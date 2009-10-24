@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra_more}
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Esquenazi"]
@@ -25,15 +25,17 @@ Gem::Specification.new do |s|
      "TODO",
      "VERSION",
      "lib/sinatra_more.rb",
-     "lib/sinatra_more/form_builder/abstract_form_builder.rb",
-     "lib/sinatra_more/form_builder/standard_form_builder.rb",
-     "lib/sinatra_more/view_helpers.rb",
-     "lib/sinatra_more/view_helpers/asset_tag_helpers.rb",
-     "lib/sinatra_more/view_helpers/form_helpers.rb",
-     "lib/sinatra_more/view_helpers/format_helpers.rb",
-     "lib/sinatra_more/view_helpers/render_helpers.rb",
-     "lib/sinatra_more/view_helpers/tag_helpers.rb",
-     "lib/sinatra_more/warden_helpers.rb",
+     "lib/sinatra_more/markup_plugin.rb",
+     "lib/sinatra_more/markup_plugin/asset_tag_helpers.rb",
+     "lib/sinatra_more/markup_plugin/form_builder/abstract_form_builder.rb",
+     "lib/sinatra_more/markup_plugin/form_builder/standard_form_builder.rb",
+     "lib/sinatra_more/markup_plugin/form_helpers.rb",
+     "lib/sinatra_more/markup_plugin/format_helpers.rb",
+     "lib/sinatra_more/markup_plugin/render_helpers.rb",
+     "lib/sinatra_more/markup_plugin/tag_helpers.rb",
+     "lib/sinatra_more/render_plugin.rb",
+     "lib/sinatra_more/warden_plugin.rb",
+     "lib/sinatra_more/warden_plugin/warden_helpers.rb",
      "sinatra_more.gemspec",
      "test/helper.rb",
      "test/test_sinatra_more.rb"
