@@ -15,10 +15,10 @@ of tools, helpers and components that will make Sinatra scale to allow for extre
 
 Here is a small list of what sinatra_more might contain:
 
-  * Lots of generic view helpers (tag, content_tag, ...)
-  * Asset helpers (link_to, image_tag, javascript_include_tag, ...)
-  * Form helpers and form builder support (form_tag, form_for, text_field, ...)
-  * Plug and play components for Warden (authentication), ActiveRecord (datastore) and MongoMapper (datastore)
+* Lots of generic view helpers (tag, content_tag, ...)
+* Asset helpers (link_to, image_tag, javascript_include_tag, ...)
+* Form helpers and form builder support (form_tag, form_for, text_field, ...)
+* Plug and play components for Warden (authentication), ActiveRecord (datastore) and MongoMapper (datastore)
 
 Keep in mind, the user will be able to pull in components as necessary and leave out any that are not required.
 
