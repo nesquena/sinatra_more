@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Esquenazi"]
   s.date = %q{2009-10-24}
-  s.description = %q{TODO: longer description of your gem}
+  s.description = %q{Expands sinatra to allow for complex applications}
   s.email = %q{nesquena@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
      "lib/sinatra_more/view_helpers/format_helpers.rb",
      "lib/sinatra_more/view_helpers/render_helpers.rb",
      "lib/sinatra_more/view_helpers/tag_helpers.rb",
+     "sinatra_more.gemspec",
      "test/helper.rb",
      "test/test_sinatra_more.rb"
   ]
@@ -39,7 +40,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
-  s.summary = %q{TODO: one-line summary of your gem}
+  s.summary = %q{Expands sinatra to allow for complex applications}
   s.test_files = [
     "test/helper.rb",
      "test/test_sinatra_more.rb"
