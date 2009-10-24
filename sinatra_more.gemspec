@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
      "LICENSE",
      "README.rdoc",
      "Rakefile",
+     "TODO",
      "VERSION",
      "lib/sinatra_more.rb",
      "lib/sinatra_more/form_builder/abstract_form_builder.rb",
