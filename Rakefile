@@ -1,3 +1,5 @@
+# $ rake version:bump:patch release 
+
 require 'rubygems'
 require 'rake'
 

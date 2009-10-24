@@ -1,6 +1,6 @@
 = sinatra_more
 
-Description goes here.
+This will be a plugin which expands sinatra in a variety of ways. Not ready to be used yet!
 
 == Note on Patches/Pull Requests
  
