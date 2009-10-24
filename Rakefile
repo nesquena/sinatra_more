@@ -8,7 +8,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "sinatra_more"
     gem.summary = "Expands sinatra to allow for complex applications"
-    gem.description = "Expands sinatra to allow for complex applications"
+    gem.description = "Expands sinatra with standard helpers and tools to allow for complex applications"
     gem.email = "nesquena@gmail.com"
     gem.homepage = "http://github.com/nesquena/sinatra_more"
     gem.authors = ["Nathan Esquenazi"]
