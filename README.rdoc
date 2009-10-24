@@ -32,21 +32,21 @@ fork the project if you have any ideas that will help flesh out this project!
 This extension can be easily registered into any existing sinatra application. You can require
 different components based on which pieces are useful for your application.
 
-    # app.rb 
-    require 'sinatra/base'
-    require 'sinatra_more'
+  # app.rb 
+  require 'sinatra/base'
+  require 'sinatra_more'
 
-    class Application < Sinatra::Base
-      register SinatraMore
-      register SinatraMore::WardenPlugin
-      # (Not yet) register SinatraMore::MarkupHelpers
-      # (Not yet) register SinatraMore::RenderHelpers
-      # (Not yet) register SinatraMore::FormHelpers
-    end
+  class Application < Sinatra::Base
+    register SinatraMore
+    register SinatraMore::WardenPlugin
+    # (Not yet) register SinatraMore::MarkupHelpers
+    # (Not yet) register SinatraMore::RenderHelpers
+    # (Not yet) register SinatraMore::FormHelpers
+  end
 
 This will then allow you to use whichever components that have been registered. A breakdown is below:
 
-=== MarkupPlugin ===
+=== MarkupPlugin
 
 This component provides a great deal of view helpers related to html markup generation.
 There are helpers for generating tags, forms, links, images, and more. Most of the basic
@@ -54,7 +54,7 @@ methods should be very familiar to anyone who has used rails view helpers.
 
 ...list methods here...
 
-=== RenderPlugin ===
+=== RenderPlugin
 
 This component provides a number of rendering helpers for sinatra, making the process
 of displaying templates far smoother. This plugin also has support for useful additions
@@ -62,7 +62,7 @@ such as partials (with support for :collection) into the templating system.
 
 ...list methods here...
 
-=== WardenPlugin ===
+=== WardenPlugin
 
 This component provides out-of-the-box support for Warden authentication. With this
 plugin registered, warden will be automatically required, configured and helpers will be
