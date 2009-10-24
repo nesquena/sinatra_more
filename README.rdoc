@@ -1,6 +1,29 @@
 = sinatra_more
 
-This will be a plugin which expands sinatra in a variety of ways. Not ready to be used yet!
+This will be a plugin which expand sinatra's capabilities in many ways. Not ready to be used yet!
+
+Let me expand briefly on what I want to accomplish with this gem. I love sinatra but if I want to use it
+for any non-trivial application I very quickly miss a lot of the extra tools provided by rails.
+
+Now the obvious question is, why not just use rails? Well, that would be the easy answer. However, until
+version 3 comes along, Rails is quite a large framework and I love the spirit of sinatra which acts
+as a thin wrapper on top of rack allowing middleware to do most of the work and pulling in complexity
+only as needed. 
+
+My goal with this extension is to maintain the spirit of Sinatra and at the same time create a standard library
+of tools, helpers and components that will make Sinatra scale to allow for extremely complex apps.
+
+Here is a small list of what sinatra_more might contain:
+
+  * Lots of generic view helpers (tag, content_tag, ...)
+  * Asset helpers (link_to, image_tag, javascript_include_tag, ...)
+  * Form helpers and form builder support (form_tag, form_for, text_field, ...)
+  * Plug and play components for Warden (authentication), ActiveRecord (datastore) and MongoMapper (datastore)
+
+Keep in mind, the user will be able to pull in components as necessary and leave out any that are not required.
+
+Obviously the project isn't ready for primetime yet but please help me brainstorm and 
+fork the project if you have any ideas that will help flesh out this project!
 
 == Note on Patches/Pull Requests
  
