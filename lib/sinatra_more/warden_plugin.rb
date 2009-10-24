@@ -3,6 +3,10 @@ Dir.glob(File.dirname(__FILE__) + '/warden_plugin/**/*.rb').each  { |f| require 
 module SinatraMore
   module WardenPlugin
     def self.registered(app)
+      app.use Warden::Manager do |manager|
+        manager.default_strategies :password
+        manager.failure_app = app
+      end
       app.helpers SinatraMore::WardenHelpers
 
       # TODO Improve serializing methods
