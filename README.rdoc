@@ -1,6 +1,72 @@
 = sinatra_more
 
-This will be a plugin which expands sinatra in a variety of ways. Not ready to be used yet!
+== Introduction
+
+This will be a plugin which expand sinatra's capabilities in many ways. Not ready to be used yet!
+
+Let me expand briefly on what I want to accomplish with this gem. I love sinatra but if I want to use it
+for any non-trivial application I very quickly miss a lot of the extra tools provided by rails.
+
+Now the obvious question is, why not just use rails? Well, that would be the easy answer. However, until
+version 3 comes along, Rails is quite a large framework and I love the spirit of sinatra which acts
+as a thin wrapper on top of rack allowing middleware to do most of the work and pulling in complexity
+only as needed. 
+
+My goal with this extension is to maintain the spirit of Sinatra and at the same time create a standard library
+of tools, helpers and components that will make Sinatra scale to allow for extremely complex apps.
+
+Here is a small list of what sinatra_more might contain:
+
+* Lots of generic view helpers (tag, content_tag, ...)
+* Asset helpers (link_to, image_tag, javascript_include_tag, ...)
+* Form helpers and form builder support (form_tag, form_for, text_field, ...)
+* Plug and play components for Warden (authentication), ActiveRecord (datastore) and MongoMapper (datastore)
+
+Keep in mind, the user will be able to pull in components as necessary and leave out any that are not required.
+
+Obviously the project isn't ready for primetime yet but please help me brainstorm and 
+fork the project if you have any ideas that will help flesh out this project!
+
+== Usage
+
+This extension can be easily registered into any existing sinatra application. You can require
+different components based on which pieces are useful for your application.
+
+  # app.rb 
+  require 'sinatra/base'
+  require 'sinatra_more'
+
+  class Application < Sinatra::Base
+    register SinatraMore::MarkupPlugin
+    register SinatraMore::RenderPlugin
+    register SinatraMore::WardenPlugin
+  end
+
+This will then allow you to use whichever components that have been registered. A breakdown is below:
+
+=== MarkupPlugin
+
+This component provides a great deal of view helpers related to html markup generation.
+There are helpers for generating tags, forms, links, images, and more. Most of the basic
+methods should be very familiar to anyone who has used rails view helpers.
+
+...list methods here...
+
+=== RenderPlugin
+
+This component provides a number of rendering helpers for sinatra, making the process
+of displaying templates far smoother. This plugin also has support for useful additions
+such as partials (with support for :collection) into the templating system.
+
+...list methods here...
+
+=== WardenPlugin
+
+This component provides out-of-the-box support for Warden authentication. With this
+plugin registered, warden will be automatically required, configured and helpers will be
+provided to make interacting with warden dead simple.
+
+...list methods here...
 
 == Note on Patches/Pull Requests
  
