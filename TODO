@@ -1,0 +1,2 @@
+* Pull from sinatra-helpers to make erb work (and credit keldredd)
+  - http://github.com/kelredd/sinatra-helpers/tree/master/lib/sinatra_helpers/erb/
