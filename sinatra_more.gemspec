@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
      "lib/sinatra_more/view_helpers/format_helpers.rb",
      "lib/sinatra_more/view_helpers/render_helpers.rb",
      "lib/sinatra_more/view_helpers/tag_helpers.rb",
+     "lib/sinatra_more/warden_helpers.rb",
      "sinatra_more.gemspec",
      "test/helper.rb",
      "test/test_sinatra_more.rb"
