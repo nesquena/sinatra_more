@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Esquenazi"]
   s.date = %q{2009-10-24}
-  s.description = %q{Expands sinatra to allow for complex applications}
+  s.description = %q{Expands sinatra with standard helpers and tools to allow for complex applications}
   s.email = %q{nesquena@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
