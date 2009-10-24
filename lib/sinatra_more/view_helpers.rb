@@ -1,1 +1,0 @@
-Dir.glob(File.dirname(__FILE__) + '/view_helpers/*.rb').each  { |f| require f }
