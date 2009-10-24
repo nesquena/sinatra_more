@@ -1,5 +1,6 @@
 require 'sinatra/base'
 
+require File.join(File.dirname(__FILE__) + '/sinatra_more/warden_helpers')
 require File.join(File.dirname(__FILE__) + '/sinatra_more/view_helpers')
 Dir.glob(File.dirname(__FILE__) + '/sinatra_more/form_builder/*.rb').each  { |f| require f }
 
