@@ -3,6 +3,8 @@
 * image_tag should start in images_path (or /images)
 * I have got to add tests, basically create dummy sinatra applications and use Webrat
 * Become total warden solution (basically just require warden gem installed, do everything else)
+  * Make warden password strategy support a callback which explains what to do with username, password
+  * WardenPlugin.authenticate_callback { |username, password| User.authenticate(username, password) }
 * Remove dependency on activesupport! and enumerate dependencies in rakefile
 
 = COMPLETED
