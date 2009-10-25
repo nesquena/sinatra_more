@@ -1,11 +1,11 @@
 module SinatraMore
   module FormHelpers
-    # form_for @user, '/register', :id => 'register'
+    # form_for @user, '/register', :id => 'register' do |f| ... end
     def form_for(object, url, settings={}, &block)
-      default_builder = settings[:builder] || self.options.default_builder.constantize
+      configured_builder = settings[:builder] || self.options.default_builder.constantize
       settings.reverse_merge!(:method => 'post', :action => url)
       settings[:enctype] = "multipart/form-data" if settings.delete(:multipart)
-      form_html = capture_html(default_builder.new(self, object), &block)
+      form_html = capture_html(configured_builder.new(self, object), &block)
       concat_content content_tag('form', form_html, settings)
     end
 
@@ -15,10 +15,13 @@ module SinatraMore
       concat_content content_tag('form', capture_html(&block), options)
     end
     
-    def field_set_tag(legend=nil, options={}, &block)
-      field_set_content = ''
-      field_set_content << content_tag(:legend, legend)  if legend.present?
-      field_set_content << capture_html(&block)
+    # field_set_tag("Office", :class => 'office-set')
+    # parameters: legend_text=nil, options={}
+    def field_set_tag(*args, &block)
+      options = args.extract_options!
+      legend_text = args[0].is_a?(String) ? args.first : nil
+      legend_html = legend_text.blank? ? '' : content_tag(:legend, legend_text)
+      field_set_content = legend_html + capture_html(&block)
       concat_content content_tag('fieldset', field_set_content, options)
     end
 
@@ -35,7 +38,8 @@ module SinatraMore
       end
     end
 
-    # label_tag :username
+    # label_tag :username, :class => 'long-label'
+    # label_tag :username, :class => 'long-label' do ... end
     def label_tag(name, options={}, &block)
       options.reverse_merge!(:caption => name.to_s.titleize, :for => name)
       caption_text = options.delete(:caption) + ": "
@@ -47,31 +51,31 @@ module SinatraMore
       end
     end
 
-    # text_field_tag :username
+    # text_field_tag :username, :class => 'long'
     def text_field_tag(name, options={})
       options.reverse_merge!(:name => name)
       input_tag(:text, options)
     end
 
-    # text_field_tag :username
+    # text_area_tag :username, :class => 'long'
     def text_area_tag(name, options={})
       options.reverse_merge!(:name => name)
       content_tag(:textarea, '', options)
     end
 
-    # password_field_tag :password
+    # password_field_tag :password, :class => 'long'
     def password_field_tag(name, options={})
       options.reverse_merge!(:name => name)
       input_tag(:password, options)
     end
 
-    # field_field_tag
+    # field_field_tag :photo, :class => 'long'
     def file_field_tag(name, options={})
       options.reverse_merge!(:name => name)
       input_tag(:file, options)
     end
 
-    # submit_tag "Create"
+    # submit_tag "Create", :class => 'success'
     def submit_tag(caption, options={})
       options.reverse_merge!(:value => caption)
       input_tag(:submit, options)

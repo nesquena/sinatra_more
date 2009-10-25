@@ -1,5 +1,7 @@
 module SinatraMore
   module FormatHelpers
+    
+    # relative_time_ago(Time.now)
     def relative_time_ago(date)
       date = date.to_date
       date = Date.parse(date, true) unless /Date.*/ =~ date.class.to_s
@@ -16,15 +18,18 @@ module SinatraMore
       return date.strftime('%A, %B %e, %Y')
     end
 
-    def escape_javascript(javascript)
-      return '' unless javascript
+    # escape_javascript("<h1>Hey</h1>")
+    # Used in xxxx.js.erb files to escape html so that it can be passed to javascript from sinatra
+    def escape_javascript(html_content)
+      return '' unless html_content
       javascript_mapping = { '\\' => '\\\\', '</' => '<\/', "\r\n" => '\n', "\n" => '\n' }
       javascript_mapping.merge("\r" => '\n', '"' => '\\"', "'" => "\\'")
-      escaped_string = javascript.gsub(/(\\|<\/|\r\n|[\n\r"'])/) { javascript_mapping[$1] }
+      escaped_string = html_content.gsub(/(\\|<\/|\r\n|[\n\r"'])/) { javascript_mapping[$1] }
       "\"#{escaped_string}\""
     end
 
     alias js_escape escape_javascript
+    alias escape_for_javascript escape_javascript
 
   end
 end
