@@ -2,7 +2,10 @@
 
 == Introduction
 
-This will be a plugin which expand sinatra's capabilities in many ways. Not ready to be used yet!
+(Not quite ready to be used yet!)
+
+This will be a plugin which expand sinatra's capabilities in many ways. 
+Note that certain template specific helpers are known to work with haml, erb, and erubis
 
 Let me expand briefly on what I want to accomplish with this gem. I love sinatra but if I want to use it
 for any non-trivial application I very quickly miss a lot of the extra tools provided by rails.
@@ -67,6 +70,15 @@ plugin registered, warden will be automatically required, configured and helpers
 provided to make interacting with warden dead simple.
 
 ...list methods here...
+
+== Acknowledgements
+
+Thanks to keldredd for the sinatra-helpers code that helped me to create erb capture and concat methods!
+
+== Contributers
+
+* Nathan Esquenazi - Project creator and code maintainer
+* Arthur Chiu      - Forming the idea and various code contributions
 
 == Note on Patches/Pull Requests
  
