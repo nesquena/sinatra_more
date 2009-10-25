@@ -1,5 +1,3 @@
 * I have got to add tests, basically create dummy sinatra applications and use Rack::Test
-* Pull from sinatra-helpers and make erb templates work (and credit keldredd)
-  - http://github.com/kelredd/sinatra-helpers/tree/master/lib/sinatra_helpers/erb/
 * Become total warden solution (basically just require warden gem installed, do everything else)
 * Remove dependency on activesupport! and enumerate dependencies in rake

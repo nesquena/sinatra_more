@@ -5,24 +5,21 @@ module SinatraMore
       default_builder = settings[:builder] || self.options.default_builder.constantize
       settings.reverse_merge!(:method => 'post', :action => url)
       settings[:enctype] = "multipart/form-data" if settings.delete(:multipart)
-      # TODO make this work with erb!!
-      form_html = capture_haml(default_builder.new(self, object), &block)
-      haml_concat content_tag('form', form_html, settings)
+      form_html = capture_html(default_builder.new(self, object), &block)
+      concat_content content_tag('form', form_html, settings)
     end
 
     # form_tag '/register' do ... end
     def form_tag(url, options={}, &block)
       options.reverse_merge!(:method => 'post', :action => url)
-      # TODO make this work with erb!!
-      haml_concat content_tag('form', capture_haml(&block), options)
+      concat_content content_tag('form', capture_html(&block), options)
     end
     
     def field_set_tag(legend=nil, options={}, &block)
-      # TODO make this work with erb!!
       field_set_content = ''
       field_set_content << content_tag(:legend, legend)  if legend.present?
-      field_set_content << capture_haml(&block)
-      haml_concat content_tag('fieldset', field_set_content, options)
+      field_set_content << capture_html(&block)
+      concat_content content_tag('fieldset', field_set_content, options)
     end
 
     # error_messages_for @user
@@ -42,10 +39,9 @@ module SinatraMore
     def label_tag(name, options={}, &block)
       options.reverse_merge!(:caption => name.to_s.titleize, :for => name)
       caption_text = options.delete(:caption) + ": "
-      # TODO make this work with erb!!
       if block_given? # label with inner content
-        label_content = caption_text + capture_haml(&block)
-        haml_concat(content_tag(:label, label_content, options))
+        label_content = caption_text + capture_html(&block)
+        concat_content(content_tag(:label, label_content, options))
       else # regular label
         content_tag(:label, caption_text, options)
       end

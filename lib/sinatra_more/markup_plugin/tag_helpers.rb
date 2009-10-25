@@ -7,8 +7,7 @@ module SinatraMore
     end
 
     def content_block_tag(name, options={}, &block)
-      # TODO make this work with erb!!
-      options.merge!(:content => block.call)
+      options.merge!(:content => capture_html(&block))
       tag(name, options)
     end
 

@@ -1,5 +1,6 @@
 module SinatraMore
   module AssetTagHelpers
+    
     # flash_tag(:notice)
     def flash_tag(kind, options={})
       flash_text = flash[kind]
@@ -8,13 +9,14 @@ module SinatraMore
       content_tag(:div, flash_text, options)
     end
     
+    # link_to 'click me', '/dashboard', :class => 'linky'
     # name, url='javascript:void(0)', options={}, &block
     def link_to(*args, &block)
       if block_given?
         url, options = (args[0] || 'javascript:void(0);'), (args[1] || {})
         options.reverse_merge!(:href => url)
-        link_content = capture_haml(&block)
-        haml_concat(content_tag(:a, link_content, options))
+        link_content = capture_html(&block)
+        concat_content(content_tag(:a, link_content, options))
       else
         name, url, options = args.first, (args[1] || 'javascript:void(0);'), (args[2] || {})
         options.reverse_merge!(:href => url)

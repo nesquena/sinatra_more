@@ -25,8 +25,8 @@ module SinatraMore
     def authenticated?(&block)
       if block_given?
         return '' unless logged_in?
-        authenticated_content = capture_haml(&block)
-        haml_concat(authenticated_content)
+        authenticated_content = capture_html(&block)
+        concat_content(authenticated_content)
       else
         return logged_in?
       end
@@ -37,8 +37,8 @@ module SinatraMore
     def unregistered?(&block)
       if block_given?
         return '' if logged_in?
-        unregistered_content = capture_haml(&block)
-        haml_concat(unregistered_content)
+        unregistered_content = capture_html(&block)
+        concat_content(unregistered_content)
       else
         return !logged_in?
       end      
