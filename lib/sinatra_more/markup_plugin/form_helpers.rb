@@ -16,6 +16,14 @@ module SinatraMore
       # TODO make this work with erb!!
       haml_concat content_tag('form', capture_haml(&block), options)
     end
+    
+    def field_set_tag(legend=nil, options={}, &block)
+      # TODO make this work with erb!!
+      field_set_content = ''
+      field_set_content << content_tag(:legend, legend)  if legend.present?
+      field_set_content << capture_haml(&block)
+      haml_concat content_tag('fieldset', field_set_content, options)
+    end
 
     # error_messages_for @user
     def error_messages_for(record, options={})
@@ -31,9 +39,16 @@ module SinatraMore
     end
 
     # label_tag :username
-    def label_tag(name, options={})
-      options.reverse_merge!(:caption => name.to_s.titleize)
-      content_tag(:label, options.delete(:caption) + ": ", :for => name)
+    def label_tag(name, options={}, &block)
+      options.reverse_merge!(:caption => name.to_s.titleize, :for => name)
+      caption_text = options.delete(:caption) + ": "
+      # TODO make this work with erb!!
+      if block_given? # label with inner content
+        label_content = caption_text + capture_haml(&block)
+        haml_concat(content_tag(:label, label_content, options))
+      else # regular label
+        content_tag(:label, caption_text, options)
+      end
     end
 
     # text_field_tag :username

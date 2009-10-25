@@ -18,26 +18,33 @@ class AbstractFormBuilder
   end
   
   def text_field(field, options={})
-    options.reverse_merge!(:value => field_value(field))
+    options.reverse_merge!(:value => field_value(field), :id => field_id(field))
     @template.text_field_tag field_name(field), options
   end
   
   def text_area(field, options={})
-    options.reverse_merge!(:value => field_value(field))
+    options.reverse_merge!(:value => field_value(field), :id => field_id(field))
     @template.text_area_tag field_name(field), options
   end
   
   def password_field(field, options={})
-    options.reverse_merge!(:value => field_value(field))
+    options.reverse_merge!(:value => field_value(field), :id => field_id(field))
     @template.password_field_tag field_name(field), options
   end
   
   def file_field(field, options={})
+    options.reverse_merge!(:id => field_id(field))
     @template.file_field_tag field_name(field), options
   end
   
   def submit(caption, options={})
     @template.submit_tag caption, options
+  end
+  
+  protected
+  
+  def self.field_types
+    [:text_field, :text_area, :password_field, :file_field]
   end
   
   private
