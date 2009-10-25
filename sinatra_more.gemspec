@@ -37,8 +37,13 @@ Gem::Specification.new do |s|
      "lib/sinatra_more/warden_plugin.rb",
      "lib/sinatra_more/warden_plugin/warden_helpers.rb",
      "sinatra_more.gemspec",
+     "test/fixtures/render_app/app.rb",
+     "test/fixtures/render_app/views/bar/test.erb",
+     "test/fixtures/render_app/views/foo/test.haml",
+     "test/fixtures/warden_app/app.rb",
      "test/helper.rb",
-     "test/test_sinatra_more.rb"
+     "test/test_render_plugin.rb",
+     "test/test_warden_plugin.rb"
   ]
   s.homepage = %q{http://github.com/nesquena/sinatra_more}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -46,8 +51,11 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Expands sinatra to allow for complex applications}
   s.test_files = [
-    "test/helper.rb",
-     "test/test_sinatra_more.rb"
+    "test/fixtures/render_app/app.rb",
+     "test/fixtures/warden_app/app.rb",
+     "test/helper.rb",
+     "test/test_render_plugin.rb",
+     "test/test_warden_plugin.rb"
   ]
 
   if s.respond_to? :specification_version then
