@@ -15,12 +15,20 @@ module SinatraMore
 
       Warden::Strategies.add(:password) do
         def valid?
-          params['username'] || params['password']
+          username || password
         end
 
         def authenticate!
-          u = User.authenticate(params['username'], params['password'])
+          u = User.authenticate(username, password)
           u.nil? ? fail!("Could not log in") : success!(u)
+        end
+        
+        def username
+          params['username'] || params['nickname'] || params['login'] || params['email']
+        end
+        
+        def password
+          params['password'] || params['pass']
         end
       end
     end
