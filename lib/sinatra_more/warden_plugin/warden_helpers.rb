@@ -24,8 +24,9 @@ module SinatraMore
     # If no block is given, returns true if the user is logged in
     def authenticated?(&block)
       if block_given?
+        return '' unless logged_in?
         authenticated_content = capture_haml(&block)
-        logged_in? ? haml_concat(authenticated_content) : ''
+        haml_concat(authenticated_content)
       else
         return logged_in?
       end
