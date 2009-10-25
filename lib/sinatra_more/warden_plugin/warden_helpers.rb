@@ -31,6 +31,18 @@ module SinatraMore
         return logged_in?
       end
     end
+    
+    # If a block is given, only yields the content if the user is unregistered
+    # If no block is given, returns true if the user is not logged in
+    def unregistered?(&block)
+      if block_given?
+        return '' if logged_in?
+        unregistered_content = capture_haml(&block)
+        haml_concat(unregistered_content)
+      else
+        return !logged_in?
+      end      
+    end
 
     # Forces a user to return to a fail path unless they are authorized
     # Used to require a user be authenticated before routing to an action
