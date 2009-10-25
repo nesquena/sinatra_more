@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra_more}
-  s.version = "0.0.6"
+  s.version = "0.0.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Esquenazi"]
@@ -31,9 +31,9 @@ Gem::Specification.new do |s|
      "lib/sinatra_more/markup_plugin/form_builder/standard_form_builder.rb",
      "lib/sinatra_more/markup_plugin/form_helpers.rb",
      "lib/sinatra_more/markup_plugin/format_helpers.rb",
-     "lib/sinatra_more/markup_plugin/render_helpers.rb",
      "lib/sinatra_more/markup_plugin/tag_helpers.rb",
      "lib/sinatra_more/render_plugin.rb",
+     "lib/sinatra_more/render_plugin/render_helpers.rb",
      "lib/sinatra_more/warden_plugin.rb",
      "lib/sinatra_more/warden_plugin/warden_helpers.rb",
      "sinatra_more.gemspec",
