@@ -4,11 +4,23 @@
   * Make warden password strategy support a callback which explains what to do with username, password
   * WardenPlugin.authenticate_callback { |username, password| User.authenticate(username, password) }
 * Remove dependency on activesupport! and enumerate dependencies in rakefile
+* Look into creating sinatra generators using rubigen (http://github.com/drnic/rubigen)
+  * http://github.com/quirkey/sinatra-gen
+* Look into adding any missing helpers from:
+  * Partials with counter (and add to tests)
+    * http://github.com/sbfaulkner/sinatra-helpers/blob/master/lib/sinatra-helpers/haml/partials.rb
+    * http://github.com/kelredd/sinatra-helpers/blob/master/lib/sinatra_helpers/erb/partials.rb
+  * http://github.com/sbfaulkner/sinatra-helpers/tree/master/lib/sinatra-helpers/haml/
+  * http://github.com/sbfaulkner/sinatra-helpers/blob/master/lib/sinatra-helpers/html/escape.rb
+  * http://github.com/sbfaulkner/sinatra-helpers/blob/master/lib/sinatra-helpers/haml/links.rb
+  * http://github.com/kelredd/sinatra-helpers/tree/master/lib/sinatra_helpers/mailer/
+  * http://github.com/kelredd/sinatra-helpers/blob/master/lib/sinatra_helpers/erb/links.rb
+  * http://github.com/kelredd/sinatra-helpers/blob/master/lib/sinatra_helpers/erb/forms.rb
 
 = COMPLETED
 
 * Pull from sinatra-helpers and make erb templates work (and credit keldredd)
-  - http://github.com/kelredd/sinatra-helpers/tree/master/lib/sinatra_helpers/erb/
+  * http://github.com/kelredd/sinatra-helpers/tree/master/lib/sinatra_helpers/erb/
 * fix content_block_tag to eliminate need for concat option
 * image_tag should start in images_path (or /images)
 * I have got to add tests, basically create dummy sinatra applications and use Webrat
