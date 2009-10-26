@@ -14,7 +14,7 @@ module SinatraMore
     # Outputs the given text to the templates buffer directly
     # concat_content("This will be output to the template buffer in erb or haml")
     def concat_content(text="")
-      if is_haml?
+      if self.respond_to?(:is_haml?) && is_haml?
         haml_concat(text)
       else
         @_out_buf << text
