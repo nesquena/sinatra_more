@@ -30,10 +30,18 @@ Keep in mind, the user will be able to pull in components as necessary and leave
 Obviously the project isn't ready for primetime yet but please help me brainstorm and 
 fork the project if you have any ideas that will help flesh out this project!
 
+== Installation
+
+To install this gem, simply grab the latest version from gemcutter:
+
+  $ sudo gem install sinatra_more --source http://gemcutter.org
+  
+Now you are ready to use the gem in your sinatra project.
+
 == Usage
 
 This extension can be easily registered into any existing sinatra application. You can require
-different components based on which pieces are useful for your application.
+different components based on which pieces are useful for your particular application.
 
   # app.rb 
   require 'sinatra/base'
