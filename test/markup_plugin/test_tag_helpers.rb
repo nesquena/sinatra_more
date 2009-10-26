@@ -1,9 +1,14 @@
-require 'test_markup_plugin' unless defined?(TestMarkupPlugin)
+require 'helper'
+require 'fixtures/markup_app/app'
 
-class TestTagHelpers < TestMarkupPlugin  
+class TestTagHelpers < Test::Unit::TestCase
+  def app
+    MarkupDemo.tap { |app| app.set :environment, :test }
+  end
+
   context 'for #tag method' do
     should("support tags with no content no attributes") do
-       assert_equal '<br />', tag(:br) 
+      assert_equal '<br />', tag(:br)
     end
     should("support tags with no content with attributes") do
       assert_equal '<br class="yellow" style="clear:both" />', tag(:br, :style => 'clear:both', :class => 'yellow')
@@ -15,7 +20,7 @@ class TestTagHelpers < TestMarkupPlugin
       assert_equal '<p class="large" id="intro">Demo</p>', tag(:p, :content => "Demo", :class => 'large', :id => 'intro')
     end
   end
-  
+
   context 'for #content_tag method' do
     should "support tags with content as parameter" do
       assert_equal '<p class="large" id="intro">Demo</p>', content_tag(:p, "Demo", :class => 'large', :id => 'intro')
@@ -28,7 +33,7 @@ class TestTagHelpers < TestMarkupPlugin
       assert_have_selector :p, :content => "Test 1", :class => 'test', :id => 'test1'
       assert_have_selector :p, :content => "Test 2"
       # TODO get these to work in erb
-      # assert_have_selector :p, :content => "Test 3" 
+      # assert_have_selector :p, :content => "Test 3"
       # assert_have_selector :p, :content => "Test 4"
     end
     should "support tags with haml" do
@@ -39,7 +44,7 @@ class TestTagHelpers < TestMarkupPlugin
       assert_have_selector :p, :content => "Test 4"
     end
   end
-  
+
   context 'for #input_tag method' do
     should "support field with type" do
       assert_equal '<input type="text" />', input_tag(:text)
@@ -48,5 +53,5 @@ class TestTagHelpers < TestMarkupPlugin
       assert_equal '<input class="first" id="texter" type="text" />', input_tag(:text, :class => "first", :id => 'texter')
     end
   end
-  
+
 end

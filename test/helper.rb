@@ -10,6 +10,8 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'sinatra_more'
 
 class Test::Unit::TestCase
+  include SinatraMore::OutputHelpers
+  include SinatraMore::TagHelpers
   include Rack::Test::Methods
   include Webrat::Methods
   include Webrat::Matchers

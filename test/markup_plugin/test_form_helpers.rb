@@ -1,5 +1,10 @@
-require 'test_markup_plugin' unless defined?(TestMarkupPlugin)
+require 'helper'
+require 'fixtures/markup_app/app'
 
-class TestFormHelpers < TestMarkupPlugin
- # Test the form helper methods
+class TestFormHelpers < Test::Unit::TestCase
+  def app
+    MarkupDemo.tap { |app| app.set :environment, :test }
+  end
+
+  # Test the form helper methods
 end

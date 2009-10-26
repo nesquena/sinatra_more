@@ -1,8 +1,13 @@
-require 'test_markup_plugin' unless defined?(TestMarkupPlugin)
+require 'helper'
+require 'fixtures/markup_app/app'
 
-class TestFormatHelpers < TestMarkupPlugin
+class TestFormatHelpers < Test::Unit::TestCase
+  def app
+    MarkupDemo.tap { |app| app.set :environment, :test }
+  end
+
   include SinatraMore::FormatHelpers
-  
+
   context 'for #relative_time_ago method' do
     should "display today" do
       assert_equal 'today', relative_time_ago(Time.now)
@@ -26,7 +31,7 @@ class TestFormatHelpers < TestMarkupPlugin
       assert_equal 500.days.ago.strftime('%A, %B %e, %Y'), relative_time_ago(500.days.ago)
     end
   end
-  
+
   context 'for #escape_javascript method' do
     should "escape double quotes" do
       assert_equal "\"hello\"", escape_javascript('"hello"')

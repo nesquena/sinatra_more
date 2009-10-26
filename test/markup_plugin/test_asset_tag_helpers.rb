@@ -1,12 +1,17 @@
-require 'test_markup_plugin' unless defined?(TestMarkupPlugin)
+require 'helper'
+require 'fixtures/markup_app/app'
 
-class TestAssetTagHelpers < TestMarkupPlugin
+class TestAssetTagHelpers < Test::Unit::TestCase
   include SinatraMore::AssetTagHelpers
-  
-  def flash
-    { :notice => "Demo notice" }    
+
+  def app
+    MarkupDemo.tap { |app| app.set :environment, :test }
   end
-  
+
+  def flash
+    { :notice => "Demo notice" }
+  end
+
   context 'for #flash_tag method' do
     should "display flash with no given attributes" do
       assert_equal '<div class="flash">Demo notice</div>', flash_tag(:notice)
@@ -16,7 +21,7 @@ class TestAssetTagHelpers < TestMarkupPlugin
       assert_equal flash_expected, flash_tag(:notice, :class => 'notice', :id => 'notice-area')
     end
   end
-  
+
   context 'for #link_to method' do
     should "display link element with no given attributes" do
       assert_equal '<a href="/register">Sign up</a>', link_to('Sign up', '/register')
@@ -44,7 +49,7 @@ class TestAssetTagHelpers < TestMarkupPlugin
       # assert_have_selector :a, :content => "Test 2 With Block", :href => '/test2', :class => 'test', :id => 'test2'
     end
   end
-  
+
   context 'for #image_tag method' do
     should "display image tag absolute link with no options" do
       assert_equal '<img src="/absolute/pic.gif" />', image_tag('/absolute/pic.gif')
@@ -56,7 +61,7 @@ class TestAssetTagHelpers < TestMarkupPlugin
       assert_equal '<img class="photo" src="/images/relative/pic.gif" />', image_tag(' relative/ pic.gif  ', :class => 'photo')
     end
   end
-  
+
   context 'for #stylesheet_link_tag method' do
     should "display stylesheet link item" do
       time = stop_time_for_test
@@ -71,7 +76,7 @@ class TestAssetTagHelpers < TestMarkupPlugin
       assert_equal expected_style, stylesheet_link_tag('style', 'layout.css', 'http://google.com/style.css')
     end
   end
-  
+
   context 'for #javascript_include_tag method' do
     should "display javascript item" do
       time = stop_time_for_test
