@@ -39,6 +39,9 @@ class TestRenderPlugin < Test::Unit::TestCase
     should "render partial html with object" do
       assert_have_selector "h1", :content => "User name is John"
     end
+    should "have no counter index for single item" do
+      assert_have_no_selector "p", :content => "My counter is 1", :count => 1
+    end
   end
   
   context 'for #partial method and collection' do
@@ -47,12 +50,19 @@ class TestRenderPlugin < Test::Unit::TestCase
       assert_have_selector "h1", :content => "User name is John"
       assert_have_selector "h1", :content => "User name is Billy"
     end
+    should "include counter which contains item index" do
+      assert_have_selector "p", :content => "My counter is 1"
+      assert_have_selector "p", :content => "My counter is 2"
+    end
   end
   
   context 'for #partial method and locals' do
     setup { visit '/partial/locals' }
     should "render partial html with locals" do
       assert_have_selector "h1", :content => "User name is John"
+    end
+    should "have no counter index for single item" do
+      assert_have_no_selector "p", :content => "My counter is 1", :count => 1
     end
   end
 

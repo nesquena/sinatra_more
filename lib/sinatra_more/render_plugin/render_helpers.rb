@@ -23,21 +23,24 @@ module SinatraMore
     # Partials implementation which includes collections support
     # partial 'photo/_item', :object => @photo
     # partial 'photo/_item', :collection => @photos
-    def partial(template, *args)
-      options = args.extract_options!
+    def partial(template, options={})
       options.merge!(:layout => false)
       path = template.to_s.split(File::SEPARATOR)
       object_name = path[-1].to_sym
       path[-1] = "_#{path[-1]}"
       template_path = File.join(path)
+      raise 'Partial collection specified but is nil' if options.has_key?(:collection) && options[:collection].nil?
       if collection = options.delete(:collection)
+        counter = 0
         collection.inject([]) do |buffer, member|
-          collection_options = options.merge(:layout => false, :locals => { object_name => member })
-          buffer << render_template(template_path, collection_options)
+          counter += 1
+          current_options = options.merge(:locals => { object_name => member, "#{object_name}_counter".to_sym => counter })
+          buffer << render_template(template_path, current_options)
         end.join("\n")
-      elsif object_record = options.delete(:object)
-        render_template(template_path, options.merge(:locals => { object_name => object_record }))
       else
+        if member = options.delete(:object)
+          options.merge!(:locals => {object_name => member})
+        end
         render_template(template_path, options)
       end
     end
@@ -48,7 +51,7 @@ module SinatraMore
       # Returns the template engine (i.e haml) to use for a given template_path
       # resolve_template_engine('users/new') => :haml
       def resolve_template_engine(template_path)
-        resolved_template_path = File.join(self.options.views, template_path + ".*")
+        resolved_template_path = File.join(self.options.views, template_path.to_s + ".*")
         template_file = Dir[resolved_template_path].first
         raise "Template path '#{template_path}' could not be located in views!" unless template_file
         template_engine = File.extname(template_file)[1..-1].to_sym

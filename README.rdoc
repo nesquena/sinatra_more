@@ -266,7 +266,8 @@ provided to make interacting with warden dead simple.
 
 == Acknowledgements
 
-Thanks to keldredd for the sinatra-helpers code that helped me to create erb capture and concat methods!
+Thanks to keldredd for the sinatra_helpers code that helped me to create erb capture and concat methods.
+Thanks to sbfaulkner for the sinatra-helpers code that I looked over while building a few helper methods.
 
 == Contributers
 
