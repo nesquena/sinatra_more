@@ -2,7 +2,7 @@
 
 == Introduction
 
-(Not quite ready to be used yet!)
+Note: This library is experimental and may not work 100% yet. This will be removed once more testing has been done.
 
 This will be a plugin which expand sinatra's capabilities in many ways. 
 Note that certain template specific helpers are known to work with haml, erb, and erubis
@@ -272,6 +272,10 @@ Thanks to keldredd for the sinatra-helpers code that helped me to create erb cap
 
 * Nathan Esquenazi - Project creator and code maintainer
 * Arthur Chiu      - Forming the idea and various code contributions
+
+== Known Issues
+
+* tag helper methods accepting blocks work quite unreliably in erb. Work must be done to improve this.
 
 == Note on Patches/Pull Requests
  
