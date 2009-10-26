@@ -1,3 +1,4 @@
+load File.dirname(__FILE__) + '/markup_plugin/output_helpers.rb'
 Dir[File.dirname(__FILE__) + '/warden_plugin/**/*.rb'].each {|file| load file }
 
 module SinatraMore
@@ -7,6 +8,7 @@ module SinatraMore
         manager.default_strategies :password
         manager.failure_app = app
       end
+      app.helpers SinatraMore::OutputHelpers
       app.helpers SinatraMore::WardenHelpers
 
       # TODO Improve serializing methods

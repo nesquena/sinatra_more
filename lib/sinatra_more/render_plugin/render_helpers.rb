@@ -27,14 +27,16 @@ module SinatraMore
       options = args.extract_options!
       options.merge!(:layout => false)
       path = template.to_s.split(File::SEPARATOR)
-      object = path[-1].to_sym
+      object_name = path[-1].to_sym
       path[-1] = "_#{path[-1]}"
       template_path = File.join(path)
       if collection = options.delete(:collection)
         collection.inject([]) do |buffer, member|
-          collection_options = options.merge(:layout => false, :locals => {object => member})
+          collection_options = options.merge(:layout => false, :locals => { object_name => member })
           buffer << render_template(template_path, collection_options)
         end.join("\n")
+      elsif object_record = options.delete(:object)
+        render_template(template_path, options.merge(:locals => { object_name => object_record }))
       else
         render_template(template_path, options)
       end

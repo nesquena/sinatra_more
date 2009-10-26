@@ -30,11 +30,40 @@ class WardenDemo < Sinatra::Base
     set :root, File.dirname(__FILE__)
   end
   
+  get '/login' do
+    "<h1>Please login!</h1>"
+  end
+  
   post '/login' do
     authenticate_user!
   end
   
+  get '/logout' do
+    logout_user!
+  end
+  
+  get '/logged_in' do
+    "<h1>logged_in? #{logged_in?}</h1>"
+  end
+  
+  get '/authenticated' do
+    haml :dashboard
+  end
+  
+  get '/unregistered' do
+    haml :dashboard
+  end
+  
+  get '/must_be_authorized' do
+    must_be_authorized!('/login')
+    "<h1>Valid Authorized Page</h1>"
+  end
+  
   get '/current_user' do
-    "<h1>#{current_user.send(:name)}</h1>"
+    if current_user
+      "<h1>#{current_user.name}</h1>"
+    else
+      "<h2>Not logged in</h2>"
+    end
   end
 end

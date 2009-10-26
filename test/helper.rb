@@ -12,9 +12,23 @@ require 'sinatra_more'
 class Test::Unit::TestCase
   include Rack::Test::Methods
   include Webrat::Methods
-  include Webrat::Matchers    
-  
+  include Webrat::Matchers
+
   Webrat.configure do |config|
     config.mode = :rack
+  end
+  
+  def stop_time_for_test
+    time = Time.now
+    Time.stubs(:now).returns(time)
+    return time
+  end
+end
+
+module Webrat
+  module Logging
+    def logger # :nodoc:
+      @logger = nil
+    end
   end
 end

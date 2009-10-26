@@ -10,7 +10,7 @@ module SinatraMore
     # Creates an html tag with given name, content and options
     # content_tag(:p, "hello", :class => 'light')
     # content_tag(:p, :class => 'dark') do ... end
-    # parameters: content_tag(name, content=nil, options={})
+    # parameters: content_tag(name, content=nil, options={}, &block)
     def content_tag(*args, &block)
       name = args.first
       options = args.extract_options!
@@ -25,6 +25,7 @@ module SinatraMore
     # tag(:p, :content => "hello", :class => 'large')
     def tag(name, options={})
       content = options.delete(:content)
+      options = options.sort { |a, b| a.to_s <=> b.to_s }
       html_attrs = options.collect { |a, v| v.blank? ? nil : "#{a}=\"#{v}\"" }.compact.join(" ")
       base_tag = (html_attrs.present? ? "<#{name} #{html_attrs}" : "<#{name}")
       base_tag << (content ? ">#{content}</#{name}>" : " />")

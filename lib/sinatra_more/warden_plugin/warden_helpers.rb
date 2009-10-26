@@ -47,7 +47,7 @@ module SinatraMore
     # Forces a user to return to a fail path unless they are authorized
     # Used to require a user be authenticated before routing to an action
     def must_be_authorized!(failure_path=nil)
-      redirect_to(failure_path ? failure_path : '/') unless authenticated?
+      redirect(failure_path ? failure_path : '/') unless authenticated?
     end
 
     # Returns the raw warden authentication handler

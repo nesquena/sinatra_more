@@ -6,7 +6,8 @@ module SinatraMore
       if self.respond_to?(:is_haml?) && is_haml?
          block_is_haml?(block) ? capture_haml(*args, &block) : block.call
       else
-        capture_erb(*args, &block)
+        result_text = capture_erb(*args, &block)
+        result_text.present? ? result_text : block.call
       end
     end
     
@@ -26,6 +27,8 @@ module SinatraMore
     def block_is_template?(block)
        block && (block_is_erb?(block) || (self.respond_to?(:block_is_haml?) && block_is_haml?(block)))
     end
+    
+    protected
 
     # Used to capture the html from a block of erb code
     # capture_erb(&block) => '...html...'
