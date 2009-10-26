@@ -11,15 +11,12 @@ module SinatraMore
     # content_tag(:p, "hello", :class => 'light')
     # content_tag(:p, :class => 'dark') do ... end
     # parameters: content_tag(name, content=nil, options={})
-    # options = { :concat => true/false }
     def content_tag(*args, &block)
       name = args.first
       options = args.extract_options!
-      options.reverse_merge!(:concat => true) if block_given?
-      should_concat = options.delete(:concat)
       tag_html = block_given? ? capture_html(&block) : args[1]
       tag_result = tag(name, options.merge(:content => tag_html))
-      should_concat ? concat_content(tag_result) : tag_result
+      block_is_template?(block) ? concat_content(tag_result) : tag_result
     end
     alias content_block_tag content_tag
 
