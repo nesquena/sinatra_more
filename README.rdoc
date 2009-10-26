@@ -142,7 +142,7 @@ A form_tag might look like:
     - field_set_tag(:class => 'buttons') do
       = submit_tag "Login"
     
-==== FormBuilders ====
+==== FormBuilders
 
 * form_for(object, url, settings={}, &block)
   * Constructs a form using given or default form_builder
