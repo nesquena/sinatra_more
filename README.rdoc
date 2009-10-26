@@ -59,23 +59,43 @@ methods should be very familiar to anyone who has used rails view helpers.
   * Captures the html from a block of template code for erb or haml
   * capture_html(&block) => "...html..."
 * concat_content(text="")
-  * Outputs the given text to the templates buffer directly
+  * Outputs the given text to the templates buffer directly in erb or haml
   * concat_content("This will be output to the template buffer in erb or haml")
 
 ==== Tag Helpers
 
 * tag(name, options={})
+  * Creates an html tag with the given name and options
+  * tag(:br, :style => 'clear:both') => <br style="clear:both" />
+  * tag(:p, :content => "demo", :class => 'large') => <p class="large">demo</p>
 * content_tag(name, content, options={})
+  * Creates an html tag with given name, content and options
+  * content_tag(:p, "demo", :class => 'light') => <p class="light">demo</p>
+  * content_tag(:p, :class => 'dark') { ...content... } => <p class="dark">...content...</p>
 * input_tag(type, options = {})
+  * Creates an html input field with given type and options
+  * input_tag :text,     :class => "demo"
+  * input_tag :password, :value => "secret", :class => "demo"
 
 ==== Asset Helpers
 
 * flash_tag(kind, options={})
+  * Creates a div to display the flash of given type if it exists
+  * flash_tag(:notice, :class => 'flash', :id => 'flash-notice')
 * link_to(*args, &block)
+  * Creates a link element with given name, url and options
+  * link_to 'click me', '/dashboard', :class => 'linky'
+  * link_to('/dashboard', :class => 'blocky') { ...content... }
 * image_tag(url, options={})
+  * Creates an image element with given url and options
+  * image_tag('icons/avatar.png')
 * stylesheet_link_tag(*sources)
+  * Returns a stylesheet link tag for the sources specified as arguments
+  * stylesheet_link_tag 'style', 'application', 'layout'
 * javascript_include_tag(*sources)
-
+  * Returns an html script tag for each of the sources provided.
+  * javascript_include_tag 'application', 'special'
+  
 ==== Form Helpers
 
 * form_for(object, url, settings={}, &block)

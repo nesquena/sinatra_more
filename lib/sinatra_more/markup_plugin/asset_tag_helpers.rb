@@ -1,6 +1,7 @@
 module SinatraMore
   module AssetTagHelpers
     
+    # Creates a div to display the flash of given type if it exists
     # flash_tag(:notice, :class => 'flash', :id => 'flash-notice')
     def flash_tag(kind, options={})
       flash_text = flash[kind]
@@ -9,7 +10,9 @@ module SinatraMore
       content_tag(:div, flash_text, options)
     end
     
+    # Creates a link element with given name, url and options
     # link_to 'click me', '/dashboard', :class => 'linky'
+    # link_to('/dashboard', :class => 'blocky') do ... end
     # parameters: name, url='javascript:void(0)', options={}, &block
     def link_to(*args, &block)
       if block_given?
@@ -24,12 +27,14 @@ module SinatraMore
       end
     end
 
+    # Creates an image element with given url and options
     # image_tag('icons/avatar.png')
     def image_tag(url, options={})
       options.reverse_merge!(:src => url)
       tag(:img, options)
     end
 
+    # Returns a stylesheet link tag for the sources specified as arguments
     # stylesheet_link_tag 'style', 'application', 'layout'
     def stylesheet_link_tag(*sources)
       options = sources.extract_options!.symbolize_keys
