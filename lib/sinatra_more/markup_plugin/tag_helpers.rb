@@ -6,16 +6,20 @@ module SinatraMore
       tag(:input, options)
     end
 
-    # content_block_tag(:p, :class => 'dark') do ... end
-    def content_block_tag(name, options={}, &block)
-      options.merge!(:content => capture_html(&block))
-      tag(name, options)
-    end
-
     # content_tag(:p, "hello", :class => 'light')
-    def content_tag(name, content, options={})
-      tag(name, options.merge(:content => content))
+    # content_tag(:p, :class => 'dark') do ... end
+    # parameters: content_tag(name, content=nil, options={})
+    # options = { :concat => true/false }
+    def content_tag(*args, &block)
+      name = args.first
+      options = args.extract_options!
+      options.reverse_merge!(:concat => true) if block_given?
+      should_concat = options.delete(:concat)
+      tag_html = block_given? ? capture_html(&block) : args[1]
+      tag_result = tag(name, options.merge(:content => tag_html))
+      should_concat ? concat_content(tag_result) : tag_result
     end
+    alias content_block_tag content_tag
 
     # tag(:br, :style => 'clear:both')
     # tag(:p, :content => "hello", :class => 'large')
