@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra_more}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Esquenazi"]
@@ -60,7 +60,6 @@ Gem::Specification.new do |s|
      "test/markup_plugin/test_format_helpers.rb",
      "test/markup_plugin/test_output_helpers.rb",
      "test/markup_plugin/test_tag_helpers.rb",
-     "test/test_markup_plugin.rb",
      "test/test_render_plugin.rb",
      "test/test_warden_plugin.rb"
   ]
@@ -80,7 +79,6 @@ Gem::Specification.new do |s|
      "test/markup_plugin/test_format_helpers.rb",
      "test/markup_plugin/test_output_helpers.rb",
      "test/markup_plugin/test_tag_helpers.rb",
-     "test/test_markup_plugin.rb",
      "test/test_render_plugin.rb",
      "test/test_warden_plugin.rb"
   ]
