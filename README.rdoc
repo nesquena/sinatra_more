@@ -98,21 +98,128 @@ methods should be very familiar to anyone who has used rails view helpers.
   
 ==== Form Helpers
 
-* form_for(object, url, settings={}, &block)
 * form_tag(url, options={}, &block)
+  * Constructs a form without object based on options
+  * form_tag('/register', :class => 'example') { ... }
 * field_set_tag(*args, &block)
+  * Constructs a field_set to group fields with given options
+  * field_set_tag(:class => 'office-set') { }
+  * field_set_tag("Office", :class => 'office-set') { }
 * error_messages_for(record, options={})
+  * Constructs list html for the errors for a given object
+  * error_messages_for @user
 * label_tag(name, options={}, &block)
+  * Constructs a label tag from the given options
+  * label_tag :username, :class => 'long-label'
+  * label_tag(:username, :class => 'blocked-label') { ... }
 * text_field_tag(name, options={})
+  * Constructs a text field input from the given options
+  * text_field_tag :username, :class => 'long'
 * text_area_tag(name, options={})
+  * Constructs a text area input from the given options
+  * text_area_tag :username, :class => 'long'
 * password_field_tag(name, options={})
+  * Constructs a password field input from the given options
+  * password_field_tag :password, :class => 'long'
 * file_field_tag(name, options={})
+  * Constructs a file field input from the given options
+  * file_field_tag :photo, :class => 'long'
 * submit_tag(caption, options={})
+  * Constructs a submit button from the given options
+  * submit_tag "Create", :class => 'success'
+
+A form_tag might look like:
+
+  - form_tag '/login', :class => 'login-form' do
+    = flash_tag(:notice)
+    - field_set_tag do
+      %p
+        = label_tag :username, :class => 'first'
+        = text_field_tag :username, :value => params[:username]
+      %p
+        = label_tag :password, :class => 'first'
+        = text_field_tag :password, :value => params[:password]
+    - field_set_tag(:class => 'buttons') do
+      = submit_tag "Login"
+    
+==== FormBuilders ====
+
+* form_for(object, url, settings={}, &block)
+  * Constructs a form using given or default form_builder
+  * form_for(@user, '/register', :id => 'register') { |f| ...field-elements... }
+
+The following are fields provided by AbstractFormBuilder that can be used within a form_for:
+
+* error_messages(options={})
+  * Displays list html for the errors on form object
+  * f.errors_messages
+* label(field, options={})
+  * f.label :name, :class => 'long'
+* text_field(field, options={})
+  * f.text_field :username, :class => 'long'
+* text_area(field, options={})
+  * f.text_area :summary, :class => 'long'
+* password_field(field, options={})
+  * f.password_field :secret, :class => 'long'
+* file_field(field, options={})
+  * f.file_field :photo, :class => 'long'
+* submit(caption, options={})
+  * f.submit "Update", :class => 'long'
+  
+A form_for using these basic fields might look like:
+
+  - form_for @user, '/register', :id => 'register' do |f|
+    = f.error_messages
+    %p
+      = f.label :username
+      = f.text_field :username
+    %p
+      = f.label :email
+      = f.text_field :email
+    %p
+      = f.label :password
+      = f.password_field :password
+    %p
+      = f.submit "Create"
+  
+There is also a StandardFormBuilder which builds on the abstract fields that can be used within a form_for:
+
+* text_field_block(field, options={}, label_options={})
+  * text_field_block(:nickname, :class => 'big', :caption => "Username")
+* text_area_block(field, options={}, label_options={})
+  * text_area_block(:about, :class => 'big')
+* password_field_block(field, options={}, label_options={})
+  * password_field_block(:code, :class => 'big')
+* file_field_block(field, options={}, label_options={})
+  * file_field_block(:photo, :class => 'big')
+* submit_block(caption, options={})
+  * submit_block(:username, :class => 'big')
+  
+A form_for using these standard fields might look like:
+
+  - form_for @user, '/register', :id => 'register' do |f|
+    = f.error_messages
+    = f.text_field_block :username
+    = f.text_field_block :email
+    = f.password_field_block :password
+    = f.submit_block "Create"
+
+and would generate this html:
+
+  <form id="register" action="/register" method="post">
+    <p><label for="user_name">Name: </label><input type="text" id="user_name" name="user[name]"></p>
+    ...omitted...
+    <p><input type="submit" value="Create"></p>
+  </form>
 
 ==== Format Helpers
 
 * relative_time_ago(date)
+  * Returns relative time in words referencing the given date
+  * relative_time_ago(2.days.ago) => "2 days ago"
 * escape_javascript(html_content)
+  * Escapes html to allow passing information to javascript. Used for passing data inside an ajax .js.erb template
+  * escape_javascript("<h1>Hey</h1>")
 
 === RenderPlugin
 
@@ -121,9 +228,19 @@ of displaying templates far smoother. This plugin also has support for useful ad
 such as partials (with support for :collection) into the templating system.
 
 * erb_template(template_path, options={})
+  * Renders a erb template based on the given path
+  * erb_template 'users/new'
 * haml_template(template_path, options={})
+  * Renders a haml template based on the given path
+  * haml_template 'users/new'
 * render_template(template_path, options={})
+  * Renders the first detected template based on the given path
+  * render_template 'users/new'
+  * render_template 'users/index', :template_engine => 'haml'
 * partial(template, *args)
+  * Renders the html related to the partial template for object or collection
+  * partial 'photo/_item', :object => @photo, :locals => { :foo => 'bar' }
+  * partial 'photo/_item', :collection => @photos
 
 === WardenPlugin
 
@@ -132,11 +249,20 @@ plugin registered, warden will be automatically required, configured and helpers
 provided to make interacting with warden dead simple.
 
 * current_user
+  * Returns the current authenticated user
 * authenticate_user!
+  * Login the user through the default warden strategies
 * logout_user!
+  * Signs out the user from the session
 * logged_in?
+  * Returns true if the user has been authenticated
 * authenticated?(&block)
+  * If a block is given, only yields the content if the user is authenticated
+  * authenticated? { puts "I am authenticated!" }
 * must_be_authorized!(failure_path=nil)
+  * Forces a user to return to a fail path unless they are authorized
+  * Used to require a user be authenticated before routing to an action
+  * must_be_authorized!('/login')
 
 == Acknowledgements
 

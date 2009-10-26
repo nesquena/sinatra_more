@@ -39,6 +39,7 @@ module SinatraMore
         render_template(template_path, options)
       end
     end
+    alias render_partial partial
 
     private
 

@@ -1,6 +1,7 @@
 module SinatraMore
   module FormatHelpers
     
+    # Returns relative time in words referencing the given date
     # relative_time_ago(Time.now)
     def relative_time_ago(date)
       date = date.to_date
@@ -18,8 +19,8 @@ module SinatraMore
       return date.strftime('%A, %B %e, %Y')
     end
 
-    # escape_javascript("<h1>Hey</h1>")
     # Used in xxxx.js.erb files to escape html so that it can be passed to javascript from sinatra
+    # escape_javascript("<h1>Hey</h1>")
     def escape_javascript(html_content)
       return '' unless html_content
       javascript_mapping = { '\\' => '\\\\', '</' => '<\/', "\r\n" => '\n', "\n" => '\n' }

@@ -17,9 +17,9 @@ class StandardFormBuilder < AbstractFormBuilder
   end
 
   # submit_block("Update")
-  def submit_block(caption)
+  def submit_block(caption, options={})
     @template.content_block_tag(:p) do
-      @template.submit_tag(caption)
+      @template.submit_tag(caption, options)
     end
   end
 end
