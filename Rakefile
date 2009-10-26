@@ -12,8 +12,13 @@ begin
     gem.email = "nesquena@gmail.com"
     gem.homepage = "http://github.com/nesquena/sinatra_more"
     gem.authors = ["Nathan Esquenazi"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.add_runtime_dependency     "sinatra", ">= 0.9.2" 
+    gem.add_runtime_dependency     "active_support", ">= 2.2.2" 
+    gem.add_runtime_dependency     "warden", ">= 0.5.0" 
+    gem.add_development_dependency "shoulda", ">= 2.10.2"
+    gem.add_development_dependency "mocha", ">= 0.9.8"
+    gem.add_development_dependency "rack-test", ">= 0.5.0"
+    gem.add_development_dependency "webrat", ">= 0.5.3"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
