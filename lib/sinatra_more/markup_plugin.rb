@@ -1,5 +1,6 @@
-require File.dirname(__FILE__) + '/markup_plugin/form_builder/abstract_form_builder.rb'
-Dir.glob(File.dirname(__FILE__) + '/markup_plugin/**/*.rb').each  { |f| require f }
+require File.dirname(__FILE__) + '/markup_plugin/form_builder/abstract_form_builder'
+require File.dirname(__FILE__) + '/markup_plugin/form_builder/standard_form_builder'
+Dir[File.dirname(__FILE__) + '/markup_plugin/*.rb'].each {|file| load file }
 
 module SinatraMore
   module MarkupPlugin

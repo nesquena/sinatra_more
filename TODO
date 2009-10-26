@@ -1,5 +1,6 @@
 = UNFINISHED
 
+* fix content_block_tag to eliminate need for concat option
 * image_tag should start in images_path (or /images)
 * I have got to add tests, basically create dummy sinatra applications and use Webrat
 * Become total warden solution (basically just require warden gem installed, do everything else)

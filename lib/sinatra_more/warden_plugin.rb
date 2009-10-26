@@ -1,4 +1,4 @@
-Dir.glob(File.dirname(__FILE__) + '/warden_plugin/**/*.rb').each  { |f| require f }
+Dir[File.dirname(__FILE__) + '/warden_plugin/**/*.rb'].each {|file| load file }
 
 module SinatraMore
   module WardenPlugin

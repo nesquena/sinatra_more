@@ -46,7 +46,7 @@ module SinatraMore
       # resolve_template_engine('users/new') => :haml
       def resolve_template_engine(template_path)
         resolved_template_path = File.join(self.options.views, template_path + ".*")
-        template_file = Dir.glob(resolved_template_path).first
+        template_file = Dir[resolved_template_path].first
         raise "Template path '#{template_path}' could not be located in views!" unless template_file
         template_engine = File.extname(template_file)[1..-1].to_sym
       end
