@@ -53,7 +53,46 @@ This component provides a great deal of view helpers related to html markup gene
 There are helpers for generating tags, forms, links, images, and more. Most of the basic
 methods should be very familiar to anyone who has used rails view helpers.
 
-...list methods here...
+==== Output Helpers
+
+* capture_html(*args, &block)
+  * Captures the html from a block of template code for erb or haml
+  * capture_html(&block) => "...html..."
+* concat_content(text="")
+  * Outputs the given text to the templates buffer directly
+  * concat_content("This will be output to the template buffer in erb or haml")
+
+==== Tag Helpers
+
+* tag(name, options={})
+* content_tag(name, content, options={})
+* input_tag(type, options = {})
+
+==== Asset Helpers
+
+* flash_tag(kind, options={})
+* link_to(*args, &block)
+* image_tag(url, options={})
+* stylesheet_link_tag(*sources)
+* javascript_include_tag(*sources)
+
+==== Form Helpers
+
+* form_for(object, url, settings={}, &block)
+* form_tag(url, options={}, &block)
+* field_set_tag(*args, &block)
+* error_messages_for(record, options={})
+* label_tag(name, options={}, &block)
+* text_field_tag(name, options={})
+* text_area_tag(name, options={})
+* password_field_tag(name, options={})
+* file_field_tag(name, options={})
+* submit_tag(caption, options={})
+
+==== Format Helpers
+
+* relative_time_ago(date)
+* escape_javascript(html_content)
 
 === RenderPlugin
 
@@ -61,7 +100,10 @@ This component provides a number of rendering helpers for sinatra, making the pr
 of displaying templates far smoother. This plugin also has support for useful additions
 such as partials (with support for :collection) into the templating system.
 
-...list methods here...
+* erb_template(template_path, options={})
+* haml_template(template_path, options={})
+* render_template(template_path, options={})
+* partial(template, *args)
 
 === WardenPlugin
 
@@ -69,7 +111,12 @@ This component provides out-of-the-box support for Warden authentication. With t
 plugin registered, warden will be automatically required, configured and helpers will be
 provided to make interacting with warden dead simple.
 
-...list methods here...
+* current_user
+* authenticate_user!
+* logout_user!
+* logged_in?
+* authenticated?(&block)
+* must_be_authorized!(failure_path=nil)
 
 == Acknowledgements
 

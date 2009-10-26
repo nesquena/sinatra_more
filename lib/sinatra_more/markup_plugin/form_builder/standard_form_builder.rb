@@ -8,7 +8,7 @@ class StandardFormBuilder < AbstractFormBuilder
     class_eval <<-EOF
     def #{field_type}_block(field, options={}, label_options={})
       label_options.reverse_merge!(:caption => options.delete(:caption)) if options[:caption]
-      @template.content_block_tag(:p) do
+      @template.content_block_tag(:p, :concat => false) do
         html =  label(field, label_options)
         html << #{field_type}(field, options)
       end
@@ -18,7 +18,7 @@ class StandardFormBuilder < AbstractFormBuilder
 
   # submit_block("Update")
   def submit_block(caption)
-    @template.content_block_tag(:p) do
+    @template.content_block_tag(:p, :concat => false) do
       @template.submit_tag(caption)
     end
   end
