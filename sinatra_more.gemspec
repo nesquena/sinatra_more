@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra_more}
-  s.version = "0.0.14"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Esquenazi"]
-  s.date = %q{2009-10-25}
+  s.date = %q{2009-10-26}
   s.description = %q{Expands sinatra with standard helpers and tools to allow for complex applications}
   s.email = %q{nesquena@gmail.com}
   s.extra_rdoc_files = [
@@ -38,11 +38,29 @@ Gem::Specification.new do |s|
      "lib/sinatra_more/warden_plugin.rb",
      "lib/sinatra_more/warden_plugin/warden_helpers.rb",
      "sinatra_more.gemspec",
+     "test/fixtures/markup_app/app.rb",
+     "test/fixtures/markup_app/views/capture_concat.erb",
+     "test/fixtures/markup_app/views/capture_concat.haml",
+     "test/fixtures/markup_app/views/content_tag.erb",
+     "test/fixtures/markup_app/views/content_tag.haml",
+     "test/fixtures/markup_app/views/link_to.erb",
+     "test/fixtures/markup_app/views/link_to.haml",
      "test/fixtures/render_app/app.rb",
-     "test/fixtures/render_app/views/bar/test.erb",
-     "test/fixtures/render_app/views/foo/test.haml",
+     "test/fixtures/render_app/views/erb/test.erb",
+     "test/fixtures/render_app/views/haml/test.haml",
+     "test/fixtures/render_app/views/template/_user.haml",
+     "test/fixtures/render_app/views/template/haml_template.haml",
+     "test/fixtures/render_app/views/template/some_template.haml",
      "test/fixtures/warden_app/app.rb",
+     "test/fixtures/warden_app/views/dashboard.haml",
      "test/helper.rb",
+     "test/markup_plugin/test_asset_tag_helpers.rb",
+     "test/markup_plugin/test_form_builder.rb",
+     "test/markup_plugin/test_form_helpers.rb",
+     "test/markup_plugin/test_format_helpers.rb",
+     "test/markup_plugin/test_output_helpers.rb",
+     "test/markup_plugin/test_tag_helpers.rb",
+     "test/test_markup_plugin.rb",
      "test/test_render_plugin.rb",
      "test/test_warden_plugin.rb"
   ]
@@ -52,9 +70,17 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Expands sinatra to allow for complex applications}
   s.test_files = [
-    "test/fixtures/render_app/app.rb",
+    "test/fixtures/markup_app/app.rb",
+     "test/fixtures/render_app/app.rb",
      "test/fixtures/warden_app/app.rb",
      "test/helper.rb",
+     "test/markup_plugin/test_asset_tag_helpers.rb",
+     "test/markup_plugin/test_form_builder.rb",
+     "test/markup_plugin/test_form_helpers.rb",
+     "test/markup_plugin/test_format_helpers.rb",
+     "test/markup_plugin/test_output_helpers.rb",
+     "test/markup_plugin/test_tag_helpers.rb",
+     "test/test_markup_plugin.rb",
      "test/test_render_plugin.rb",
      "test/test_warden_plugin.rb"
   ]
