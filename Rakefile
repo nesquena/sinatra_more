@@ -13,7 +13,7 @@ begin
     gem.homepage = "http://github.com/nesquena/sinatra_more"
     gem.authors = ["Nathan Esquenazi"]
     gem.add_runtime_dependency     "sinatra", ">= 0.9.2" 
-    gem.add_runtime_dependency     "active_support", ">= 2.2.2" 
+    gem.add_runtime_dependency     "activesupport", ">= 2.2.2" 
     gem.add_runtime_dependency     "warden", ">= 0.5.0" 
     gem.add_development_dependency "shoulda", ">= 2.10.2"
     gem.add_development_dependency "mocha", ">= 0.9.8"

@@ -33,9 +33,9 @@ fork the project if you have any ideas that will help flesh out this project!
 == Installation
 
 This gem has very few runtime dependencies. Primarily, you just need the 'sinatra' gem installed
-and right now active_support. If you want to use the WardenPlugin, then you also need the 'warden' gem.
+and right now 'activesupport'. If you want to use the WardenPlugin, then you also need the 'warden' gem.
 
-To install this gem, simply grab the latest version from gemcutter:
+To install sinatra_more, simply grab the latest version from gemcutter:
 
   $ sudo gem install sinatra_more --source http://gemcutter.org
   
