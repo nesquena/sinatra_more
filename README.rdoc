@@ -2,44 +2,47 @@
 
 == Introduction
 
-Note: This library is experimental and may not work 100% yet. This will be removed once more testing has been done.
+Note: This library is still experimental and may not be ready for production just yet. 
+That being said, work is being put into reaching solid test coverage and the gem is being actively used
+on a number of sinatra projects. This notice will be removed once sufficient testing has been done.
 
-This will be a plugin which expand sinatra's capabilities in many ways. 
-Note that certain template specific helpers are known to work with haml, erb, and erubis
+This will be a plugin which expands sinatra's capabilities in a variety of ways. 
+Note that as much as possible, all helpers have been created to work with haml, erb, and erubis. 
+This gem is intended to be template-agnostic in providing helpers as much as possible.
 
 Let me expand briefly on what I want to accomplish with this gem. I love sinatra but if I want to use it
 for any non-trivial application I very quickly miss a lot of the extra tools provided by rails.
 
-Now the obvious question is, why not just use rails? Well, that would be the easy answer. However, until
-version 3 comes along, Rails is quite a large framework and I love the spirit of sinatra which acts
-as a thin wrapper on top of rack allowing middleware to do most of the work and pulling in complexity
-only as needed. 
+Now the obvious question is "Why not just use rails then?" Well, in many cases that might be the right decision.
+Still, at least until version 3 comes along, Rails is quite a large framework with a 'take it or leave it' attitude.
+Personally, I have come to love the spirit of sinatra which acts as a thin wrapper on top of rack 
+often allowing middleware to do most of the work and pulling in additional complexity only as required. 
 
-My goal with this extension is to maintain the spirit of Sinatra and at the same time create a standard library
-of tools, helpers and components that will make Sinatra scale to allow for extremely complex apps.
+My goal with this extension is to match the spirit of Sinatra and at the same time create a standard library
+of tools, helpers and components that will make Sinatra suitable for more complex applications.
 
-Here is a small list of what sinatra_more might contain:
+Here is a small list of what sinatra_more contains:
 
-* Lots of generic view helpers (tag, content_tag, ...)
+* Generic view and tag helpers (tag, content_tag, input_tag, ...)
 * Asset helpers (link_to, image_tag, javascript_include_tag, ...)
-* Form helpers and form builder support (form_tag, form_for, text_field, ...)
-* Plug and play components for Warden (authentication)
+* Form helpers and builder support (form_tag, form_for, field_set_tag, text_field, ...)
+* Plug and play setup for the excellent Warden authentication system
+* Code generators for creating a new sinatra application
 
-Keep in mind, the user will be able to pull in components as necessary and leave out any that are not required.
+Keep in mind, the user will be able to pull in these components seperately and leave out those that are not required.
 
-Obviously the project isn't ready for primetime yet but please help me brainstorm and 
-fork the project if you have any ideas that will help flesh out this project!
+Please help me brainstorm and fork the project if you have any ideas to contribute.
 
 == Installation
 
-This gem has very few runtime dependencies. Primarily, you just need the 'sinatra' gem installed
-and right now 'activesupport'. If you want to use the WardenPlugin, then you also need the 'warden' gem.
+This gem has very few runtime dependencies. The 'sinatra' gem needs to be installed and also 'activesupport'. 
+If you want to use the WardenPlugin component, then the 'warden' gem is also required.
 
 To install sinatra_more, simply grab the latest version from gemcutter:
 
   $ sudo gem install sinatra_more --source http://gemcutter.org
   
-Now you are ready to use the gem in your sinatra project.
+Now you are ready to use this gem in your sinatra project.
 
 == Usage
 
@@ -56,7 +59,7 @@ different components based on which pieces are useful for your particular applic
     register SinatraMore::WardenPlugin
   end
 
-This will then allow you to use whichever components that have been registered. A breakdown is below:
+This will then allow you to use the components that have been registered. A breakdown of components is below:
 
 === MarkupPlugin
 
@@ -277,8 +280,8 @@ provided to make interacting with warden dead simple.
 
 == Acknowledgements
 
-Thanks to keldredd for the sinatra_helpers code that helped me to create erb capture and concat methods.
-Thanks to sbfaulkner for the sinatra-helpers code that I looked over while building a few helper methods.
+ * Thanks to keldredd for the sinatra_helpers code that helped me to create erb capture and concat methods.
+ * Thanks to sbfaulkner for the sinatra-helpers code that I looked while starting this library.
 
 == Contributers
 
@@ -287,7 +290,7 @@ Thanks to sbfaulkner for the sinatra-helpers code that I looked over while build
 
 == Known Issues
 
-* tag helper methods accepting blocks work quite unreliably in erb. Work must be done to improve this.
+* Tag helper methods that accept blocks work unreliably in ERB.
 
 == Note on Patches/Pull Requests
  
