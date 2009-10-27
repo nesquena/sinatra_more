@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra_more}
-  s.version = "0.1.6"
+  s.version = "0.1.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Esquenazi"]
@@ -43,6 +43,8 @@ Gem::Specification.new do |s|
      "test/fixtures/markup_app/views/capture_concat.haml",
      "test/fixtures/markup_app/views/content_tag.erb",
      "test/fixtures/markup_app/views/content_tag.haml",
+     "test/fixtures/markup_app/views/form_for.erb",
+     "test/fixtures/markup_app/views/form_for.haml",
      "test/fixtures/markup_app/views/form_tag.erb",
      "test/fixtures/markup_app/views/form_tag.haml",
      "test/fixtures/markup_app/views/link_to.erb",
