@@ -114,6 +114,7 @@ methods should be very familiar to anyone who has used rails view helpers.
 
 * <tt>form_tag(url, options={}, &block)</tt>
   * Constructs a form without object based on options
+  * Supports form methods 'put' and 'delete' through hidden field
   * <tt>form_tag('/register', :class => 'example') { ... }</tt>
 * <tt>field_set_tag(*args, &block)</tt>
   * Constructs a field_set to group fields with given options
@@ -147,7 +148,7 @@ methods should be very familiar to anyone who has used rails view helpers.
 
 A form_tag might look like:
 
-  - form_tag '/login', :class => 'login-form' do
+  - form_tag '/destroy', :class => 'destroy-form', :method => 'delete' do
     = flash_tag(:notice)
     - field_set_tag do
       %p
@@ -157,7 +158,7 @@ A form_tag might look like:
         = label_tag :password, :class => 'first'
         = password_field_tag :password, :value => params[:password]
     - field_set_tag(:class => 'buttons') do
-      = submit_tag "Login"
+      = submit_tag "Remove"
     
 ==== FormBuilders
 

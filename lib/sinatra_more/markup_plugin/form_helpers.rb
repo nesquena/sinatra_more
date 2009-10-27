@@ -16,7 +16,8 @@ module SinatraMore
     # form_tag '/register' do ... end
     def form_tag(url, options={}, &block)
       options.reverse_merge!(:method => 'post', :action => url)
-      concat_content content_tag('form', capture_html(&block), options)
+      inner_form_html = hidden_form_method_field(options[:method]) + capture_html(&block)
+      concat_content content_tag('form', inner_form_html, options)
     end
 
     # Constructs a field_set to group fields with given options
@@ -96,6 +97,19 @@ module SinatraMore
     def submit_tag(caption="Submit", options={})
       options.reverse_merge!(:value => caption)
       input_tag(:submit, options)
+    end
+
+    protected
+
+    # returns the hidden method field for 'put' and 'delete' forms
+    # Only 'get' and 'post' are allowed within browsers;
+    # 'put' and 'delete' are just specified using hidden fields with form action still 'put'.
+    # <input name="_method" value="delete" />
+    def hidden_form_method_field(desired_method)
+      return '' if (desired_method =~ /get|post/)
+      original_method = desired_method.dup
+      desired_method.replace('post')
+      hidden_field_tag(:_method, :value => original_method)
     end
   end
 end

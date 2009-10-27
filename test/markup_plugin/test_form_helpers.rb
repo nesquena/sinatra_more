@@ -10,13 +10,26 @@ class TestFormHelpers < Test::Unit::TestCase
 
   context 'for #form_tag method' do
     should "display correct forms in ruby" do
-      actual_html = form_tag('/register', :class => 'test', :action => "hello") { "Demo" }
+      actual_html = form_tag('/register', :class => 'test', :method => "post") { "Demo" }
       assert_has_tag(:form, :class => "test") { actual_html }
+      assert_has_tag('form input', :type => 'hidden', :count => 0) { actual_html }
     end
 
-    should "display correct inputs in ruby for form_tag" do
-      actual_html = form_tag('/register', :class => 'test', :action => "hello") { text_field_tag(:username) }
+    should "display correct text inputs within form_tag" do
+      actual_html = form_tag('/register', :class => 'test') { text_field_tag(:username) }
       assert_has_tag('form input', :type => 'text', :name => "username") { actual_html }
+    end
+
+    should "display correct form with method :put" do
+      actual_html = form_tag('/update', :class => 'put-form', :method => "put") { "Demo" }
+      assert_has_tag(:form, :class => "put-form", :method => 'post') { actual_html }
+      assert_has_tag('form input', :type => 'hidden', :name => "_method", :value => 'put') { actual_html }
+    end
+
+    should "display correct form with method :delete" do
+      actual_html = form_tag('/remove', :class => 'delete-form', :method => "delete") { "Demo" }
+      assert_has_tag(:form, :class => "delete-form", :method => 'post') { actual_html }
+      assert_has_tag('form input', :type => 'hidden', :name => "_method", :value => 'delete') { actual_html }
     end
 
     should "display correct forms in erb" do
