@@ -10,11 +10,6 @@ class MarkupDemo < Sinatra::Base
     set :root, File.dirname(__FILE__)
   end
 
-  get '/:engine/form_tag' do
-    @user = User.new
-    show(params[:engine], 'form_tag')
-  end
-
   get '/:engine/:file' do
     show(params[:engine], params[:file].to_sym)
   end
@@ -49,20 +44,15 @@ class MarkupDemo < Sinatra::Base
       end
     end
   end
+end
 
-  class User
-    def errors
-      Errors.new
-    end
-  end
+class MarkupUser
+  def errors; Errors.new; end
+end
 
-  class Errors < Array
-    def initialize
-      self << [:fake, :second, :third]
-    end
-
-    def full_messages
-      ["This is a fake error", "This is a second fake error", "This is a third fake error"]
-    end
+class Errors < Array
+  def initialize; self << [:fake, :second, :third]; end
+  def full_messages
+    ["This is a fake error", "This is a second fake error", "This is a third fake error"]
   end
 end

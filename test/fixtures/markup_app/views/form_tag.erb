@@ -10,7 +10,7 @@
 <% end %>
 
 <% form_tag '/advanced', :id => 'advanced', :class => 'advanced-form', :method => 'get' do %>
-  <%= error_messages_for @user, :header_message => "There are problems with saving user!" %>
+  <%= error_messages_for MarkupUser.new, :header_message => "There are problems with saving user!" %>
   <% field_set_tag "Advanced", :class => 'advanced-field-set' do %>
     <p>
       <%= label_tag :username, :class => 'first', :caption => "Nickname" %>
