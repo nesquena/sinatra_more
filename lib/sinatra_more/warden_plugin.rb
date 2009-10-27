@@ -1,3 +1,4 @@
+require File.dirname(__FILE__) + '/support_lite'
 load File.dirname(__FILE__) + '/markup_plugin/output_helpers.rb'
 Dir[File.dirname(__FILE__) + '/warden_plugin/**/*.rb'].each {|file| load file }
 

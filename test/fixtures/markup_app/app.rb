@@ -1,5 +1,4 @@
 require 'sinatra/base'
-require 'active_support'
 require 'sinatra_more'
 require 'haml'
 
