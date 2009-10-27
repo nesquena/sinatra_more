@@ -257,7 +257,8 @@ The form builder can even be made into the default builder when form_for is invo
   # anywhere in the sinatra application
   set :default_builder, 'MyCustomFormBuilder'
 
-And this is just the beginning of what you can do.
+And there you have it, a fairly complete form builder solution for sinatra. 
+I hope to create or merge in an even better 'default' form_builder in the near future.
 
 ==== Format Helpers
 
@@ -291,6 +292,36 @@ such as partials (with support for :collection) into the templating system.
   * <tt>partial 'photo/_item', :object => @photo, :locals => { :foo => 'bar' }</tt>
   * <tt>partial 'photo/_item', :collection => @photos</tt>
 
+Using render plugin helpers is extremely simple. If you want to render an erb template in your view path:
+
+  erb_template 'path/to/my/template'
+  
+or using haml templates works just as well:
+
+  haml_template 'path/to/haml/template'
+  
+There is also a method which renders the first view matching the path and removes the need to define an engine:
+
+  render_template 'path/to/any/template'
+  
+It is worth noting these are mostly for convenience. When I had more complex view files in sinatra, I got tired of writing:
+
+  haml :"the/path/to/file"
+  erb "/path/to/file".to_sym
+  
+Finally, we have the all-important partials support for rendering mini-templates onto a page:
+
+  partial 'photo/_item', :object => @photo, :locals => { :foo => 'bar' }
+  partial 'photo/_item', :collection => @photos
+  
+This works as you would expect and also supports the collection counter inside the partial <tt>item_counter</tt>
+
+  # /views/photo/_item.haml
+  # Access to collection counter with <partial_name>_counter i.e item_counter
+  # Access the object with the partial_name i.e item
+  
+And that concludes the render plugin for now but I am open to adding more methods as time progresses.
+
 === WardenPlugin
 
 This component provides out-of-the-box support for Warden authentication. With this
@@ -312,11 +343,18 @@ provided to make interacting with warden dead simple.
   * Forces a user to return to a fail path unless they are authorized
   * Used to require a user be authenticated before routing to an action
   * <tt>must_be_authorized!('/login')</tt>
+  
+I am aware of other sinatra/warden extensions which work very similarly to the system I outlined here. 
+Most notably is the sinatra_warden plugin by Justin Smestad (http://github.com/jsmestad/sinatra_warden)
+Eventually I plan to vendor that gem or just remove support for this piece of my plugin completely. 
+
+If anybody has any thoughts on this, please let me know. There is something convenient to me about having
+access to a plug-and-play warden solution directly from this gem.
 
 == Acknowledgements
 
 * Thanks to keldredd for the sinatra_helpers code that helped me to create erb capture and concat methods.
-* Thanks to sbfaulkner for the sinatra-helpers code that I looked while starting this library.
+* Thanks to sbfaulkner for the sinatra-helpers code that I browsed through many times while starting this library.
 
 == Contributors
 
