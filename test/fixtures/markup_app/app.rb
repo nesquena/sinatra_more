@@ -43,6 +43,7 @@ end
 
 class MarkupUser
   def errors; Errors.new; end
+  def session_id; 45; end
 end
 
 class Errors < Array

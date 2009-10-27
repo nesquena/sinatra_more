@@ -9,7 +9,7 @@ class TestFormBuilder < Test::Unit::TestCase
   end
 
   def setup
-    @user = stub(:errors => stub(:full_messages => ["1", "2"], :none? => false), :class => 'User', :first_name => "Joe")
+    @user = stub(:errors => stub(:full_messages => ["1", "2"], :none? => false), :class => 'User', :first_name => "Joe", :session_id => 54)
     @user_none = stub(:errors => stub(:none? => true), :class => 'User')
   end
 
@@ -106,6 +106,25 @@ class TestFormBuilder < Test::Unit::TestCase
     end
   end
 
+  context 'for #hidden_field method' do
+    should "display correct hidden field html" do
+      actual_html = standard_builder.hidden_field(:session_id, :class => 'hidden')
+      assert_has_tag('input.hidden[type=hidden]', :value => "54", :id => 'user_session_id', :name => 'user[session_id]') { actual_html }
+    end
+
+    should "display correct hidden field in haml" do
+      visit '/haml/form_for'
+      assert_have_selector '#demo input[type=hidden]', :id => 'markup_user_session_id', :value => "45"
+      assert_have_selector '#demo2 input', :type => 'hidden', :name => 'markup_user[session_id]'
+    end
+
+    should "display correct hidden field in erb" do
+      visit '/erb/form_for'
+      assert_have_selector '#demo input[type=hidden]', :id => 'markup_user_session_id', :value => "45"
+      assert_have_selector '#demo2 input', :type => 'hidden', :name => 'markup_user[session_id]'
+    end
+  end
+
   context 'for #text_field method' do
     should "display correct text field html" do
       actual_html = standard_builder.text_field(:first_name, :class => 'large')
@@ -115,13 +134,13 @@ class TestFormBuilder < Test::Unit::TestCase
     should "display correct text field in haml" do
       visit '/haml/form_for'
       assert_have_selector '#demo input.user-text[type=text]', :id => 'markup_user_username', :value => "John"
-      assert_have_selector '#demo2 input', :class => 'input', :name => 'markup_user[username]'
+      assert_have_selector '#demo2 input', :type => 'text', :class => 'input', :name => 'markup_user[username]'
     end
 
     should "display correct text field in erb" do
       visit '/erb/form_for'
       assert_have_selector '#demo input.user-text[type=text]', :id => 'markup_user_username', :value => "John"
-      assert_have_selector '#demo2 input', :class => 'input', :name => 'markup_user[username]'
+      assert_have_selector '#demo2 input', :type => 'text', :class => 'input', :name => 'markup_user[username]'
     end
   end
 

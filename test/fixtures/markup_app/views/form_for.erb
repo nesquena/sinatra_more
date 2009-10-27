@@ -1,5 +1,6 @@
 <% form_for MarkupUser.new, '/demo', :id => 'demo' do |f| %>
   <%= f.error_messages(:header_message => "custom MarkupUser cannot be saved!") %>
+  <%= f.hidden_field :session_id %>
   <p>
     <%= f.label :username, :caption => "Login", :class => 'user-label' %>
     <%= f.text_field :username, :class => 'user-text', :value => "John" %>
@@ -25,6 +26,7 @@
 
 <% form_for MarkupUser.new, '/another_demo', :id => 'demo2', :method => 'get' do |f| %>
   <%= f.error_messages :header_message => "custom MarkupUser cannot be saved!" %>
+  <%= f.hidden_field :session_id %>
   <%= f.text_field_block :username, { :class => 'input' }, { :caption => 'Nickname', :class => 'label' } %>
   <%= f.password_field_block :code, { :class => 'input' } %>
   <%= f.text_area_block :about, { :class => 'textarea' } %>

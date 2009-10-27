@@ -4,7 +4,7 @@ class StandardFormBuilder < AbstractFormBuilder
   # text_area_block(:username, { :class => 'long' }, { :class => 'wide-label' })
   # password_field_block(:username, { :class => 'long' }, { :class => 'wide-label' })
   # file_field_block(:username, { :class => 'long' }, { :class => 'wide-label' })
-  self.field_types.each do |field_type|
+  (self.field_types - [:hidden_field]).each do |field_type|
     class_eval <<-EOF
     def #{field_type}_block(field, options={}, label_options={})
       label_options.reverse_merge!(:caption => options.delete(:caption)) if options[:caption]
