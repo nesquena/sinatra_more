@@ -185,7 +185,7 @@ A form_for using these basic fields might look like:
   - form_for @user, '/register', :id => 'register' do |f|
     = f.error_messages
     %p
-      = f.label :username
+      = f.label :username, :caption => "Nickname"
       = f.text_field :username
     %p
       = f.label :email
@@ -194,7 +194,7 @@ A form_for using these basic fields might look like:
       = f.label :password
       = f.password_field :password
     %p
-      = f.submit "Create"
+      = f.submit "Create", :class => 'button'
   
 There is also a StandardFormBuilder which builds on the abstract fields that can be used within a form_for:
 
@@ -213,17 +213,17 @@ A form_for using these standard fields might look like:
 
   - form_for @user, '/register', :id => 'register' do |f|
     = f.error_messages
-    = f.text_field_block :username
+    = f.text_field_block :name, :caption => "Full name"
     = f.text_field_block :email
     = f.password_field_block :password
-    = f.submit_block "Create"
+    = f.submit_block "Create", :class => 'button'
 
 and would generate this html:
 
   <form id="register" action="/register" method="post">
-    <p><label for="user_name">Name: </label><input type="text" id="user_name" name="user[name]"></p>
+    <p><label for="user_name">Full name: </label><input type="text" id="user_name" name="user[name]"></p>
     ...omitted...
-    <p><input type="submit" value="Create"></p>
+    <p><input type="submit" value="Create" class="button"></p>
   </form>
 
 ==== Format Helpers
