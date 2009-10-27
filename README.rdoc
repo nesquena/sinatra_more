@@ -29,8 +29,8 @@ That being said the gem is being actively used on a number of sinatra projects.
 In addition, the gem has fairly solid test coverage ensuring that everything works as expected.
 
 This will be a plugin which expands sinatra's capabilities in a variety of ways. 
-Note that as much as possible, all helpers have been created to work with haml, erb, and erubis. 
-This gem is intended to be template-agnostic in providing helpers as much as possible.
+Note that all extensions have been created to work with haml, erb, and erubis. 
+This gem is intended to be template-agnostic in providing helpers wherever possible.
 
 Let me expand briefly on what I want to accomplish with this gem. I love sinatra but if I want to use it
 for any non-trivial application I very quickly miss a lot of the extra tools provided by rails.
