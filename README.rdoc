@@ -17,10 +17,10 @@ and then to run the application:
 
   $ ruby myapp.rb
   
-The extreme simplicity of the framework is quite refreshing. I have been using Sinatra increasingly
-more for recent projects. First for small and simple json and xml web services and then even
+The extreme simplicity of the framework is quite refreshing. I have been using Sinatra a great deal
+for recent projects. First for small and simple json and xml web services and then even
 for more complex full-featured applications. This gem represents my attempt to make it as fun and easy
-as possible to code web more advanced view-heavy web applications in Sinatra.
+as possible to code increasingly advanced view-heavy web applications in Sinatra.
 
 == Introduction
 
