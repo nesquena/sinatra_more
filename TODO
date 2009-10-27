@@ -1,9 +1,12 @@
 = UNFINISHED
 
 * Become total warden solution (basically just require warden gem installed, do everything else)
+  * Look into removing overlapping methods and simply leverage sinatra_warden
+  * Take advantage of shared strategies: http://github.com/hassox/warden_strategies/tree/master/lib/
   * Make warden password strategy support a callback which explains what to do with username, password
   * WardenPlugin.authenticate_callback { |username, password| User.authenticate(username, password) }
 * Remove dependency on activesupport! and enumerate dependencies in rakefile
+* Add support for missing formhelpers/fields (check_box, radio_button, ...)
 * Look into creating sinatra generators using rubigen (http://github.com/drnic/rubigen)
   * http://github.com/quirkey/sinatra-gen
 * Look into adding any missing helpers from:
