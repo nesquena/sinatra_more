@@ -3,7 +3,8 @@ module SinatraMore
     # Constructs a form for object using given or default form_builder
     # form_for @user, '/register', :id => 'register' do |f| ... end
     def form_for(object, url, settings={}, &block)
-      configured_builder = settings[:builder] || self.options.default_builder || 'StandardFormBuilder'
+      default_builder = self.respond_to?(:options) && self.options.default_builder
+      configured_builder = settings[:builder] || default_builder || 'StandardFormBuilder'
       configured_builder = configured_builder.constantize if configured_builder.is_a?(String)
       settings.reverse_merge!(:method => 'post', :action => url)
       settings[:enctype] = "multipart/form-data" if settings.delete(:multipart)
