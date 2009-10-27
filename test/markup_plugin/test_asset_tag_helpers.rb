@@ -14,28 +14,25 @@ class TestAssetTagHelpers < Test::Unit::TestCase
 
   context 'for #flash_tag method' do
     should "display flash with no given attributes" do
-      assert_equal '<div class="flash">Demo notice</div>', flash_tag(:notice)
+      assert_has_tag('div.flash', :content => "Demo notice") { flash_tag(:notice) }
     end
     should "display flash with given attributes" do
-      flash_expected = '<div class="notice" id="notice-area">Demo notice</div>'
-      assert_equal flash_expected, flash_tag(:notice, :class => 'notice', :id => 'notice-area')
+      actual_html = flash_tag(:notice, :class => 'notice', :id => 'notice-area')
+      assert_has_tag('div.notice#notice-area', :content => "Demo notice") { actual_html }
     end
   end
 
   context 'for #link_to method' do
     should "display link element with no given attributes" do
-      assert_equal '<a href="/register">Sign up</a>', link_to('Sign up', '/register')
+      assert_has_tag('a', :content => "Sign up", :href => '/register') { link_to('Sign up', '/register') }
     end
     should "display link element with given attributes" do
-      link_expected = '<a class="first" href="/register" id="linky">Sign up</a>'
-      assert_equal link_expected, link_to('Sign up', '/register', :class => 'first', :id => 'linky')
+      actual_html = link_to('Sign up', '/register', :class => 'first', :id => 'linky')
+      assert_has_tag('a#linky.first', :content => "Sign up", :href => '/register') { actual_html }
     end
     should "display link element with ruby block" do
-      link_expected = '<a class="first" href="/register" id="binky">Sign up</a>'
-      actual_link = link_to('/register', :class => 'first', :id => 'binky') do
-        "Sign up"
-      end
-      assert_equal link_expected, actual_link
+      actual_link = link_to('/register', :class => 'first', :id => 'binky') { "Sign up" }
+      assert_has_tag('a#binky.first', :content => "Sign up", :href => '/register') { actual_link }
     end
     should "display link block element in haml" do
       visit '/haml/link_to'
@@ -52,43 +49,45 @@ class TestAssetTagHelpers < Test::Unit::TestCase
 
   context 'for #image_tag method' do
     should "display image tag absolute link with no options" do
-      assert_equal '<img src="/absolute/pic.gif" />', image_tag('/absolute/pic.gif')
+      assert_has_tag('img', :src => "/absolute/pic.gif") { image_tag('/absolute/pic.gif') }
     end
     should "display image tag relative link with options" do
-      assert_equal '<img class="photo" src="/images/relative/pic.gif" />', image_tag('relative/pic.gif', :class => 'photo')
+      assert_has_tag('img.photo', :src => "/images/relative/pic.gif") { image_tag('relative/pic.gif', :class => 'photo') }
     end
-    should "display image tag relative link with incorrect space" do
-      assert_equal '<img class="photo" src="/images/relative/pic.gif" />', image_tag(' relative/ pic.gif  ', :class => 'photo')
+    should "display image tag relative link with incorrect spacing" do
+      assert_has_tag('img.photo', :src => "/images/relative/pic.gif") { image_tag(' relative/ pic.gif  ', :class => 'photo') }
     end
   end
 
   context 'for #stylesheet_link_tag method' do
     should "display stylesheet link item" do
       time = stop_time_for_test
-      expected_style = %Q[<link href="/stylesheets/style.css?#{time.to_i}" media="screen" rel="stylesheet" type="text/css" />]
-      assert_equal expected_style, stylesheet_link_tag('style')
+      expected_options = { :media => "screen", :rel => "stylesheet", :type => "text/css" }
+      assert_has_tag('link', expected_options.merge(:href => "/stylesheets/style.css?#{time.to_i}")) { stylesheet_link_tag('style') }
     end
     should "display stylesheet link items" do
       time = stop_time_for_test
-      expected_style =  %Q[<link href="/stylesheets/style.css?#{time.to_i}" media="screen" rel="stylesheet" type="text/css" />\n]
-      expected_style << %Q[<link href="/stylesheets/layout.css?#{time.to_i}" media="screen" rel="stylesheet" type="text/css" />\n]
-      expected_style << %Q[<link href="http://google.com/style.css" media="screen" rel="stylesheet" type="text/css" />]
-      assert_equal expected_style, stylesheet_link_tag('style', 'layout.css', 'http://google.com/style.css')
+      actual_html = stylesheet_link_tag('style', 'layout.css', 'http://google.com/style.css')
+      assert_has_tag('link', :media => "screen", :rel => "stylesheet", :type => "text/css", :count => 3) { actual_html }
+      assert_has_tag('link', :href => "/stylesheets/style.css?#{time.to_i}") { actual_html }
+      assert_has_tag('link', :href => "/stylesheets/layout.css?#{time.to_i}") { actual_html }
+      assert_has_tag('link', :href => "http://google.com/style.css") { actual_html }
     end
   end
 
   context 'for #javascript_include_tag method' do
     should "display javascript item" do
       time = stop_time_for_test
-      expected_include = %Q[<script src="/javascripts/application.js?#{time.to_i}" type="text/javascript"></script>]
-      assert_equal expected_include, javascript_include_tag('application')
+      actual_html = javascript_include_tag('application')
+      assert_has_tag('script', :src => "/javascripts/application.js?#{time.to_i}", :type => "text/javascript") { actual_html }
     end
     should "display javascript items" do
       time = stop_time_for_test
-      expected_include = %Q[<script src="/javascripts/application.js?#{time.to_i}" type="text/javascript"></script>\n]
-      expected_include << %Q[<script src="/javascripts/base.js?#{time.to_i}" type="text/javascript"></script>\n]
-      expected_include << %Q[<script src="http://google.com/lib.js" type="text/javascript"></script>]
-      assert_equal expected_include, javascript_include_tag('application', 'base.js', 'http://google.com/lib.js')
+      actual_html = javascript_include_tag('application', 'base.js', 'http://google.com/lib.js')
+      assert_has_tag('script', :type => "text/javascript", :count => 3) { actual_html }
+      assert_has_tag('script', :src => "/javascripts/application.js?#{time.to_i}") { actual_html }
+      assert_has_tag('script', :src => "/javascripts/base.js?#{time.to_i}") { actual_html }
+      assert_has_tag('script', :src => "http://google.com/lib.js") { actual_html }
     end
   end
 end
