@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra_more}
-  s.version = "0.1.8"
+  s.version = "0.1.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Esquenazi"]
@@ -35,9 +35,11 @@ Gem::Specification.new do |s|
      "lib/sinatra_more/markup_plugin/tag_helpers.rb",
      "lib/sinatra_more/render_plugin.rb",
      "lib/sinatra_more/render_plugin/render_helpers.rb",
+     "lib/sinatra_more/support_lite.rb",
      "lib/sinatra_more/warden_plugin.rb",
      "lib/sinatra_more/warden_plugin/warden_helpers.rb",
      "sinatra_more.gemspec",
+     "test/active_support_helpers.rb",
      "test/fixtures/markup_app/app.rb",
      "test/fixtures/markup_app/views/capture_concat.erb",
      "test/fixtures/markup_app/views/capture_concat.haml",
@@ -73,7 +75,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Expands sinatra to allow for complex applications}
   s.test_files = [
-    "test/fixtures/markup_app/app.rb",
+    "test/active_support_helpers.rb",
+     "test/fixtures/markup_app/app.rb",
      "test/fixtures/render_app/app.rb",
      "test/fixtures/warden_app/app.rb",
      "test/helper.rb",
