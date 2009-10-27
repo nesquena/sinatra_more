@@ -164,6 +164,8 @@ A form_tag might look like:
 
 * <tt>form_for(object, url, settings={}, &block)</tt>
   * Constructs a form using given or default form_builder
+  * Supports form methods 'put' and 'delete' through hidden field
+  * Defaults to StandardFormBuilder but you can easily create your own!
   * <tt>form_for(@user, '/register', :id => 'register') { |f| ...field-elements... }</tt>
 
 The following are fields provided by AbstractFormBuilder that can be used within a form_for:
@@ -231,6 +233,27 @@ and would generate this html:
     ...omitted...
     <p><input type="submit" value="Create" class="button"></p>
   </form>
+
+You can also easily build your own FormBuilder which allows for customized fields:
+
+  class MyCustomFormBuilder < AbstractFormBuilder
+    # Here we have access to a number of useful variables
+    # template (use to invoke any helpers), object (the record for this form), object_name (object's type such as 'admin_user')
+    # We also have access to self.field_types => [:text_field, :text_area, ...]
+    # In addition, we have access to all the existing field tag helpers (text_field, hidden_field, file_field, ...)
+  end
+
+Once a custom builder is defined, any call to form_for can use the new builder:
+
+  - form_for @user, '/register', :builder => 'MyCustomFormBuilder', :id => 'register' do |f|
+    ...fields here...
+
+The form builder can even be made into the default builder when form_for is invoked:
+
+  # anywhere in the sinatra application
+  set :default_builder, 'MyCustomFormBuilder'
+
+And this is just the beginning of what you can do.
 
 ==== Format Helpers
 
