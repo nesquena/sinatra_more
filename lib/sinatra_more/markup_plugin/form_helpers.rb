@@ -18,7 +18,7 @@ module SinatraMore
       options.reverse_merge!(:method => 'post', :action => url)
       concat_content content_tag('form', capture_html(&block), options)
     end
-    
+
     # Constructs a field_set to group fields with given options
     # field_set_tag("Office", :class => 'office-set')
     # parameters: legend_text=nil, options={}
@@ -54,6 +54,13 @@ module SinatraMore
       else # regular label
         content_tag(:label, caption_text, options)
       end
+    end
+
+    # Constructs a hidden field input from the given options
+    # hidden_field_tag :session_key, :value => "__secret__"
+    def hidden_field_tag(name, options={})
+      options.reverse_merge!(:name => name)
+      input_tag(:hidden, options)
     end
 
     # Constructs a text field input from the given options

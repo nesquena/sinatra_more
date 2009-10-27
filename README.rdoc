@@ -126,6 +126,9 @@ methods should be very familiar to anyone who has used rails view helpers.
   * Constructs a label tag from the given options
   * <tt>label_tag :username, :class => 'long-label'</tt>
   * <tt>label_tag(:username, :class => 'blocked-label') { ... }</tt>
+* <tt>hidden_field_tag(name, options={})</tt>
+  * Constructs a hidden field input from the given options
+  * <tt>hidden_field_tag :session_key, :value => 'secret'</tt>
 * <tt>text_field_tag(name, options={})</tt>
   * Constructs a text field input from the given options
   * <tt>text_field_tag :username, :class => 'long'</tt>

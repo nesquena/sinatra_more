@@ -13,7 +13,7 @@ class TestFormHelpers < Test::Unit::TestCase
       actual_html = form_tag('/register', :class => 'test', :action => "hello") { "Demo" }
       assert_has_tag(:form, :class => "test") { actual_html }
     end
-    
+
     should "display correct inputs in ruby for form_tag" do
       actual_html = form_tag('/register', :class => 'test', :action => "hello") { text_field_tag(:username) }
       assert_has_tag('form input', :type => 'text', :name => "username") { actual_html }
@@ -121,6 +121,25 @@ class TestFormHelpers < Test::Unit::TestCase
       assert_have_selector 'form.advanced-form label.first', :content => "Password", :for => 'password'
       assert_have_selector 'form.advanced-form label.about', :content => "About Me", :for => 'about'
       assert_have_selector 'form.advanced-form label.photo', :content => "Photo"   , :for => 'photo'
+    end
+  end
+
+  context 'for #hidden_field_tag method' do
+    should "display hidden field in ruby" do
+      actual_html = hidden_field_tag(:session_key, :id => 'session_id', :value => '56768')
+      assert_has_tag(:input, :type => 'hidden', :id => "session_id", :name => 'session_key', :value => '56768') { actual_html }
+    end
+
+    should "display hidden field in erb" do
+      visit '/erb/form_tag'
+      assert_have_selector 'form.simple-form input[type=hidden]', :count => 1, :name => 'session_id', :value => "__secret__"
+      assert_have_selector 'form.advanced-form input[type=hidden]', :count => 1, :name => 'session_id', :value => "__secret__"
+    end
+
+    should "display hidden field in haml" do
+      visit '/haml/form_tag'
+      assert_have_selector 'form.simple-form input[type=hidden]', :count => 1, :name => 'session_id', :value => "__secret__"
+      assert_have_selector 'form.advanced-form input[type=hidden]', :count => 1, :name => 'session_id', :value => "__secret__"
     end
   end
 
