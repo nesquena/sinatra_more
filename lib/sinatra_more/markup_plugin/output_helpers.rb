@@ -16,8 +16,10 @@ module SinatraMore
     def concat_content(text="")
       if self.respond_to?(:is_haml?) && is_haml?
         haml_concat(text)
-      else
-        @_out_buf << text
+      elsif @_out_buf
+        erb_concat(text)
+      else # theres no place to concat
+        text
       end
     end
     
@@ -29,11 +31,18 @@ module SinatraMore
     end
     
     protected
+  
 
     # Used to capture the html from a block of erb code
     # capture_erb(&block) => '...html...'
     def capture_erb(*args, &block)
       erb_with_output_buffer { block.call(*args) }
+    end
+    
+    # Concats directly to an erb template
+    # erb_concat("Direct to buffer")
+    def erb_concat(text)
+      @_out_buf << text unless @_out_buf.nil?
     end
     
     # Used to determine if a block is called from ERB.

@@ -152,7 +152,7 @@ A form_tag might look like:
         = text_field_tag :username, :value => params[:username]
       %p
         = label_tag :password, :class => 'first'
-        = text_field_tag :password, :value => params[:password]
+        = password_field_tag :password, :value => params[:password]
     - field_set_tag(:class => 'buttons') do
       = submit_tag "Login"
     

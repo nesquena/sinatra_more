@@ -35,12 +35,10 @@ module SinatraMore
       return "" if record.blank? or record.errors.none?
       options.reverse_merge!(:header_message => "The #{record.class.to_s.downcase} could not be saved!")
       error_messages = record.errors.full_messages
-      content_block_tag(:div, :class => 'field-errors', :concat => false) do
-        html = content_tag(:p, options.delete(:header_message))
-        html << content_block_tag(:ul, :class => 'field-errors', :concat => false) do
-          error_messages.collect { |er| content_tag(:li, er) }.join("\n")
-        end
-      end
+      error_items = error_messages.collect { |er| content_tag(:li, er) }.join("\n")
+      error_html = content_tag(:p, options.delete(:header_message))
+      error_html << content_block_tag(:ul, error_items, :class => 'errors-list')
+      content_block_tag(:div, error_html, :class => 'field-errors')
     end
 
     # Constructs a label tag from the given options
@@ -87,7 +85,7 @@ module SinatraMore
 
     # Constructs a submit button from the given options
     # submit_tag "Create", :class => 'success'
-    def submit_tag(caption, options={})
+    def submit_tag(caption="Submit", options={})
       options.reverse_merge!(:value => caption)
       input_tag(:submit, options)
     end
