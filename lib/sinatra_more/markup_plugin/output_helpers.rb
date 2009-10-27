@@ -56,7 +56,7 @@ module SinatraMore
     # NOTE: This doesn't actually work yet because the variable __in_erb_template 
     # hasn't been defined in ERB. We need to find a way to fix this.
     def block_is_erb?(block)
-      block && eval('defined? __in_erb_template', block)
+      has_erb_buffer? || block && eval('defined? __in_erb_template', block)
     end
 
     # Used to direct the buffer for the erb capture

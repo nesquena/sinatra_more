@@ -37,11 +37,7 @@ class MarkupDemo < Sinatra::Base
     end
 
     def determine_block_is_template(name, &block)
-      if block_given?
-        concat_content "<p class='is_template'>The #{name} block passed in is a template</p>" if block_is_template?(block)
-      else
-        concat_content "<p class='is_template'>The #{name} block passed in is a template</p>" if block_is_template?(block)
-      end
+      concat_content "<p class='is_template'>The #{name} block passed in is a template</p>" if block_is_template?(block)
     end
   end
 end

@@ -36,9 +36,8 @@ class TestTagHelpers < Test::Unit::TestCase
       visit '/erb/content_tag'
       assert_have_selector :p, :content => "Test 1", :class => 'test', :id => 'test1'
       assert_have_selector :p, :content => "Test 2"
-      # TODO get these to work in erb
-      # assert_have_selector :p, :content => "Test 3"
-      # assert_have_selector :p, :content => "Test 4"
+      assert_have_selector :p, :content => "Test 3"
+      assert_have_selector :p, :content => "Test 4"
     end
     should "support tags with haml" do
       visit '/haml/content_tag'

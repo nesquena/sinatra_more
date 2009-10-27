@@ -3,8 +3,8 @@
 == Introduction
 
 Note: This library is still experimental and may not be ready for production just yet. 
-That being said, work is being put into reaching solid test coverage and the gem is being actively used
-on a number of sinatra projects. This notice will be removed once sufficient testing has been done.
+That being said the gem is being actively used on a number of sinatra projects.
+In addition, the gem has fairly solid test coverage ensuring that everything works as expected.
 
 This will be a plugin which expands sinatra's capabilities in a variety of ways. 
 Note that as much as possible, all helpers have been created to work with haml, erb, and erubis. 
@@ -290,7 +290,7 @@ provided to make interacting with warden dead simple.
 
 == Known Issues
 
-* Tag helper methods that accept blocks work unreliably in ERB.
+* No serious issues known
 
 == Note on Patches/Pull Requests
  

@@ -42,8 +42,7 @@ class TestAssetTagHelpers < Test::Unit::TestCase
     should "display link block element in erb" do
       visit '/erb/link_to'
       assert_have_selector :a, :content => "Test 1 No Block", :href => '/test1', :class => 'test', :id => 'test1'
-      #TODO fix this selector below in erb
-      # assert_have_selector :a, :content => "Test 2 With Block", :href => '/test2', :class => 'test', :id => 'test2'
+      assert_have_selector :a, :content => "Test 2 With Block", :href => '/test2', :class => 'test', :id => 'test2'
     end
   end
 

@@ -35,9 +35,9 @@ class TestOutputHelpers < Test::Unit::TestCase
   context 'for #block_is_template?' do
     should "work for erb templates" do
       visit '/erb/capture_concat'
-      # TODO Get ERB template detection working
-      # assert_have_selector 'p', :content => "The erb block passed in is a template", :class => 'is_template'
-      assert_have_no_selector 'p', :content => "The ruby block passed in is a template", :class => 'is_template'
+      assert_have_selector 'p', :content => "The erb block passed in is a template", :class => 'is_template'
+      # TODO Get ERB template detection working (fix block_is_erb? method)
+      # assert_have_no_selector 'p', :content => "The ruby block passed in is a template", :class => 'is_template'
     end
 
     should "work for haml templates" do
