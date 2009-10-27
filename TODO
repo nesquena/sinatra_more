@@ -8,9 +8,12 @@
 * Add support for missing formhelpers/fields (check_box, radio_button, ...)
 * Look into creating sinatra generators using rubigen (http://github.com/drnic/rubigen)
   * http://github.com/quirkey/sinatra-gen
+  * http://github.com/monkrb/monk
 * Look into adding any missing helpers from:
+  * http://github.com/brianjlandau/nice-n-easy 
   * http://github.com/kelredd/sinatra-helpers/blob/master/lib/sinatra_helpers/erb/links.rb
   * http://github.com/kelredd/sinatra-helpers/blob/master/lib/sinatra_helpers/erb/forms.rb
+  * http://github.com/twilson63/sinatra-formhelpers/blob/master/lib/sinatra/formhelpers.rb
 
 = COMPLETED
 

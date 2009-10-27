@@ -1,10 +1,10 @@
 # This is for adding specific methods that are required by sinatra_more if activesupport isn't required
 
-unless String.new.respond_to?(:titleize)
+unless String.method_defined?(:titleize)
   require 'active_support/inflector'
 end
 
-unless Hash.new.respond_to?(:reverse_merge!)
+unless Hash.method_defined?(:reverse_merge!)
   module HashExtensions
     def reverse_merge(other_hash)
       other_hash.merge(self)
@@ -15,7 +15,7 @@ unless Hash.new.respond_to?(:reverse_merge!)
   end
 end
 
-unless Hash.new.respond_to?(:symbolize_keys!)
+unless Hash.method_defined?(:symbolize_keys!)
   module HashExtensions
     def symbolize_keys
       inject({}) do |options, (key, value)|
@@ -29,7 +29,7 @@ unless Hash.new.respond_to?(:symbolize_keys!)
   end
 end
 
-unless Array.new.respond_to?(:extract_options!)
+unless Array.method_defined?(:extract_options!)
   module ArrayExtensions
     def extract_options!
       last.is_a?(::Hash) ? pop : {}
