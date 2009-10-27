@@ -1,0 +1,26 @@
+- form_tag '/simple', :class => 'simple-form' do
+  = error_messages_for nil
+  - field_set_tag do
+    = label_tag :username
+    = text_field_tag :username
+    = label_tag :password
+    = password_field_tag :password
+    = submit_tag
+
+- form_tag '/advanced', :id => 'advanced', :class => 'advanced-form', :method => 'get' do
+  = error_messages_for @user, :header_message => "There are problems with saving user!"
+  - field_set_tag "Advanced", :class => 'advanced-field-set' do
+    %p
+      = label_tag :username, :class => 'first', :caption => "Nickname"
+      = text_field_tag :username, :value => params[:username], :id => 'the_username'
+    %p
+      = label_tag :password, :class => 'first'
+      = password_field_tag :password, :value => params[:password]
+    %p
+      = label_tag :about, :class => 'about', :caption => "About Me"
+      = text_area_tag :about, :class => 'large'
+    %p
+      = label_tag :photo, :class => 'photo'
+      = file_field_tag :photo, :class => 'upload'
+  - field_set_tag(:class => 'buttons') do
+    = submit_tag "Login"
