@@ -3,19 +3,16 @@ module SinatraMore
     # Constructs a form for object using given or default form_builder
     # form_for @user, '/register', :id => 'register' do |f| ... end
     def form_for(object, url, settings={}, &block)
-      default_builder = self.respond_to?(:options) && self.options.default_builder
-      configured_builder = settings[:builder] || default_builder || 'StandardFormBuilder'
-      configured_builder = configured_builder.constantize if configured_builder.is_a?(String)
-      settings.reverse_merge!(:method => 'post', :action => url)
-      settings[:enctype] = "multipart/form-data" if settings.delete(:multipart)
-      form_html = capture_html(configured_builder.new(self, object), &block)
-      concat_content content_tag('form', form_html, settings)
+      builder_class = configured_form_builder_class(settings[:builder])
+      form_html = capture_html(builder_class.new(self, object), &block)
+      form_tag(url, settings) { form_html }
     end
 
     # Constructs a form without object based on options
     # form_tag '/register' do ... end
     def form_tag(url, options={}, &block)
       options.reverse_merge!(:method => 'post', :action => url)
+      options[:enctype] = "multipart/form-data" if options.delete(:multipart)
       inner_form_html = hidden_form_method_field(options[:method]) + capture_html(&block)
       concat_content content_tag('form', inner_form_html, options)
     end
@@ -104,12 +101,22 @@ module SinatraMore
     # returns the hidden method field for 'put' and 'delete' forms
     # Only 'get' and 'post' are allowed within browsers;
     # 'put' and 'delete' are just specified using hidden fields with form action still 'put'.
-    # <input name="_method" value="delete" />
+    # hidden_form_method_field('delete') => <input name="_method" value="delete" />
     def hidden_form_method_field(desired_method)
       return '' if (desired_method =~ /get|post/)
       original_method = desired_method.dup
       desired_method.replace('post')
       hidden_field_tag(:_method, :value => original_method)
+    end
+
+    # Returns the FormBuilder class to use based on all available setting sources
+    # If explicitly defined, returns that, otherwise returns defaults
+    # configured_form_builder_class(nil) => StandardFormBuilder
+    def configured_form_builder_class(explicit_builder=nil)
+      default_builder = self.respond_to?(:options) && self.options.default_builder
+      configured_builder = explicit_builder || default_builder || 'StandardFormBuilder'
+      configured_builder = configured_builder.constantize if configured_builder.is_a?(String)
+      configured_builder
     end
   end
 end

@@ -9,10 +9,6 @@
 * Look into creating sinatra generators using rubigen (http://github.com/drnic/rubigen)
   * http://github.com/quirkey/sinatra-gen
 * Look into adding any missing helpers from:
-  * http://github.com/sbfaulkner/sinatra-helpers/tree/master/lib/sinatra-helpers/haml/
-  * http://github.com/sbfaulkner/sinatra-helpers/blob/master/lib/sinatra-helpers/html/escape.rb
-  * http://github.com/sbfaulkner/sinatra-helpers/blob/master/lib/sinatra-helpers/haml/links.rb
-  * http://github.com/kelredd/sinatra-helpers/tree/master/lib/sinatra_helpers/mailer/
   * http://github.com/kelredd/sinatra-helpers/blob/master/lib/sinatra_helpers/erb/links.rb
   * http://github.com/kelredd/sinatra-helpers/blob/master/lib/sinatra_helpers/erb/forms.rb
 

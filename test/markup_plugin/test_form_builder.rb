@@ -19,8 +19,21 @@ class TestFormBuilder < Test::Unit::TestCase
 
   context 'for #form_for method' do
     should "display correct form html" do
-      actual_html = form_for(@user, '/register', :id => 'register') { "Demo" }
-      assert_has_tag('form', :action => '/register', :id => 'register', :content => "Demo") { actual_html }
+      actual_html = form_for(@user, '/register', :id => 'register', :method => 'post') { "Demo" }
+      assert_has_tag('form', :action => '/register', :id => 'register', :method => 'post', :content => "Demo") { actual_html }
+      assert_has_tag('form input[type=hidden]', :name => '_method', :count => 0) { actual_html } # no method action field
+    end
+
+    should "display correct form html with method :post" do
+      actual_html = form_for(@user, '/update', :method => 'put') { "Demo" }
+      assert_has_tag('form', :action => '/update', :method => 'post') { actual_html }
+      assert_has_tag('form input', :type => 'hidden', :name => "_method", :value => 'put') { actual_html }
+    end
+
+    should "display correct form html with method :delete" do
+      actual_html = form_for(@user, '/destroy', :method => 'delete') { "Demo" }
+      assert_has_tag('form', :action => '/destroy', :method => 'post') { actual_html }
+      assert_has_tag('form input', :type => 'hidden', :name => "_method", :value => 'delete') { actual_html }
     end
 
     should "display correct form html with multipart" do

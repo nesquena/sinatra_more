@@ -12,7 +12,7 @@ class TestFormHelpers < Test::Unit::TestCase
     should "display correct forms in ruby" do
       actual_html = form_tag('/register', :class => 'test', :method => "post") { "Demo" }
       assert_has_tag(:form, :class => "test") { actual_html }
-      assert_has_tag('form input', :type => 'hidden', :count => 0) { actual_html }
+      assert_has_tag('form input', :type => 'hidden', :name => '_method', :count => 0) { actual_html }
     end
 
     should "display correct text inputs within form_tag" do
@@ -30,6 +30,11 @@ class TestFormHelpers < Test::Unit::TestCase
       actual_html = form_tag('/remove', :class => 'delete-form', :method => "delete") { "Demo" }
       assert_has_tag(:form, :class => "delete-form", :method => 'post') { actual_html }
       assert_has_tag('form input', :type => 'hidden', :name => "_method", :value => 'delete') { actual_html }
+    end
+
+    should "display correct form with multipart encoding" do
+      actual_html = form_tag('/remove', :multipart => true) { "Demo" }
+      assert_has_tag(:form, :enctype => "multipart/form-data") { actual_html }
     end
 
     should "display correct forms in erb" do
