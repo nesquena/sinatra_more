@@ -23,9 +23,9 @@ of tools, helpers and components that will make Sinatra suitable for more comple
 
 Here is a small list of what sinatra_more contains:
 
-* Generic view and tag helpers (tag, content_tag, input_tag, ...)
-* Asset helpers (link_to, image_tag, javascript_include_tag, ...)
-* Form helpers and builder support (form_tag, form_for, field_set_tag, text_field, ...)
+* Generic view and tag helpers (<tt>tag</tt>, <tt>content_tag</tt>, <tt>input_tag</tt>, ...)
+* Asset helpers (<tt>link_to</tt>, <tt>image_tag</tt>, <tt>javascript_include_tag</tt>, ...)
+* Form helpers and builder support (<tt>form_tag</tt>, <tt>form_for</tt>, <tt>field_set_tag</tt>, <tt>text_field</tt>, ...)
 * Plug and play setup for the excellent Warden authentication system
 * Code generators for creating a new sinatra application
 
@@ -69,78 +69,78 @@ methods should be very familiar to anyone who has used rails view helpers.
 
 ==== Output Helpers
 
-* capture_html(*args, &block)
+* <tt>capture_html(*args, &block)</tt>
   * Captures the html from a block of template code for erb or haml
-  * capture_html(&block) => "...html..."
-* concat_content(text="")
+  * <tt>capture_html(&block)</tt> => "...html..."
+* <tt>concat_content(text="")</tt>
   * Outputs the given text to the templates buffer directly in erb or haml
-  * concat_content("This will be output to the template buffer in erb or haml")
+  * <tt>concat_content("This will be output to the template buffer in erb or haml")</tt>
 
 ==== Tag Helpers
 
-* tag(name, options={})
+* <tt>tag(name, options={})</tt>
   * Creates an html tag with the given name and options
-  * tag(:br, :style => 'clear:both') => <br style="clear:both" />
-  * tag(:p, :content => "demo", :class => 'large') => <p class="large">demo</p>
-* content_tag(name, content, options={})
+  * <tt>tag(:br, :style => 'clear:both')</tt> => <br style="clear:both" />
+  * <tt>tag(:p, :content => "demo", :class => 'large')</tt> => <p class="large">demo</p>
+* <tt>content_tag(name, content, options={})</tt>
   * Creates an html tag with given name, content and options
-  * content_tag(:p, "demo", :class => 'light') => <p class="light">demo</p>
-  * content_tag(:p, :class => 'dark') { ...content... } => <p class="dark">...content...</p>
-* input_tag(type, options = {})
+  * <tt>content_tag(:p, "demo", :class => 'light')</tt> => <p class="light">demo</p>
+  * <tt>content_tag(:p, :class => 'dark') { ...content... }</tt> => <p class="dark">...content...</p>
+* <tt>input_tag(type, options = {})</tt>
   * Creates an html input field with given type and options
-  * input_tag :text,     :class => "demo"
-  * input_tag :password, :value => "secret", :class => "demo"
+  * <tt>input_tag :text,     :class => "demo"</tt>
+  * <tt>input_tag :password, :value => "secret", :class => "demo"</tt>
 
 ==== Asset Helpers
 
-* flash_tag(kind, options={})
+* <tt>flash_tag(kind, options={})</tt>
   * Creates a div to display the flash of given type if it exists
-  * flash_tag(:notice, :class => 'flash', :id => 'flash-notice')
-* link_to(*args, &block)
+  * <tt>flash_tag(:notice, :class => 'flash', :id => 'flash-notice')</tt>
+* <tt>link_to(*args, &block)</tt>
   * Creates a link element with given name, url and options
-  * link_to 'click me', '/dashboard', :class => 'linky'
-  * link_to('/dashboard', :class => 'blocky') { ...content... }
-* image_tag(url, options={})
+  * <tt>link_to 'click me', '/dashboard', :class => 'linky'</tt>
+  * <tt>link_to('/dashboard', :class => 'blocky') { ...content... }</tt>
+* <tt>image_tag(url, options={})</tt>
   * Creates an image element with given url and options
-  * image_tag('icons/avatar.png')
-* stylesheet_link_tag(*sources)
+  * <tt>image_tag('icons/avatar.png')</tt>
+* <tt>stylesheet_link_tag(*sources)</tt>
   * Returns a stylesheet link tag for the sources specified as arguments
-  * stylesheet_link_tag 'style', 'application', 'layout'
-* javascript_include_tag(*sources)
+  * <tt>stylesheet_link_tag 'style', 'application', 'layout'</tt>
+* <tt>javascript_include_tag(*sources)</tt>
   * Returns an html script tag for each of the sources provided.
-  * javascript_include_tag 'application', 'special'
+  * <tt>javascript_include_tag 'application', 'special'</tt>
   
 ==== Form Helpers
 
-* form_tag(url, options={}, &block)
+* <tt>form_tag(url, options={}, &block)</tt>
   * Constructs a form without object based on options
-  * form_tag('/register', :class => 'example') { ... }
-* field_set_tag(*args, &block)
+  * <tt>form_tag('/register', :class => 'example') { ... }</tt>
+* <tt>field_set_tag(*args, &block)</tt>
   * Constructs a field_set to group fields with given options
-  * field_set_tag(:class => 'office-set') { }
-  * field_set_tag("Office", :class => 'office-set') { }
-* error_messages_for(record, options={})
+  * <tt>field_set_tag(:class => 'office-set') { }</tt>
+  * <tt>field_set_tag("Office", :class => 'office-set') { }</tt>
+* <tt>error_messages_for(record, options={})</tt>
   * Constructs list html for the errors for a given object
-  * error_messages_for @user
-* label_tag(name, options={}, &block)
+  * <tt>error_messages_for @user</tt>
+* <tt>label_tag(name, options={}, &block)</tt>
   * Constructs a label tag from the given options
-  * label_tag :username, :class => 'long-label'
-  * label_tag(:username, :class => 'blocked-label') { ... }
-* text_field_tag(name, options={})
+  * <tt>label_tag :username, :class => 'long-label'</tt>
+  * <tt>label_tag(:username, :class => 'blocked-label') { ... }</tt>
+* <tt>text_field_tag(name, options={})</tt>
   * Constructs a text field input from the given options
-  * text_field_tag :username, :class => 'long'
-* text_area_tag(name, options={})
+  * <tt>text_field_tag :username, :class => 'long'</tt>
+* <tt>text_area_tag(name, options={})</tt>
   * Constructs a text area input from the given options
-  * text_area_tag :username, :class => 'long'
-* password_field_tag(name, options={})
+  * <tt>text_area_tag :username, :class => 'long'</tt>
+* <tt>password_field_tag(name, options={})</tt>
   * Constructs a password field input from the given options
-  * password_field_tag :password, :class => 'long'
-* file_field_tag(name, options={})
+  * <tt>password_field_tag :password, :class => 'long'</tt>
+* <tt>file_field_tag(name, options={})</tt>
   * Constructs a file field input from the given options
-  * file_field_tag :photo, :class => 'long'
-* submit_tag(caption, options={})
+  * <tt>file_field_tag :photo, :class => 'long'</tt>
+* <tt>submit_tag(caption, options={})</tt>
   * Constructs a submit button from the given options
-  * submit_tag "Create", :class => 'success'
+  * <tt>submit_tag "Create", :class => 'success'</tt>
 
 A form_tag might look like:
 
@@ -158,27 +158,27 @@ A form_tag might look like:
     
 ==== FormBuilders
 
-* form_for(object, url, settings={}, &block)
+* <tt>form_for(object, url, settings={}, &block)</tt>
   * Constructs a form using given or default form_builder
-  * form_for(@user, '/register', :id => 'register') { |f| ...field-elements... }
+  * <tt>form_for(@user, '/register', :id => 'register') { |f| ...field-elements... }</tt>
 
 The following are fields provided by AbstractFormBuilder that can be used within a form_for:
 
-* error_messages(options={})
+* <tt>error_messages(options={})</tt>
   * Displays list html for the errors on form object
-  * f.errors_messages
-* label(field, options={})
-  * f.label :name, :class => 'long'
-* text_field(field, options={})
-  * f.text_field :username, :class => 'long'
-* text_area(field, options={})
-  * f.text_area :summary, :class => 'long'
-* password_field(field, options={})
-  * f.password_field :secret, :class => 'long'
-* file_field(field, options={})
-  * f.file_field :photo, :class => 'long'
-* submit(caption, options={})
-  * f.submit "Update", :class => 'long'
+  * <tt>f.errors_messages</tt>
+* <tt>label(field, options={})</tt>
+  * <tt>f.label :name, :class => 'long'</tt>
+* <tt>text_field(field, options={})</tt>
+  * <tt>f.text_field :username, :class => 'long'</tt>
+* <tt>text_area(field, options={})</tt>
+  * <tt>f.text_area :summary, :class => 'long'</tt>
+* <tt>password_field(field, options={})</tt>
+  * <tt>f.password_field :secret, :class => 'long'</tt>
+* <tt>file_field(field, options={})</tt>
+  * <tt>f.file_field :photo, :class => 'long'</tt>
+* <tt>submit(caption, options={})</tt>
+  * <tt>f.submit "Update", :class => 'long'</tt>
   
 A form_for using these basic fields might look like:
 
@@ -198,16 +198,16 @@ A form_for using these basic fields might look like:
   
 There is also a StandardFormBuilder which builds on the abstract fields that can be used within a form_for:
 
-* text_field_block(field, options={}, label_options={})
-  * text_field_block(:nickname, :class => 'big', :caption => "Username")
-* text_area_block(field, options={}, label_options={})
-  * text_area_block(:about, :class => 'big')
-* password_field_block(field, options={}, label_options={})
-  * password_field_block(:code, :class => 'big')
-* file_field_block(field, options={}, label_options={})
-  * file_field_block(:photo, :class => 'big')
-* submit_block(caption, options={})
-  * submit_block(:username, :class => 'big')
+* <tt>text_field_block(field, options={}, label_options={})</tt>
+  * <tt>text_field_block(:nickname, :class => 'big', :caption => "Username")</tt>
+* <tt>text_area_block(field, options={}, label_options={})</tt>
+  * <tt>text_area_block(:about, :class => 'big')</tt>
+* <tt>password_field_block(field, options={}, label_options={})</tt>
+  * <tt>password_field_block(:code, :class => 'big')</tt>
+* <tt>file_field_block(field, options={}, label_options={})</tt>
+  * <tt>file_field_block(:photo, :class => 'big')</tt>
+* <tt>submit_block(caption, options={})</tt>
+  * <tt>submit_block(:username, :class => 'big')</tt>
   
 A form_for using these standard fields might look like:
 
@@ -228,12 +228,12 @@ and would generate this html:
 
 ==== Format Helpers
 
-* relative_time_ago(date)
+* <tt>relative_time_ago(date)</tt>
   * Returns relative time in words referencing the given date
-  * relative_time_ago(2.days.ago) => "2 days ago"
-* escape_javascript(html_content)
+  * <tt>relative_time_ago(2.days.ago)</tt> => "2 days ago"
+* <tt>escape_javascript(html_content)</tt>
   * Escapes html to allow passing information to javascript. Used for passing data inside an ajax .js.erb template
-  * escape_javascript("<h1>Hey</h1>")
+  * <tt>escape_javascript("<h1>Hey</h1>")</tt>
 
 === RenderPlugin
 
@@ -241,20 +241,20 @@ This component provides a number of rendering helpers for sinatra, making the pr
 of displaying templates far smoother. This plugin also has support for useful additions
 such as partials (with support for :collection) into the templating system.
 
-* erb_template(template_path, options={})
+* <tt>erb_template(template_path, options={})</tt>
   * Renders a erb template based on the given path
-  * erb_template 'users/new'
-* haml_template(template_path, options={})
+  * <tt>erb_template 'users/new'</tt>
+* <tt>haml_template(template_path, options={})</tt>
   * Renders a haml template based on the given path
-  * haml_template 'users/new'
-* render_template(template_path, options={})
+  * <tt>haml_template 'users/new'</tt>
+* <tt>render_template(template_path, options={})</tt>
   * Renders the first detected template based on the given path
-  * render_template 'users/new'
-  * render_template 'users/index', :template_engine => 'haml'
-* partial(template, *args)
+  * <tt>render_template 'users/new'</tt>
+  * <tt>render_template 'users/index', :template_engine => 'haml'</tt>
+* <tt>partial(template, *args)</tt>
   * Renders the html related to the partial template for object or collection
-  * partial 'photo/_item', :object => @photo, :locals => { :foo => 'bar' }
-  * partial 'photo/_item', :collection => @photos
+  * <tt>partial 'photo/_item', :object => @photo, :locals => { :foo => 'bar' }</tt>
+  * <tt>partial 'photo/_item', :collection => @photos</tt>
 
 === WardenPlugin
 
@@ -262,21 +262,21 @@ This component provides out-of-the-box support for Warden authentication. With t
 plugin registered, warden will be automatically required, configured and helpers will be
 provided to make interacting with warden dead simple.
 
-* current_user
+* <tt>current_user</tt>
   * Returns the current authenticated user
-* authenticate_user!
+* <tt>authenticate_user!</tt>
   * Login the user through the default warden strategies
-* logout_user!
+* <tt>logout_user!</tt>
   * Signs out the user from the session
-* logged_in?
+* <tt>logged_in?</tt>
   * Returns true if the user has been authenticated
-* authenticated?(&block)
+* <tt>authenticated?(&block)</tt>
   * If a block is given, only yields the content if the user is authenticated
-  * authenticated? { puts "I am authenticated!" }
-* must_be_authorized!(failure_path=nil)
+  * <tt>authenticated? { puts "I am authenticated!" }</tt>
+* <tt>must_be_authorized!(failure_path=nil)</tt>
   * Forces a user to return to a fail path unless they are authorized
   * Used to require a user be authenticated before routing to an action
-  * must_be_authorized!('/login')
+  * <tt>must_be_authorized!('/login')</tt>
 
 == Acknowledgements
 
