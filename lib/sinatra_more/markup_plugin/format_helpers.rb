@@ -1,6 +1,19 @@
 module SinatraMore
   module FormatHelpers
-    
+
+    # Returns escaped text to protect against malicious content
+    def h(text)
+      Rack::Utils.escape_html(text)
+    end
+    alias escape_html h
+
+    # Returns escaped text to protect against malicious content
+    # Returns blank if the text is empty
+    def h!(text, blank_text = '&nbsp;')
+      return blank_text if text.nil? || text.empty?
+      h text
+    end
+
     # Returns relative time in words referencing the given date
     # relative_time_ago(Time.now)
     def relative_time_ago(date)

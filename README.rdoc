@@ -234,6 +234,8 @@ and would generate this html:
 
 ==== Format Helpers
 
+* <tt>escape_html</tt> (alias <tt>h</tt> and <tt>h!</tt>)
+  * (from RackUtils) Escape ampersands, brackets and quotes to their HTML/XML entities.
 * <tt>relative_time_ago(date)</tt>
   * Returns relative time in words referencing the given date
   * <tt>relative_time_ago(2.days.ago)</tt> => "2 days ago"

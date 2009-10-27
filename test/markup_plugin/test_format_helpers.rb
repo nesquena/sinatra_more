@@ -8,6 +8,23 @@ class TestFormatHelpers < Test::Unit::TestCase
 
   include SinatraMore::FormatHelpers
 
+  context 'for #h and #h! method' do
+    should "escape the simple html" do
+      assert_equal '&lt;h1&gt;hello&lt;/h1&gt;', h('<h1>hello</h1>')
+      assert_equal '&lt;h1&gt;hello&lt;/h1&gt;', escape_html('<h1>hello</h1>')
+    end
+    should "escape all brackets, quotes and ampersands" do
+      assert_equal '&lt;h1&gt;&lt;&gt;&quot;&amp;demo&amp;&quot;&lt;&gt;&lt;/h1&gt;', h('<h1><>"&demo&"<></h1>')
+    end
+    should "return default text if text is empty" do
+      assert_equal 'default', h!("", "default")
+      assert_equal '&nbsp;', h!("")
+    end
+    should "return text escaped if not empty" do
+      assert_equal '&lt;h1&gt;hello&lt;/h1&gt;', h!('<h1>hello</h1>')
+    end
+  end
+
   context 'for #relative_time_ago method' do
     should "display today" do
       assert_equal 'today', relative_time_ago(Time.now)
