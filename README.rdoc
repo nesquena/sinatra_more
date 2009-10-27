@@ -238,7 +238,11 @@ You can also easily build your own FormBuilder which allows for customized field
 
   class MyCustomFormBuilder < AbstractFormBuilder
     # Here we have access to a number of useful variables
-    # template (use to invoke any helpers), object (the record for this form), object_name (object's type such as 'admin_user')
+    #
+    #   * template  (use this to invoke any helpers)(ex. template.hidden_field_tag(...))
+    #   * object    (the record for this form) (ex. object.valid?)
+    #   * object_name (object's underscored type) (ex. object_name => 'admin_user')
+    #
     # We also have access to self.field_types => [:text_field, :text_area, ...]
     # In addition, we have access to all the existing field tag helpers (text_field, hidden_field, file_field, ...)
   end
