@@ -44,7 +44,7 @@ class AbstractFormBuilder
   end
   
   # f.submit "Update", :class => 'large'
-  def submit(caption, options={})
+  def submit(caption="Submit", options={})
     @template.submit_tag caption, options
   end
   

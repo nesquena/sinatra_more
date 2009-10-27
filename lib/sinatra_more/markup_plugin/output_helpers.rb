@@ -5,9 +5,11 @@ module SinatraMore
     def capture_html(*args, &block)
       if self.respond_to?(:is_haml?) && is_haml?
          block_is_haml?(block) ? capture_haml(*args, &block) : block.call
-      else
+      elsif has_erb_buffer?
         result_text = capture_erb(*args, &block)
-        result_text.present? ? result_text : block.call
+        result_text.present? ? result_text : (block_given? && block.call(*args))
+      else # theres no template to capture, invoke the block directly
+        block.call(*args)
       end
     end
     
@@ -16,9 +18,9 @@ module SinatraMore
     def concat_content(text="")
       if self.respond_to?(:is_haml?) && is_haml?
         haml_concat(text)
-      elsif @_out_buf
+      elsif has_erb_buffer?
         erb_concat(text)
-      else # theres no place to concat
+      else # theres no template to concat, return the text directly
         text
       end
     end
@@ -32,17 +34,22 @@ module SinatraMore
     
     protected
   
-
     # Used to capture the html from a block of erb code
     # capture_erb(&block) => '...html...'
     def capture_erb(*args, &block)
-      erb_with_output_buffer { block.call(*args) }
+      erb_with_output_buffer { block_given? && block.call(*args) }
     end
     
     # Concats directly to an erb template
     # erb_concat("Direct to buffer")
     def erb_concat(text)
-      @_out_buf << text unless @_out_buf.nil?
+      @_out_buf << text if has_erb_buffer?
+    end
+    
+    # Returns true if an erb buffer is detected
+    # has_erb_buffer? => true
+    def has_erb_buffer?
+      !@_out_buf.nil?
     end
     
     # Used to determine if a block is called from ERB.

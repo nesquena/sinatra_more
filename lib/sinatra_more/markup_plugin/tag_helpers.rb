@@ -18,7 +18,6 @@ module SinatraMore
       tag_result = tag(name, options.merge(:content => tag_html))
       block_is_template?(block) ? concat_content(tag_result) : tag_result
     end
-    alias content_block_tag content_tag
 
     # Creates an html tag with the given name and options
     # tag(:br, :style => 'clear:both')

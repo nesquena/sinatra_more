@@ -5,6 +5,7 @@ Dir[File.dirname(__FILE__) + '/markup_plugin/*.rb'].each {|file| load file }
 module SinatraMore
   module MarkupPlugin
     def self.registered(app)
+      app.set :default_builder, 'StandardFormBuilder'
       app.helpers OutputHelpers
       app.helpers TagHelpers
       app.helpers AssetTagHelpers
