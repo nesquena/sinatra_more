@@ -1,24 +1,20 @@
 = UNFINISHED
 
+* Add support for fields_for tag in formbuilder
+* Add support for button tag method, mail_to helper
+* Add support for check_box_group, radio_button_group which create a set of checkboxes or radio buttons
+* Look into creating sinatra generators using rubigen (http://github.com/drnic/rubigen)
+  * http://github.com/quirkey/sinatra-gen
+  * http://github.com/monkrb/monk
 * Become total warden solution (basically just require warden gem installed, do everything else)
   * Look into removing overlapping methods and simply leverage sinatra_warden
   * Take advantage of shared strategies: http://github.com/hassox/warden_strategies/tree/master/lib/
   * Make warden password strategy support a callback which explains what to do with username, password
   * WardenPlugin.authenticate_callback { |username, password| User.authenticate(username, password) }
-* Add support for fields_for tag in formbuilder
-* Add support for missing formbuilder fields (select, and standard_form_builder methods i.e check_box_group)
-* Look into creating sinatra generators using rubigen (http://github.com/drnic/rubigen)
-  * http://github.com/quirkey/sinatra-gen
-  * http://github.com/monkrb/monk
-* Look into adding any missing helpers from:
-  * http://github.com/brianjlandau/nice-n-easy
-  * http://github.com/brianjlandau/nice-n-easy/blob/master/lib/sinatra/nice_easy_helpers.rb
-  * http://github.com/kelredd/sinatra-helpers/blob/master/lib/sinatra_helpers/erb/links.rb
-  * http://github.com/kelredd/sinatra-helpers/blob/master/lib/sinatra_helpers/erb/forms.rb
-  * http://github.com/twilson63/sinatra-formhelpers/blob/master/lib/sinatra/formhelpers.rb
 
 = COMPLETED
 
+* Add support for missing formbuilder fields (select, and standard_form_builder methods i.e check_box_group)
 * Add support for missing formhelpers/fields (radio_button_tag, select_tag)
 * Add support for select_tag :multiple => true
 * Add support for forms with method => put, delete using hidden field
