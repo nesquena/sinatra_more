@@ -167,6 +167,11 @@ methods should be very familiar to anyone who has used rails view helpers.
 * <tt>radio_button_tag(name, options={})</tt>
   * Constructs a radio button input from the given options
   * <tt>radio_button_tag :gender, :value => 'male'</tt>
+* <tt>select_tag(name, settings={})</tt>
+  * Constructs a select tag with options from the given settings
+  * <tt>select_tag(:favorite_color, :options => ['1', '2', '3'], :selected => '1')</tt>
+  * <tt>select_tag(:more_color, :options => [['label', '1'], ['label2', '2']])</tt>
+  * <tt>select_tag(:multiple_color, :options => [...], :multiple => true)</tt>
 * <tt>file_field_tag(name, options={})</tt>
   * Constructs a file field input from the given options
   * <tt>file_field_tag :photo, :class => 'long'</tt>
@@ -188,6 +193,9 @@ A form_tag might look like:
       %p
         = label_tag :password, :class => 'first'
         = password_field_tag :password, :value => params[:password]
+      %p
+        = label_tag :strategy
+        = select_tag :strategy, :options => ['delete', 'destroy'], :selected => 'delete'
       %p
         = check_box_tag :confirm_delete
     - field_set_tag(:class => 'buttons') do

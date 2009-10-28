@@ -4,7 +4,6 @@ module SinatraMore
     # input_tag :text, :class => "test"
     def input_tag(type, options = {})
       options.reverse_merge!(:type => type)
-      [:checked, :disabled].each { |attr| options[attr] = attr.to_s if options[attr]  }
       tag(:input, options)
     end
 
@@ -25,9 +24,17 @@ module SinatraMore
     # tag(:p, :content => "hello", :class => 'large')
     def tag(name, options={})
       content = options.delete(:content)
+      identity_tag_attributes.each { |attr| options[attr] = attr.to_s if options[attr]  }
       html_attrs = options.collect { |a, v| v.blank? ? nil : "#{a}=\"#{v}\"" }.compact.join(" ")
       base_tag = (html_attrs.present? ? "<#{name} #{html_attrs}" : "<#{name}")
       base_tag << (content ? ">#{content}</#{name}>" : " />")
+    end
+
+    protected
+
+    # Returns a list of attributes which can only contain an identity value (i.e selected)
+    def identity_tag_attributes
+      [:checked, :disabled, :selected, :multiple]
     end
   end
 end

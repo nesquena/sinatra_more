@@ -83,6 +83,17 @@ module SinatraMore
     end
 
     # Constructs a check_box from the given options
+    # options = [['caption', 'value'], ['Green', 'green1'], ['Blue', 'blue1'], ['Black', "black1"]]
+    # options = ['option', 'red', 'yellow' ]
+    # select_tag(:favorite_color, :options => ['red', 'yellow'], :selected => 'green1')
+    def select_tag(name, options={})
+      options.reverse_merge!(:name => name)
+      select_options_html = options_for_select(options.delete(:options), options.delete(:selected))
+      options.merge!(:name => "#{options[:name]}[]") if options[:multiple]
+      content_tag(:select, select_options_html, options)
+    end
+
+    # Constructs a check_box from the given options
     # check_box_tag :remember_me, :value => 'Yes'
     def check_box_tag(name, options={})
       options.reverse_merge!(:name => name, :value => '1')
@@ -118,6 +129,14 @@ module SinatraMore
     end
 
     protected
+
+    # Returns the options tags for a select based on the given option items
+    def options_for_select(option_items, selected_value=nil)
+      return '' if option_items.blank?
+      option_items.collect do |caption, value|
+        content_tag(:option, caption, :value => (value || caption), :selected => (selected_value == (value || caption)))
+      end
+    end
 
     # returns the hidden method field for 'put' and 'delete' forms
     # Only 'get' and 'post' are allowed within browsers;

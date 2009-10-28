@@ -6,8 +6,7 @@
   * Make warden password strategy support a callback which explains what to do with username, password
   * WardenPlugin.authenticate_callback { |username, password| User.authenticate(username, password) }
 * Add support for fields_for tag in formbuilder
-* Add support for missing formhelpers/fields (radio_button_tag, select_tag)
-* Add support for missing formbuilder fields (radio_button, select, and standard_form_builder methods i.e check_box_group)
+* Add support for missing formbuilder fields (select, and standard_form_builder methods i.e check_box_group)
 * Look into creating sinatra generators using rubigen (http://github.com/drnic/rubigen)
   * http://github.com/quirkey/sinatra-gen
   * http://github.com/monkrb/monk
@@ -20,6 +19,8 @@
 
 = COMPLETED
 
+* Add support for missing formhelpers/fields (radio_button_tag, select_tag)
+* Add support for select_tag :multiple => true
 * Add support for forms with method => put, delete using hidden field
 * Remove dependency on activesupport! and enumerate dependencies in rakefile (as much as possible, need inflectors)
 * Pull from sinatra-helpers and make erb templates work (and credit keldredd)

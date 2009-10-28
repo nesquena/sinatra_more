@@ -113,14 +113,14 @@ class TestFormHelpers < Test::Unit::TestCase
 
     should "display label tag in erb for simple form" do
       visit '/erb/form_tag'
-      assert_have_selector 'form.simple-form label', :count => 3
+      assert_have_selector 'form.simple-form label', :count => 4
       assert_have_selector 'form.simple-form label', :content => "Username", :for => 'username'
       assert_have_selector 'form.simple-form label', :content => "Password", :for => 'password'
       assert_have_selector 'form.simple-form label', :content => "Gender", :for => 'gender'
     end
     should "display label tag in erb for advanced form" do
       visit '/erb/form_tag'
-      assert_have_selector 'form.advanced-form label', :count => 5
+      assert_have_selector 'form.advanced-form label', :count => 6
       assert_have_selector 'form.advanced-form label.first', :content => "Nickname", :for => 'username'
       assert_have_selector 'form.advanced-form label.first', :content => "Password", :for => 'password'
       assert_have_selector 'form.advanced-form label.about', :content => "About Me", :for => 'about'
@@ -130,14 +130,14 @@ class TestFormHelpers < Test::Unit::TestCase
 
     should "display label tag in haml for simple form" do
       visit '/haml/form_tag'
-      assert_have_selector 'form.simple-form label', :count => 3
+      assert_have_selector 'form.simple-form label', :count => 4
       assert_have_selector 'form.simple-form label', :content => "Username", :for => 'username'
       assert_have_selector 'form.simple-form label', :content => "Password", :for => 'password'
       assert_have_selector 'form.simple-form label', :content => "Gender", :for => 'gender'
     end
     should "display label tag in haml for advanced form" do
       visit '/haml/form_tag'
-      assert_have_selector 'form.advanced-form label', :count => 5
+      assert_have_selector 'form.advanced-form label', :count => 6
       assert_have_selector 'form.advanced-form label.first', :content => "Nickname", :for => 'username'
       assert_have_selector 'form.advanced-form label.first', :content => "Password", :for => 'password'
       assert_have_selector 'form.advanced-form label.about', :content => "About Me", :for => 'about'
@@ -286,6 +286,60 @@ class TestFormHelpers < Test::Unit::TestCase
       assert_have_selector 'form.simple-form input[type=radio]', :count => 1, :value => 'female'
       assert_have_selector 'form.advanced-form input[type=radio]', :value => "male", :checked => 'checked'
       assert_have_selector 'form.advanced-form input[type=radio]', :value => "female"
+    end
+  end
+
+  context "for #select_tag method" do
+    should "display select tag in ruby" do
+      actual_html = select_tag(:favorite_color, :options => ['green', 'blue', 'black'])
+      assert_has_tag(:select, :name => 'favorite_color') { actual_html }
+      assert_has_tag('select option', :content => 'green', :value => 'green') { actual_html }
+      assert_has_tag('select option', :content => 'blue', :value => 'blue') { actual_html }
+      assert_has_tag('select option', :content => 'black', :value => 'black') { actual_html }
+    end
+
+    should "display select tag in ruby with extended attributes" do
+      actual_html = select_tag(:favorite_color, :disabled => true, :options => ['only', 'option'])
+      assert_has_tag(:select, :disabled => 'disabled') { actual_html }
+    end
+
+    should "display select tag in ruby with multiple attribute" do
+      actual_html = select_tag(:favorite_color, :multiple => true, :options => ['only', 'option'])
+      assert_has_tag(:select, :multiple => 'multiple', :name => 'favorite_color[]') { actual_html }
+    end
+
+    should "display options with values and selected" do
+      options = [['Green', 'green1'], ['Blue', 'blue1'], ['Black', "black1"]]
+      actual_html = select_tag(:favorite_color, :options => options, :selected => 'green1')
+      assert_has_tag(:select, :name => 'favorite_color') { actual_html }
+      assert_has_tag('select option', :selected => 'selected', :count => 1) { actual_html }
+      assert_has_tag('select option', :content => 'Green', :value => 'green1', :selected => 'selected') { actual_html }
+      assert_has_tag('select option', :content => 'Blue', :value => 'blue1') { actual_html }
+      assert_has_tag('select option', :content => 'Black', :value => 'black1') { actual_html }
+    end
+
+    should "display select tag in erb" do
+      visit '/erb/form_tag'
+      assert_have_selector 'form.simple-form select', :count => 1, :name => 'color'
+      assert_have_selector('select option', :content => 'green',  :value => 'green')
+      assert_have_selector('select option', :content => 'orange', :value => 'orange')
+      assert_have_selector('select option', :content => 'purple', :value => 'purple')
+      assert_have_selector 'form.advanced-form select', :name => 'fav_color'
+      assert_have_selector('select option', :content => 'green',  :value => '1')
+      assert_have_selector('select option', :content => 'orange', :value => '2', :selected => 'selected')
+      assert_have_selector('select option', :content => 'purple', :value => '3')
+    end
+
+    should "display select tag in haml" do
+      visit '/haml/form_tag'
+      assert_have_selector 'form.simple-form select', :count => 1, :name => 'color'
+      assert_have_selector('select option', :content => 'green',  :value => 'green')
+      assert_have_selector('select option', :content => 'orange', :value => 'orange')
+      assert_have_selector('select option', :content => 'purple', :value => 'purple')
+      assert_have_selector 'form.advanced-form select', :name => 'fav_color'
+      assert_have_selector('select option', :content => 'green',  :value => '1')
+      assert_have_selector('select option', :content => 'orange', :value => '2', :selected => 'selected')
+      assert_have_selector('select option', :content => 'purple', :value => '3')
     end
   end
 

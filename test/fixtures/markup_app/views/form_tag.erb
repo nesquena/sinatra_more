@@ -8,6 +8,8 @@
     <%= password_field_tag :password %>
     <%= check_box_tag :remember_me %>
     <%= label_tag :gender %>
+    <%= label_tag :color %>
+    <%= select_tag :color, :options => ['green', 'orange', 'purple'] %>
     <%= radio_button_tag :gender, :value => 'male' %>
     <%= radio_button_tag :gender, :value => 'female' %>
     <%= submit_tag %>
@@ -39,6 +41,10 @@
       <%= radio_button_tag :gender, :value => 'male', :checked => true %>
       <%= radio_button_tag :remember_me, :value => 'female' %>
     <p>
+    <p>
+      <%= label_tag :fav_color %>
+      <%= select_tag :fav_color, :options => [ ['green', '1'], ['orange', '2'], ['purple', '3'] ], :selected => '2' %>
+    </p>
     <p>
       <%= check_box_tag :remember_me, :value => '1', :checked => true %>
     <p>

@@ -11,8 +11,12 @@ class TestTagHelpers < Test::Unit::TestCase
       assert_has_tag(:br) { tag(:br) }
     end
     should("support tags with no content with attributes") do
-      actual_html = tag(:br, :style => 'clear:both', :class => 'yellow') 
+      actual_html = tag(:br, :style => 'clear:both', :class => 'yellow')
       assert_has_tag(:br, :class => 'yellow', :style=>'clear:both') { actual_html }
+    end
+    should "support selected attribute by using 'selected' if true" do
+      actual_html = tag(:option, :selected => true)
+      assert_has_tag('option', :selected => 'selected') { actual_html }
     end
     should "support tags with content no attributes" do
       assert_has_tag(:p, :content => "Demo String") { tag(:p, :content => "Demo String") }
