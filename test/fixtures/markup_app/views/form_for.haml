@@ -38,5 +38,7 @@
   = f.password_field_block :code, { :class => 'input' }
   = f.text_area_block :about, { :class => 'textarea' }
   = f.file_field_block :photo, { :class => 'upload' }
+  = f.check_box_block :remember_me, { :class => 'checker' }
+  = f.select_block :state, :options => ['California', 'Texas'], :class => 'selector'
   = f.submit_block "Create", { :class => 'button' }
   = f.image_submit_block "buttons/ok.png", { :class => 'image' }

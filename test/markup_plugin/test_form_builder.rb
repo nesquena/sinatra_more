@@ -474,6 +474,50 @@ class TestFormBuilder < Test::Unit::TestCase
     end
   end
 
+  context 'for #check_box_block method' do
+    should "display correct check box block html" do
+      actual_html = standard_builder.check_box_block(:remember_me, :class => 'large', :caption => "Remember session")
+      assert_has_tag('p label', :for => 'user_remember_me', :content => "Remember session: ") { actual_html }
+      assert_has_tag('p input.large[type=checkbox]', :id => 'user_remember_me', :name => 'user[remember_me]') { actual_html }
+    end
+
+    should "display correct check box block in haml" do
+      visit '/haml/form_for'
+      assert_have_selector '#demo2 p label', :for => 'markup_user_remember_me', :content => "Remember Me: "
+      assert_have_selector '#demo2 p input.checker', :type => 'checkbox', :name => 'markup_user[remember_me]'
+    end
+
+    should "display correct check box block in erb" do
+      visit '/erb/form_for'
+      assert_have_selector '#demo2 p label', :for => 'markup_user_remember_me', :content => "Remember Me: "
+      assert_have_selector '#demo2 p input.checker', :type => 'checkbox', :name => 'markup_user[remember_me]'
+    end
+  end
+
+  context 'for #select_block method' do
+    should "display correct select_block block html" do
+      actual_html = standard_builder.select_block(:country, :options => ['USA', 'Canada'], :class => 'large', :caption => "Your country")
+      assert_has_tag('p label', :for => 'user_country', :content => "Your country: ") { actual_html }
+      assert_has_tag('p select', :id => 'user_country', :name => 'user[country]') { actual_html }
+      assert_has_tag('p select option', :content => 'USA')   { actual_html }
+      assert_has_tag('p select option', :content => 'Canada') { actual_html }
+    end
+
+    should "display correct select_block block in haml" do
+      visit '/haml/form_for'
+      assert_have_selector '#demo2 p label', :for => 'markup_user_state', :content => "State: "
+      assert_have_selector '#demo2 p select', :name => 'markup_user[state]', :id => 'markup_user_state'
+      assert_have_selector '#demo2 p select option',  :content => 'California'
+      assert_have_selector '#demo2 p select option',  :content => 'Texas'
+    end
+
+    should "display correct select_block block in erb" do
+      visit '/erb/form_for'
+      assert_have_selector '#demo2 p label', :for => 'markup_user_state', :content => "State: "
+      assert_have_selector '#demo2 p select', :name => 'markup_user[state]', :id => 'markup_user_state'
+    end
+  end
+
   context 'for #submit_block method' do
     should "display correct submit block html" do
       actual_html = standard_builder.submit_block("Update", :class => 'large')

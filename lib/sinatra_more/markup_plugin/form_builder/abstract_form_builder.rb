@@ -86,7 +86,7 @@ class AbstractFormBuilder
 
   # Returns the known field types for a formbuilder
   def self.field_types
-    [:text_field, :text_area, :password_field, :file_field, :hidden_field, :check_box]
+    [:hidden_field, :text_field, :text_area, :password_field, :file_field, :radio_button, :check_box, :select]
   end
 
   # Returns the object's models name

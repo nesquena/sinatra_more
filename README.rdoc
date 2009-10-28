@@ -272,6 +272,10 @@ There is also a StandardFormBuilder which builds on the abstract fields that can
   * <tt>password_field_block(:code, :class => 'big')</tt>
 * <tt>file_field_block(field, options={}, label_options={})</tt>
   * <tt>file_field_block(:photo, :class => 'big')</tt>
+* <tt>check_box_block(field, options={}, label_options={})</tt>
+  * <tt>check_box_block(:remember_me, :class => 'big')</tt>
+* <tt>select_block(field, options={}, label_options={})</tt>
+  * <tt>select_block(:country, :option => ['USA', 'Canada'])</tt>
 * <tt>submit_block(caption, options={})</tt>
   * <tt>submit_block(:username, :class => 'big')</tt>
 * <tt>image_submit_block(source, options={})</tt>
@@ -283,6 +287,8 @@ A form_for using these standard fields might look like:
     = f.error_messages
     = f.text_field_block :name, :caption => "Full name"
     = f.text_field_block :email
+    = f.check_box_block  :remember_me
+    = f.select_block     :fav_color, :options => ['red', 'blue']
     = f.password_field_block :password
     = f.submit_block "Create", :class => 'button'
 
