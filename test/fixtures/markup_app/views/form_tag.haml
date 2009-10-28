@@ -6,6 +6,7 @@
     = text_field_tag :username
     = label_tag :password
     = password_field_tag :password
+    = checkbox_tag :checkbox
     = submit_tag
 
 - form_tag '/advanced', :id => 'advanced', :class => 'advanced-form', :method => 'get' do
@@ -24,5 +25,7 @@
     %p
       = label_tag :photo, :class => 'photo'
       = file_field_tag :photo, :class => 'upload'
+    %p
+      = checkbox_tag :photo, :value => "1", :checked => 'true'
   - field_set_tag(:class => 'buttons') do
     = submit_tag "Login"
