@@ -225,6 +225,8 @@ The following are fields provided by AbstractFormBuilder that can be used within
   * <tt>f.file_field :photo, :class => 'long'</tt>
 * <tt>submit(caption, options={})</tt>
   * <tt>f.submit "Update", :class => 'long'</tt>
+* <tt>image_submit(source, options={})</tt>
+  * <tt>f.submit "submit.png", :class => 'long'</tt>
   
 A form_for using these basic fields might look like:
 
@@ -257,6 +259,8 @@ There is also a StandardFormBuilder which builds on the abstract fields that can
   * <tt>file_field_block(:photo, :class => 'big')</tt>
 * <tt>submit_block(caption, options={})</tt>
   * <tt>submit_block(:username, :class => 'big')</tt>
+* <tt>image_submit_block(source, options={})</tt>
+  * <tt>image_submit_block('submit.png', :class => 'big')</tt>
   
 A form_for using these standard fields might look like:
 
