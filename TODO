@@ -5,6 +5,7 @@
   * Take advantage of shared strategies: http://github.com/hassox/warden_strategies/tree/master/lib/
   * Make warden password strategy support a callback which explains what to do with username, password
   * WardenPlugin.authenticate_callback { |username, password| User.authenticate(username, password) }
+* Add support for fields_for tag in formbuilder
 * Add support for missing formhelpers/fields (radio_button_tag, select_tag)
 * Add support for missing formbuilder fields (radio_button, select, and standard_form_builder methods i.e check_box_group)
 * Look into creating sinatra generators using rubigen (http://github.com/drnic/rubigen)

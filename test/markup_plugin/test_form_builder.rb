@@ -161,6 +161,7 @@ class TestFormBuilder < Test::Unit::TestCase
     should "display correct checkbox html" do
       actual_html = standard_builder.check_box(:confirm_destroy, :class => 'large')
       assert_has_tag('input.large[type=checkbox]', :id => 'user_confirm_destroy', :name => 'user[confirm_destroy]') { actual_html }
+      assert_has_tag('input[type=hidden]', :name => 'user[confirm_destroy]', :value => '0') { actual_html }
     end
 
     should "display correct checkbox html when checked" do
@@ -169,15 +170,20 @@ class TestFormBuilder < Test::Unit::TestCase
     end
 
     should "display correct checkbox html as checked when object value matches" do
-      @user.stubs(:show_favories => '1')
-      actual_html = standard_builder.check_box(:show_favories, :value => '1')
-      assert_has_tag('input[type=checkbox]', :checked => 'checked', :name => 'user[show_favories]') { actual_html }
+      @user.stubs(:show_favorites => '1')
+      actual_html = standard_builder.check_box(:show_favorites, :value => '1')
+      assert_has_tag('input[type=checkbox]', :checked => 'checked', :name => 'user[show_favorites]') { actual_html }
     end
 
     should "display correct checkbox html as unchecked when object value doesn't match" do
       @user.stubs(:show_favories => '0')
-      actual_html = standard_builder.radio_button(:show_favories, :value => 'female')
+      actual_html = standard_builder.check_box(:show_favorites, :value => 'female')
       assert_has_no_tag('input[type=checkbox]', :checked => 'checked') { actual_html }
+    end
+
+    should "display correct unchecked hidden field when specified" do
+      actual_html = standard_builder.check_box(:show_favorites, :value => 'female', :uncheck_value => 'false')
+      assert_has_tag('input[type=hidden]', :name => 'user[show_favorites]', :value => 'false') { actual_html }
     end
 
     should "display correct checkbox in haml" do

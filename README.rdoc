@@ -208,7 +208,8 @@ The following are fields provided by AbstractFormBuilder that can be used within
 * <tt>text_field(field, options={})</tt>
   * <tt>f.text_field :username, :class => 'long'</tt>
 * <tt>check_box(field, options={})</tt>
-  * <tt>f.check_box :remember_me, :class => 'checkable'</tt>
+  * Uses hidden field to provide a 'unchecked' value for field
+  * <tt>f.check_box :remember_me, :uncheck_value => 'false'</tt>
 * <tt>radio_button(field, options={})</tt>
   * <tt>f.radio_button :gender, :value => 'male'</tt>
 * <tt>hidden_field(field, options={})</tt>
