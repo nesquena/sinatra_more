@@ -95,6 +95,13 @@ module SinatraMore
       options.reverse_merge!(:value => caption)
       input_tag(:submit, options)
     end
+    
+    # Constructs a checkbox button from the given options
+    # checkbox_tag :photo, :value => 'dog'
+    def checkbox_tag(name,options={})
+      options.reverse_merge!(:name => name)
+      input_tag(:checkbox, options)
+    end
 
     protected
 

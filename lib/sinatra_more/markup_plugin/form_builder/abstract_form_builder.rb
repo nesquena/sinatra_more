@@ -54,11 +54,18 @@ class AbstractFormBuilder
     @template.submit_tag caption, options
   end
 
+  # f.checkbox :photo, :value => 'dog'
+  def checkbox(field,options={})
+    options.reverse_merge!(:value => field_value(field), :id => field_id(field))
+    @template.checkbox_tag field_name(field), options
+  end
+
+
   protected
 
   # Returns the known field types for a formbuilder
   def self.field_types
-    [:text_field, :text_area, :password_field, :file_field, :hidden_field]
+    [:text_field, :text_area, :password_field, :file_field, :hidden_field,:checkbox]
   end
 
   private

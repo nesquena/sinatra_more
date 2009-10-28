@@ -251,4 +251,25 @@ class TestFormHelpers < Test::Unit::TestCase
       assert_have_selector 'form.advanced-form input[type=submit]', :count => 1, :value => "Login"
     end
   end
+
+  context "for #checkbox_tag method" do
+    should "display checkbox tag in ruby" do
+      actual_html = checkbox_tag("checkbox", :value => '1')
+      assert_has_tag(:input, :type => 'checkbox', :value => '1') { actual_html }
+    end
+    
+    should "display checkbox tag in erb" do
+      visit '/erb/form_tag'
+      assert_have_selector 'form.simple-form input[type=checkbox]', :count => 1
+      assert_have_selector 'form.advanced-form input[type=checkbox]', :count => 1, :value => "1"
+    end
+    
+    should "display checkbox tag in haml" do
+      visit '/haml/form_tag'
+      assert_have_selector 'form.simple-form input[type=checkbox]', :count => 1
+      assert_have_selector 'form.advanced-form input[type=checkbox]', :count => 1, :value => "1"
+    end
+    
+  end
+
 end

@@ -21,6 +21,9 @@
     <%= f.label :about, :caption => "About Me" %>
     <%= f.text_area :about, :class => 'user-about'  %> 
   </p>
+  <p>
+    <%= f.checkbox :checkbox, :value => 1 %>
+  </p>
   <p><%= f.submit "Create", :class => 'success', :id => 'demo-button' %></p>
 <% end %>
 

@@ -17,6 +17,8 @@
     = f.label :about, :caption => "About Me"
     = f.text_area :about, :class => 'user-about'  
   %p
+    = f.checkbox :checkbox, :value => "1"
+  %p
     = f.submit "Create", :class => 'success', :id => 'demo-button'
 
 - form_for MarkupUser.new, '/another_demo', :id => 'demo2', :method => 'get' do |f|
