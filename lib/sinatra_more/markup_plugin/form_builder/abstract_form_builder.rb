@@ -70,6 +70,11 @@ class AbstractFormBuilder
     @template.submit_tag caption, options
   end
 
+  # f.simage_submitubmit "buttons/submit.png", :class => 'large'
+  def image_submit(source, options={})
+    @template.image_submit_tag source, options
+  end
+
   protected
 
   # Returns the known field types for a formbuilder

@@ -1,5 +1,5 @@
 class StandardFormBuilder < AbstractFormBuilder
-  
+
   # text_field_block(:username, { :class => 'long' }, { :class => 'wide-label' })
   # text_area_block(:username, { :class => 'long' }, { :class => 'wide-label' })
   # password_field_block(:username, { :class => 'long' }, { :class => 'wide-label' })
@@ -17,7 +17,13 @@ class StandardFormBuilder < AbstractFormBuilder
 
   # submit_block("Update")
   def submit_block(caption, options={})
-    submit_html = @template.submit_tag(caption, options)
+    submit_html = self.submit(caption, options)
+    @template.content_tag(:p, submit_html)
+  end
+
+  # image_submit_block("submit.png")
+  def image_submit_block(source, options={})
+    submit_html = self.image_submit(source, options)
     @template.content_tag(:p, submit_html)
   end
 end

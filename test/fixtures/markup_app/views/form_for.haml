@@ -24,6 +24,8 @@
     = f.check_box :remember_me, :value => "1"
   %p
     = f.submit "Create", :class => 'success', :id => 'demo-button'
+  %p
+    = f.image_submit "buttons/post.png", :class => 'success', :id => 'image-button'
 
 - form_for MarkupUser.new, '/another_demo', :id => 'demo2', :method => 'get' do |f|
   = f.error_messages :header_message => "custom MarkupUser cannot be saved!"
@@ -33,3 +35,4 @@
   = f.text_area_block :about, { :class => 'textarea' }
   = f.file_field_block :photo, { :class => 'upload' }
   = f.submit_block "Create", { :class => 'button' }
+  = f.image_submit_block "buttons/ok.png", { :class => 'image' }

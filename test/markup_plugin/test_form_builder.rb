@@ -316,6 +316,30 @@ class TestFormBuilder < Test::Unit::TestCase
     end
   end
 
+  context 'for #image_submit method' do
+    should "display correct image submit button html with no options" do
+      actual_html = standard_builder.image_submit('buttons/ok.png')
+      assert_has_tag('input[type=image]', :src => "/images/buttons/ok.png") { actual_html }
+    end
+
+    should "display correct image submit button html" do
+      actual_html = standard_builder.image_submit('/system/ok.png', :class => 'large')
+      assert_has_tag('input.large[type=image]', :src => "/system/ok.png") { actual_html }
+    end
+
+    should "display correct image submit button in haml" do
+      visit '/haml/form_for'
+      assert_have_selector '#demo input', :type => 'image', :id => 'image-button', :src => '/images/buttons/post.png'
+      assert_have_selector '#demo2 input', :type => 'image', :class => 'image', :src => "/images/buttons/ok.png"
+    end
+
+    should "display correct image submit button in erb" do
+      visit '/erb/form_for'
+      assert_have_selector '#demo input', :type => 'image', :id => 'image-button', :src => '/images/buttons/post.png'
+      assert_have_selector '#demo2 input', :type => 'image', :class => 'image', :src => "/images/buttons/ok.png"
+    end
+  end
+
   # ===========================
   # StandardFormBuilder
   # ===========================
@@ -414,6 +438,23 @@ class TestFormBuilder < Test::Unit::TestCase
     should "display correct submit block in erb" do
       visit '/erb/form_for'
       assert_have_selector '#demo2 p input', :type => 'submit', :class => 'button'
+    end
+  end
+
+  context 'for #image_submit_block method' do
+    should "display correct image submit block html" do
+      actual_html = standard_builder.image_submit_block("buttons/ok.png", :class => 'large')
+      assert_has_tag('p input.large[type=image]', :src => '/images/buttons/ok.png') { actual_html }
+    end
+
+    should "display correct image submit block in haml" do
+      visit '/haml/form_for'
+      assert_have_selector '#demo2 p input', :type => 'image', :class => 'image', :src => '/images/buttons/ok.png'
+    end
+
+    should "display correct image submit block in erb" do
+      visit '/erb/form_for'
+      assert_have_selector '#demo2 p input', :type => 'image', :class => 'image', :src => '/images/buttons/ok.png'
     end
   end
 end

@@ -30,6 +30,7 @@
     <%= f.check_box :remember_me, :value => '1' %>
   </p>
   <p><%= f.submit "Create", :class => 'success', :id => 'demo-button' %></p>
+  <p><%= f.image_submit "buttons/post.png", :class => 'success', :id => 'image-button' %></p>
 <% end %>
 
 <% form_for MarkupUser.new, '/another_demo', :id => 'demo2', :method => 'get' do |f| %>
@@ -39,5 +40,6 @@
   <%= f.password_field_block :code, { :class => 'input' } %>
   <%= f.text_area_block :about, { :class => 'textarea' } %>
   <%= f.file_field_block :photo, { :class => 'upload' } %>
-  <%= f.submit_block "Create", { :class => 'button', :class => 'button' } %>
+  <%= f.submit_block "Create", { :class => 'button' } %>
+  <%= f.image_submit_block "buttons/ok.png", { :class => 'image' } %>
 <% end %>
