@@ -231,6 +231,10 @@ The following are fields provided by AbstractFormBuilder that can be used within
   * <tt>f.password_field :secret, :class => 'long'</tt>
 * <tt>file_field(field, options={})</tt>
   * <tt>f.file_field :photo, :class => 'long'</tt>
+* <tt>select(field, options={})</tt>
+  * <tt>f.select(:state, :options => ['California', 'Texas', 'Wyoming'])</tt>
+  * <tt>f.select(:state, :collection => @states, :fields => [:name, :id])</tt>
+  * <tt>f.select(:state, :options => [...], :include_blank => true)</tt>
 * <tt>submit(caption, options={})</tt>
   * <tt>f.submit "Update", :class => 'long'</tt>
 * <tt>image_submit(source, options={})</tt>
@@ -252,6 +256,9 @@ A form_for using these basic fields might look like:
     %p
       = f.label :is_admin, :caption => "Admin User?"
       = f.check_box :is_admin
+    $p
+      = f.label :color, :caption => "Favorite Color?"
+      = f.select :color, :options => ['red', 'black']
     %p
       = f.submit "Create", :class => 'button'
   

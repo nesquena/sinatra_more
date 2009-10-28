@@ -27,6 +27,11 @@
     <%= f.radio_button :gender, :value => 'female' %>
   </p>
   <p>
+    <%= f.label :country, :caption => "Your country" %>
+    <%= f.select :country, :options => ['USA', 'Canada', 'Mexico'], :selected => 'USA', :class => 'selector' %>
+  </p>
+  <p>
+    <%= f.label :remember_me %>
     <%= f.check_box :remember_me, :value => '1' %>
   </p>
   <p><%= f.submit "Create", :class => 'success', :id => 'demo-button' %></p>

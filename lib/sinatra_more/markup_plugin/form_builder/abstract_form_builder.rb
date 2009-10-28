@@ -43,6 +43,13 @@ class AbstractFormBuilder
     @template.password_field_tag field_name(field), options
   end
 
+  # f.select :color, :options => ['red', 'green'], :include_blank => true
+  # f.select :color, :collection => @colors, :fields => [:name, :id]
+  def select(field, options={})
+    options.reverse_merge!(:id => field_id(field), :selected => field_value(field))
+    @template.select_tag field_name(field), options
+  end
+
   # f.check_box :remember_me, :value => 'true', :uncheck_value => '0'
   def check_box(field, options={})
     unchecked_value = options.delete(:uncheck_value) || '0'

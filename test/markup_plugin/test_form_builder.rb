@@ -9,7 +9,10 @@ class TestFormBuilder < Test::Unit::TestCase
   end
 
   def setup
-    @user = stub(:errors => stub(:full_messages => ["1", "2"], :none? => false), :class => 'User', :first_name => "Joe", :session_id => 54)
+    error_stub = stub(:full_messages => ["1", "2"], :none? => false)
+    role_types = [stub(:name => 'Admin', :id => 1), stub(:name => 'Moderate', :id => 2),  stub(:name => 'Limited', :id => 3)]
+    @user = stub(:errors => error_stub, :class => 'User', :first_name => "Joe", :session_id => 54)
+    @user.stubs(:role_types => role_types, :role => "1")
     @user_none = stub(:errors => stub(:none? => true), :class => 'User')
   end
 
@@ -289,6 +292,53 @@ class TestFormBuilder < Test::Unit::TestCase
       visit '/erb/form_for'
       assert_have_selector '#demo  input.user-photo', :type => 'file', :name => 'markup_user[photo]', :id => 'markup_user_photo'
       assert_have_selector '#demo2 input.upload', :type => 'file', :name => 'markup_user[photo]', :id => 'markup_user_photo'
+    end
+  end
+
+  context 'for #select method' do
+    should "display correct select html" do
+      actual_html = standard_builder.select(:state, :options => ['California', 'Texas', 'Wyoming'], :class => 'selecty')
+      assert_has_tag('select.selecty', :id => 'user_state', :name => 'user[state]') { actual_html }
+      assert_has_tag('select.selecty option', :count => 3) { actual_html }
+      assert_has_tag('select.selecty option', :value => 'California', :content => 'California') { actual_html }
+      assert_has_tag('select.selecty option', :value => 'Texas',      :content => 'Texas')      { actual_html }
+      assert_has_tag('select.selecty option', :value => 'Wyoming',    :content => 'Wyoming')    { actual_html }
+    end
+
+    should "display correct select html with selected item if it matches value" do
+      @user.stubs(:state => 'California')
+      actual_html = standard_builder.select(:state, :options => ['California', 'Texas', 'Wyoming'])
+      assert_has_tag('select', :id => 'user_state', :name => 'user[state]') { actual_html }
+      assert_has_tag('select option', :selected => 'selected', :count => 1) { actual_html }
+      assert_has_tag('select option', :value => 'California', :selected => 'selected') { actual_html }
+    end
+
+    should "display correct select html with include_blank" do
+      actual_html = standard_builder.select(:state, :options => ['California', 'Texas', 'Wyoming'], :include_blank => true)
+      assert_has_tag('select', :id => 'user_state', :name => 'user[state]') { actual_html }
+      assert_has_tag('select option', :count => 4) { actual_html }
+      assert_has_tag('select option:first-child', :content => '') { actual_html }
+    end
+
+    should "display correct select html with collection passed in" do
+      actual_html = standard_builder.select(:role, :collection => @user.role_types, :fields => [:name, :id])
+      assert_has_tag('select', :id => 'user_role', :name => 'user[role]') { actual_html }
+      assert_has_tag('select option', :count => 3) { actual_html }
+      assert_has_tag('select option', :value => '1', :content => 'Admin', :selected => 'selected')     { actual_html }
+      assert_has_tag('select option', :value => '2', :content => 'Moderate')  { actual_html }
+      assert_has_tag('select option', :value => '3', :content => 'Limited')   { actual_html }
+    end
+
+    should "display correct select in haml" do
+      visit '/haml/form_for'
+      assert_have_selector '#demo textarea', :name => 'markup_user[about]', :id => 'markup_user_about', :class => 'user-about'
+      assert_have_selector '#demo2 textarea', :name => 'markup_user[about]', :id => 'markup_user_about', :class => 'textarea'
+    end
+
+    should "display correct select in erb" do
+      visit '/erb/form_for'
+      assert_have_selector '#demo textarea', :name => 'markup_user[about]', :id => 'markup_user_about', :class => 'user-about'
+      assert_have_selector '#demo2 textarea', :name => 'markup_user[about]', :id => 'markup_user_about', :class => 'textarea'
     end
   end
 

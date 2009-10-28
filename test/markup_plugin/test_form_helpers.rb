@@ -291,8 +291,9 @@ class TestFormHelpers < Test::Unit::TestCase
 
   context "for #select_tag method" do
     should "display select tag in ruby" do
-      actual_html = select_tag(:favorite_color, :options => ['green', 'blue', 'black'])
+      actual_html = select_tag(:favorite_color, :options => ['green', 'blue', 'black'], :include_blank => true)
       assert_has_tag(:select, :name => 'favorite_color') { actual_html }
+      assert_has_tag('select option:first-child', :content => '') { actual_html }
       assert_has_tag('select option', :content => 'green', :value => 'green') { actual_html }
       assert_has_tag('select option', :content => 'blue', :value => 'blue') { actual_html }
       assert_has_tag('select option', :content => 'black', :value => 'black') { actual_html }

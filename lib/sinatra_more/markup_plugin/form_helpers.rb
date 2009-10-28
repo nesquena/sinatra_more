@@ -86,8 +86,12 @@ module SinatraMore
     # options = [['caption', 'value'], ['Green', 'green1'], ['Blue', 'blue1'], ['Black', "black1"]]
     # options = ['option', 'red', 'yellow' ]
     # select_tag(:favorite_color, :options => ['red', 'yellow'], :selected => 'green1')
+    # select_tag(:country, :collection => @countries, :fields => [:name, :code])
     def select_tag(name, options={})
       options.reverse_merge!(:name => name)
+      collection, fields = options.delete(:collection), options.delete(:fields)
+      options[:options] = options_from_collection(collection, fields) if collection
+      options[:options].unshift('') if options.delete(:include_blank)
       select_options_html = options_for_select(options.delete(:options), options.delete(:selected))
       options.merge!(:name => "#{options[:name]}[]") if options[:multiple]
       content_tag(:select, select_options_html, options)
@@ -130,11 +134,19 @@ module SinatraMore
 
     protected
 
+    # Returns an array of option items for a select field based on the given collection
+    # fields is an array containing the fields to display from each item in the collection
+    def options_from_collection(collection, fields)
+      return '' if collection.blank?
+      collection.collect { |item| [ item.send(fields.first), item.send(fields.last) ] }
+    end
+
     # Returns the options tags for a select based on the given option items
     def options_for_select(option_items, selected_value=nil)
       return '' if option_items.blank?
       option_items.collect do |caption, value|
-        content_tag(:option, caption, :value => (value || caption), :selected => (selected_value == (value || caption)))
+        value ||= caption
+        content_tag(:option, caption, :value => value, :selected => selected_value.to_s =~ /#{value}|#{caption}/)
       end
     end
 
