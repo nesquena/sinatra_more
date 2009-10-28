@@ -261,13 +261,13 @@ class TestFormHelpers < Test::Unit::TestCase
     should "display checkbox tag in erb" do
       visit '/erb/form_tag'
       assert_have_selector 'form.simple-form input[type=checkbox]', :count => 1
-      assert_have_selector 'form.advanced-form input[type=checkbox]', :count => 1, :value => "1"
+      assert_have_selector 'form.advanced-form input[type=checkbox]', :count => 1, :value => "1", :checked => 'true'
     end
     
     should "display checkbox tag in haml" do
       visit '/haml/form_tag'
       assert_have_selector 'form.simple-form input[type=checkbox]', :count => 1
-      assert_have_selector 'form.advanced-form input[type=checkbox]', :count => 1, :value => "1"
+      assert_have_selector 'form.advanced-form input[type=checkbox]', :count => 1, :value => "1", :checked => 'true'
     end
     
   end
