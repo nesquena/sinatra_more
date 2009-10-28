@@ -7,6 +7,9 @@
     <%= label_tag :password %>
     <%= password_field_tag :password %>
     <%= check_box_tag :remember_me %>
+    <%= label_tag :gender %>
+    <%= radio_button_tag :gender, :value => 'male' %>
+    <%= radio_button_tag :gender, :value => 'female' %>
     <%= submit_tag %>
   <% end %>
 <% end %>
@@ -32,7 +35,12 @@
      <%= file_field_tag :photo, :class => 'upload' %>
     </p>
     <p>
-      <%= check_box_tag :remember_me, :value => '1', :checked => 'true' %>
+      <%= label_tag :gender, :class => 'gender' %>
+      <%= radio_button_tag :gender, :value => 'male', :checked => true %>
+      <%= radio_button_tag :remember_me, :value => 'female' %>
+    <p>
+    <p>
+      <%= check_box_tag :remember_me, :value => '1', :checked => true %>
     <p>
   <% end %>
   <% field_set_tag(:class => 'buttons') do %>

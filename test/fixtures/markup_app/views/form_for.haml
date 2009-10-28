@@ -17,6 +17,10 @@
     = f.label :about, :caption => "About Me"
     = f.text_area :about, :class => 'user-about'  
   %p
+    = f.label :gender, :caption => "Your gender:"
+    = f.radio_button :gender, :value => 'male'
+    = f.radio_button :gender, :value => 'female'
+  %p
     = f.check_box :remember_me, :value => "1"
   %p
     = f.submit "Create", :class => 'success', :id => 'demo-button'

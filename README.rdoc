@@ -164,6 +164,9 @@ methods should be very familiar to anyone who has used rails view helpers.
 * <tt>check_box_tag(name, options={})</tt>
   * Constructs a checkbox input from the given options
   * <tt>check_box_tag :remember_me, :checked => true</tt>
+* <tt>radio_button_tag(name, options={})</tt>
+  * Constructs a radio button input from the given options
+  * <tt>radio_button_tag :gender, :value => 'male'</tt>
 * <tt>file_field_tag(name, options={})</tt>
   * Constructs a file field input from the given options
   * <tt>file_field_tag :photo, :class => 'long'</tt>
@@ -206,6 +209,8 @@ The following are fields provided by AbstractFormBuilder that can be used within
   * <tt>f.text_field :username, :class => 'long'</tt>
 * <tt>check_box(field, options={})</tt>
   * <tt>f.check_box :remember_me, :class => 'checkable'</tt>
+* <tt>radio_button(field, options={})</tt>
+  * <tt>f.radio_button :gender, :value => 'male'</tt>
 * <tt>hidden_field(field, options={})</tt>
   * <tt>f.hidden_field :session_id, :class => 'hidden'</tt>
 * <tt>text_area(field, options={})</tt>

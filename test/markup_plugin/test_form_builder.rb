@@ -179,6 +179,30 @@ class TestFormBuilder < Test::Unit::TestCase
     end
   end
 
+  context 'for #radio_button method' do
+    should "display correct radio button html" do
+      actual_html = standard_builder.radio_button(:gender, :value => 'male', :class => 'large')
+      assert_has_tag('input.large[type=radio]', :id => 'user_gender_male', :name => 'user[gender]', :value => 'male') { actual_html }
+    end
+
+    should "display correct radio button html when checked" do
+      actual_html = standard_builder.radio_button(:gender, :checked => true)
+      assert_has_tag('input[type=radio]', :checked => 'checked', :name => 'user[gender]') { actual_html }
+    end
+
+    should "display correct radio button in haml" do
+      visit '/haml/form_for'
+      assert_have_selector '#demo input[type=radio]', :id => 'markup_user_gender_male', :name => 'markup_user[gender]', :value => 'male'
+      assert_have_selector '#demo input[type=radio]', :id => 'markup_user_gender_female', :name => 'markup_user[gender]', :value => 'female'
+    end
+
+    should "display correct radio button in erb" do
+      visit '/erb/form_for'
+      assert_have_selector '#demo input[type=radio]', :id => 'markup_user_gender_male', :name => 'markup_user[gender]', :value => 'male'
+      assert_have_selector '#demo input[type=radio]', :id => 'markup_user_gender_female', :name => 'markup_user[gender]', :value => 'female'
+    end
+  end
+
   context 'for #text_area method' do
     should "display correct text_area html" do
       actual_html = standard_builder.text_area(:about, :class => 'large')

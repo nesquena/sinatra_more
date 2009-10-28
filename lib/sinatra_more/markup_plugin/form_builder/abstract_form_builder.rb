@@ -49,6 +49,13 @@ class AbstractFormBuilder
     @template.check_box_tag field_name(field), options
   end
 
+  # f.radio_button :gender, :value => 'male'
+  def radio_button(field, options={})
+    options.reverse_merge!(:value => field_value(field))
+    options.reverse_merge!(:id => field_id(field, options[:value]))
+    @template.radio_button_tag field_name(field), options
+  end
+
   # f.file_field :photo, :class => 'avatar'
   def file_field(field, options={})
     options.reverse_merge!(:id => field_id(field))
@@ -59,7 +66,6 @@ class AbstractFormBuilder
   def submit(caption="Submit", options={})
     @template.submit_tag caption, options
   end
-
 
   protected
 
@@ -88,7 +94,8 @@ class AbstractFormBuilder
 
   # Returns the id for the given field
   # field_id(:username) => "user_username"
-  def field_id(field)
-    "#{object_name}_#{field}"
+  # field_id(:gender, :male) => "user_gender_male"
+  def field_id(field, value=nil)
+    value.blank? ? "#{object_name}_#{field}" : "#{object_name}_#{field}_#{value}"
   end
 end

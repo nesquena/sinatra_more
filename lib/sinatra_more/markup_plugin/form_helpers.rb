@@ -82,11 +82,18 @@ module SinatraMore
       input_tag(:password, options)
     end
 
-    # Constructs a check_box button from the given options
-    # check_box_tag :remember_me, :value => 'true'
+    # Constructs a check_box from the given options
+    # check_box_tag :remember_me, :value => 'Yes'
     def check_box_tag(name, options={})
       options.reverse_merge!(:name => name)
       input_tag(:checkbox, options)
+    end
+
+    # Constructs a radio_button from the given options
+    # radio_button_tag :remember_me, :value => 'true'
+    def radio_button_tag(name, options={})
+      options.reverse_merge!(:name => name)
+      input_tag(:radio, options)
     end
 
     # Constructs a file field input from the given options

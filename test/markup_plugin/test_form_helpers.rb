@@ -113,32 +113,36 @@ class TestFormHelpers < Test::Unit::TestCase
 
     should "display label tag in erb for simple form" do
       visit '/erb/form_tag'
-      assert_have_selector 'form.simple-form label', :count => 2
+      assert_have_selector 'form.simple-form label', :count => 3
       assert_have_selector 'form.simple-form label', :content => "Username", :for => 'username'
       assert_have_selector 'form.simple-form label', :content => "Password", :for => 'password'
+      assert_have_selector 'form.simple-form label', :content => "Gender", :for => 'gender'
     end
     should "display label tag in erb for advanced form" do
       visit '/erb/form_tag'
-      assert_have_selector 'form.advanced-form label', :count => 4
+      assert_have_selector 'form.advanced-form label', :count => 5
       assert_have_selector 'form.advanced-form label.first', :content => "Nickname", :for => 'username'
       assert_have_selector 'form.advanced-form label.first', :content => "Password", :for => 'password'
       assert_have_selector 'form.advanced-form label.about', :content => "About Me", :for => 'about'
       assert_have_selector 'form.advanced-form label.photo', :content => "Photo"   , :for => 'photo'
+      assert_have_selector 'form.advanced-form label.gender', :content => "Gender"   , :for => 'gender'
     end
 
     should "display label tag in haml for simple form" do
       visit '/haml/form_tag'
-      assert_have_selector 'form.simple-form label', :count => 2
+      assert_have_selector 'form.simple-form label', :count => 3
       assert_have_selector 'form.simple-form label', :content => "Username", :for => 'username'
       assert_have_selector 'form.simple-form label', :content => "Password", :for => 'password'
+      assert_have_selector 'form.simple-form label', :content => "Gender", :for => 'gender'
     end
     should "display label tag in haml for advanced form" do
       visit '/haml/form_tag'
-      assert_have_selector 'form.advanced-form label', :count => 4
+      assert_have_selector 'form.advanced-form label', :count => 5
       assert_have_selector 'form.advanced-form label.first', :content => "Nickname", :for => 'username'
       assert_have_selector 'form.advanced-form label.first', :content => "Password", :for => 'password'
       assert_have_selector 'form.advanced-form label.about', :content => "About Me", :for => 'about'
       assert_have_selector 'form.advanced-form label.photo', :content => "Photo"   , :for => 'photo'
+      assert_have_selector 'form.advanced-form label.gender', :content => "Gender"   , :for => 'gender'
     end
   end
 
@@ -233,25 +237,6 @@ class TestFormHelpers < Test::Unit::TestCase
     end
   end
 
-  context 'for #submit_tag method' do
-    should "display submit tag in ruby" do
-      actual_html = submit_tag("Update", :class => 'success')
-      assert_has_tag(:input, :type => 'submit', :class => "success", :value => 'Update') { actual_html }
-    end
-
-    should "display submit tag in erb" do
-      visit '/erb/form_tag'
-      assert_have_selector 'form.simple-form input[type=submit]', :count => 1, :value => "Submit"
-      assert_have_selector 'form.advanced-form input[type=submit]', :count => 1, :value => "Login"
-    end
-
-    should "display submit tag in haml" do
-      visit '/haml/form_tag'
-      assert_have_selector 'form.simple-form input[type=submit]', :count => 1, :value => "Submit"
-      assert_have_selector 'form.advanced-form input[type=submit]', :count => 1, :value => "Login"
-    end
-  end
-
   context "for #check_box_tag method" do
     should "display check_box tag in ruby" do
       actual_html = check_box_tag("clear_session", :value => '1')
@@ -273,6 +258,53 @@ class TestFormHelpers < Test::Unit::TestCase
       visit '/haml/form_tag'
       assert_have_selector 'form.simple-form input[type=checkbox]', :count => 1
       assert_have_selector 'form.advanced-form input[type=checkbox]', :value => "1", :checked => 'checked'
+    end
+  end
+
+  context "for #radio_button_tag method" do
+    should "display radio_button tag in ruby" do
+      actual_html = radio_button_tag("gender", :value => 'male')
+      assert_has_tag(:input, :type => 'radio', :value => 'male', :name => 'gender') { actual_html }
+    end
+
+    should "display radio_button tag in ruby with extended attributes" do
+      actual_html = radio_button_tag("gender", :disabled => true, :checked => true)
+      assert_has_tag(:input, :type => 'radio', :disabled => 'disabled', :checked => 'checked') { actual_html }
+    end
+
+    should "display radio_button tag in erb" do
+      visit '/erb/form_tag'
+      assert_have_selector 'form.simple-form input[type=radio]', :count => 1, :value => 'male'
+      assert_have_selector 'form.simple-form input[type=radio]', :count => 1, :value => 'female'
+      assert_have_selector 'form.advanced-form input[type=radio]', :value => "male", :checked => 'checked'
+      assert_have_selector 'form.advanced-form input[type=radio]', :value => "female"
+    end
+
+    should "display radio_button tag in haml" do
+      visit '/haml/form_tag'
+      assert_have_selector 'form.simple-form input[type=radio]', :count => 1, :value => 'male'
+      assert_have_selector 'form.simple-form input[type=radio]', :count => 1, :value => 'female'
+      assert_have_selector 'form.advanced-form input[type=radio]', :value => "male", :checked => 'checked'
+      assert_have_selector 'form.advanced-form input[type=radio]', :value => "female"
+    end
+  end
+
+  context 'for #submit_tag method' do
+    should "display submit tag in ruby" do
+      actual_html = submit_tag("Update", :class => 'success')
+      assert_has_tag(:input, :type => 'submit', :class => "success", :value => 'Update') { actual_html }
+    end
+
+    should "display submit tag in erb" do
+      visit '/erb/form_tag'
+      assert_have_selector 'form.simple-form input[type=submit]', :count => 1, :value => "Submit"
+      assert_have_selector 'form.advanced-form input[type=submit]', :count => 1, :value => "Login"
+    end
+
+    should "display submit tag in haml" do
+      visit '/haml/form_tag'
+      assert_have_selector 'form.simple-form input[type=submit]', :count => 1, :value => "Submit"
+      assert_have_selector 'form.advanced-form input[type=submit]', :count => 1, :value => "Login"
     end
   end
 

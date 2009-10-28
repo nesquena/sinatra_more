@@ -6,6 +6,9 @@
     = text_field_tag :username
     = label_tag :password
     = password_field_tag :password
+    = label_tag :gender
+    = radio_button_tag :gender, :value => 'male'
+    = radio_button_tag :gender, :value => 'female'
     = check_box_tag :remember_me
     = submit_tag
 
@@ -23,9 +26,13 @@
       = label_tag :about, :class => 'about', :caption => "About Me"
       = text_area_tag :about, :class => 'large'
     %p
+      = label_tag :gender, :class => 'gender'
+      = radio_button_tag :gender, :value => 'male', :checked => true
+      = radio_button_tag :gender, :value => 'female'
+    %p
       = label_tag :photo, :class => 'photo'
       = file_field_tag :photo, :class => 'upload'
     %p
-      = check_box_tag :remember_me, :value => "1", :checked => 'true'
+      = check_box_tag :remember_me, :value => "1", :checked => true
   - field_set_tag(:class => 'buttons') do
     = submit_tag "Login"

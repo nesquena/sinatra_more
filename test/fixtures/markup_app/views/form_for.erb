@@ -22,7 +22,12 @@
     <%= f.text_area :about, :class => 'user-about'  %> 
   </p>
   <p>
-    <%= f.check_box :remember_me, :value => 1 %>
+    <%= f.label :gender, :caption => "Your gender:" %>
+    <%= f.radio_button :gender, :value => 'male' %>
+    <%= f.radio_button :gender, :value => 'female' %>
+  </p>
+  <p>
+    <%= f.check_box :remember_me, :value => '1' %>
   </p>
   <p><%= f.submit "Create", :class => 'success', :id => 'demo-button' %></p>
 <% end %>
