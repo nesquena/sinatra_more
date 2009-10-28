@@ -82,6 +82,13 @@ module SinatraMore
       input_tag(:password, options)
     end
 
+    # Constructs a check_box button from the given options
+    # check_box_tag :remember_me, :value => 'true'
+    def check_box_tag(name, options={})
+      options.reverse_merge!(:name => name)
+      input_tag(:checkbox, options)
+    end
+
     # Constructs a file field input from the given options
     # file_field_tag :photo, :class => 'long'
     def file_field_tag(name, options={})
@@ -94,13 +101,6 @@ module SinatraMore
     def submit_tag(caption="Submit", options={})
       options.reverse_merge!(:value => caption)
       input_tag(:submit, options)
-    end
-    
-    # Constructs a checkbox button from the given options
-    # checkbox_tag :photo, :value => 'dog'
-    def checkbox_tag(name,options={})
-      options.reverse_merge!(:name => name)
-      input_tag(:checkbox, options)
     end
 
     protected

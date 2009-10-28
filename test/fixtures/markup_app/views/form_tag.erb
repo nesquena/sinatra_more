@@ -6,7 +6,7 @@
     <%= text_field_tag :username %>
     <%= label_tag :password %>
     <%= password_field_tag :password %>
-    <%= checkbox_tag :checkbox %>
+    <%= check_box_tag :remember_me %>
     <%= submit_tag %>
   <% end %>
 <% end %>
@@ -32,7 +32,7 @@
      <%= file_field_tag :photo, :class => 'upload' %>
     </p>
     <p>
-      <%= checkbox_tag :checkbox, :value => '1', :checked => 'true' %>
+      <%= check_box_tag :remember_me, :value => '1', :checked => 'true' %>
     <p>
   <% end %>
   <% field_set_tag(:class => 'buttons') do %>

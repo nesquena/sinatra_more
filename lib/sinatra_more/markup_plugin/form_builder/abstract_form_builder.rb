@@ -43,7 +43,13 @@ class AbstractFormBuilder
     @template.password_field_tag field_name(field), options
   end
 
-  # f.file_field(:photo, :class => 'avatar')
+  # f.check_box :remember_me, :value => 'true'
+  def check_box(field, options={})
+    options.reverse_merge!(:value => field_value(field), :id => field_id(field))
+    @template.check_box_tag field_name(field), options
+  end
+
+  # f.file_field :photo, :class => 'avatar'
   def file_field(field, options={})
     options.reverse_merge!(:id => field_id(field))
     @template.file_field_tag field_name(field), options
@@ -54,21 +60,13 @@ class AbstractFormBuilder
     @template.submit_tag caption, options
   end
 
-  # f.checkbox :photo, :value => 'dog'
-  def checkbox(field,options={})
-    options.reverse_merge!(:value => field_value(field), :id => field_id(field))
-    @template.checkbox_tag field_name(field), options
-  end
-
 
   protected
 
   # Returns the known field types for a formbuilder
   def self.field_types
-    [:text_field, :text_area, :password_field, :file_field, :hidden_field,:checkbox]
+    [:text_field, :text_area, :password_field, :file_field, :hidden_field, :check_box]
   end
-
-  private
 
   # Returns the object's models name
   #   => user_assignment

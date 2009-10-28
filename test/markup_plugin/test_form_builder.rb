@@ -157,6 +157,23 @@ class TestFormBuilder < Test::Unit::TestCase
     end
   end
 
+  context 'for #check_box method' do
+    should "display correct checkbox html" do
+      actual_html = standard_builder.check_box(:confirm_destroy, :class => 'large')
+      assert_has_tag('input.large[type=checkbox]', :id => 'user_confirm_destroy', :name => 'user[confirm_destroy]') { actual_html }
+    end
+
+    should "display correct checkbox in haml" do
+      visit '/haml/form_for'
+      assert_have_selector '#demo input[type=checkbox]', :id => 'markup_user_remember_me', :name => 'markup_user[remember_me]'
+    end
+
+    should "display correct checkbox in erb" do
+      visit '/erb/form_for'
+      assert_have_selector '#demo input[type=checkbox]', :id => 'markup_user_remember_me', :name => 'markup_user[remember_me]'
+    end
+  end
+
   context 'for #text_area method' do
     should "display correct text_area html" do
       actual_html = standard_builder.text_area(:about, :class => 'large')

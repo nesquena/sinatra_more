@@ -161,6 +161,9 @@ methods should be very familiar to anyone who has used rails view helpers.
 * <tt>password_field_tag(name, options={})</tt>
   * Constructs a password field input from the given options
   * <tt>password_field_tag :password, :class => 'long'</tt>
+* <tt>check_box_tag(name, options={})</tt>
+  * Constructs a checkbox input from the given options
+  * <tt>check_box_tag :remember_me, :checked => true</tt>
 * <tt>file_field_tag(name, options={})</tt>
   * Constructs a file field input from the given options
   * <tt>file_field_tag :photo, :class => 'long'</tt>
@@ -179,6 +182,8 @@ A form_tag might look like:
       %p
         = label_tag :password, :class => 'first'
         = password_field_tag :password, :value => params[:password]
+      %p
+        = check_box_tag :confirm_delete
     - field_set_tag(:class => 'buttons') do
       = submit_tag "Remove"
     
@@ -199,6 +204,8 @@ The following are fields provided by AbstractFormBuilder that can be used within
   * <tt>f.label :name, :class => 'long'</tt>
 * <tt>text_field(field, options={})</tt>
   * <tt>f.text_field :username, :class => 'long'</tt>
+* <tt>check_box(field, options={})</tt>
+  * <tt>f.check_box :remember_me, :class => 'checkable'</tt>
 * <tt>hidden_field(field, options={})</tt>
   * <tt>f.hidden_field :session_id, :class => 'hidden'</tt>
 * <tt>text_area(field, options={})</tt>
@@ -223,6 +230,9 @@ A form_for using these basic fields might look like:
     %p
       = f.label :password
       = f.password_field :password
+    %p
+      = f.label :is_admin, :caption => "Admin User?"
+      = f.check_box :is_admin
     %p
       = f.submit "Create", :class => 'button'
   
