@@ -4,6 +4,7 @@ module SinatraMore
     # input_tag :text, :class => "test"
     def input_tag(type, options = {})
       options.reverse_merge!(:type => type)
+      [:checked, :disabled].each { |attr| options[attr] = attr.to_s if options[attr]  }
       tag(:input, options)
     end
 

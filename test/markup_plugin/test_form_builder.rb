@@ -163,6 +163,11 @@ class TestFormBuilder < Test::Unit::TestCase
       assert_has_tag('input.large[type=checkbox]', :id => 'user_confirm_destroy', :name => 'user[confirm_destroy]') { actual_html }
     end
 
+    should "display correct checkbox html when checked" do
+      actual_html = standard_builder.check_box(:confirm_destroy, :checked => true)
+      assert_has_tag('input[type=checkbox]', :checked => 'checked', :name => 'user[confirm_destroy]') { actual_html }
+    end
+
     should "display correct checkbox in haml" do
       visit '/haml/form_for'
       assert_have_selector '#demo input[type=checkbox]', :id => 'markup_user_remember_me', :name => 'markup_user[remember_me]'

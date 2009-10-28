@@ -56,6 +56,14 @@ class TestTagHelpers < Test::Unit::TestCase
       actual_html = input_tag(:text, :class => "first", :id => 'texter')
       assert_has_tag('input.first#texter[type=text]') { actual_html }
     end
+    should "support checked attribute by using 'checked' if true" do
+      actual_html = input_tag(:checkbox, :checked => true)
+      assert_has_tag('input[type=checkbox]', :checked => 'checked') { actual_html }
+    end
+    should "support disabled attribute by using 'disabled' if true" do
+      actual_html = input_tag(:checkbox, :disabled => true)
+      assert_has_tag('input[type=checkbox]', :disabled => 'disabled') { actual_html }
+    end
   end
 
 end

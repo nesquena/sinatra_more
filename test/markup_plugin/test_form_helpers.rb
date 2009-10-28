@@ -257,17 +257,22 @@ class TestFormHelpers < Test::Unit::TestCase
       actual_html = check_box_tag("clear_session", :value => '1')
       assert_has_tag(:input, :type => 'checkbox', :value => '1', :name => 'clear_session') { actual_html }
     end
-    
+
+    should "display check_box tag in ruby with extended attributes" do
+      actual_html = check_box_tag("clear_session", :disabled => true, :checked => true)
+      assert_has_tag(:input, :type => 'checkbox', :disabled => 'disabled', :checked => 'checked') { actual_html }
+    end
+
     should "display check_box tag in erb" do
       visit '/erb/form_tag'
       assert_have_selector 'form.simple-form input[type=checkbox]', :count => 1
-      assert_have_selector 'form.advanced-form input[type=checkbox]', :count => 1, :value => "1", :checked => 'true'
+      assert_have_selector 'form.advanced-form input[type=checkbox]', :value => "1", :checked => 'checked'
     end
-    
+
     should "display check_box tag in haml" do
       visit '/haml/form_tag'
       assert_have_selector 'form.simple-form input[type=checkbox]', :count => 1
-      assert_have_selector 'form.advanced-form input[type=checkbox]', :count => 1, :value => "1", :checked => 'true'
+      assert_have_selector 'form.advanced-form input[type=checkbox]', :value => "1", :checked => 'checked'
     end
   end
 
