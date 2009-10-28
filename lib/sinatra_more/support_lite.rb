@@ -2,6 +2,7 @@
 
 unless String.method_defined?(:titleize)
   require 'active_support/inflector'
+  require 'active_support/core_ext/blank'
 end
 
 unless Hash.method_defined?(:reverse_merge!)

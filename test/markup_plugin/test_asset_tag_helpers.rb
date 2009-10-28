@@ -53,6 +53,9 @@ class TestAssetTagHelpers < Test::Unit::TestCase
     should "display image tag relative link with options" do
       assert_has_tag('img.photo', :src => "/images/relative/pic.gif") { image_tag('relative/pic.gif', :class => 'photo') }
     end
+    should "display image tag uri link with options" do
+      assert_has_tag('img.photo', :src => "http://demo.org/pic.gif") { image_tag('http://demo.org/pic.gif', :class => 'photo') }
+    end
     should "display image tag relative link with incorrect spacing" do
       assert_has_tag('img.photo', :src => "/images/relative/pic.gif") { image_tag(' relative/ pic.gif  ', :class => 'photo') }
     end

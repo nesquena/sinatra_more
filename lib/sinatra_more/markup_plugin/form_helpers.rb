@@ -110,6 +110,13 @@ module SinatraMore
       input_tag(:submit, options)
     end
 
+    # Constructs a submit button from the given options
+    # submit_tag "Create", :class => 'success'
+    def image_submit_tag(source, options={})
+      options.reverse_merge!(:src => image_path(source))
+      input_tag(:image, options)
+    end
+
     protected
 
     # returns the hidden method field for 'put' and 'delete' forms

@@ -308,4 +308,26 @@ class TestFormHelpers < Test::Unit::TestCase
     end
   end
 
+  context 'for #image_submit_tag method' do
+    should "display image submit tag in ruby with relative path" do
+      actual_html = image_submit_tag('buttons/ok.png', :class => 'success')
+      assert_has_tag(:input, :type => 'image', :class => "success", :src => '/images/buttons/ok.png') { actual_html }
+    end
+
+    should "display image submit tag in ruby with absolute path" do
+      actual_html = image_submit_tag('/system/ok.png', :class => 'success')
+      assert_has_tag(:input, :type => 'image', :class => "success", :src => '/system/ok.png') { actual_html }
+    end
+
+    should "display image submit tag in erb" do
+      visit '/erb/form_tag'
+      assert_have_selector 'form.advanced-form input[type=image]', :count => 1, :src => "/images/buttons/submit.png"
+    end
+
+    should "display image submit tag in haml" do
+      visit '/haml/form_tag'
+      assert_have_selector 'form.advanced-form input[type=image]', :count => 1, :src => "/images/buttons/submit.png"
+    end
+  end
+
 end

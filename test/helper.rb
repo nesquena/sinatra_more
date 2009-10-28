@@ -13,6 +13,7 @@ require 'sinatra_more'
 class Test::Unit::TestCase
   include SinatraMore::OutputHelpers
   include SinatraMore::TagHelpers
+  include SinatraMore::AssetTagHelpers
   include Rack::Test::Methods
   include Webrat::Methods
   include Webrat::Matchers

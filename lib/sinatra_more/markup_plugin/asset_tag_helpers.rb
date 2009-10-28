@@ -48,6 +48,12 @@ module SinatraMore
       sources.collect { |script| javascript_tag(script, options) }.join("\n")
     end
 
+    # Returns the path to the image, either relative or absolute
+    def image_path(src)
+      src.gsub!(/\s/, '')
+      src =~ %r{^\s*(/|http)} ? src : File.join('/images', src)
+    end
+
     protected
 
     # stylesheet_tag('style', :media => 'screen')
@@ -60,12 +66,6 @@ module SinatraMore
     def javascript_tag(source, options={})
       options = options.dup.reverse_merge!(:src => javascript_path(source), :type => 'text/javascript', :content => "")
       tag(:script, options)
-    end
-
-    # Returns the path to the image, either relative or absolute
-    def image_path(src)
-      src.gsub!(/\s/, '')
-      src =~ %r{^\s*/} ? src : File.join('/images', src)
     end
 
     def javascript_path(source)
