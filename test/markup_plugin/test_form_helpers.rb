@@ -239,7 +239,7 @@ class TestFormHelpers < Test::Unit::TestCase
 
   context "for #check_box_tag method" do
     should "display check_box tag in ruby" do
-      actual_html = check_box_tag("clear_session", :value => '1')
+      actual_html = check_box_tag("clear_session")
       assert_has_tag(:input, :type => 'checkbox', :value => '1', :name => 'clear_session') { actual_html }
     end
 

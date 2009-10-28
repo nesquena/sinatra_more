@@ -44,6 +44,8 @@ end
 class MarkupUser
   def errors; Errors.new; end
   def session_id; 45; end
+  def gender; 'male'; end
+  def remember_me; '1'; end
 end
 
 class Errors < Array

@@ -168,14 +168,26 @@ class TestFormBuilder < Test::Unit::TestCase
       assert_has_tag('input[type=checkbox]', :checked => 'checked', :name => 'user[confirm_destroy]') { actual_html }
     end
 
+    should "display correct checkbox html as checked when object value matches" do
+      @user.stubs(:show_favories => '1')
+      actual_html = standard_builder.check_box(:show_favories, :value => '1')
+      assert_has_tag('input[type=checkbox]', :checked => 'checked', :name => 'user[show_favories]') { actual_html }
+    end
+
+    should "display correct checkbox html as unchecked when object value doesn't match" do
+      @user.stubs(:show_favories => '0')
+      actual_html = standard_builder.radio_button(:show_favories, :value => 'female')
+      assert_has_no_tag('input[type=checkbox]', :checked => 'checked') { actual_html }
+    end
+
     should "display correct checkbox in haml" do
       visit '/haml/form_for'
-      assert_have_selector '#demo input[type=checkbox]', :id => 'markup_user_remember_me', :name => 'markup_user[remember_me]'
+      assert_have_selector '#demo input[type=checkbox]', :checked => 'checked', :id => 'markup_user_remember_me', :name => 'markup_user[remember_me]'
     end
 
     should "display correct checkbox in erb" do
       visit '/erb/form_for'
-      assert_have_selector '#demo input[type=checkbox]', :id => 'markup_user_remember_me', :name => 'markup_user[remember_me]'
+      assert_have_selector '#demo input[type=checkbox]', :checked => 'checked', :id => 'markup_user_remember_me', :name => 'markup_user[remember_me]'
     end
   end
 
@@ -190,16 +202,30 @@ class TestFormBuilder < Test::Unit::TestCase
       assert_has_tag('input[type=radio]', :checked => 'checked', :name => 'user[gender]') { actual_html }
     end
 
+    should "display correct radio button html as checked when object value matches" do
+      @user.stubs(:gender => 'male')
+      actual_html = standard_builder.radio_button(:gender, :value => 'male')
+      assert_has_tag('input[type=radio]', :checked => 'checked', :name => 'user[gender]') { actual_html }
+    end
+
+    should "display correct radio button html as unchecked when object value doesn't match" do
+      @user.stubs(:gender => 'male')
+      actual_html = standard_builder.radio_button(:gender, :value => 'female')
+      assert_has_no_tag('input[type=radio]', :checked => 'checked') { actual_html }
+    end
+
     should "display correct radio button in haml" do
       visit '/haml/form_for'
       assert_have_selector '#demo input[type=radio]', :id => 'markup_user_gender_male', :name => 'markup_user[gender]', :value => 'male'
       assert_have_selector '#demo input[type=radio]', :id => 'markup_user_gender_female', :name => 'markup_user[gender]', :value => 'female'
+      assert_have_selector '#demo input[type=radio][checked=checked]', :id => 'markup_user_gender_male'
     end
 
     should "display correct radio button in erb" do
       visit '/erb/form_for'
       assert_have_selector '#demo input[type=radio]', :id => 'markup_user_gender_male', :name => 'markup_user[gender]', :value => 'male'
       assert_have_selector '#demo input[type=radio]', :id => 'markup_user_gender_female', :name => 'markup_user[gender]', :value => 'female'
+      assert_have_selector '#demo input[type=radio][checked=checked]', :id => 'markup_user_gender_male'
     end
   end
 

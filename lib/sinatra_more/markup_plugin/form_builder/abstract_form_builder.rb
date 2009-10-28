@@ -45,14 +45,15 @@ class AbstractFormBuilder
 
   # f.check_box :remember_me, :value => 'true'
   def check_box(field, options={})
-    options.reverse_merge!(:value => field_value(field), :id => field_id(field))
+    options.reverse_merge!(:id => field_id(field))
+    options.merge!(:checked => true) if values_matches_field?(field, options[:value])
     @template.check_box_tag field_name(field), options
   end
 
   # f.radio_button :gender, :value => 'male'
   def radio_button(field, options={})
-    options.reverse_merge!(:value => field_value(field))
     options.reverse_merge!(:id => field_id(field, options[:value]))
+    options.merge!(:checked => true) if values_matches_field?(field, options[:value])
     @template.radio_button_tag field_name(field), options
   end
 
@@ -78,6 +79,12 @@ class AbstractFormBuilder
   #   => user_assignment
   def object_name
     object.class.to_s.underscore
+  end
+
+  # Returns true if the value matches the value in the field
+  # field_has_value?(:gender, 'male')
+  def values_matches_field?(field, value)
+    value.present? && field_value(field).to_s == value.to_s
   end
 
   # Returns the value for the object's field

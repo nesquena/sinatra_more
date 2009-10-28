@@ -35,6 +35,16 @@ class Test::Unit::TestCase
     raise "Please specify a block!" if html.blank?
     assert matcher.matches?(html), matcher.failure_message
   end
+
+  # assert_has_no_tag, tag(:h1, :content => "yellow") { "<h1>green</h1>" }
+  # In this case, block is the html to evaluate
+  def assert_has_no_tag(name, attributes = {}, &block)
+    html = block && block.call
+    attributes.merge!(:count => 0)
+    matcher = HaveSelector.new(name, attributes)
+    raise "Please specify a block!" if html.blank?
+    assert matcher.matches?(html), matcher.failure_message
+  end
 end
 
 module Webrat

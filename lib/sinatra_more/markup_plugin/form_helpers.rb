@@ -85,7 +85,7 @@ module SinatraMore
     # Constructs a check_box from the given options
     # check_box_tag :remember_me, :value => 'Yes'
     def check_box_tag(name, options={})
-      options.reverse_merge!(:name => name)
+      options.reverse_merge!(:name => name, :value => '1')
       input_tag(:checkbox, options)
     end
 
