@@ -5,6 +5,7 @@ Dir[File.dirname(__FILE__) + '/warden_plugin/**/*.rb'].each {|file| load file }
 module SinatraMore
   module WardenPlugin
     def self.registered(app)
+      raise "WardenPlugin::Error - Install with 'sudo gem install warden' or require 'warden' in your app." unless Warden::Manager
       app.use Warden::Manager do |manager|
         manager.default_strategies :password
         manager.failure_app = app

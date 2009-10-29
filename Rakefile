@@ -14,7 +14,6 @@ begin
     gem.authors = ["Nathan Esquenazi"]
     gem.add_runtime_dependency     "sinatra",       ">= 0.9.2"
     gem.add_runtime_dependency     "activesupport", ">= 2.2.2"
-    gem.add_runtime_dependency     "warden",        ">= 0.4.0"
     gem.add_development_dependency "haml",          ">= 2.2.1"
     gem.add_development_dependency "shoulda",       ">= 2.10.2"
     gem.add_development_dependency "mocha",         ">= 0.9.7"
