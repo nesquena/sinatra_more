@@ -241,6 +241,7 @@ class TestFormHelpers < Test::Unit::TestCase
     should "display check_box tag in ruby" do
       actual_html = check_box_tag("clear_session")
       assert_has_tag(:input, :type => 'checkbox', :value => '1', :name => 'clear_session') { actual_html }
+      assert_has_no_tag(:input, :type => 'hidden') { actual_html }
     end
 
     should "display check_box tag in ruby with extended attributes" do

@@ -26,7 +26,7 @@ class TestFormBuilder < Test::Unit::TestCase
       assert_has_tag('form', :action => '/register', :id => 'register', :method => 'post', :content => "Demo") { actual_html }
       assert_has_tag('form input[type=hidden]', :name => '_method', :count => 0) { actual_html } # no method action field
     end
-    
+
     should "display correct form html with fake object" do
       actual_html = form_for(:markup_user, '/register', :id => 'register', :method => 'post') { |f| f.text_field :username }
       assert_has_tag('form', :action => '/register', :id => 'register', :method => 'post') { actual_html }
@@ -59,6 +59,10 @@ class TestFormBuilder < Test::Unit::TestCase
     should "support using default standard builder" do
       actual_html = form_for(@user, '/register') { |f| f.text_field_block(:name) }
       assert_has_tag('form p input[type=text]') { actual_html }
+    end
+
+    should "display fail for form with no object" do
+      assert_raises(RuntimeError) { form_for(@not_real, '/register', :id => 'register', :method => 'post') { "Demo" } }
     end
 
     should "display correct form in haml" do

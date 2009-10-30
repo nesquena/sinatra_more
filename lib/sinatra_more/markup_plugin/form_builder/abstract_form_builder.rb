@@ -2,9 +2,10 @@ class AbstractFormBuilder
   attr_accessor :template, :object
 
   def initialize(template, object)
-    raise "FormBuilder template must be initialized!" unless template
     @template = template
     @object   = build_object(object)
+    raise "FormBuilder template must be initialized!" unless template
+    raise "FormBuilder object must be not be nil value. If there's no object, use a symbol instead! (i.e :user)" unless object
   end
 
   # f.error_messages
@@ -118,11 +119,15 @@ class AbstractFormBuilder
   def field_id(field, value=nil)
     value.blank? ? "#{object_name}_#{field}" : "#{object_name}_#{field}_#{value}"
   end
-  
-  # Either a symbol or a record
-  def build_object(explicit_object)
-    explicit_object.is_a?(Symbol) ? explicit_object.to_s.classify.constantize.new : explicit_object
-    raise "FormBuilder object must be initialized or use a symbol instead! (i.e :user)" unless explicit_object
-    explicit_object
+
+  # explicit_object is either a symbol or a record
+  # Returns a new record of the type specified in the object
+  def build_object(object_or_symbol)
+    object_or_symbol.is_a?(Symbol) ? object_class(object_or_symbol).new : object_or_symbol
+  end
+
+  # Returns the class type for the given object
+  def object_class(explicit_object)
+    explicit_object.is_a?(Symbol) ? explicit_object.to_s.classify.constantize : explicit_object.class
   end
 end
