@@ -335,7 +335,14 @@ I hope to create or merge in an even better 'default' form_builder in the near f
   * (from RackUtils) Escape ampersands, brackets and quotes to their HTML/XML entities.
 * <tt>relative_time_ago(date)</tt>
   * Returns relative time in words referencing the given date
-  * <tt>relative_time_ago(2.days.ago)</tt> => "2 days ago"
+  * <tt>relative_time_ago(2.days.ago)</tt> => "2 days"
+  * <tt>relative_time_ago(5.minutes.ago)</tt> => "5 minutes"
+  * <tt>relative_time_ago(2800.days.ago)</tt> => "over 7 years"
+* <tt>time_in_words(date)</tt>
+  * Returns relative time in the past or future using appropriate date format
+  * <tt>time_in_words(2.days.ago)</tt> => "2 days ago"
+  * <tt>time_in_words(100.days.ago)</tt> => "Tuesday, July 21"
+  * <tt>time_in_words(1.day.from_now)</tt> => "tomorrow"
 * <tt>escape_javascript(html_content)</tt>
   * Escapes html to allow passing information to javascript. Used for passing data inside an ajax .js.erb template
   * <tt>escape_javascript("<h1>Hey</h1>")</tt>
