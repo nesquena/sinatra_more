@@ -2,10 +2,11 @@ module SinatraMore
   module FormatHelpers
 
     # Returns escaped text to protect against malicious content
-    def h(text)
+    def escape_html(text)
       Rack::Utils.escape_html(text)
     end
-    alias escape_html h
+    alias h escape_html
+    alias sanitize_html escape_html
 
     # Returns escaped text to protect against malicious content
     # Returns blank if the text is empty
@@ -43,6 +44,7 @@ module SinatraMore
     end
 
     alias js_escape escape_javascript
+    alias js_escape_html escape_javascript
     alias escape_for_javascript escape_javascript
 
   end
