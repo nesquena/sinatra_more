@@ -3,6 +3,7 @@
 unless String.method_defined?(:titleize)
   require 'active_support/inflector'
   require 'active_support/core_ext/blank'
+  require 'active_support/core_ext/class/attribute_accessors'
 end
 
 unless Hash.method_defined?(:reverse_merge!)

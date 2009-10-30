@@ -411,7 +411,41 @@ provided to make interacting with warden dead simple.
   * Used to require a user be authenticated before routing to an action
   * <tt>must_be_authorized!('/login')</tt>
   
-I am aware of other sinatra/warden extensions which work very similarly to the system I outlined here. 
+There are a few configuration options and details you need to be aware of. By default, the WardenPlugin
+assumes you have a User class which represents the authenticating class type. If your user class has a different
+name then you need to specify that as follows:
+
+  SinatraMore::WardenPlugin::PasswordStrategy.user_class = CustomUser
+
+Similarly, the strategy used expects that you have an <tt>authenticate</tt> method on your user class as follows:
+
+  def authenticate(username, password)
+    # Returns user record if user and password match; otherwise return false
+  end
+
+Using this plugin you also do need to define your own routes for managing warden sessions. An example is below:
+
+  get '/unauthenticated/?' do
+    flash[:notice] = "That username and password are not correct!"
+    status 401
+    haml_template 'session/login'
+  end
+
+  get '/login/?' do
+    haml_template 'session/login'
+  end
+
+  post '/login/?' do
+    authenticate_user!
+    redirect "/dashboard"
+  end
+
+  get '/logout/?' do
+    logout_user!
+    redirect '/session/login'
+  end
+
+I was made aware of other sinatra/warden extensions which work very similarly to the system I outline for this plugin.
 Most notably is the sinatra_warden plugin by Justin Smestad (http://github.com/jsmestad/sinatra_warden)
 Eventually I plan to vendor that gem or just remove support for this piece of my plugin completely. 
 

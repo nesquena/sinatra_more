@@ -6,13 +6,16 @@ Dir[File.dirname(__FILE__) + '/warden_plugin/**/*.rb'].each {|file| load file }
 module SinatraMore
   module WardenPlugin
     # This is the basic password strategy for authentication
-    class BasicPassword < Warden::Strategies::Base
+    class PasswordStrategy < Warden::Strategies::Base
+      cattr_accessor :user_class
+
       def valid?
         username || password
       end
 
       def authenticate!
-        u = User.authenticate(username, password)
+        raise "Please either define a user class or set SinatraMore::WardenPlugin::PasswordStrategy.user_class" unless user_class
+        u = user_class.authenticate(username, password)
         u.nil? ? fail!("Could not log in") : success!(u)
       end
 
@@ -34,10 +37,11 @@ module SinatraMore
       app.helpers SinatraMore::OutputHelpers
       app.helpers SinatraMore::WardenHelpers
 
-      # TODO Improve serializing methods
-      Warden::Manager.serialize_into_session{ |user| user.nil? ? nil : user.id }
-      Warden::Manager.serialize_from_session{ |id|   id.nil? ? nil : User.find(id) }
-      Warden::Strategies.add(:password, BasicPassword)
+      Warden::Manager.before_failure { |env,opts| env['REQUEST_METHOD'] = "POST" }
+      Warden::Manager.serialize_into_session { |user| user.nil? ? nil : user.id }
+      Warden::Manager.serialize_from_session { |id| id.nil? ? nil : PasswordStrategy.user_class.find(id) }
+      Warden::Strategies.add(:password, PasswordStrategy)
+      PasswordStrategy.user_class = User if defined?(User)
     end
   end
 end
