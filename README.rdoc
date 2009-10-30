@@ -417,11 +417,17 @@ name then you need to specify that as follows:
 
   SinatraMore::WardenPlugin::PasswordStrategy.user_class = CustomUser
 
-Similarly, the strategy used expects that you have an <tt>authenticate</tt> method on your user class as follows:
+In addition, the strategy used expects that you have an <tt>authenticate</tt> method with the specific signature below:
 
+class CustomUser
+  # ...
+  # Returns user record if user and password match; otherwise return false
   def authenticate(username, password)
-    # Returns user record if user and password match; otherwise return false
+    user = User.find(username)
+    user.has_password?(password) ? user : false
   end
+  # ...
+end
 
 Using this plugin you also do need to define your own routes for managing warden sessions. An example is below:
 
@@ -445,12 +451,12 @@ Using this plugin you also do need to define your own routes for managing warden
     redirect '/session/login'
   end
 
-I was made aware of other sinatra/warden extensions which work very similarly to the system I outline for this plugin.
+I was made aware of other sinatra/warden plugins which work very similarly to the system I outline for this plugin.
 Most notably is the sinatra_warden plugin by Justin Smestad (http://github.com/jsmestad/sinatra_warden)
 Eventually I plan to vendor that gem or just remove support for this piece of my plugin completely. 
 
-If anybody has any thoughts on this, please let me know. There is something convenient to me about having
-access to a plug-and-play warden solution directly from this gem.
+If anybody has any thoughts on this or the warden integration in general, please let me know. 
+Nonetheless, there is a certain convenience for me having access to a plug-and-play warden solution directly from this gem.
 
 == Acknowledgements
 
