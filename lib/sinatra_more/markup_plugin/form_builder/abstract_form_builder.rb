@@ -3,9 +3,8 @@ class AbstractFormBuilder
 
   def initialize(template, object)
     raise "FormBuilder template must be initialized!" unless template
-    raise "FormBuilder object must be initialized!" unless object
     @template = template
-    @object   = object
+    @object   = build_object(object)
   end
 
   # f.error_messages
@@ -92,7 +91,7 @@ class AbstractFormBuilder
   # Returns the object's models name
   #   => user_assignment
   def object_name
-    object.class.to_s.underscore
+    object.is_a?(Symbol) ? object : object.class.to_s.underscore
   end
 
   # Returns true if the value matches the value in the field
@@ -118,5 +117,12 @@ class AbstractFormBuilder
   # field_id(:gender, :male) => "user_gender_male"
   def field_id(field, value=nil)
     value.blank? ? "#{object_name}_#{field}" : "#{object_name}_#{field}_#{value}"
+  end
+  
+  # Either a symbol or a record
+  def build_object(explicit_object)
+    explicit_object.is_a?(Symbol) ? explicit_object.to_s.classify.constantize.new : explicit_object
+    raise "FormBuilder object must be initialized or use a symbol instead! (i.e :user)" unless explicit_object
+    explicit_object
   end
 end

@@ -208,6 +208,7 @@ A form_tag might look like:
   * Supports form methods 'put' and 'delete' through hidden field
   * Defaults to StandardFormBuilder but you can easily create your own!
   * <tt>form_for(@user, '/register', :id => 'register') { |f| ...field-elements... }</tt>
+  * <tt>form_for(:user, '/register', :id => 'register') { |f| ...field-elements... }</tt>
 
 The following are fields provided by AbstractFormBuilder that can be used within a form_for:
 
