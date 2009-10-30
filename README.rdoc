@@ -419,15 +419,15 @@ name then you need to specify that as follows:
 
 In addition, the strategy used expects that you have an <tt>authenticate</tt> method with the specific signature below:
 
-class CustomUser
-  # ...
-  # Returns user record if user and password match; otherwise return false
-  def authenticate(username, password)
-    user = User.find(username)
-    user.has_password?(password) ? user : false
+  class CustomUser
+    # ...
+    # Returns user record if user and password match; otherwise return false
+    def authenticate(username, password)
+      user = User.find(username)
+      user.has_password?(password) ? user : false
+    end
+    # ...
   end
-  # ...
-end
 
 Using this plugin you also do need to define your own routes for managing warden sessions. An example is below:
 
