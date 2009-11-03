@@ -49,8 +49,8 @@ Here is a small list of what sinatra_more contains:
 * Asset tag helpers (<tt>link_to</tt>, <tt>image_tag</tt>, <tt>javascript_include_tag</tt>, ...)
 * Full form helpers and builders support (<tt>form_tag</tt>, <tt>form_for</tt>, <tt>field_set_tag</tt>, <tt>text_field</tt>, ...)
 * Generally useful formatting extensions (<tt>relative_time_ago</tt>, <tt>js_escape_html</tt>, <tt>sanitize_html</tt>)
+* Simple 'mailer' support for sinatra (akin to <tt>ActionMailer</tt> but simpler and powered by <tt>pony</tt>)
 * Plug and play setup for the excellent Warden authentication system
-* Robust 'mailer' support for sinatra (akin to <tt>ActionMailer</tt> but simpler and powered by <tt>pony</tt>) (COMING SOON)
 * Code generators for creating a new sinatra application (COMING SOON)
 
 Keep in mind, the user will be able to pull in these components seperately and leave out those that are not required.
@@ -75,12 +75,13 @@ different components based on which pieces are useful for your particular applic
 
   # app.rb 
   require 'sinatra/base'
-  require 'sinatra_more'
+  require 'sinatra_more' # or require 'sinatra_more/markup_plugin' for precise inclusion
 
   class Application < Sinatra::Base
     register SinatraMore::MarkupPlugin
     register SinatraMore::RenderPlugin
     register SinatraMore::WardenPlugin
+    register SinatraMore::MailerPlugin
   end
 
 This will then allow you to use the components that have been registered. A breakdown of components is below:
@@ -467,10 +468,85 @@ Eventually I plan to vendor that gem or just remove support for this piece of my
 If anybody has any thoughts on this or the warden integration in general, please let me know. 
 Nonetheless, there is a certain convenience for me having access to a plug-and-play warden solution directly from this gem.
 
+=== MailerPlugin
+
+This component uses an enhanced version of the excellent <tt>pony</tt> library (vendored) for a powerful but simple
+mailer system within Sinatra. There is full support for using an html content type as well as for file attachments.
+The MailerPlugin has many similarities to ActionMailer but is much lighterweight and (arguably) easier to use.
+
+Let's take a look at using the MailerPlugin in an application. By default, MailerPlugin uses the built-in sendmail
+functionality on the server. However, smtp is also supported using the following configuration:
+
+    SinatraMore::MailerBase.smtp_settings = {
+      :host   => 'smtp.gmail.com',
+      :port   => '587',
+      :tls    => true,
+      :user   => 'user',
+      :pass   => 'pass',
+      :auth   => :plain
+   }
+
+Once those have been defined, the default will become smtp delivery unless overwritten in an individual mail definition.
+Next, we should define a custom mailer extended from <tt>SinatraMore::MailerBase</tt>.
+
+  class SampleMailer < SinatraMore::MailerBase
+    def registration_email(name, user_email_address)
+      from 'admin@site.com'
+      to user_email_address
+      subject 'Welcome to the site!'
+      body    :name => name
+      type    'html'                # optional, defaults to plain/text
+      charset 'windows-1252'        # optional, defaults to utf-8
+      via     :sendmail             # optional, to smtp if defined otherwise sendmail
+    end
+  end
+
+This defines a mail called '<tt>registration_mail</tt>' with the specified attributes for delivery. The <tt>body</tt> method
+is passing the <tt>name</tt> attribute to the body message template which should be defined in
+<tt>[views_path]/sample_mailer/registration_email.erb</tt> as shown below:
+
+  # ./views/sample_mailer/registration_email.erb
+  This is the body of the email and can access the <%= name %> that was passed in from the mailer definition
+  That's all there is to defining the body of the email which can be plain text or email
+
+Once the mailer definition has been completed and the template has been defined, the email can be sent using:
+
+  SampleMailer.deliver(:registration_email, "Bob", "bob@bobby.com")
+
+or if you like the method_missing approach:
+
+  SampleMailer.deliver_registration_email "Bob", 'bob@bobby.com'
+
+And that will then deliver the email according the the configured options. This is really all you need to send emails.
+A few variations are shown below for completeness.
+
+If we want to attach files to our email:
+
+  class SampleMailer < SinatraMore::MailerBase
+    def attachment_email(name, user_email_address)
+      from 'admin@site.com'
+      to user_email_address
+      # ...
+      attachments { "foo.zip" => File.read("path/to/foo.zip"), "file.txt" => "this is a text file!" }
+    end
+  end
+
+or perhaps we want to have a short body without the need for a template file:
+
+  class SampleMailer < SinatraMore::MailerBase
+    def short_email(name, user_email_address)
+      from 'admin@site.com'
+      to user_email_address
+      subject 'Welcome to the site!'
+      body    "This is a short body defined right in the mailer itself"
+    end
+  end
+
 == Acknowledgements
 
-* Thanks to keldredd for the sinatra_helpers code that helped me to create erb capture and concat methods.
-* Thanks to sbfaulkner for the sinatra-helpers code that I browsed through many times while starting this library.
+* Thanks to keldredd for the <tt>sinatra_helpers</tt> code that helped me to create erb capture and concat methods.
+* Thanks to sbfaulkner for the <tt>sinatra-helpers</tt> code that I browsed through many times while starting this library.
+* Thanks to vestel for the excellent modified <tt>pony</tt> fork which in part powers the mailer_plugin (http://github.com/vestel/pony)
 
 == Contributors
 
