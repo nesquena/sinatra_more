@@ -14,11 +14,11 @@ module SinatraMore
     argument :name, :desc => "The name of your sinatra app"
     argument :path, :desc => "The path to create your app"
 
-    component_option :mock,     "Mocking library",      :aliases => '-m'
-    component_option :test,     "Testing framework",    :aliases => '-t'
-    component_option :script,   "Javascript library",   :aliases => '-s'
-    component_option :renderer, "Template Engine",      :aliases => '-r'
-    component_option :orm,      "Database engine",      :aliases => '-d'
+    component_option :mock,     "Mocking library",    :aliases => '-m', :choices => [:rr, :mocha]
+    component_option :test,     "Testing framework",  :aliases => '-t', :choices => [:bacon, :shoulda, :rspec]
+    component_option :script,   "Javascript library", :aliases => '-s', :choices => [:jquery, :prototype, :rightjs]
+    component_option :renderer, "Template Engine",    :aliases => '-r', :choices => [:haml, :erb]
+    component_option :orm,      "Database engine",    :aliases => '-d', :choices => [:sequel, :datamapper, :mongomapper, :activerecord]
 
     # Copies over the base sinatra starting application
     def setup_skeleton
@@ -29,12 +29,12 @@ module SinatraMore
     component_types.each do |comp|
       define_method("perform_setup_for_#{comp}") do
         chosen_option = options[comp]
-        if valid_option?(chosen_option, comp)
+        if valid_choice?(chosen_option, comp)
           say "Applying '#{chosen_option}' (#{comp})...", :yellow
           self.class.send(:include, generator_module_for(chosen_option, comp))
           send("setup_#{comp}") if respond_to?("setup_#{comp}")
         else # chosen not a supported option
-          available_string = available_options_for(comp).join(", ")
+          available_string = available_choices_for(comp).join(", ")
           say("Option for --#{comp} '#{chosen_option}' is not available. Available: #{available_string}", :red)
         end
       end
