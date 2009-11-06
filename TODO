@@ -1,6 +1,5 @@
 = UNFINISHED
 
-* Add support for a MailerPlugin which will make sending emails a breeze (http://github.com/hiroshi/pony)
 * Add support for fields_for tag in formbuilder
 * Add support for button tag method, mail_to helper
 * Add support for check_box_group, radio_button_group which create a set of checkboxes or radio buttons
@@ -15,6 +14,7 @@
 
 = COMPLETED
 
+* Add support for a MailerPlugin which will make sending emails a breeze (http://github.com/hiroshi/pony)
 * Add support for missing formbuilder fields (select, and standard_form_builder methods i.e check_box_group)
 * Add support for missing formhelpers/fields (radio_button_tag, select_tag)
 * Add support for select_tag :multiple => true

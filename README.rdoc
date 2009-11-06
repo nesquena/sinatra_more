@@ -51,7 +51,7 @@ Here is a small list of what sinatra_more contains:
 * Generally useful formatting extensions (<tt>relative_time_ago</tt>, <tt>js_escape_html</tt>, <tt>sanitize_html</tt>)
 * Simple 'mailer' support for sinatra (akin to <tt>ActionMailer</tt> but simpler and powered by <tt>pony</tt>)
 * Plug and play setup for the excellent Warden authentication system
-* Code generators for creating a new sinatra application (COMING SOON)
+* Code generators for creating new sinatra applications (COMING SOON)
 
 Keep in mind, the user will be able to pull in these components seperately and leave out those that are not required.
 
@@ -556,6 +556,11 @@ or perhaps we want to have a short body without the need for a template file:
 == Known Issues
 
 * No serious issues known
+
+== Links and Resources
+
+* EnvyCasts - <http://railsenvy.com/2009/10/28/episode-098>
+* Ruby5     - <http://ruby5.envylabs.com/episodes/24-episode-23-october-30-2009/stories/183-sinatra-more>
 
 == Note on Patches/Pull Requests
  
