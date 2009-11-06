@@ -22,9 +22,9 @@ class User
 end
   USER
     
-    def build_orm
-      create_file(@root_path + "/config/initializers/datamapper.rb",DM)
-      create_file(@root_path + "/app/models/user.rb",USER)
+    def setup_orm
+      create_file(root_path("/config/initializers/datamapper.rb"), DM)
+      create_file(root_path("/app/models/user.rb"), USER)
     end
   end
 end

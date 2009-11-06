@@ -1,5 +1,5 @@
 module SinatraMore
-  module HamlTemplateGen
+  module HamlRendererGen
     
     HASSLE = <<-HASSLE
 module HassleInitializer
@@ -9,11 +9,11 @@ module HassleInitializer
 end
 HASSLE
     
-    def build_template
-      inject_into_file(@root_path+"/config/dependencies.rb",:after => /require gem.*?\n/) do
+    def setup_renderer
+      inject_into_file(root_path("/config/dependencies.rb"), :after => /require gem.*?\n/) do
         "  %w[haml sass hassle].each { |gem| require gem }"
       end
-      create_file(@root_path + "/config/initializers/hassle.rb",HASSLE)
+      create_file(root_path("/config/initializers/hassle.rb"), HASSLE)
     end
   end
 end
