@@ -18,14 +18,6 @@ module SinatraMore
     end
 
     module ClassMethods
-      DEFAULTS = {
-        :mocks =>     :rr,
-        :tests =>     :bacon,
-        :scripts =>   :jquery,
-        :renderers => :haml,
-        :orms =>      :sequel
-      }
-
       def component_types
         @component_types
       end
@@ -38,7 +30,7 @@ module SinatraMore
       end
 
       def default_for(component)
-        DEFAULTS[component.to_s.pluralize.to_sym]
+        AVAILABLE[component.to_s.pluralize.to_sym].first
       end
     end
   end
