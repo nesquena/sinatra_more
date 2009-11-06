@@ -20,8 +20,10 @@ module SinatraMore
       :templates => [:haml,:erb],
       :orms => [:sequel,:datamapper,:mongomapper,:activerecord]
     }
+    
+    @@components = %w[test mock script template orm]
 
-    %w[test mock script template orm].each do |comp|
+    @@components.each do |comp|
       define_method("include_#{comp}") do
         unless eval("@@available[#{comp.pluralize.to_sym.inspect}]").include? options[comp].to_sym
           raise "Option not supported"
@@ -38,7 +40,7 @@ module SinatraMore
       @root_path = File.join(path,name)
       @class_name = name.classify
       directory("skeleton/",@root_path)
-      %w[test orm template mock script].each do |component|
+      @@components.each do |component|
         send("build_#{component}") if respond_to?("build_#{component}")
       end
     end
