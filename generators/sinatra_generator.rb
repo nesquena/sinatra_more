@@ -2,11 +2,15 @@ require File.dirname(__FILE__) + '/configured_components'
 Dir[File.dirname(__FILE__) + "/{base_app,components}/**/*.rb"].each { |lib| require lib }
 
 module SinatraMore
-  class Generator < Thor::Group 
+  class Generator < Thor::Group
     include Thor::Actions
     include SinatraMore::ConfiguredComponents
     include SinatraMore::GeneratorHelpers
-       
+    
+    def self.source_root
+      File.dirname(__FILE__)
+    end
+
     argument :name, :desc => "The name of your sinatra app"
     argument :path, :desc => "The path to create your app"
 
@@ -24,15 +28,11 @@ module SinatraMore
       end
     end
 
-    def self.source_root
-      File.dirname(__FILE__)
-    end
-
     def setup_skeleton
       @class_name = name.classify
       directory("base_app/", root_path)
     end
-    
+
     component_types.each do |comp|
       define_method("perform_setup_for_#{comp}") do
         say "Applying '#{options[comp.to_sym]}' (#{comp})...", :yellow
