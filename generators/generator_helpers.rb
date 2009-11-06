@@ -13,6 +13,29 @@ module SinatraMore
     def default_for(component)
       self.class.default_for(component)
     end
+    
+    # Returns true if the option passed is a valid choice for component
+    # valid_option?(:mock)
+    def valid_choice?(component)
+      available_choices_for(component).include? options[component].to_sym
+    end
+
+    # Performs the necessary generator for a given component choice
+    # execute_component_setup(:mock)
+    def execute_component_setup(component)
+      choice = options[component]
+      say "Applying '#{choice}' (#{component})...", :yellow
+      self.class.send(:include, generator_module_for(choice, component))
+      send("setup_#{component}") if respond_to?("setup_#{component}")
+    end
+
+    # Displays to the console the available options for the given component choice
+    # display_available_choices(:mock)
+    def display_available_choices(component)
+      choice = options[component]
+      available_string = available_choices_for(component).join(", ")
+      say("Option for --#{component} '#{choice}' is not available. Available: #{available_string}", :red)
+    end
 
     module ClassMethods
       # Defines a class option to allow a component to be chosen and add to component type list
@@ -34,12 +57,6 @@ module SinatraMore
         @available_choices[component]
       end
 
-      # Returns true if the option passed is a valid choice for component
-      # valid_option?('rr', :mock)
-      def valid_choice?(option, component)
-        available_choices_for(component).include? option.to_sym
-      end
-
       # Returns the default choice for a given component
       def default_for(component)
         available_choices_for(component).first
@@ -56,8 +73,8 @@ module SinatraMore
 
     # Returns the related module for a given component and option
     # generator_module_for('rr', :mock)
-    def generator_module_for(option, component)
-      "SinatraMore::#{option.to_s.capitalize}#{component.to_s.capitalize}Gen".constantize
+    def generator_module_for(choice, component)
+      "SinatraMore::#{choice.to_s.capitalize}#{component.to_s.capitalize}Gen".constantize
     end
   end
 end

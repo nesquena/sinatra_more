@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/configured_components'
+require File.dirname(__FILE__) + '/generator_helpers'
 Dir[File.dirname(__FILE__) + "/{base_app,components}/**/*.rb"].each { |lib| require lib }
 
 module SinatraMore
@@ -27,20 +27,11 @@ module SinatraMore
       directory("base_app/", root_path)
     end
 
-    # For each component, apply the component setup if valid choice; otherwise display valid choices
+    # For each component, apply the component setup if valid choice; otherwise display alternate choices
     component_types.each do |comp|
       define_method("perform_setup_for_#{comp}") do
-        chosen_option = options[comp]
-        if valid_choice?(chosen_option, comp)
-          say "Applying '#{chosen_option}' (#{comp})...", :yellow
-          self.class.send(:include, generator_module_for(chosen_option, comp))
-          send("setup_#{comp}") if respond_to?("setup_#{comp}")
-        else # chosen not a supported option
-          available_string = available_choices_for(comp).join(", ")
-          say("Option for --#{comp} '#{chosen_option}' is not available. Available: #{available_string}", :red)
-        end
+        valid_choice?(comp) ? execute_component_setup(comp) : display_available_choices(comp)
       end
     end
-
   end
 end
