@@ -3,4 +3,7 @@
 %w[rubygems activesupport thor].each { |gem| require gem }
 Dir.glob(File.dirname(__FILE__)+"/../lib/sinatra_more/sinatra_generator/**/*.rb").each { |lib| require lib }
 
+
 SinatraMore::Base.start
+
+#sinatra_gen model User

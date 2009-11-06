@@ -21,10 +21,12 @@ module SinatraMore
       :orms => [:sequel,:datamapper,:mongomapper,:activerecord]
     }
 
-    %w[test mock script template orm].each do |component|
-      define_method("include_#{component}") do
-        raise "Option not supported" unless eval("@@available[#{component.pluralize.to_sym.inspect}]").include? options[component]
-        self.class.send(:include, "SinatraMore::#{options[component].to_s.capitalize}#{component.capitalize}Gen".constantize)
+    %w[test mock script template orm].each do |comp|
+      define_method("include_#{comp}") do
+        unless eval("@@available[#{comp.pluralize.to_sym.inspect}]").include? options[comp].to_sym
+          raise "Option not supported"
+        end
+        self.class.send(:include, "SinatraMore::#{options[comp].to_s.capitalize}#{comp.capitalize}Gen".constantize)
       end
     end
 
