@@ -1,0 +1,9 @@
+%w[rubygems sinatra rack/test].each {|gem| require gem }
+require File.dirname(File.dirname(__FILE__)) + "/app"
+
+set :environment, :test
+
+
+def app
+  <%= @class_name %>
+end

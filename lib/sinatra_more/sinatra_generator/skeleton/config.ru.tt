@@ -1,0 +1,11 @@
+RACK_ENV = ENV["RACK_ENV"] ||= "development" unless defined? RACK_ENV
+ROOT_DIR = $0.gsub(%r{^.*?/}, '/') unless defined? ROOT_DIR
+
+require File.dirname(__FILE__) + '/app.rb'
+
+FileUtils.mkdir_p 'log' unless File.exists?('log')
+log = File.new("log/sinatra.log", "a")
+$stdout.reopen(log)
+$stderr.reopen(log)
+
+run <%= @class_name %>

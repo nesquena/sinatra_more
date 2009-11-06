@@ -1,0 +1,5 @@
+%w[rubygems sinatra/base].each { |gem| require gem }
+
+class <%= @class_name %> < Sinatra::Application
+  load 'config/boot.rb'
+end

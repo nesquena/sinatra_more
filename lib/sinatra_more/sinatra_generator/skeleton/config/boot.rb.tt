@@ -1,0 +1,37 @@
+# This file is merely for beginning the boot process, check dependencies.rb for more information
+
+ROOT_DIR = File.dirname(__FILE__) + '/../' unless defined? ROOT_DIR
+
+# Helper method for file references.
+#
+# @param args [Array] Path components relative to ROOT_DIR.
+# @example Referencing a file in config called settings.yml:
+#   root_path("config", "settings.yml")
+def root_path(*args)
+  File.join(ROOT_DIR, *args)
+end
+
+# Returns the full path to the public folder along with any given additions
+# public_path("images")
+def public_path(*args)
+  root_path('public', *args)
+end
+
+class <%= @class_name %> < Sinatra::Application
+  # Defines basic application settings
+  set :root, root_path
+  set :views, root_path("app", "views")
+  set :images_path, public_path("images")
+  set :default_builder, 'StandardFormBuilder'
+
+  # Dependencies contains all required gems and core configuration
+  require File.dirname(__FILE__) + '/dependencies.rb'
+
+  # Requires the initializer modules which configure specific components
+  Dir[File.dirname(__FILE__) + '/initializers/*.rb'].each do |file|
+    # Each initializer file contains a module called 'XxxxInitializer' (i.e HassleInitializer)
+    require file
+    file_class = File.basename(file, '.rb').classify
+    register "#{file_class}Initializer".constantize
+  end
+end
