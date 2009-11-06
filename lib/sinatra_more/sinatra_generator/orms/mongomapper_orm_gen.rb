@@ -5,6 +5,7 @@ module SinatraMore
 class MongoDBConnectionFailure < RuntimeError; end
 
 module MongoInitializer
+  require 'mongo_mapper'
   def self.registered(app)
     MongoMapper.connection = Mongo::Connection.new('localhost')
     MongoMapper.database = 'fyourparking'
