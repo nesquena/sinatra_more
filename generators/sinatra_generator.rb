@@ -36,7 +36,7 @@ module SinatraMore
     
     component_types.each do |comp|
       define_method("perform_setup_for_#{comp}") do
-        say "Applying #{options[comp.to_sym]} '#{comp}'...", :yellow
+        say "Applying '#{options[comp.to_sym]}' (#{comp})...", :yellow
         send("setup_#{comp}") if respond_to?("setup_#{comp}")
       end
     end
