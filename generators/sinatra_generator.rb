@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/generator_helpers'
+require File.dirname(__FILE__) + '/generator_components'
 Dir[File.dirname(__FILE__) + "/{base_app,components}/**/*.rb"].each { |lib| require lib }
 
 module SinatraMore
