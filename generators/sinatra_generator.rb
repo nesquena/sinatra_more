@@ -11,11 +11,11 @@ module SinatraMore
     argument :name, :desc => "The name of your sinatra app"
     argument :path, :desc => "The path to create your app"
 
+    component_option :mock,     "Mocking library",      :aliases => '-m'
     component_option :test,     "Testing framework",    :aliases => '-t'
-    component_option :orm,      "Database engine",      :aliases => '-d'
     component_option :script,   "Javascript library",   :aliases => '-s'
     component_option :renderer, "Template Engine",      :aliases => '-r'
-    component_option :mock,     "Mocking library",      :aliases => '-m'
+    component_option :orm,      "Database engine",      :aliases => '-d'
 
     component_types.each do |comp|
       define_method("include_#{comp}") do

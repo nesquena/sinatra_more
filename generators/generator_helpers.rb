@@ -16,7 +16,7 @@ module SinatraMore
     # Returns the related module for a given component and option
     # generator_module_for('rr', :mock)
     def generator_module_for(option, component)
-      "SinatraMore::#{option.to_s.capitalize}#{component.capitalize}Gen".constantize
+      "SinatraMore::#{option.to_s.capitalize}#{component.to_s.capitalize}Gen".constantize
     end
   end
 end

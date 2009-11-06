@@ -26,7 +26,7 @@ module SinatraMore
       # component_option :test, "Testing framework", :aliases => '-t'
       def component_option(name, description, options = {})
         class_option name, :default => default_for(name), :aliases => options[:aliases]
-        (@component_types ||= []) << name.to_s
+        (@component_types ||= []) << name
       end
 
       def default_for(component)
