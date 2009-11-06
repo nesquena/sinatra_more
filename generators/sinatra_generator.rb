@@ -14,6 +14,7 @@ module SinatraMore
     argument :name, :desc => "The name of your sinatra app"
     argument :path, :desc => "The path to create your app"
 
+    # Definitions for the available customizable components
     component_option :mock,     "Mocking library",    :aliases => '-m', :choices => [:rr, :mocha]
     component_option :test,     "Testing framework",  :aliases => '-t', :choices => [:bacon, :shoulda, :rspec]
     component_option :script,   "Javascript library", :aliases => '-s', :choices => [:jquery, :prototype, :rightjs]
@@ -26,6 +27,7 @@ module SinatraMore
       directory("base_app/", root_path)
     end
 
+    # For each component, apply the component setup if valid choice; otherwise display valid choices
     component_types.each do |comp|
       define_method("perform_setup_for_#{comp}") do
         chosen_option = options[comp]

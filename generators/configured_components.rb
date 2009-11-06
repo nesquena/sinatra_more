@@ -4,10 +4,12 @@ module SinatraMore
       base.extend(ClassMethods)
     end
 
+    # Returns the list of available choices for the given component
     def available_choices_for(component)
       self.class.available_choices_for(component)
     end
 
+    # Returns the default choice for a given component
     def default_for(component)
       self.class.default_for(component)
     end
@@ -27,7 +29,7 @@ module SinatraMore
         @component_types
       end
 
-      # Returns the list of available
+      # Returns the list of available choices for the given component
       def available_choices_for(component)
         @available_choices[component]
       end
@@ -38,6 +40,7 @@ module SinatraMore
         available_choices_for(component).include? option.to_sym
       end
 
+      # Returns the default choice for a given component
       def default_for(component)
         available_choices_for(component).first
       end
@@ -45,6 +48,7 @@ module SinatraMore
   end
 
   module GeneratorHelpers
+    # Returns the root_path for the generated application or the calculated relative specified path
     # root_path('public/javascripts/example.js')
     def root_path(*paths)
       paths.blank? ? File.join(path, name) : File.join(path, name, *paths)
