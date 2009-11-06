@@ -17,6 +17,10 @@ module SinatraMore
       AVAILABLE[component.to_s.pluralize.to_sym]
     end
 
+    def default_for(component)
+      AVAILABLE[component.to_s.pluralize.to_sym].first
+    end
+
     module ClassMethods
       def component_types
         @component_types
