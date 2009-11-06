@@ -8,8 +8,8 @@ module SinatraMore
     include SinatraMore::ConfiguredComponents
     include SinatraMore::GeneratorHelpers
        
-    argument :name
-    argument :path
+    argument :name, :desc => "The name of your sinatra app"
+    argument :path, :desc => "The path to create your app"
 
     component_option :test,     "Testing framework",    :aliases => '-t'
     component_option :orm,      "Database engine",      :aliases => '-d'
