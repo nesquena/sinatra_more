@@ -18,8 +18,8 @@ module SinatraMore
 
     component_types.each do |comp|
       define_method("include_#{comp}") do
-        option = options[comp.to_sym]
-        raise "Option not supported" unless valid_option?(option, comp)
+        option, available_string = options[comp], available_options_for(comp).join(", ")
+        raise "Option for '--#{comp}' is not supported. Available: #{available_string}" unless valid_option?(option, comp)
         self.class.send(:include, generator_module_for(option, comp))
       end
     end
