@@ -6,11 +6,11 @@ module SinatraMore
     end
 
     AVAILABLE = {
-      :mocks =>     [:rr,:mocha],
-      :tests =>     [:bacon,:shoulda,:rspec],
-      :scripts =>   [:jquery,:prototype,:rightjs],
-      :renderers => [:haml,:erb],
-      :orms =>      [:sequel,:datamapper,:mongomapper,:activerecord]
+      :mocks =>     [:rr, :mocha],
+      :tests =>     [:bacon, :shoulda, :rspec],
+      :scripts =>   [:jquery, :prototype, :rightjs],
+      :renderers => [:haml, :erb],
+      :orms =>      [:sequel, :datamapper, :mongomapper, :activerecord]
     }
 
     def available_options_for(component)
@@ -26,10 +26,8 @@ module SinatraMore
         :orms =>      :sequel
       }
 
-      COMPONENTS = %w[test mock script renderer orm]
-
       def component_types
-        COMPONENTS
+        %w[test mock script renderer orm]
       end
 
       # component_option :test, "Testing framework", :aliases => '-t'
