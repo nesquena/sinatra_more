@@ -16,20 +16,7 @@ module MongoInitializer
 end
 MONGO
 
-  USER = <<-USER
-class User
-  include MongoMapper::Document
-  concerned_with :authentications
-
-  key :name, String, :required => true
-  key :username, String, :required => true
-  key :email, String, :required => true
-
-  many :car_photos
-end
-USER
-
-  CONCERNED = <<-CONCERN
+   CONCERNED = <<-CONCERN
 module MongoMapper
   module Document
     module ClassMethods
@@ -42,10 +29,22 @@ module MongoMapper
 end
 CONCERN
 
+  USER = <<-USER
+class User
+  include MongoMapper::Document
+  concerned_with :authentications
+
+  key :name, String, :required => true
+  key :username, String, :required => true
+  key :email, String, :required => true
+  key :crypted_password, String, :required => true
+
+  many :car_photos
+end
+USER
+
   AUTH = <<-AUTH
 class User
-  key :crypted_password, String
-
   attr_accessor :password, :password_confirmation
   before_validation :password_checks
   validate :validate_password
@@ -87,8 +86,8 @@ AUTH
 
     def setup_orm
       create_file(root_path("/config/initializers/mongo.rb"), MONGO)
-      create_file(root_path("/app/models/user.rb"), USER)
       create_file(root_path("/lib/ext/mongo_mapper.rb"), CONCERNED)
+      create_file(root_path("/app/models/user.rb"), USER)
       create_file(root_path("/app/models/user/authentications.rb"), AUTH)
     end
   end

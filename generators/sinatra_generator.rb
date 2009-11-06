@@ -9,7 +9,7 @@ module SinatraMore
     # Include related modules
     include Thor::Actions
     include SinatraMore::GeneratorComponents
-
+    
     argument :name, :desc => "The name of your sinatra app"
     argument :path, :desc => "The path to create your app"
 
