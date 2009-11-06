@@ -553,7 +553,7 @@ The usage for the generator is very simple:
 
   $ sinatra_gen <the_app_name> </path/to/create/app> --<component-name> <value>
 
-The simplest possible usage would be:
+The simplest possible command to generate a base application would be:
 
   $ sinatra_gen demo_app .
   
@@ -565,11 +565,11 @@ modify specific components to be used:
   
 The available components and their default options are listed below:
 
- * test:     <tt>bacon</tt> (default), <tt>shoulda</tt>, <tt>rspec</tt>
- * renderer: <tt>haml</tt> (default), <tt>erb</tt>
- * mock:     <tt>rr</tt> (default), <tt>mocha</tt>
- * script:   <tt>jquery</tt> (default), <tt>prototype</tt>, <tt>rightjs</tt>
- * orm:      <tt>sequel</tt> (default), <tt>datamapper</tt>, <tt>mongomapper</tt>, <tt>activerecord</tt>
+* test:     <tt>bacon</tt> (default), <tt>shoulda</tt>, <tt>rspec</tt>
+* renderer: <tt>haml</tt> (default), <tt>erb</tt>
+* mock:     <tt>rr</tt> (default), <tt>mocha</tt>
+* script:   <tt>jquery</tt> (default), <tt>prototype</tt>, <tt>rightjs</tt>
+* orm:      <tt>sequel</tt> (default), <tt>datamapper</tt>, <tt>mongomapper</tt>, <tt>activerecord</tt>
  
 The generator framework within sinatra_more is highly extensible and additional generators can easily be added. This would be done 
 through forking our project and reading through the code in <tt>/generators/sinatra_generator.rb</tt> and
@@ -578,9 +578,9 @@ for additional generators (although helping us maintain them would also be appre
 
 We are also planning additional generators to come such as:
 
- * Model generator (working for any of the available orms listed)
- * Routes generator 
- * Migrations generator
+* Model generator (working for any of the available orms listed)
+* Routes generator 
+* Migrations generator
   
 == Acknowledgements
 
