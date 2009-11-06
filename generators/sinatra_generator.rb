@@ -34,7 +34,7 @@ module SinatraMore
           self.class.send(:include, generator_module_for(chosen_option, comp))
           send("setup_#{comp}") if respond_to?("setup_#{comp}")
         else # chosen not a supported option
-          default_option, available_string = default_for(comp), available_options_for(comp).join(", ")
+          available_string = available_options_for(comp).join(", ")
           say("Option for --#{comp} '#{chosen_option}' is not available. Available: #{available_string}", :red)
         end
       end
