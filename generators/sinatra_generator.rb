@@ -8,8 +8,7 @@ module SinatraMore
 
     # Include related modules
     include Thor::Actions
-    include SinatraMore::ConfiguredComponents
-    include SinatraMore::GeneratorHelpers
+    include SinatraMore::GeneratorComponents
 
     argument :name, :desc => "The name of your sinatra app"
     argument :path, :desc => "The path to create your app"
@@ -28,10 +27,11 @@ module SinatraMore
     end
 
     # For each component, apply the component setup if valid choice; otherwise display alternate choices
-    component_types.each do |comp|
-      define_method("perform_setup_for_#{comp}") do
+    def setup_components
+      self.class.component_types.each do |comp|
         valid_choice?(comp) ? execute_component_setup(comp) : display_available_choices(comp)
       end
     end
+    
   end
 end

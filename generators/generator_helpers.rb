@@ -1,23 +1,14 @@
 module SinatraMore
-  module ConfiguredComponents
+  module GeneratorComponents
+    
     def self.included(base)
       base.extend(ClassMethods)
     end
 
-    # Returns the list of available choices for the given component
-    def available_choices_for(component)
-      self.class.available_choices_for(component)
-    end
-
-    # Returns the default choice for a given component
-    def default_for(component)
-      self.class.default_for(component)
-    end
-    
     # Returns true if the option passed is a valid choice for component
     # valid_option?(:mock)
     def valid_choice?(component)
-      available_choices_for(component).include? options[component].to_sym
+      self.class.available_choices_for(component).include? options[component].to_sym
     end
 
     # Performs the necessary generator for a given component choice
@@ -33,8 +24,20 @@ module SinatraMore
     # display_available_choices(:mock)
     def display_available_choices(component)
       choice = options[component]
-      available_string = available_choices_for(component).join(", ")
+      available_string = self.class.available_choices_for(component).join(", ")
       say("Option for --#{component} '#{choice}' is not available. Available: #{available_string}", :red)
+    end
+
+    # Returns the related module for a given component and option
+    # generator_module_for('rr', :mock)
+    def generator_module_for(choice, component)
+      "SinatraMore::#{choice.to_s.capitalize}#{component.to_s.capitalize}Gen".constantize
+    end
+
+    # Returns the root_path for the generated application or the calculated relative specified path
+    # root_path('public/javascripts/example.js')
+    def root_path(*paths)
+      paths.blank? ? File.join(path, name) : File.join(path, name, *paths)
     end
 
     module ClassMethods
@@ -61,20 +64,6 @@ module SinatraMore
       def default_for(component)
         available_choices_for(component).first
       end
-    end
-  end
-
-  module GeneratorHelpers
-    # Returns the root_path for the generated application or the calculated relative specified path
-    # root_path('public/javascripts/example.js')
-    def root_path(*paths)
-      paths.blank? ? File.join(path, name) : File.join(path, name, *paths)
-    end
-
-    # Returns the related module for a given component and option
-    # generator_module_for('rr', :mock)
-    def generator_module_for(choice, component)
-      "SinatraMore::#{choice.to_s.capitalize}#{component.to_s.capitalize}Gen".constantize
     end
   end
 end
