@@ -17,10 +17,11 @@ module SinatraMore
       :mocks => [:rr,:mocha],
       :tests => [:bacon,:shoulda,:rspec],
       :scripts => [:jquery,:prototype,:rightjs],
-      :templates => [:haml,:erb]
+      :templates => [:haml,:erb],
+      :orms => [:sequel,:datamapper,:mongomapper,:activerecord]
     }
 
-    %w[test mock script template].each do |component|
+    %w[test mock script template orm].each do |component|
       define_method("include_#{component}") do
         raise "Option not supported" unless eval("@@available[#{component.pluralize.to_sym.inspect}]").include? options[component]
         self.class.send(:include, "SinatraMore::#{options[component].to_s.capitalize}#{component.capitalize}Gen".constantize)

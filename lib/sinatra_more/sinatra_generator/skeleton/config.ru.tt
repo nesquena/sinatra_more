@@ -8,4 +8,6 @@ log = File.new("log/sinatra.log", "a")
 $stdout.reopen(log)
 $stderr.reopen(log)
 
+ENV['DATABASE_URL'] = 'your_database_here'
+
 run <%= @class_name %>
