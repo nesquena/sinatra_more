@@ -1,32 +1,35 @@
 module SinatraMore
   module GeneratorComponents
-    
+
     def self.included(base)
       base.extend(ClassMethods)
-    end
-
-    # Returns true if the option passed is a valid choice for component
-    # valid_option?(:mock,'rr')
-    def valid_choice?(component,choice)
-      return true if choice == 'none'
-      self.class.available_choices_for(component).include? choice.to_sym
     end
 
     # Performs the necessary generator for a given component choice
     # execute_component_setup(:mock, 'rr')
     def execute_component_setup(component, choice)
-      return true if choice == 'none'
       say "Applying '#{choice}' (#{component})...", :yellow
       self.class.send(:include, generator_module_for(choice, component))
       send("setup_#{component}") if respond_to?("setup_#{component}")
     end
 
-    # Displays to the console the available options for the given component choice
-    # display_available_choices(:mock, 'rr')
-    def display_available_choices(component,choice)
+    # Prompts the user if necessary until a valid choice is returned for the component
+    # resolve_valid_choice(:mock) => 'rr'
+    def resolve_valid_choice(component)
       available_string = self.class.available_choices_for(component).join(", ")
-      say("Option for --#{component} '#{choice}' is not available. Available: #{available_string} or none", :red)
-      ask("Please enter a valid option:")
+      choice = options[component]
+      until valid_choice?(component, choice)
+        say("Option for --#{component} '#{choice}' is not available. Available: #{available_string}, none", :red)
+        choice = ask("Please enter a valid option for #{component}:") 
+      end
+      choice
+    end
+
+    # Returns true if the option passed is a valid choice for component
+    # valid_option?(:mock, 'rr')
+    def valid_choice?(component, choice)
+      return true if choice == 'none'
+      self.class.available_choices_for(component).include? choice.to_sym
     end
 
     # Returns the related module for a given component and option
