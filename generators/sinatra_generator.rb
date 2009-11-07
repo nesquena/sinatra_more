@@ -30,9 +30,7 @@ module SinatraMore
     def setup_components
       self.class.component_types.each do |comp|
         choice = options[comp]
-        until valid_choice?(comp,choice)
-          choice = display_available_choices(comp,choice)
-        end
+        choice = display_available_choices(comp,choice) until valid_choice?(comp,choice)
         execute_component_setup(comp, choice)
       end
     end
