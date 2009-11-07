@@ -14,11 +14,11 @@ module SinatraMore
     argument :path, :desc => "The path to create your app"
 
     # Definitions for the available customizable components
-    component_option :mock,     "Mocking library",    :aliases => '-m', :choices => [:rr, :mocha]
+    component_option :orm,      "Database engine",    :aliases => '-d', :choices => [:sequel, :datamapper, :mongomapper, :activerecord]
     component_option :test,     "Testing framework",  :aliases => '-t', :choices => [:bacon, :shoulda, :rspec]
+    component_option :mock,     "Mocking library",    :aliases => '-m', :choices => [:rr, :mocha]
     component_option :script,   "Javascript library", :aliases => '-s', :choices => [:jquery, :prototype, :rightjs]
     component_option :renderer, "Template Engine",    :aliases => '-r', :choices => [:haml, :erb]
-    component_option :orm,      "Database engine",    :aliases => '-d', :choices => [:sequel, :datamapper, :mongomapper, :activerecord]
 
     # Copies over the base sinatra starting application
     def setup_skeleton
