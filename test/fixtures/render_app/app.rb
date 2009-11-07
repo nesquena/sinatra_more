@@ -39,16 +39,16 @@ class RenderDemo < Sinatra::Base
   
   # partial with object
   get '/partial/object' do
-    partial 'template/user', :object => RenderUser.new('John')
+    partial 'template/user', :object => RenderUser.new('John'), :locals => { :extra => "bar" }
   end
   
   # partial with collection
   get '/partial/collection' do
-    partial 'template/user', :collection => [RenderUser.new('John'), RenderUser.new('Billy')]
+    partial 'template/user', :collection => [RenderUser.new('John'), RenderUser.new('Billy')], :locals => { :extra => "bar" }
   end
   
   # partial with locals
   get '/partial/locals' do
-    partial 'template/user', :locals => { :user => RenderUser.new('John') }
+    partial 'template/user', :locals => { :user => RenderUser.new('John'), :extra => "bar" }
   end
 end

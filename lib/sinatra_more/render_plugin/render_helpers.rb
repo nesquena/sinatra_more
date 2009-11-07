@@ -31,15 +31,18 @@ module SinatraMore
       template_path = File.join(path)
       raise 'Partial collection specified but is nil' if options.has_key?(:collection) && options[:collection].nil?
       if collection = options.delete(:collection)
+        options.delete(:object)
         counter = 0
         collection.inject([]) do |buffer, member|
           counter += 1
-          current_options = options.merge(:locals => { object_name => member, "#{object_name}_counter".to_sym => counter })
-          buffer << render_template(template_path, current_options)
+          options[:locals] ||= {}
+          options[:locals].merge!(object_name => member, "#{object_name}_counter".to_sym => counter)
+          buffer << render_template(template_path, options)
         end.join("\n")
       else
         if member = options.delete(:object)
-          options.merge!(:locals => {object_name => member})
+          options[:locals] ||= {}
+          options[:locals].merge!(object_name => member)
         end
         render_template(template_path, options)
       end
