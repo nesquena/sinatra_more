@@ -1,32 +1,51 @@
 module SinatraMore
   module GeneratorComponents
-    
+
     def self.included(base)
       base.extend(ClassMethods)
     end
 
-    # Returns true if the option passed is a valid choice for component
-    # valid_option?(:mock,'rr')
-    def valid_choice?(component,choice)
-      return true if choice == 'none'
-      self.class.available_choices_for(component).include? choice.to_sym
+    # Creates a component_config file at the destination containing all component options
+    # Content is a yamlized version of a hash containing component name mapping to chosen value
+    def store_component_config(destination)
+      create_file(destination) do
+        self.class.component_types.inject({}) { |result, component|
+          result[component] = options[component].to_s; result
+        }.to_yaml
+      end
+    end
+    
+    # Loads the component config back into a hash
+    # i.e retrieve_component_config(...) => { :mock => 'rr', :test => 'riot', ... }
+    def retrieve_component_config(target)
+      YAML.load_file(target)
     end
 
     # Performs the necessary generator for a given component choice
     # execute_component_setup(:mock, 'rr')
     def execute_component_setup(component, choice)
-      return true if choice == 'none'
+      return true && say("Skipping generator for #{component} component...", :yellow) if choice == 'none'
       say "Applying '#{choice}' (#{component})...", :yellow
       self.class.send(:include, generator_module_for(choice, component))
       send("setup_#{component}") if respond_to?("setup_#{component}")
     end
 
-    # Displays to the console the available options for the given component choice
-    # display_available_choices(:mock, 'rr')
-    def display_available_choices(component,choice)
+    # Prompts the user if necessary until a valid choice is returned for the component
+    # resolve_valid_choice(:mock) => 'rr'
+    def resolve_valid_choice(component)
       available_string = self.class.available_choices_for(component).join(", ")
-      say("Option for --#{component} '#{choice}' is not available. Available: #{available_string} or none", :red)
-      ask("Please enter a valid option:")
+      choice = options[component]
+      until valid_choice?(component, choice)
+        say("Option for --#{component} '#{choice}' is not available.", :red)
+        choice = ask("Please enter a valid option for #{component} (#{available_string}):")
+      end
+      choice
+    end
+
+    # Returns true if the option passed is a valid choice for component
+    # valid_option?(:mock, 'rr')
+    def valid_choice?(component, choice)
+      self.class.available_choices_for(component).include? choice.to_sym
     end
 
     # Returns the related module for a given component and option
@@ -56,9 +75,9 @@ module SinatraMore
         @component_types
       end
 
-      # Returns the list of available choices for the given component
+      # Returns the list of available choices for the given component (including none)
       def available_choices_for(component)
-        @available_choices[component]
+        @available_choices[component] + [:none]
       end
 
       # Returns the default choice for a given component
