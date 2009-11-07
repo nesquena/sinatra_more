@@ -22,8 +22,10 @@ module SinatraMore
 
     # Copies over the base sinatra starting application
     def setup_skeleton
+      destination_root = root_path
       @class_name = name.classify
       directory("base_app/", root_path)
+      store_component_config(root_path('.components'))
     end
 
     # For each component, retrieve a valid choice and then execute the associated generator
