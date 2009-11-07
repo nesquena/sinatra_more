@@ -58,9 +58,8 @@ Keep in mind, the user will be able to pull in these components seperately and l
 Please help me brainstorm and fork the project if you have any ideas to contribute.
 
 == Installation
-
-This gem has very few runtime dependencies. The 'sinatra' gem needs to be installed and also 'activesupport' (for the inflectors). 
-If you want to use the WardenPlugin component, then the 'warden' gem would also be required.
+ 
+If you want to use the WardenPlugin component, then the 'warden' gem would need to be installed.
 
 To install sinatra_more, simply grab the latest version from gemcutter:
 
