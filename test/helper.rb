@@ -46,6 +46,13 @@ class Test::Unit::TestCase
     raise "Please specify a block!" if html.blank?
     assert matcher.matches?(html), matcher.failure_message
   end
+  
+  def silence_logger(&block)
+    orig_stdout = $stdout
+    $stdout = StringIO.new
+    block.call
+    $stdout = orig_stdout
+  end
 end
 
 module Webrat
