@@ -29,7 +29,11 @@ module SinatraMore
     # For each component, apply the component setup if valid choice; otherwise display alternate choices
     def setup_components
       self.class.component_types.each do |comp|
-        valid_choice?(comp) ? execute_component_setup(comp) : display_available_choices(comp)
+        choice = options[comp]
+        until valid_choice?(comp,choice)
+          choice = display_available_choices(comp,choice)
+        end
+        execute_component_setup(comp, choice)
       end
     end
     
