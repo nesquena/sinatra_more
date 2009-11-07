@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/generator_components'
 Dir[File.dirname(__FILE__) + "/{base_app,components}/**/*.rb"].each { |lib| require lib }
 
 module SinatraMore
-  class Generator < Thor::Group
+  class SkeletonGenerator < Thor::Group
     # Define the source template root
     def self.source_root; File.dirname(__FILE__); end
 

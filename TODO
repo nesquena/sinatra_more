@@ -5,7 +5,6 @@
 * Add support for check_box_group, radio_button_group which create a set of checkboxes or radio buttons
 * Look into creating sinatra generators using rubigen (http://github.com/drnic/rubigen)
   * http://github.com/quirkey/sinatra-gen
-  * http://github.com/monkrb/monk
   * test generators
   * add support for model, routes, migration generator types
 * Become total warden solution (basically just require warden gem installed, do everything else)
