@@ -21,7 +21,6 @@ begin
     gem.add_development_dependency "mocha",         ">= 0.9.7"
     gem.add_development_dependency "rack-test",     ">= 0.5.0"
     gem.add_development_dependency "webrat",        ">= 0.5.1"
-    gem.add_development_dependency "fakefs",        ">= 0.2tho.1"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
