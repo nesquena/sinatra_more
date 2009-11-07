@@ -26,7 +26,7 @@ module SinatraMore
       directory("base_app/", root_path)
     end
 
-    # For each component, apply the component setup if valid choice; otherwise display alternate choices
+    # For each component, retrieve a valid choice and then execute the associated generator
     def setup_components
       self.class.component_types.each do |comp|
         choice = resolve_valid_choice(comp)

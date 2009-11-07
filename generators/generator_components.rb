@@ -8,6 +8,7 @@ module SinatraMore
     # Performs the necessary generator for a given component choice
     # execute_component_setup(:mock, 'rr')
     def execute_component_setup(component, choice)
+      return true && say("Skipping generator for #{component} component...", :yellow) if choice == 'none'
       say "Applying '#{choice}' (#{component})...", :yellow
       self.class.send(:include, generator_module_for(choice, component))
       send("setup_#{component}") if respond_to?("setup_#{component}")
@@ -19,8 +20,8 @@ module SinatraMore
       available_string = self.class.available_choices_for(component).join(", ")
       choice = options[component]
       until valid_choice?(component, choice)
-        say("Option for --#{component} '#{choice}' is not available. Available: #{available_string}, none", :red)
-        choice = ask("Please enter a valid option for #{component}:") 
+        say("Option for --#{component} '#{choice}' is not available.", :red)
+        choice = ask("Please enter a valid option for #{component} (#{available_string}):") 
       end
       choice
     end
@@ -28,7 +29,6 @@ module SinatraMore
     # Returns true if the option passed is a valid choice for component
     # valid_option?(:mock, 'rr')
     def valid_choice?(component, choice)
-      return true if choice == 'none'
       self.class.available_choices_for(component).include? choice.to_sym
     end
 
@@ -59,9 +59,9 @@ module SinatraMore
         @component_types
       end
 
-      # Returns the list of available choices for the given component
+      # Returns the list of available choices for the given component (including none)
       def available_choices_for(component)
-        @available_choices[component]
+        @available_choices[component] + [:none]
       end
 
       # Returns the default choice for a given component
