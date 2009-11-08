@@ -88,7 +88,7 @@ AUTH
       create_file(root_path("/lib/ext/mongo_mapper.rb"), CONCERNED)
       create_file(root_path("/app/models/user.rb"), USER)
       create_file(root_path("/app/models/user/authentications.rb"), AUTH)
-      insert_require 'mongo_mapper', :path => root_path("/config/dependencies.rb"), :space => 2
+      insert_require 'mongo_mapper', :path => root_path("/config/dependencies.rb"), :indent => 2
     end
   end
 end

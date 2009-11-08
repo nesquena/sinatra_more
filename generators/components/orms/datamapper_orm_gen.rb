@@ -38,7 +38,7 @@ end
     def setup_orm
       create_file(root_path("/config/initializers/datamapper.rb"), DM)
       create_file(root_path("/app/models/user.rb"), USER)
-      insert_require 'dm-core', :path => root_path("/config/dependencies.rb"), :space => 2
+      insert_require 'dm-core', :path => root_path("/config/dependencies.rb"), :indent => 2
     end
   end
 end

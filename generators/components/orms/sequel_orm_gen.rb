@@ -42,7 +42,7 @@ USER
     def setup_orm
       create_file(root_path("/config/initializers/sequel.rb"), SEQUEL)
       create_file(root_path("/app/models/user.rb"), USER)
-      insert_require 'sequel', :path => root_path("/config/dependencies.rb"), :space => 2
+      insert_require 'sequel', :path => root_path("/config/dependencies.rb"), :indent => 2
     end
   end
 end

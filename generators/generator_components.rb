@@ -59,14 +59,14 @@ module SinatraMore
     def root_path(*paths)
       paths.blank? ? File.join(path, name) : File.join(path, name, *paths)
     end
-    
+
     # Inserts require statement into target file
-    # insert_require('active_record', :path => root_path("/test/test_config.rb"), :space => 2)
+    # insert_require('active_record', :path => root_path("/test/test_config.rb"), :indent => 2)
+    # options = { :path => '...', :indent => 2, :after => /.../ }
     def insert_require(lib, options = {})
-      options.reverse_merge! :path => "/test/test_config.rb", :space => 0
-      req = "require '#{lib}'\n"
-      options[:space].times { req = " " + req }
-      inject_into_file(options[:path],req,:after => /require gem.*?\n/)
+      options.reverse_merge!(:indent => 0, :after => /require\sgem.*?\n/)
+      req = "#{(' ' * options[:indent])}" << "require '#{lib}'\n"
+      inject_into_file(options[:path], req, :after => options[:after])
     end
 
     module ClassMethods
