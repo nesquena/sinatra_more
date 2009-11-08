@@ -544,7 +544,7 @@ or perhaps we want to have a short body without the need for a template file:
 
 == Acknowledgements
 
-* Thanks to keldredd for the <tt>sinatra_helpers</tt> code that helped me to create erb capture and concat methods.
+* Thanks to kelredd (http://github.com/kelredd) for the <tt>sinatra_helpers</tt> code that helped me to create erb capture and concat methods.
 * Thanks to sbfaulkner for the <tt>sinatra-helpers</tt> code that I browsed through many times while starting this library.
 * Thanks to vestel for the excellent modified <tt>pony</tt> fork which in part powers the mailer_plugin (http://github.com/vestel/pony)
 
