@@ -5,22 +5,6 @@ module SinatraMore
       base.extend(ClassMethods)
     end
 
-    # Creates a component_config file at the destination containing all component options
-    # Content is a yamlized version of a hash containing component name mapping to chosen value
-    def store_component_config(destination)
-      create_file(destination) do
-        self.class.component_types.inject({}) { |result, component|
-          result[component] = options[component].to_s; result
-        }.to_yaml
-      end
-    end
-    
-    # Loads the component config back into a hash
-    # i.e retrieve_component_config(...) => { :mock => 'rr', :test => 'riot', ... }
-    def retrieve_component_config(target)
-      YAML.load_file(target)
-    end
-
     # Performs the necessary generator for a given component choice
     # execute_component_setup(:mock, 'rr')
     def execute_component_setup(component, choice)
@@ -52,6 +36,22 @@ module SinatraMore
     # generator_module_for('rr', :mock)
     def generator_module_for(choice, component)
       "SinatraMore::#{choice.to_s.capitalize}#{component.to_s.capitalize}Gen".constantize
+    end
+
+    # Creates a component_config file at the destination containing all component options
+    # Content is a yamlized version of a hash containing component name mapping to chosen value
+    def store_component_config(destination)
+      create_file(destination) do
+        self.class.component_types.inject({}) { |result, component|
+          result[component] = options[component].to_s; result
+        }.to_yaml
+      end
+    end
+
+    # Loads the component config back into a hash
+    # i.e retrieve_component_config(...) => { :mock => 'rr', :test => 'riot', ... }
+    def retrieve_component_config(target)
+      YAML.load_file(target)
     end
 
     # Returns the root_path for the generated application or the calculated relative specified path
