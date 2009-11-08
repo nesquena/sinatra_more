@@ -60,8 +60,8 @@ module SinatraMore
       paths.blank? ? File.join(path, name) : File.join(path, name, *paths)
     end
     
-    # Inserts require statement into target file inside root_path
-    # insert_require('active_record', :path => "/test/test_config.rb", :space => 2)
+    # Inserts require statement into target file
+    # insert_require('active_record', :path => root_path("/test/test_config.rb"), :space => 2)
     def insert_require(lib, options = {})
       options.reverse_merge! :path => "/test/test_config.rb", :space => 0
       req = "require '#{lib}'\n"
