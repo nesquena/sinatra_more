@@ -3,8 +3,6 @@ module SinatraMore
     
     AR = <<-AR
 module ActiveRecordInitializer
-  require 'active_record'
-  
   def self.registered(app)
     app.configure do
       ActiveRecord::Base.establish_connection(
@@ -56,6 +54,7 @@ end
       create_file(root_path("/config/initializers/activerecord.rb"), AR)
       create_file(root_path("/db/migrate/001_create_users.rb"), MIGRATION)
       create_file(root_path("/app/models/user.rb"), USER)
+      insert_require 'active_record', :path => root_path("/config/dependencies.rb"), :space => 2
     end
   end
 end

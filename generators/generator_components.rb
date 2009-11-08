@@ -59,6 +59,15 @@ module SinatraMore
     def root_path(*paths)
       paths.blank? ? File.join(path, name) : File.join(path, name, *paths)
     end
+    
+    # Inserts require statement into target file inside root_path
+    # insert_require('active_record', :path => "/test/test_config.rb", :space => 2)
+    def insert_require(lib, options = {})
+      options.reverse_merge! :path => "/test/test_config.rb", :space => 0
+      req = "require '#{lib}'\n"
+      options[:space].times { req = " " + req }
+      inject_into_file(options[:path],req,:after => /require gem.*?\n/)
+    end
 
     module ClassMethods
       # Defines a class option to allow a component to be chosen and add to component type list
