@@ -1,9 +1,7 @@
 module SinatraMore
   module ErbRendererGen    
     def setup_renderer
-      inject_into_file(root_path("/config/dependencies.rb"), :after => /require gem.*?\n/) do
-        "  require 'erb'"
-      end
+      insert_require 'erb', :path => root_path("/config/dependencies.rb"), :space => 2
     end
   end
 end

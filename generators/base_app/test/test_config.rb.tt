@@ -1,5 +1,6 @@
 %w[rubygems sinatra].each {|gem| require gem }
-require File.dirname(__FILE__) + "/../app"
 require 'rack/test'
+require File.dirname(__FILE__) + "/../app"
+
 
 set :environment, :test

@@ -3,7 +3,6 @@ module SinatraMore
 
     SEQUEL = <<-SEQUEL
 module SequelInitializer
-  require 'sequel'
   def self.registered(app)
     app.configure do
       Sequel.connect(ENV['DATABASE_URL'])
@@ -13,7 +12,7 @@ end
 SEQUEL
 
     USER = <<-USER
-class User < Sequel::Model(:schema)
+class User < Sequel::Model(:users)
   unless table_exists?
     set_schema do
       primary_key :id
@@ -43,6 +42,7 @@ USER
     def setup_orm
       create_file(root_path("/config/initializers/sequel.rb"), SEQUEL)
       create_file(root_path("/app/models/user.rb"), USER)
+      insert_require 'sequel', :path => root_path("/config/dependencies.rb"), :space => 2
     end
   end
 end
