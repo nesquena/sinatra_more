@@ -52,7 +52,7 @@ USER
     
     def setup_orm
       insert_require 'active_record', :path => "config/dependencies.rb", :indent => 2
-      create_file("config/initializers/activerecord.rb", AR)
+      create_file("config/initializers/active_record.rb", AR)
       create_file("db/migrate/001_create_users.rb", MIGRATION)
       create_file("app/models/user.rb", USER)
     end

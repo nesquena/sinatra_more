@@ -4,7 +4,7 @@ module SinatraMore
     MONGO = <<-MONGO
 class MongoDBConnectionFailure < RuntimeError; end
 
-module MongodbInitializer
+module MongoDbInitializer
   def self.registered(app)
     MongoMapper.connection = Mongo::Connection.new('localhost')
     MongoMapper.database = ENV['DATABASE_URL']
@@ -84,7 +84,7 @@ AUTH
 
     def setup_orm
       insert_require 'mongo_mapper', :path => "config/dependencies.rb", :indent => 2
-      create_file("config/initializers/mongodb.rb", MONGO)
+      create_file("config/initializers/mongo_db.rb", MONGO)
       create_file("lib/ext/mongo_mapper.rb", CONCERNED)
       create_file("app/models/user.rb", USER)
       create_file("app/models/user/authentications.rb", AUTH)
