@@ -347,6 +347,8 @@ I hope to create or merge in an even better 'default' form_builder in the near f
   * Escapes html to allow passing information to javascript. Used for passing data inside an ajax .js.erb template
   * <tt>escape_javascript("<h1>Hey</h1>")</tt>
 
+See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/markupplugin>
+
 === RenderPlugin
 
 This component provides a number of rendering helpers for sinatra, making the process
@@ -397,6 +399,8 @@ This works as you would expect and also supports the collection counter inside t
   # Access the object with the partial_name i.e item
   
 And that concludes the render plugin for now but I am open to adding more methods as time progresses.
+
+See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/renderplugin>
 
 === WardenPlugin
 
@@ -466,6 +470,8 @@ Eventually I plan to vendor that gem or just remove support for this piece of my
 
 If anybody has any thoughts on this or the warden integration in general, please let me know. 
 Nonetheless, there is a certain convenience for me having access to a plug-and-play warden solution directly from this gem.
+
+See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/wardenplugin>
 
 === MailerPlugin
 
@@ -540,6 +546,8 @@ or perhaps we want to have a short body without the need for a template file:
       body    "This is a short body defined right in the mailer itself"
     end
   end
+
+See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/mailerplugin>
   
 == Sinatra Generators
 
@@ -584,6 +592,8 @@ We are planning to add additional generator actions such as:
 * Model generator (working for any of the available orms listed)
 * Routes generator 
 * Migrations generator
+
+See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/generator>
   
 == Acknowledgements
 
