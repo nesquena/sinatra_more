@@ -5,13 +5,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra_more}
-  s.version = "0.2.9"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Esquenazi"]
-  s.date = %q{2009-11-06}
+  s.date = %q{2009-11-08}
+  s.default_executable = %q{sinatra_gen}
   s.description = %q{Expands sinatra with standard helpers and tools to allow for complex applications}
   s.email = %q{nesquena@gmail.com}
+  s.executables = ["sinatra_gen"]
   s.extra_rdoc_files = [
     "LICENSE",
      "README.rdoc"
@@ -24,6 +26,46 @@ Gem::Specification.new do |s|
      "Rakefile",
      "TODO",
      "VERSION",
+     "bin/sinatra_gen",
+     "generators/base_app/app.rb.tt",
+     "generators/base_app/app/.empty_directory",
+     "generators/base_app/app/helpers/.empty_directory",
+     "generators/base_app/app/helpers/view_helpers.rb",
+     "generators/base_app/app/models/.empty_directory",
+     "generators/base_app/app/routes/.empty_directory",
+     "generators/base_app/config.ru.tt",
+     "generators/base_app/config/boot.rb.tt",
+     "generators/base_app/config/dependencies.rb.tt",
+     "generators/base_app/lib/.empty_directory",
+     "generators/base_app/log/.empty_directory",
+     "generators/base_app/public/images/.empty_directory",
+     "generators/base_app/public/images/.gitignore",
+     "generators/base_app/public/javascripts/.empty_directory",
+     "generators/base_app/public/stylesheets/.empty_directory",
+     "generators/base_app/test/models/.empty_directory",
+     "generators/base_app/test/routes/.empty_directory",
+     "generators/base_app/test/test_config.rb.tt",
+     "generators/base_app/tmp/.empty_directory",
+     "generators/base_app/vendor/gems/.empty_directory",
+     "generators/components/component_actions.rb",
+     "generators/components/mocks/mocha_mock_gen.rb",
+     "generators/components/mocks/rr_mock_gen.rb",
+     "generators/components/orms/activerecord_orm_gen.rb",
+     "generators/components/orms/datamapper_orm_gen.rb",
+     "generators/components/orms/mongomapper_orm_gen.rb",
+     "generators/components/orms/sequel_orm_gen.rb",
+     "generators/components/renderers/erb_renderer_gen.rb",
+     "generators/components/renderers/haml_renderer_gen.rb",
+     "generators/components/scripts/jquery_script_gen.rb",
+     "generators/components/scripts/prototype_script_gen.rb",
+     "generators/components/scripts/rightjs_script_gen.rb",
+     "generators/components/tests/bacon_test_gen.rb",
+     "generators/components/tests/riot_test_gen.rb",
+     "generators/components/tests/rspec_test_gen.rb",
+     "generators/components/tests/shoulda_test_gen.rb",
+     "generators/components/tests/testspec_test_gen.rb",
+     "generators/generator_actions.rb",
+     "generators/skeleton_generator.rb",
      "lib/sinatra_more.rb",
      "lib/sinatra_more/mailer_plugin.rb",
      "lib/sinatra_more/mailer_plugin/mail_object.rb",
@@ -66,6 +108,7 @@ Gem::Specification.new do |s|
      "test/fixtures/render_app/views/template/some_template.haml",
      "test/fixtures/warden_app/app.rb",
      "test/fixtures/warden_app/views/dashboard.haml",
+     "test/generators/test_skeleton_generator.rb",
      "test/helper.rb",
      "test/mailer_plugin/test_mail_object.rb",
      "test/mailer_plugin/test_mailer_base.rb",
@@ -93,6 +136,7 @@ Gem::Specification.new do |s|
      "test/fixtures/markup_app/app.rb",
      "test/fixtures/render_app/app.rb",
      "test/fixtures/warden_app/app.rb",
+     "test/generators/test_skeleton_generator.rb",
      "test/helper.rb",
      "test/mailer_plugin/test_mail_object.rb",
      "test/mailer_plugin/test_mailer_base.rb",
@@ -112,8 +156,9 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<tilt>, [">= 0.2"])
       s.add_runtime_dependency(%q<sinatra>, [">= 0.9.2"])
+      s.add_runtime_dependency(%q<tilt>, [">= 0.2"])
+      s.add_runtime_dependency(%q<thor>, [">= 0.11.8"])
       s.add_runtime_dependency(%q<activesupport>, [">= 2.2.2"])
       s.add_development_dependency(%q<haml>, [">= 2.2.1"])
       s.add_development_dependency(%q<shoulda>, [">= 2.10.2"])
@@ -121,8 +166,9 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rack-test>, [">= 0.5.0"])
       s.add_development_dependency(%q<webrat>, [">= 0.5.1"])
     else
-      s.add_dependency(%q<tilt>, [">= 0.2"])
       s.add_dependency(%q<sinatra>, [">= 0.9.2"])
+      s.add_dependency(%q<tilt>, [">= 0.2"])
+      s.add_dependency(%q<thor>, [">= 0.11.8"])
       s.add_dependency(%q<activesupport>, [">= 2.2.2"])
       s.add_dependency(%q<haml>, [">= 2.2.1"])
       s.add_dependency(%q<shoulda>, [">= 2.10.2"])
@@ -131,8 +177,9 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<webrat>, [">= 0.5.1"])
     end
   else
-    s.add_dependency(%q<tilt>, [">= 0.2"])
     s.add_dependency(%q<sinatra>, [">= 0.9.2"])
+    s.add_dependency(%q<tilt>, [">= 0.2"])
+    s.add_dependency(%q<thor>, [">= 0.11.8"])
     s.add_dependency(%q<activesupport>, [">= 2.2.2"])
     s.add_dependency(%q<haml>, [">= 2.2.1"])
     s.add_dependency(%q<shoulda>, [">= 2.10.2"])
