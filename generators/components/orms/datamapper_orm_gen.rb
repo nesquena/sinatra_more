@@ -34,7 +34,8 @@ class User
     BCrypt::Password.new(crypted_password) == password
   end
 end
-  USER
+User.auto_migrate! unless User.table_exists?
+USER
     
     def setup_orm
       insert_require 'dm-core', :path => "config/dependencies.rb", :indent => 2
