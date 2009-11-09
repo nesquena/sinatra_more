@@ -4,10 +4,10 @@ module SinatraMore
     SEQUEL = <<-SEQUEL
 module SequelInitializer
   def self.registered(app)
-    app.configure do
-      Sequel::Model.plugin(:schema)
-      Sequel.connect('your_db_here')
-    end
+    Sequel::Model.plugin(:schema)
+    app.configure(:development) { Sequel.connect('your_dev_db_here') }
+    app.configure(:production)  { Sequel.connect('your_production_db_here') }
+    app.configure(:test)        { Sequel.connect('your_test_db_here') }
   end
 end
 SEQUEL

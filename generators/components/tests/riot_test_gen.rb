@@ -5,7 +5,7 @@ module SinatraMore
   include Rack::Test::Methods
   
   def app
-    CLASS_NAME
+    CLASS_NAME.tap { |app| app.set :environment, :test }
   end
 end
 TEST

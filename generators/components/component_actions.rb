@@ -21,7 +21,7 @@ module SinatraMore
     # insert_test_suite_setup('...CLASS_NAME...')
     # => inject_into_file("test/test_config.rb", TEST.gsub(/CLASS_NAME/, @class_name), :after => "set :environment, :test\n")
     def insert_test_suite_setup(suite_text, options={})
-      options.reverse_merge!(:path => "test/test_config.rb", :after => "set :environment, :test\n")
+      options.reverse_merge!(:path => "test/test_config.rb", :after => /require.*?app.*?\n/)
       inject_into_file(options[:path], suite_text.gsub(/CLASS_NAME/, @class_name), :after => options[:after])
     end
 

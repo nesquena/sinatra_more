@@ -23,6 +23,7 @@ class <%= @class_name %> < Sinatra::Application
   set :views, root_path("app", "views")
   set :images_path, public_path("images")
   set :default_builder, 'StandardFormBuilder'
+  set :environment, RACK_ENV if defined?(RACK_ENV)
 
   # Dependencies contains all required gems and core configuration
   require File.dirname(__FILE__) + '/dependencies.rb'
