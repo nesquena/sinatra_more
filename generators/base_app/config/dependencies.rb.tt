@@ -17,7 +17,7 @@ class <%= @class_name %> < Sinatra::Application
   
   # Returns the list of load paths for this sinatra application
   def self.file_loading_paths
-    ["lib/**/*.rb", "app/helpers/**/*.rb", "app/routes/**/*.rb", "app/models/*.rb"]
+    ["lib/**/*.rb", "app/helpers/**/*.rb", "app/routes/**/*.rb", "app/models/*.rb", "app/mailers/*.rb"]
   end
   
   # Require all the folders and files necessary to run the application
