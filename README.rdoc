@@ -541,14 +541,14 @@ or perhaps we want to have a short body without the need for a template file:
     end
   end
   
-== Sinatra Generator
+== Sinatra Generators
 
 In addition to the support provided above, sinatra_more also comes preloaded with flexible code generators for Sinatra
-powered in part by the excellent Thor gem (incidentally also used in the Rails 3 generator). These generators are intended
-to allow easy code generation both for creating new applications and adding to existing ones. The generators have been
-built to be as agnostic as possible, supporting a myriad of test frameworks, js libraries, mocking libraries and more. 
+powered in part by the excellent Thor gem (incidentally also used in the Rails 3 generators). These generators are intended
+to allow for easy code generation both in creating new applications and building on existing ones. The generators have been
+built to be as library-agnostic as possible, supporting a myriad of test frameworks, js libraries, mocking libraries, etc. 
 
-The usage for the generator is very simple:
+The usage for the generator is quite simple:
 
   $ sinatra_gen <the_app_name> </path/to/create/app> --<component-name> <value>
 
@@ -558,7 +558,7 @@ The simplest possible command to generate a base application would be:
   
 This would construct a Sinatra application DemoApp (which extends from Sinatra::Application) 
 inside the folder 'demo_app' at our current path. Inside the application there would be configuration and 
-setup performed for the default components. You can also modify specific components to be used:
+setup performed for the default components. You can also define specific components to be used:
 
   $ sinatra_gen demo_app . --test=rspec --renderer=haml --mock=rr --script=jquery --orm datamapper
   
@@ -576,10 +576,10 @@ The available components and their default options are listed below:
  
 The generator framework within sinatra_more is highly extensible and additional components and tools can easily be added. 
 This would be achieved through forking our project and reading through the code in <tt>/generators/sinatra_generator.rb</tt> and
-the setup instructions inside each file within <tt>/generators/components/</tt>. We are happy to accept pull requests
-for additional component types not initially included (although helping us maintain them would also be appreciated).
+the setup instructions inside the relevant files within <tt>/generators/components/</tt>. We are happy to accept pull requests
+for additional component types not originally included (although helping us maintain them would also be appreciated).
 
-We are also planning to add additional generator actions such as:
+We are planning to add additional generator actions such as:
 
 * Model generator (working for any of the available orms listed)
 * Routes generator 
