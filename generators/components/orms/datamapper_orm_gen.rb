@@ -2,7 +2,7 @@ module SinatraMore
   module DatamapperOrmGen
     
     DM = <<-DM
-module DatamapperInitializer
+module DataMapperInitializer
   def self.registered(app)
     app.configure do
       DataMapper.setup(:default, 'your_db_here')
@@ -39,7 +39,7 @@ USER
     
     def setup_orm
       insert_require 'dm-core', :path => "config/dependencies.rb", :indent => 2
-      create_file("config/initializers/datamapper.rb", DM)
+      create_file("config/initializers/data_mapper.rb", DM)
       create_file("app/models/user.rb", USER)
     end
   end
