@@ -1,6 +1,4 @@
-%w[rubygems sinatra].each {|gem| require gem }
+RACK_ENV = 'test' unless defined?(RACK_ENV)
+%w[rubygems sinatra/base].each {|gem| require gem }
 require 'rack/test'
 require File.dirname(__FILE__) + "/../app"
-
-
-set :environment, :test

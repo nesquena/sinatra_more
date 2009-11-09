@@ -6,7 +6,7 @@ module SinatraMore
 end
 
 def app
-  CLASS_NAME
+  CLASS_NAME.tap { |app| app.set :environment, :test }
 end
 TEST
 

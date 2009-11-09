@@ -4,9 +4,9 @@ module SinatraMore
     DM = <<-DM
 module DataMapperInitializer
   def self.registered(app)
-    app.configure do
-      DataMapper.setup(:default, 'your_db_here')
-    end
+    app.configure(:development) { DataMapper.setup(:default, 'your_dev_db_here') }
+    app.configure(:production)  { DataMapper.setup(:default, 'your_production_db_here') }
+    app.configure(:test)        { DataMapper.setup(:default, 'your_test_db_here') }
   end
 end
 DM
