@@ -17,7 +17,7 @@ class TestSkeletonGenerator < Test::Unit::TestCase
     should "create components file containing options chosen with defaults" do
       silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp']) }
       components_chosen = YAML.load_file('/tmp/sample_app/.components')
-      assert_equal 'sequel', components_chosen[:orm]
+      assert_equal 'datamapper', components_chosen[:orm]
       assert_equal 'bacon', components_chosen[:test]
       assert_equal 'mocha', components_chosen[:mock]
       assert_equal 'jquery', components_chosen[:script]
@@ -62,7 +62,7 @@ class TestSkeletonGenerator < Test::Unit::TestCase
 
 
   context "the generator for orm components" do
-    should "properly generate default for sequel" do
+    should "properly generate for sequel" do
       SinatraMore::SkeletonGenerator.instance_eval("undef setup_orm if respond_to?('setup_orm')")
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--orm=sequel', '--script=none']) }
       assert_match /Applying.*?sequel.*?orm/, buffer
@@ -80,7 +80,7 @@ class TestSkeletonGenerator < Test::Unit::TestCase
       assert_match_in_file(/class User < ActiveRecord::Base/, '/tmp/sample_app/app/models/user.rb')
     end
 
-    should "properly generate for datamapper" do
+    should "properly generate default for datamapper" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--orm=datamapper', '--script=none']) }
       assert_match /Applying.*?datamapper.*?orm/, buffer
       assert_match_in_file(/require 'dm-core'/, '/tmp/sample_app/config/dependencies.rb')
