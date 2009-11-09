@@ -36,8 +36,6 @@ class User
   key :username, String, :required => true
   key :email, String, :required => true
   key :crypted_password, String, :required => true
-
-  many :car_photos
 end
 USER
 
