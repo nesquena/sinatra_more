@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra_more}
-  s.version = "0.3.2"
+  s.version = "0.3.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Esquenazi"]
-  s.date = %q{2009-11-08}
+  s.date = %q{2009-11-09}
   s.default_executable = %q{sinatra_gen}
   s.description = %q{Expands sinatra with standard helpers and tools to allow for complex applications}
   s.email = %q{nesquena@gmail.com}
@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
      "generators/base_app/app/helpers/view_helpers.rb",
      "generators/base_app/app/models/.empty_directory",
      "generators/base_app/app/routes/.empty_directory",
+     "generators/base_app/app/views/.empty_directory",
      "generators/base_app/config.ru.tt",
      "generators/base_app/config/boot.rb.tt",
      "generators/base_app/config/dependencies.rb.tt",

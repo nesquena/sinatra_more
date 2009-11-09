@@ -494,6 +494,7 @@ functionality on the server. However, smtp is also supported using the following
 Once those have been defined, the default will become smtp delivery unless overwritten in an individual mail definition.
 Next, we should define a custom mailer extended from <tt>SinatraMore::MailerBase</tt>.
 
+  # app/mailers/sample_mailer.rb
   class SampleMailer < SinatraMore::MailerBase
     def registration_email(name, user_email_address)
       from 'admin@site.com'
@@ -512,7 +513,7 @@ is passing the <tt>name</tt> attribute to the body message template which should
 
   # ./views/sample_mailer/registration_email.erb
   This is the body of the email and can access the <%= name %> that was passed in from the mailer definition
-  That's all there is to defining the body of the email which can be plain text or email
+  That's all there is to defining the body of the email which can be plain text or html
 
 Once the mailer definition has been completed and the template has been defined, the email can be sent using:
 
@@ -527,6 +528,7 @@ A few variations are shown below for completeness.
 
 If we want to attach files to our email:
 
+  # app/mailers/sample_mailer.rb
   class SampleMailer < SinatraMore::MailerBase
     def attachment_email(name, user_email_address)
       from 'admin@site.com'
@@ -538,6 +540,7 @@ If we want to attach files to our email:
 
 or perhaps we want to have a short body without the need for a template file:
 
+  # app/mailers/sample_mailer.rb
   class SampleMailer < SinatraMore::MailerBase
     def short_email(name, user_email_address)
       from 'admin@site.com'
