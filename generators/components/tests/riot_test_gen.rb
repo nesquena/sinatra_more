@@ -1,6 +1,6 @@
 module SinatraMore
   module RiotTestGen
-    TEST = <<-RIOT
+    RIOT_SETUP = <<-TEST
 \nclass Riot::Context
   include Rack::Test::Methods
   
@@ -8,11 +8,11 @@ module SinatraMore
     CLASS_NAME
   end
 end
-RIOT
+TEST
 
     def setup_test
       insert_require 'riot', :path => "test/test_config.rb"
-      inject_into_file("test/test_config.rb", TEST.gsub(/CLASS_NAME/, @class_name), :after => "set :environment, :test\n")
+      insert_test_suite_setup RIOT_SETUP
     end
     
   end

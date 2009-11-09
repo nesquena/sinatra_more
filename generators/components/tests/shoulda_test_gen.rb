@@ -1,6 +1,6 @@
 module SinatraMore
   module ShouldaTestGen
-    TEST = <<-SHOULDA
+    SHOULDA_SETUP = <<-TEST
 \nclass Test::Unit::TestCase
   include Rack::Test::Methods
   
@@ -8,11 +8,11 @@ module SinatraMore
     CLASS_NAME
   end
 end
-SHOULDA
+TEST
+
     def setup_test
-      insert_require 'test/unit', :path => "test/test_config.rb"
-      insert_require 'shoulda', :path => "test/test_config.rb"
-      inject_into_file("test/test_config.rb", TEST.gsub(/CLASS_NAME/, @class_name), :after => "set :environment, :test\n")
+      insert_require 'test/unit', 'shoulda', :path => "test/test_config.rb"
+      insert_test_suite_setup SHOULDA_SETUP
     end
     
   end

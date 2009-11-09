@@ -1,6 +1,6 @@
 module SinatraMore
   module TestspecTestGen
-    TEST = <<-TESTSPEC
+    TESTSPEC_SETUP = <<-TEST
 \nclass Test::Unit::TestCase
   include Rack::Test::Methods
   
@@ -8,10 +8,11 @@ module SinatraMore
     CLASS_NAME
   end
 end
-TESTSPEC
+TEST
+
     def setup_test
       insert_require 'test/spec', :path => "test/test_config.rb"
-      inject_into_file("test/test_config.rb", TEST.gsub(/CLASS_NAME/, @class_name), :after => "set :environment, :test\n")
+      insert_test_suite_setup TESTSPEC_SETUP
     end
     
   end

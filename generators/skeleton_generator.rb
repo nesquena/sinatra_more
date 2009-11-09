@@ -1,4 +1,5 @@
-require File.dirname(__FILE__) + '/generator_components'
+require File.dirname(__FILE__) + '/generator_actions'
+require File.dirname(__FILE__) + '/components/component_actions'
 Dir[File.dirname(__FILE__) + "/{base_app,components}/**/*.rb"].each { |lib| require lib }
 
 module SinatraMore
@@ -9,6 +10,7 @@ module SinatraMore
     # Include related modules
     include Thor::Actions
     include SinatraMore::GeneratorActions
+    include SinatraMore::ComponentActions
 
     argument :name, :desc => "The name of your sinatra app"
     argument :path, :desc => "The path to create your app"

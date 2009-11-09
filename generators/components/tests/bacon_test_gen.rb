@@ -1,6 +1,6 @@
 module SinatraMore
   module BaconTestGen
-    TEST = <<-BACON
+    BACON_SETUP = <<-TEST
 \nclass Bacon::Context
   include Rack::Test::Methods
 end
@@ -8,10 +8,11 @@ end
 def app
   CLASS_NAME
 end
-BACON
+TEST
+
     def setup_test
       insert_require 'bacon', :path => "test/test_config.rb"
-      inject_into_file("test/test_config.rb", TEST.gsub(/CLASS_NAME/, @class_name), :after => "set :environment, :test\n")
+      insert_test_suite_setup BACON_SETUP
     end
     
   end
