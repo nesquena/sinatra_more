@@ -6,21 +6,24 @@ module SinatraMore
   class SkeletonGenerator < Thor::Group
     # Define the source template root
     def self.source_root; File.dirname(__FILE__); end
+    def self.banner; "sinatra_gen [app_name] [path] [options]"; end
 
     # Include related modules
     include Thor::Actions
     include SinatraMore::GeneratorActions
     include SinatraMore::ComponentActions
+    
+    desc "Description:\n\n\tsinatra_gen is the sinatra_more generators which generate or build on Sinatra applications."
 
     argument :name, :desc => "The name of your sinatra app"
     argument :path, :desc => "The path to create your app"
 
     # Definitions for the available customizable components
-    component_option :orm,      "Database engine",    :aliases => '-d', :choices => [:sequel, :datamapper, :mongomapper, :activerecord]
-    component_option :test,     "Testing framework",  :aliases => '-t', :choices => [:bacon, :shoulda, :rspec, :testspec, :riot]
-    component_option :mock,     "Mocking library",    :aliases => '-m', :choices => [:mocha, :rr]
-    component_option :script,   "Javascript library", :aliases => '-s', :choices => [:jquery, :prototype, :rightjs]
-    component_option :renderer, "Template Engine",    :aliases => '-r', :choices => [:erb, :haml]
+    component_option :orm,      "database engine",    :aliases => '-d', :choices => [:sequel, :datamapper, :mongomapper, :activerecord]
+    component_option :test,     "testing framework",  :aliases => '-t', :choices => [:bacon, :shoulda, :rspec, :testspec, :riot]
+    component_option :mock,     "mocking library",    :aliases => '-m', :choices => [:mocha, :rr]
+    component_option :script,   "javascript library", :aliases => '-s', :choices => [:jquery, :prototype, :rightjs]
+    component_option :renderer, "template engine",    :aliases => '-r', :choices => [:erb, :haml]
 
     # Copies over the base sinatra starting application
     def setup_skeleton

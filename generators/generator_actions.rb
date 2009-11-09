@@ -58,9 +58,10 @@ module SinatraMore
       # Defines a class option to allow a component to be chosen and add to component type list
       # Also builds the available_choices hash of which component choices are supported
       # component_option :test, "Testing framework", :aliases => '-t', :choices => [:bacon, :shoulda]
-      def component_option(name, description, options = {})
+      def component_option(name, caption, options = {})
         (@available_choices ||= Hash.new({}))[name] = options[:choices]
-        class_option name, :default => options[:choices].first, :aliases => options[:aliases]
+        description = "The #{caption} component (#{options[:choices].join(', ')})"
+        class_option name, :default => options[:choices].first, :aliases => options[:aliases], :desc => description
       end
 
       # Returns the compiled list of component types which can be specified

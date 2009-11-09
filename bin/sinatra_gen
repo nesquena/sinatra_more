@@ -2,4 +2,5 @@
 
 %w[rubygems activesupport thor].each { |gem| require gem }
 require File.dirname(__FILE__) + "/../generators/skeleton_generator"
-SinatraMore::SkeletonGenerator.start
+arguments = ARGV.any? ? ARGV : ['-h']
+SinatraMore::SkeletonGenerator.start(arguments)
