@@ -4,11 +4,10 @@ module SinatraMore
     MONGO = <<-MONGO
 class MongoDBConnectionFailure < RuntimeError; end
 
-module MongoDBInitializer
+module MongodbInitializer
   def self.registered(app)
     MongoMapper.connection = Mongo::Connection.new('localhost')
-    MongoMapper.database = 'fyourparking'
-    User.first
+    MongoMapper.database = ENV['DATABASE_URL']
   rescue RuntimeError
     raise MongoDBConnectionFailure.new("mongodb cannot connect to db! Start the mongodb process and try again.")
   end
