@@ -12,8 +12,9 @@ begin
     gem.email = "nesquena@gmail.com"
     gem.homepage = "http://github.com/nesquena/sinatra_more"
     gem.authors = ["Nathan Esquenazi"]
-    gem.add_runtime_dependency     "tilt",          ">= 0.2"
     gem.add_runtime_dependency     "sinatra",       ">= 0.9.2"
+    gem.add_runtime_dependency     "tilt",          ">= 0.2"
+    gem.add_runtime_dependency     "thor",          ">= 0.11.8"
     gem.add_runtime_dependency     "activesupport", ">= 2.2.2"
     gem.add_development_dependency "haml",          ">= 2.2.1"
     gem.add_development_dependency "shoulda",       ">= 2.10.2"

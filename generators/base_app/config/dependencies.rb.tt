@@ -1,0 +1,26 @@
+# Dependencies contains all required gems, helpers and core configuration
+
+class <%= @class_name %> < Sinatra::Application
+  %w[rubygems rack-flash warden sinatra_more bcrypt].each { |gem| require gem }
+  
+  # Required middleware
+  use Rack::Session::Cookie
+  use Rack::Flash
+
+  # Returns the list of load paths for this sinatra application
+  def self.file_loading_paths
+    ["lib/**/*.rb", "app/helpers/**/*.rb", "app/routes/**/*.rb", "app/models/*.rb"]
+  end
+  
+  # Require all the folders and files necessary to run the application
+  file_loading_paths.each { |load_path| Dir[root_path(load_path)].each { |file| require file } }
+  
+  # Includes all necessary sinatra_more helpers
+  register SinatraMore::MarkupPlugin
+  register SinatraMore::RenderPlugin
+  register SinatraMore::MailerPlugin
+  register SinatraMore::WardenPlugin
+    
+  # Required helpers
+  helpers ViewHelpers
+end
