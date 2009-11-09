@@ -5,6 +5,7 @@ module SinatraMore
 module SequelInitializer
   def self.registered(app)
     app.configure do
+      Sequel::Model.plugin(:schema)
       Sequel.connect('your_db_here')
     end
   end
