@@ -5,7 +5,7 @@ module SinatraMore
 module DatamapperInitializer
   def self.registered(app)
     app.configure do
-      DataMapper.setup(:default, ENV['DATABASE_URL'])
+      DataMapper.setup(:default, 'your_db_here')
     end
   end
 end

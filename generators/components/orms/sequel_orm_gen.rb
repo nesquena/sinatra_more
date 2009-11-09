@@ -5,7 +5,7 @@ module SinatraMore
 module SequelInitializer
   def self.registered(app)
     app.configure do
-      Sequel.connect(ENV['DATABASE_URL'])
+      Sequel.connect('your_db_here')
     end
   end
 end

@@ -1,5 +1,4 @@
 RACK_ENV = ENV["RACK_ENV"] ||= "development" unless defined? RACK_ENV
-ENV['DATABASE_URL'] = 'your_database_here'
 
 require File.dirname(__FILE__) + '/app.rb'
 

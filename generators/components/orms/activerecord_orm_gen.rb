@@ -7,12 +7,27 @@ module ActiveRecordInitializer
     app.configure do
       ActiveRecord::Base.establish_connection(
         :adapter => 'sqlite3',
-        :dbfile =>  ENV['DATABASE_URL']
+        :database => 'your_db_here'
       )
     end
   end
 end
 AR
+
+RAKE = <<-RAKE
+require 'active_record'
+require 'sinatra/base'
+
+namespace :db do
+  desc "Migrate the database"
+  task(:migrate) do
+    load 'config/boot.rb'
+    ActiveRecord::Base.logger = Logger.new(STDOUT)
+    ActiveRecord::Migration.verbose = true
+    ActiveRecord::Migrator.migrate("db/migrate")
+  end
+end
+RAKE
 
 
    MIGRATION = <<-MIGRATION

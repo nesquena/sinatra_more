@@ -7,7 +7,7 @@ class MongoDBConnectionFailure < RuntimeError; end
 module MongoDbInitializer
   def self.registered(app)
     MongoMapper.connection = Mongo::Connection.new('localhost')
-    MongoMapper.database = ENV['DATABASE_URL']
+    MongoMapper.database = 'your_db_here'
   rescue RuntimeError
     raise MongoDBConnectionFailure.new("mongodb cannot connect to db! Start the mongodb process and try again.")
   end
