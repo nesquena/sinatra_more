@@ -1,5 +1,5 @@
 module SinatraMore
-  module GeneratorComponents
+  module GeneratorActions
 
     def self.included(base)
       base.extend(ClassMethods)
@@ -52,15 +52,6 @@ module SinatraMore
     # i.e retrieve_component_config(...) => { :mock => 'rr', :test => 'riot', ... }
     def retrieve_component_config(target)
       YAML.load_file(target)
-    end
-
-    # Inserts require statement into target file
-    # insert_require('active_record', :path => "test/test_config.rb", :indent => 2)
-    # options = { :path => '...', :indent => 2, :after => /.../ }
-    def insert_require(lib, options = {})
-      options.reverse_merge!(:indent => 0, :after => /require\sgem.*?\n/)
-      req = "#{(' ' * options[:indent])}" << "require '#{lib}'\n"
-      inject_into_file(options[:path], req, :after => options[:after])
     end
 
     module ClassMethods
