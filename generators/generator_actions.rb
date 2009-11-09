@@ -8,7 +8,7 @@ module SinatraMore
     # Performs the necessary generator for a given component choice
     # execute_component_setup(:mock, 'rr')
     def execute_component_setup(component, choice)
-      return true && say("Skipping generator for #{component} component...", :yellow) if choice == 'none'
+      return true && say("Skipping generator for #{component} component...", :yellow) if choice.to_s == 'none'
       say "Applying '#{choice}' (#{component})...", :yellow
       self.class.send(:include, generator_module_for(choice, component))
       send("setup_#{component}") if respond_to?("setup_#{component}")
@@ -60,23 +60,17 @@ module SinatraMore
       # component_option :test, "Testing framework", :aliases => '-t', :choices => [:bacon, :shoulda]
       def component_option(name, description, options = {})
         (@available_choices ||= Hash.new({}))[name] = options[:choices]
-        (@component_types ||= []) << name
-        class_option name, :default => default_for(name), :aliases => options[:aliases]
+        class_option name, :default => options[:choices].first, :aliases => options[:aliases]
       end
 
       # Returns the compiled list of component types which can be specified
       def component_types
-        @component_types
+        @available_choices.keys
       end
 
       # Returns the list of available choices for the given component (including none)
       def available_choices_for(component)
         @available_choices[component] + [:none]
-      end
-
-      # Returns the default choice for a given component
-      def default_for(component)
-        available_choices_for(component).first
       end
     end
   end
