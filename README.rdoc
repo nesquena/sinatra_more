@@ -45,13 +45,13 @@ of tools, helpers and components that will make Sinatra suitable for more comple
 
 Here is a small list of what sinatra_more contains:
 
+* Code generators for creating new sinatra applications (using <tt>sinatra_gen</tt> on command line)
 * Generic view and tag helpers (<tt>tag</tt>, <tt>content_tag</tt>, <tt>input_tag</tt>, ...)
 * Asset tag helpers (<tt>link_to</tt>, <tt>image_tag</tt>, <tt>javascript_include_tag</tt>, ...)
 * Full form helpers and builders support (<tt>form_tag</tt>, <tt>form_for</tt>, <tt>field_set_tag</tt>, <tt>text_field</tt>, ...)
 * Generally useful formatting extensions (<tt>relative_time_ago</tt>, <tt>js_escape_html</tt>, <tt>sanitize_html</tt>)
 * Simple 'mailer' support for sinatra (akin to <tt>ActionMailer</tt> but simpler and powered by <tt>pony</tt>)
 * Plug and play setup for the excellent Warden authentication system
-* Code generators for creating new sinatra applications (COMING SOON)
 
 Keep in mind, the user will be able to pull in these components seperately and leave out those that are not required.
 
