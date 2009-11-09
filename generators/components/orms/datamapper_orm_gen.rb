@@ -34,7 +34,7 @@ class User
     BCrypt::Password.new(crypted_password) == password
   end
 end
-User.auto_migrate! unless User.table_exists?
+User.auto_upgrade!
 USER
     
     def setup_orm
