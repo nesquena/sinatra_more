@@ -26,12 +26,4 @@ class <%= @class_name %> < Sinatra::Application
 
   # Dependencies contains all required gems and core configuration
   require File.dirname(__FILE__) + '/dependencies.rb'
-
-  # Requires the initializer modules which configure specific components
-  Dir[File.dirname(__FILE__) + '/initializers/*.rb'].each do |file|
-    # Each initializer file contains a module called 'XxxxInitializer' (i.e HassleInitializer)
-    require file
-    file_class = File.basename(file, '.rb').classify
-    register "#{file_class}Initializer".constantize
-  end
 end

@@ -6,7 +6,7 @@ module SinatraMore
     def insert_require(*libs)
       options = libs.extract_options!
       options.reverse_merge!(:indent => 0, :after => /require\sgem.*?\n/)
-      multiple_gem_require = "%w[#{libs.join(' ')}].each { |gem| require gem }\n"
+      multiple_gem_require = "%w[#{libs.join(' ')}].each { |lib| require lib }\n"
       req = indent_spaces(options[:indent]) + (libs.size == 1 ? "require '#{libs}'\n" : multiple_gem_require)
       inject_into_file(options[:path], req, :after => options[:after])
     end
