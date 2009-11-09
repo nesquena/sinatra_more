@@ -19,9 +19,9 @@ class TestSkeletonGenerator < Test::Unit::TestCase
       components_chosen = YAML.load_file('/tmp/sample_app/.components')
       assert_equal 'sequel', components_chosen[:orm]
       assert_equal 'bacon', components_chosen[:test]
-      assert_equal 'rr', components_chosen[:mock]
+      assert_equal 'mocha', components_chosen[:mock]
       assert_equal 'jquery', components_chosen[:script]
-      assert_equal 'haml', components_chosen[:renderer]
+      assert_equal 'erb', components_chosen[:renderer]
     end
     should "create components file containing options chosen" do
       component_options = ['--orm=datamapper', '--test=riot', '--mock=mocha', '--script=prototype', '--renderer=erb']
@@ -45,14 +45,14 @@ class TestSkeletonGenerator < Test::Unit::TestCase
   end
 
   context "the generator for mock component" do
-    should "roperly generate default for rr" do
+    should "properly generate for rr" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--mock=rr', '--script=none']) }
       assert_match /Applying.*?rr.*?mock/, buffer
       assert_match_in_file(/require 'rr'/, '/tmp/sample_app/test/test_config.rb')
       assert_match_in_file(/class.*?include RR::Adapters::RRMethods/m, '/tmp/sample_app/test/test_config.rb')
     end
 
-    should "properly generate for mocha" do
+    should "properly generate default for mocha" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--mock=mocha', '--script=none']) }
       assert_match /Applying.*?mocha.*?mock/, buffer
       assert_match_in_file(/require 'mocha'/, '/tmp/sample_app/test/test_config.rb')
@@ -98,13 +98,13 @@ class TestSkeletonGenerator < Test::Unit::TestCase
   end
 
   context "the generator for renderer component" do
-    should "properly generate for erb" do
+    should "properly generate default for erb" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--renderer=erb', '--script=none']) }
       assert_match /Applying.*?erb.*?renderer/, buffer
       assert_match_in_file(/require 'erb'/, '/tmp/sample_app/config/dependencies.rb')
     end
 
-    should "properly default generate for haml" do
+    should "properly generate for haml" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--renderer=haml','--script=none']) }
       assert_match /Applying.*?haml.*?renderer/, buffer
       assert_match_in_file(/haml.*sass.*hassle.*require/, '/tmp/sample_app/config/dependencies.rb')

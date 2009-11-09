@@ -568,9 +568,9 @@ There is also support for aliases for each component within the command:
   
 The available components and their default options are listed below:
 
-* test:     <tt>bacon</tt> (default), <tt>shoulda</tt>, <tt>rspec</tt>, <tt>testspec</tt>,<tt>riot</tt>
-* renderer: <tt>haml</tt> (default), <tt>erb</tt>
-* mock:     <tt>rr</tt> (default), <tt>mocha</tt>
+* test:     <tt>bacon</tt>  (default), <tt>shoulda</tt>, <tt>rspec</tt>, <tt>testspec</tt>,<tt>riot</tt>
+* renderer: <tt>erb</tt>    (default), <tt>haml</tt>
+* mock:     <tt>mocha</tt>  (default), <tt>rr</tt>
 * script:   <tt>jquery</tt> (default), <tt>prototype</tt>, <tt>rightjs</tt>
 * orm:      <tt>sequel</tt> (default), <tt>datamapper</tt>, <tt>mongomapper</tt>, <tt>activerecord</tt>
  
