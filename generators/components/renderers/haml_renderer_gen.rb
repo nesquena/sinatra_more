@@ -10,10 +10,10 @@ end
 HASSLE
     
     def setup_renderer
-      inject_into_file(root_path("/config/dependencies.rb"), :after => /require gem.*?\n/) do
+      inject_into_file("config/dependencies.rb", :after => /require gem.*?\n/) do
         "  %w[haml sass hassle].each { |gem| require gem }\n"
       end
-      create_file(root_path("/config/initializers/hassle.rb"), HASSLE)
+      create_file("config/initializers/hassle.rb", HASSLE)
     end
   end
 end

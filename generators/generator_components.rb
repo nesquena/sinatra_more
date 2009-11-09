@@ -54,14 +54,8 @@ module SinatraMore
       YAML.load_file(target)
     end
 
-    # Returns the root_path for the generated application or the calculated relative specified path
-    # root_path('public/javascripts/example.js')
-    def root_path(*paths)
-      paths.blank? ? File.join(path, name) : File.join(path, name, *paths)
-    end
-
     # Inserts require statement into target file
-    # insert_require('active_record', :path => root_path("/test/test_config.rb"), :indent => 2)
+    # insert_require('active_record', :path => "test/test_config.rb", :indent => 2)
     # options = { :path => '...', :indent => 2, :after => /.../ }
     def insert_require(lib, options = {})
       options.reverse_merge!(:indent => 0, :after => /require\sgem.*?\n/)

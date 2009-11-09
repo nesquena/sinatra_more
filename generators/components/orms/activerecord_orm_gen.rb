@@ -48,13 +48,13 @@ class User < ActiveRecord::Base
     BCrypt::Password.new(crypted_password) == password
   end
 end
-  USER
+USER
     
     def setup_orm
-      create_file(root_path("/config/initializers/activerecord.rb"), AR)
-      create_file(root_path("/db/migrate/001_create_users.rb"), MIGRATION)
-      create_file(root_path("/app/models/user.rb"), USER)
-      insert_require 'active_record', :path => root_path("/config/dependencies.rb"), :indent => 2
+      insert_require 'active_record', :path => "config/dependencies.rb", :indent => 2
+      create_file("config/initializers/activerecord.rb", AR)
+      create_file("db/migrate/001_create_users.rb", MIGRATION)
+      create_file("app/models/user.rb", USER)
     end
   end
 end

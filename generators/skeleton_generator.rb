@@ -9,7 +9,7 @@ module SinatraMore
     # Include related modules
     include Thor::Actions
     include SinatraMore::GeneratorComponents
-    
+
     argument :name, :desc => "The name of your sinatra app"
     argument :path, :desc => "The path to create your app"
 
@@ -22,10 +22,10 @@ module SinatraMore
 
     # Copies over the base sinatra starting application
     def setup_skeleton
-      destination_root = root_path
+      self.destination_root = File.join(path, name)
       @class_name = name.classify
-      directory("base_app/", root_path)
-      store_component_config(root_path('.components'))
+      directory("base_app/", self.destination_root)
+      store_component_config('.components')
     end
 
     # For each component, retrieve a valid choice and then execute the associated generator
@@ -35,6 +35,5 @@ module SinatraMore
         execute_component_setup(comp, choice)
       end
     end
-    
   end
 end
