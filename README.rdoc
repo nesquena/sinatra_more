@@ -580,7 +580,7 @@ The available components and their default options are listed below:
 * renderer: <tt>erb</tt>    (default), <tt>haml</tt>
 * mock:     <tt>mocha</tt>  (default), <tt>rr</tt>
 * script:   <tt>jquery</tt> (default), <tt>prototype</tt>, <tt>rightjs</tt>
-* orm:      <tt>sequel</tt> (default), <tt>datamapper</tt>, <tt>mongomapper</tt>, <tt>activerecord</tt>
+* orm:      <tt>datamapper</tt> (default), <tt>mongomapper</tt>, <tt>activerecord</tt>, <tt>sequel</tt>
  
 The generator framework within sinatra_more is highly extensible and additional components and tools can easily be added. 
 This would be achieved through forking our project and reading through the code in <tt>/generators/sinatra_generator.rb</tt> and
