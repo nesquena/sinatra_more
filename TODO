@@ -1,20 +1,16 @@
 = UNFINISHED
 
+* Add support for model, routes, migration generator types based on components
 * Add support for fields_for tag in formbuilder
 * Add support for button tag method, mail_to helper
 * Add support for check_box_group, radio_button_group which create a set of checkboxes or radio buttons
-* Look into creating sinatra generators using rubigen (http://github.com/drnic/rubigen)
-  * http://github.com/quirkey/sinatra-gen
-  * test generators
-  * add support for model, routes, migration generator types
 * Become total warden solution (basically just require warden gem installed, do everything else)
   * Look into removing overlapping methods and simply leverage sinatra_warden
   * Take advantage of shared strategies: http://github.com/hassox/warden_strategies/tree/master/lib/
-  * Make warden password strategy support a callback which explains what to do with username, password
-  * WardenPlugin.authenticate_callback { |username, password| User.authenticate(username, password) }
 
 = COMPLETED
 
+* Created application generator using thor
 * Add support for a MailerPlugin which will make sending emails a breeze (http://github.com/hiroshi/pony)
 * Add support for missing formbuilder fields (select, and standard_form_builder methods i.e check_box_group)
 * Add support for missing formhelpers/fields (radio_button_tag, select_tag)
