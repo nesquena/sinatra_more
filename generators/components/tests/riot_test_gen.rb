@@ -1,7 +1,7 @@
 module SinatraMore
   module RiotTestGen
     RIOT_SETUP = <<-TEST
-\nclass Riot::Context
+\nclass Riot::Situation
   include Rack::Test::Methods
   
   def app
