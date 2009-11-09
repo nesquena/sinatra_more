@@ -146,7 +146,7 @@ class TestSkeletonGenerator < Test::Unit::TestCase
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--test=riot', '--script=none']) }
       assert_match /Applying.*?riot.*?test/, buffer
       assert_match_in_file(/require 'riot'/, '/tmp/sample_app/test/test_config.rb')
-      assert_match_in_file(/Riot::Context/, '/tmp/sample_app/test/test_config.rb')
+      assert_match_in_file(/Riot::Situation/, '/tmp/sample_app/test/test_config.rb')
     end
 
     should "properly generate for rspec" do
