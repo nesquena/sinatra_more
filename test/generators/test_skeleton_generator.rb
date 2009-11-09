@@ -75,7 +75,8 @@ class TestSkeletonGenerator < Test::Unit::TestCase
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--orm=activerecord', '--script=none']) }
       assert_match /Applying.*?activerecord.*?orm/, buffer
       assert_match_in_file(/require 'active_record'/, '/tmp/sample_app/config/dependencies.rb')
-      assert_match_in_file(/ActiveRecordInitializer/, '/tmp/sample_app/config/initializers/activerecord.rb')
+      assert_match_in_file(/ActiveRecordInitializer/, '/tmp/sample_app/config/initializers/active_record.rb')
+      assert_match_in_file(/Migrate the database/, '/tmp/sample_app/Rakefile')
       assert_match_in_file(/CreateUsers < ActiveRecord::Migration/, '/tmp/sample_app/db/migrate/001_create_users.rb')
       assert_match_in_file(/class User < ActiveRecord::Base/, '/tmp/sample_app/app/models/user.rb')
     end
@@ -84,7 +85,7 @@ class TestSkeletonGenerator < Test::Unit::TestCase
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--orm=datamapper', '--script=none']) }
       assert_match /Applying.*?datamapper.*?orm/, buffer
       assert_match_in_file(/require 'dm-core'/, '/tmp/sample_app/config/dependencies.rb')
-      assert_match_in_file(/DatamapperInitializer/, '/tmp/sample_app/config/initializers/datamapper.rb')
+      assert_match_in_file(/DataMapperInitializer/, '/tmp/sample_app/config/initializers/data_mapper.rb')
       assert_match_in_file(/class User.*?include DataMapper::Resource/m, '/tmp/sample_app/app/models/user.rb')
     end
 
@@ -92,7 +93,7 @@ class TestSkeletonGenerator < Test::Unit::TestCase
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--orm=mongomapper', '--script=none']) }
       assert_match /Applying.*?mongomapper.*?orm/, buffer
       assert_match_in_file(/require 'mongo_mapper'/, '/tmp/sample_app/config/dependencies.rb')
-      assert_match_in_file(/MongoDBInitializer/, '/tmp/sample_app/config/initializers/mongodb.rb')
+      assert_match_in_file(/MongoDbInitializer/, '/tmp/sample_app/config/initializers/mongo_db.rb')
       assert_match_in_file(/class User.*?include MongoMapper::Document/m, '/tmp/sample_app/app/models/user.rb')
     end
   end
