@@ -10,6 +10,7 @@
 
 = COMPLETED
 
+* Add content_for / yield tags similar to rails
 * Created application generator using thor
 * Add support for a MailerPlugin which will make sending emails a breeze (http://github.com/hiroshi/pony)
 * Add support for missing formbuilder fields (select, and standard_form_builder methods i.e check_box_group)
