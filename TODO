@@ -7,6 +7,11 @@
 * Become total warden solution (basically just require warden gem installed, do everything else)
   * Look into removing overlapping methods and simply leverage sinatra_warden
   * Take advantage of shared strategies: http://github.com/hassox/warden_strategies/tree/master/lib/
+* Check out the following sinatra extensions:
+  * http://github.com/emk/sinatra-url-for/
+  * http://github.com/wbzyl/sinatra-static-assets
+  * http://github.com/hallison/sinatra-mapping/
+  * http://github.com/bcarlso/snap/
 
 = COMPLETED
 
