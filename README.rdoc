@@ -95,14 +95,14 @@ methods should be very familiar to anyone who has used rails view helpers.
 
 * <tt>content_for(key, &block)</tt>
   * Capture a block of content to be rendered at a later time.
-  * content_for(:head) { ...content... }
+  * <tt>content_for(:head) { ...content... }</tt>
   * Also supports arguments passed to the content block
-  * content_for(:head) { |param1, param2| ...content... }
+  * <tt>content_for(:head) { |param1, param2| ...content... }</tt>
 * <tt>yield_content(key, *args)</tt>
   * Render the captured content blocks for a given key.
-  * yield_content :head
+  * <tt>yield_content :head</tt>
   * Also supports arguments yielded to the content block
-  * yield_content :head, param1, param2
+  * <tt>yield_content :head, param1, param2</tt>
 * <tt>capture_html(*args, &block)</tt>
   * Captures the html from a block of template code for erb or haml
   * <tt>capture_html(&block)</tt> => "...html..."
