@@ -59,6 +59,11 @@ class WardenDemo < Sinatra::Base
     must_be_authorized!('/login')
     "<h1>Valid Authorized Page</h1>"
   end
+  
+  post '/unauthenticated/?' do
+    status 401
+    '<h2>Unauthenticated</h2>'
+  end
 
   get '/current_user' do
     if current_user

@@ -454,12 +454,6 @@ In addition, the strategy used expects that you have an <tt>authenticate</tt> me
 
 Using this plugin you also do need to define your own routes for managing warden sessions. An example is below:
 
-  get '/unauthenticated/?' do
-    flash[:notice] = "That username and password are not correct!"
-    status 401
-    haml_template 'session/login'
-  end
-
   get '/login/?' do
     haml_template 'session/login'
   end
@@ -467,6 +461,12 @@ Using this plugin you also do need to define your own routes for managing warden
   post '/login/?' do
     authenticate_user!
     redirect "/dashboard"
+  end
+  
+  post '/unauthenticated/?' do
+    flash[:notice] = "That username and password are not correct!"
+    status 401
+    haml_template 'session/login'
   end
 
   get '/logout/?' do
