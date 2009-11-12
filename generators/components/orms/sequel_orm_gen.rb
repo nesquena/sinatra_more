@@ -46,7 +46,7 @@ SEQUEL
       end
 
       def validate
-        errors.add :password, "must not be empty" if crypted_password.blank? && password.blank?
+        errors.add :password, "must not be empty" if self.crypted_password.blank? && password.blank?
         errors.add :password, "must match password confirmation" unless password == password_confirmation
       end
     end
