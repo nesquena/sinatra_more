@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra_more}
-  s.version = "0.3.9"
+  s.version = "0.3.10"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Esquenazi"]
-  s.date = %q{2009-11-10}
+  s.date = %q{2009-11-11}
   s.default_executable = %q{sinatra_gen}
   s.description = %q{Expands sinatra with standard helpers and tools to allow for complex applications}
   s.email = %q{nesquena@gmail.com}
@@ -98,12 +98,16 @@ Gem::Specification.new do |s|
      "test/fixtures/markup_app/views/content_for.haml",
      "test/fixtures/markup_app/views/content_tag.erb",
      "test/fixtures/markup_app/views/content_tag.haml",
+     "test/fixtures/markup_app/views/fields_for.erb",
+     "test/fixtures/markup_app/views/fields_for.haml",
      "test/fixtures/markup_app/views/form_for.erb",
      "test/fixtures/markup_app/views/form_for.haml",
      "test/fixtures/markup_app/views/form_tag.erb",
      "test/fixtures/markup_app/views/form_tag.haml",
      "test/fixtures/markup_app/views/link_to.erb",
      "test/fixtures/markup_app/views/link_to.haml",
+     "test/fixtures/markup_app/views/mail_to.erb",
+     "test/fixtures/markup_app/views/mail_to.haml",
      "test/fixtures/render_app/app.rb",
      "test/fixtures/render_app/views/erb/test.erb",
      "test/fixtures/render_app/views/haml/test.haml",
