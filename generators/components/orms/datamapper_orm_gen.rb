@@ -21,6 +21,12 @@ class User
   property :email,    String
   property :crypted_password, String
 
+  attr_accessor :password, :password_confirmation
+  
+  before :save, :encrypt_password
+  
+  validates_present :password, :password_confirmation
+
   def self.authenticate(username, password)
     user = User.first(:username => username)
     user && user.has_password?(password) ? user : nil
