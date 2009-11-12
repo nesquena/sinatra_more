@@ -44,5 +44,33 @@ Framework breakdown:
   # or maybe
   link_to "Show Admin", url_for(:admin, :show, :id => 5)
   link_to "Accounts", url_for(:accounts)
+  
+'sinatra-cache' Caching concept:
+
+  # in models
+  class Person
+    def something_expensive
+      Sinatra::Cache.get('key')
+      Sinatra::Cache.set('key', value)
+      Sinatra::Cache.fetch('key') { 'value' }
+    end
+  end
+
+  # fragment in route
+  get '/cache2' do
+    cache 'cache2', :expiry => 10 do
+      'Hello Cache2'
+    end
+  end
+
+  # fragment in view
+  # /views/test.haml
+  - cache 'test', :expiry => 10 do
+    = partial 'item', :collection => @items
+
+  # page
+  get '/example', :cache => true do
+    haml_template 'accounts/index'
+  end
 
 Use Bundler for managing dependencies: http://www.engineyard.com/blog/2009/using-the-rubygems-bundler-for-your-app/
