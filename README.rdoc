@@ -93,6 +93,16 @@ methods should be very familiar to anyone who has used rails view helpers.
 
 ==== Output Helpers
 
+* <tt>content_for(key, &block)</tt>
+  * Capture a block of content to be rendered at a later time.
+  * <tt>content_for(:head) { ...content... }</tt>
+  * Also supports arguments passed to the content block
+  * <tt>content_for(:head) { |param1, param2| ...content... }</tt>
+* <tt>yield_content(key, *args)</tt>
+  * Render the captured content blocks for a given key.
+  * <tt>yield_content :head</tt>
+  * Also supports arguments yielded to the content block
+  * <tt>yield_content :head, param1, param2</tt>
 * <tt>capture_html(*args, &block)</tt>
   * Captures the html from a block of template code for erb or haml
   * <tt>capture_html(&block)</tt> => "...html..."
@@ -124,6 +134,10 @@ methods should be very familiar to anyone who has used rails view helpers.
   * Creates a link element with given name, url and options
   * <tt>link_to 'click me', '/dashboard', :class => 'linky'</tt>
   * <tt>link_to('/dashboard', :class => 'blocky') { ...content... }</tt>
+* <tt>mail_to(email, caption=nil, mail_options={})</tt>
+  * Creates a mailto link tag to the specified email_address
+  * <tt>mail_to "me@demo.com"</tt>
+  * <tt>mail_to "me@demo.com", "My Email", :subject => "Feedback", :cc => 'test@demo.com'</tt>
 * <tt>image_tag(url, options={})</tt>
   * Creates an image element with given url and options
   * <tt>image_tag('icons/avatar.png')</tt>
@@ -180,6 +194,9 @@ methods should be very familiar to anyone who has used rails view helpers.
 * <tt>submit_tag(caption, options={})</tt>
   * Constructs a submit button from the given options
   * <tt>submit_tag "Create", :class => 'success'</tt>
+* <tt>button_tag(caption, options={})</tt>
+  * Constructs an input (type => 'button') from the given options
+  * <tt>button_tag "Cancel", :class => 'clear'</tt>
 * <tt>image_submit_tag(source, options={})</tt>
   * Constructs an image submit button from the given options
   * <tt>image_submit_tag "submit.png", :class => 'success'</tt>
@@ -211,8 +228,13 @@ A form_tag might look like:
   * Defaults to StandardFormBuilder but you can easily create your own!
   * <tt>form_for(@user, '/register', :id => 'register') { |f| ...field-elements... }</tt>
   * <tt>form_for(:user, '/register', :id => 'register') { |f| ...field-elements... }</tt>
+* <tt>fields_for(object, settings={}, &block)</tt>
+  * Constructs fields for a given object for use in an existing form
+  * Defaults to StandardFormBuilder but you can easily create your own!
+  * <tt>fields_for @user.assignment do |assignment| ... end</tt>
+  * <tt>fields_for :assignment do |assigment| ... end</tt>
 
-The following are fields provided by AbstractFormBuilder that can be used within a form_for:
+The following are fields provided by AbstractFormBuilder that can be used within a form_for or fields_for:
 
 * <tt>error_messages(options={})</tt>
   * Displays list html for the errors on form object
@@ -259,9 +281,13 @@ A form_for using these basic fields might look like:
     %p
       = f.label :is_admin, :caption => "Admin User?"
       = f.check_box :is_admin
-    $p
+    %p
       = f.label :color, :caption => "Favorite Color?"
       = f.select :color, :options => ['red', 'black']
+    %p
+      - fields_for @user.location do |location|
+        = location.text_field :street
+        = location.text_field :city
     %p
       = f.submit "Create", :class => 'button'
   
@@ -444,12 +470,6 @@ In addition, the strategy used expects that you have an <tt>authenticate</tt> me
 
 Using this plugin you also do need to define your own routes for managing warden sessions. An example is below:
 
-  get '/unauthenticated/?' do
-    flash[:notice] = "That username and password are not correct!"
-    status 401
-    haml_template 'session/login'
-  end
-
   get '/login/?' do
     haml_template 'session/login'
   end
@@ -457,6 +477,12 @@ Using this plugin you also do need to define your own routes for managing warden
   post '/login/?' do
     authenticate_user!
     redirect "/dashboard"
+  end
+  
+  post '/unauthenticated/?' do
+    flash[:notice] = "That username and password are not correct!"
+    status 401
+    haml_template 'session/login'
   end
 
   get '/logout/?' do
@@ -603,6 +629,7 @@ See the wiki article for additional information: <http://wiki.github.com/nesquen
 * Thanks to kelredd (http://github.com/kelredd) for the <tt>sinatra_helpers</tt> code that helped me to create erb capture and concat methods.
 * Thanks to sbfaulkner for the <tt>sinatra-helpers</tt> code that I browsed through many times while starting this library.
 * Thanks to vestel for the excellent modified <tt>pony</tt> fork which in part powers the mailer_plugin (http://github.com/vestel/pony)
+* Thanks to focat and sinatra-content-for library (http://github.com/focat/sinatra-content-for) for a good content_for starting point
 * Thanks to wycats and all for the awesome Thor gem which made creating the sinatra generator relatively painless
 
 == Contributors

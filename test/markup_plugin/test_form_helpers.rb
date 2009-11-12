@@ -364,6 +364,23 @@ class TestFormHelpers < Test::Unit::TestCase
     end
   end
 
+  context 'for #button_tag method' do
+    should "display submit tag in ruby" do
+      actual_html = button_tag("Cancel", :class => 'clear')
+      assert_has_tag(:input, :type => 'button', :class => "clear", :value => 'Cancel') { actual_html }
+    end
+
+    should "display submit tag in erb" do
+      visit '/erb/form_tag'
+      assert_have_selector 'form.advanced-form input[type=button]', :count => 1, :value => "Cancel"
+    end
+
+    should "display submit tag in haml" do
+      visit '/haml/form_tag'
+      assert_have_selector 'form.advanced-form input[type=button]', :count => 1, :value => "Cancel"
+    end
+  end
+
   context 'for #image_submit_tag method' do
     should "display image submit tag in ruby with relative path" do
       actual_html = image_submit_tag('buttons/ok.png', :class => 'success')

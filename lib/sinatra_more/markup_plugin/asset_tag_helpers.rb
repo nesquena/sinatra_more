@@ -28,6 +28,16 @@ module SinatraMore
       end
     end
 
+    # Creates a mail link element with given name and caption
+    # mail_to "me@demo.com"             => <a href="mailto:me@demo.com">me@demo.com</a>
+    # mail_to "me@demo.com", "My Email" => <a href="mailto:me@demo.com">My Email</a>
+    def mail_to(email, caption=nil, mail_options={})
+      html_options = mail_options.slice!(:cc, :bcc, :subject, :body)
+      mail_query = Rack::Utils.build_query(mail_options).gsub(/\+/, '%20').gsub('%40', '@')
+      mail_href = "mailto:#{email}"; mail_href << "?#{mail_query}" if mail_query.present?
+      link_to (caption || email), mail_href, html_options
+    end
+
     # Creates an image element with given url and options
     # image_tag('icons/avatar.png')
     def image_tag(url, options={})

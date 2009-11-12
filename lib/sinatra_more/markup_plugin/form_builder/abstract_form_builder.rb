@@ -53,7 +53,7 @@ class AbstractFormBuilder
   # f.check_box :remember_me, :value => 'true', :uncheck_value => '0'
   def check_box(field, options={})
     unchecked_value = options.delete(:uncheck_value) || '0'
-    options.reverse_merge!(:id => field_id(field))
+    options.reverse_merge!(:id => field_id(field), :value => '1')
     options.merge!(:checked => true) if values_matches_field?(field, options[:value])
     html = @template.check_box_tag field_name(field), options
     html << hidden_field(field, :value => unchecked_value, :id => nil)
@@ -98,7 +98,7 @@ class AbstractFormBuilder
   # Returns true if the value matches the value in the field
   # field_has_value?(:gender, 'male')
   def values_matches_field?(field, value)
-    value.present? && field_value(field).to_s == value.to_s
+    value.present? && (field_value(field).to_s == value.to_s || field_value(field).to_s == 'true')
   end
 
   # Returns the value for the object's field
