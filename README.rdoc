@@ -263,7 +263,7 @@ The following are fields provided by AbstractFormBuilder that can be used within
 * <tt>submit(caption, options={})</tt>
   * <tt>f.submit "Update", :class => 'long'</tt>
 * <tt>image_submit(source, options={})</tt>
-  * <tt>f.submit "submit.png", :class => 'long'</tt>
+  * <tt>f.image_submit "submit.png", :class => 'long'</tt>
   
 A form_for using these basic fields might look like:
 
