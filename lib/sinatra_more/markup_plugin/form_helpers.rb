@@ -136,6 +136,13 @@ module SinatraMore
       input_tag(:submit, options)
     end
 
+    # Constructs a button input from the given options
+    # button_tag "Cancel", :class => 'clear'
+    def button_tag(caption, options = {})
+      options.reverse_merge!(:value => caption)
+      input_tag(:button, options)
+    end
+
     # Constructs a submit button from the given options
     # submit_tag "Create", :class => 'success'
     def image_submit_tag(source, options={})

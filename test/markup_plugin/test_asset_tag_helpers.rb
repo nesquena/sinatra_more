@@ -46,6 +46,38 @@ class TestAssetTagHelpers < Test::Unit::TestCase
     end
   end
 
+  context 'for #mail_to method' do
+    should "display link element for mail to no caption" do
+      actual_html = mail_to('test@demo.com')
+      assert_has_tag(:a, :href => "mailto:test@demo.com", :content => 'test@demo.com') { actual_html }
+    end
+
+    should "display link element for mail to with caption" do
+      actual_html = mail_to('test@demo.com', "My Email", :class => 'demo')
+      assert_has_tag(:a, :href => "mailto:test@demo.com", :content => 'My Email', :class => 'demo') { actual_html }
+    end
+
+    should "display link element for mail to with caption and mail options" do
+      actual_html = mail_to('test@demo.com', "My Email", :subject => 'demo test', :class => 'demo', :cc => 'foo@test.com')
+      assert_has_tag(:a, :class => 'demo') { actual_html }
+      assert_match /mailto\:test\@demo.com\?/, actual_html
+      assert_match /cc=foo\@test\.com/, actual_html
+      assert_match /subject\=demo\%20test/, actual_html
+    end
+
+    should "display mail link element in haml" do
+      visit '/haml/mail_to'
+      assert_have_selector 'p.simple a', :href => 'mailto:test@demo.com', :content => 'test@demo.com'
+      assert_have_selector 'p.captioned a', :href => 'mailto:test@demo.com', :content => 'Click my Email'
+    end
+
+    should "display mail link element in erb" do
+      visit '/erb/mail_to'
+      assert_have_selector 'p.simple a', :href => 'mailto:test@demo.com', :content => 'test@demo.com'
+      assert_have_selector 'p.captioned a', :href => 'mailto:test@demo.com', :content => 'Click my Email'
+    end
+  end
+
   context 'for #image_tag method' do
     should "display image tag absolute link with no options" do
       assert_has_tag('img', :src => "/absolute/pic.gif") { image_tag('/absolute/pic.gif') }

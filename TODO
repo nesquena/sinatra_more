@@ -2,7 +2,6 @@
 
 * Add support for model, routes, migration generator types based on components
 * Add support for form.fields_for (one-to-one, nested and many associations like in rails)
-* Add support for button tag method, mail_to helper
 * Add support for check_box_group, radio_button_group which create a set of checkboxes or radio buttons
 * Become total warden solution (basically just require warden gem installed, do everything else)
   * Look into removing overlapping methods and simply leverage sinatra_warden
@@ -19,6 +18,7 @@
 
 = COMPLETED
 
+* Add support for button tag method, mail_to helper
 * Add support for simple fields_for tag helper
 * Add content_for / yield tags similar to rails
 * Created application generator using thor
