@@ -63,7 +63,16 @@ end
 MIGRATION
 
   USER = <<-USER
-class User < ActiveRecord::Base  
+class User < ActiveRecord::Base
+  before_save :encrypt_password
+  
+  attr_accessor :password, :password_confirmation
+  
+  def validate
+    errors.add :password, "must not be empty" if self.crypted_password.blank? && password.blank?
+    errors.add :password, "must match password confirmation" unless password == password_confirmation
+  end
+  
   def self.authenticate(username, password)
     user = User.first(:conditions => { :username => username })
     user && user.has_password?(password) ? user : nil
