@@ -1,0 +1,46 @@
+Working with lipsiadmin:
+
+1) Proof of concept for the Sinatra Framework
+2) Adding in additional features to the current sinatra_more (more generators, helpers, etc)
+3) Split plugin up into individual gems for better organization
+4) Porting of lipsiadmin over to sinatra
+5) First produciton application
+6) Build Sinatra Framework Website
+
+Framework breakdown:
+
+ * sinatra-core    (the existing sinatra-core)
+ * sinatra-mapping (sinatra route mapping system)
+ * sinatra-helpers (adds the markup and renderer helpers)
+ * sinatra-mailer  (mailer for easily managing and delivering mail from application)
+ * sinatra-gen     (generators for creating and building on existing sinatra applications)
+ * sinatra-admin   (admin management dashboard) [port of http://lipsiadmin.com/]
+ * sinatra-cache   (caching mechanism for memcache and page, fragment caching)
+
+Routing Concept:
+
+  namespace :admin do
+    get :show do
+      ...
+    end
+  end
+ 
+  get :accounts do
+   ...
+  end
+ 
+  map(:admin, :show).to("/my-admin/:id/show")
+  map(:accounts).to("/show-me-my/accounts")
+ 
+  # or
+ 
+  map :admin do |namespace|
+   namespace.map(:show).to("/my-admin/:id/show")
+  end
+ 
+  # and to use
+  link_to "Show Admin", admin_show_path(:id => 5)
+  link_to "Accounts", accounts_path
+  # or maybe
+  link_to "Show Admin", url_for(:admin, :show, :id => 5)
+  link_to "Accounts", url_for(:accounts)
