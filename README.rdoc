@@ -221,8 +221,13 @@ A form_tag might look like:
   * Defaults to StandardFormBuilder but you can easily create your own!
   * <tt>form_for(@user, '/register', :id => 'register') { |f| ...field-elements... }</tt>
   * <tt>form_for(:user, '/register', :id => 'register') { |f| ...field-elements... }</tt>
+* <tt>fields_for(object, settings={}, &block)</tt>
+  * Constructs fields for a given object for use in an existing form
+  * Defaults to StandardFormBuilder but you can easily create your own!
+  * <tt>fields_for @user.assignment do |assignment| ... end</tt>
+  * <tt>fields_for :assignment do |assigment| ... end</tt>
 
-The following are fields provided by AbstractFormBuilder that can be used within a form_for:
+The following are fields provided by AbstractFormBuilder that can be used within a form_for or fields_for:
 
 * <tt>error_messages(options={})</tt>
   * Displays list html for the errors on form object
@@ -269,9 +274,13 @@ A form_for using these basic fields might look like:
     %p
       = f.label :is_admin, :caption => "Admin User?"
       = f.check_box :is_admin
-    $p
+    %p
       = f.label :color, :caption => "Favorite Color?"
       = f.select :color, :options => ['red', 'black']
+    %p
+      - fields_for @user.location do |location|
+        = location.text_field :street
+        = location.text_field :city
     %p
       = f.submit "Create", :class => 'button'
   

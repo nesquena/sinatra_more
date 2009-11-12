@@ -1,11 +1,22 @@
 module SinatraMore
   module FormHelpers
     # Constructs a form for object using given or default form_builder
+    # form_for :user, '/register' do |f| ... end
     # form_for @user, '/register', :id => 'register' do |f| ... end
     def form_for(object, url, settings={}, &block)
       builder_class = configured_form_builder_class(settings[:builder])
       form_html = capture_html(builder_class.new(self, object), &block)
       form_tag(url, settings) { form_html }
+    end
+
+    # Constructs form fields for an object using given or default form_builder
+    # Used within an existing form to allow alternate objects within one form
+    # fields_for @user.assignment do |assignment| ... end
+    # fields_for :assignment do |assigment| ... end
+    def fields_for(object, settings={}, &block)
+      builder_class = configured_form_builder_class(settings[:builder])
+      fields_html = capture_html(builder_class.new(self, object), &block)
+      concat_content fields_html
     end
 
     # Constructs a form without object based on options

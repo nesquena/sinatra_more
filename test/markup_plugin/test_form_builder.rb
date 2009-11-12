@@ -34,7 +34,7 @@ class TestFormBuilder < Test::Unit::TestCase
       assert_has_tag('form input[type=hidden]', :name => '_method', :count => 0) { actual_html } # no method action field
     end
 
-    should "display correct form html with method :post" do
+    should "display correct form html with method :put" do
       actual_html = form_for(@user, '/update', :method => 'put') { "Demo" }
       assert_has_tag('form', :action => '/update', :method => 'post') { actual_html }
       assert_has_tag('form input', :type => 'hidden', :name => "_method", :value => 'put') { actual_html }
@@ -61,7 +61,7 @@ class TestFormBuilder < Test::Unit::TestCase
       assert_has_tag('form p input[type=text]') { actual_html }
     end
 
-    should "display fail for form with no object" do
+    should "display fail for form with nil object" do
       assert_raises(RuntimeError) { form_for(@not_real, '/register', :id => 'register', :method => 'post') { "Demo" } }
     end
 
@@ -77,6 +77,38 @@ class TestFormBuilder < Test::Unit::TestCase
       assert_have_selector :form, :action => '/demo', :id => 'demo'
       assert_have_selector :form, :action => '/another_demo', :id => 'demo2', :method => 'get'
       assert_have_selector :form, :action => '/third_demo', :id => 'demo3', :method => 'get'
+    end
+  end
+
+  context 'for #fields_for method' do
+    should 'display correct fields html' do
+      actual_html = fields_for(@user) { |f| f.text_field(:first_name) }
+      assert_has_tag(:input, :type => 'text', :name => 'user[first_name]', :id => 'user_first_name') { actual_html }
+    end
+
+    should 'display correct fields html with symbol object' do
+      actual_html = fields_for(:markup_user) { |f| f.text_field(:first_name) }
+      assert_has_tag(:input, :type => 'text', :name => 'markup_user[first_name]', :id => 'markup_user_first_name') { actual_html }
+    end
+
+    should "display fail for nil object" do
+      assert_raises(RuntimeError) { fields_for(@not_real) { |f| "Demo" } }
+    end
+
+    should 'display correct simple fields in haml' do
+      visit '/haml/fields_for'
+      assert_have_selector :form, :action => '/demo1', :id => 'demo-fields-for'
+      assert_have_selector '#demo-fields-for input', :type => 'text', :name => 'markup_user[gender]', :value => 'male'
+      assert_have_selector '#demo-fields-for input', :type => 'checkbox', :name => 'permission[can_edit]', :value => '1', :checked => 'checked'
+      assert_have_selector '#demo-fields-for input', :type => 'checkbox', :name => 'permission[can_delete]'
+    end
+
+    should "display correct simple fields in erb" do
+      visit '/erb/fields_for'
+      assert_have_selector :form, :action => '/demo1', :id => 'demo-fields-for'
+      assert_have_selector '#demo-fields-for input', :type => 'text', :name => 'markup_user[gender]', :value => 'male'
+      assert_have_selector '#demo-fields-for input', :type => 'checkbox', :name => 'permission[can_edit]', :value => '1', :checked => 'checked'
+      assert_have_selector '#demo-fields-for input', :type => 'checkbox', :name => 'permission[can_delete]'
     end
   end
 
@@ -186,14 +218,26 @@ class TestFormBuilder < Test::Unit::TestCase
     end
 
     should "display correct checkbox html as checked when object value matches" do
-      @user.stubs(:show_favorites => '1')
+      @user.stubs(:show_favorites => 'human')
+      actual_html = standard_builder.check_box(:show_favorites, :value => 'human')
+      assert_has_tag('input[type=checkbox]', :checked => 'checked', :name => 'user[show_favorites]') { actual_html }
+    end
+
+    should "display correct checkbox html as checked when object value is true" do
+      @user.stubs(:show_favorites => true)
       actual_html = standard_builder.check_box(:show_favorites, :value => '1')
       assert_has_tag('input[type=checkbox]', :checked => 'checked', :name => 'user[show_favorites]') { actual_html }
     end
 
     should "display correct checkbox html as unchecked when object value doesn't match" do
-      @user.stubs(:show_favories => '0')
-      actual_html = standard_builder.check_box(:show_favorites, :value => 'female')
+      @user.stubs(:show_favorites => 'alien')
+      actual_html = standard_builder.check_box(:show_favorites, :value => 'human')
+      assert_has_no_tag('input[type=checkbox]', :checked => 'checked') { actual_html }
+    end
+
+    should "display correct checkbox html as unchecked when object value is false" do
+      @user.stubs(:show_favorites => false)
+      actual_html = standard_builder.check_box(:show_favorites, :value => '1')
       assert_has_no_tag('input[type=checkbox]', :checked => 'checked') { actual_html }
     end
 

@@ -46,6 +46,12 @@ class MarkupUser
   def session_id; 45; end
   def gender; 'male'; end
   def remember_me; '1'; end
+  def permission; Permission.new; end
+end
+
+class Permission
+  def can_edit; true; end
+  def can_delete; false; end
 end
 
 class Errors < Array
