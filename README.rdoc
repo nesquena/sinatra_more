@@ -136,8 +136,8 @@ methods should be very familiar to anyone who has used rails view helpers.
   * <tt>link_to('/dashboard', :class => 'blocky') { ...content... }</tt>
 * <tt>mail_to(email, caption=nil, mail_options={})</tt>
   * Creates a mailto link tag to the specified email_address
-  * <tt>mail_to "me@demo.com"</tt> # => <a href="mailto:me@demo.com">me@demo.com</a>
-  * <tt>mail_to "me@demo.com", "My Email"</tt> # => <a href="mailto:me@demo.com">My Email</a>
+  * <tt>mail_to "me@demo.com"</tt> # => <pre><a href="mailto:me@demo.com">me@demo.com</a></pre>
+  * <tt>mail_to "me@demo.com", "My Email"</tt> # => <pre><a href="mailto:me@demo.com">My Email</a></pre>
 * <tt>image_tag(url, options={})</tt>
   * Creates an image element with given url and options
   * <tt>image_tag('icons/avatar.png')</tt>
