@@ -9,15 +9,15 @@ Working with lipsiadmin:
 
 Framework breakdown:
 
- * sinatra-core    (the existing sinatra-core)
+ * sinatra-core    (the existing sinatra framework)          <= from Sinatra
+ * sinatra-helpers (adds the markup and renderer helpers)    <= from MarkupPlugin, RenderPlugin
+ * sinatra-mailer  (mail handling for sinatra applications)  <= from MailerPlugin
+ * sinatra-gen     (easy generation of and for sinatra apps) <= from Generator
+ * sinatra-admin   (admin management dashboard for content)  <= from Lipsiadmin (ported)
+ * sinatra-cache   (page and fragment caching support)       
  * sinatra-mapping (sinatra route mapping system)
- * sinatra-helpers (adds the markup and renderer helpers)
- * sinatra-mailer  (mailer for easily managing and delivering mail from application)
- * sinatra-gen     (generators for creating and building on existing sinatra applications)
- * sinatra-admin   (admin management dashboard) [port of http://lipsiadmin.com/]
- * sinatra-cache   (caching mechanism for memcache and page, fragment caching)
 
-Routing Concept:
+'sinatra-mapping' Routing Concept:
 
   namespace :admin do
     get :show do
@@ -44,3 +44,5 @@ Routing Concept:
   # or maybe
   link_to "Show Admin", url_for(:admin, :show, :id => 5)
   link_to "Accounts", url_for(:accounts)
+
+Use Bundler for managing dependencies: http://www.engineyard.com/blog/2009/using-the-rubygems-bundler-for-your-app/
