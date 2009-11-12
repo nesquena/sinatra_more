@@ -137,7 +137,7 @@ methods should be very familiar to anyone who has used rails view helpers.
 * <tt>mail_to(email, caption=nil, mail_options={})</tt>
   * Creates a mailto link tag to the specified email_address
   * <tt>mail_to "me@demo.com"</tt>
-  * <tt>mail_to "me@demo.com", "My Email"</tt>
+  * <tt>mail_to "me@demo.com", "My Email", :subject => "Feedback", :cc => 'test@demo.com'</tt>
 * <tt>image_tag(url, options={})</tt>
   * Creates an image element with given url and options
   * <tt>image_tag('icons/avatar.png')</tt>
