@@ -11,7 +11,7 @@ end
 TEST
 
     def setup_test
-      insert_require 'test/unit', 'shoulda', :path => "test/test_config.rb"
+      require_dependencies 'test/unit', 'shoulda', :env => :testing
       insert_test_suite_setup SHOULDA_SETUP
     end
     

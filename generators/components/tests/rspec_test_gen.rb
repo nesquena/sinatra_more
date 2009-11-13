@@ -11,7 +11,7 @@ end
 TEST
 
     def setup_test
-      insert_require 'spec', :path => "test/test_config.rb"
+      require_dependencies 'spec', :env => :testing
       insert_test_suite_setup RSPEC_SETUP
     end
     

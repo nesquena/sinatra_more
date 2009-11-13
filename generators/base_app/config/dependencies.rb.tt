@@ -1,7 +1,7 @@
 # Dependencies contains all required gems, helpers and core configuration
 
 class <%= @class_name %> < Sinatra::Application
-  %w[rubygems rack-flash warden sinatra_more bcrypt].each { |gem| require gem }
+  bundler_require_dependencies
   
   # Required middleware
   use Rack::Session::Cookie

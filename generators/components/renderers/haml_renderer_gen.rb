@@ -10,8 +10,9 @@ end
 HASSLE
     
     def setup_renderer
-      insert_require('haml', 'sass', 'hassle', :path => 'config/dependencies.rb', :indent => 2)
+      require_dependencies 'haml', 'hassle'
       create_file("config/initializers/hassle.rb", HASSLE)
+      empty_directory('public/stylesheets/sass')
     end
   end
 end

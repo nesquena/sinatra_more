@@ -1,0 +1,13 @@
+clear_sources
+source 'http://gemcutter.org'
+# Base requirements
+gem 'sinatra'
+gem 'sinatra_more'
+gem 'rack-flash'
+gem 'warden'
+gem 'bcrypt-ruby', :require_as => 'bcrypt'
+
+# Component requirements
+
+# Testing requirements
+gem 'rack-test', :require_as => 'rack/test', :only => :testing

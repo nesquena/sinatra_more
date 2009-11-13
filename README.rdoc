@@ -595,7 +595,9 @@ The simplest possible command to generate a base application would be:
   
 This would construct a Sinatra application DemoApp (which extends from Sinatra::Application) 
 inside the folder 'demo_app' at our current path. Inside the application there would be configuration and 
-setup performed for the default components. You can also define specific components to be used:
+setup performed for the default components.
+
+You can also define specific components to be used:
 
   $ sinatra_gen demo_app . --test=rspec --renderer=haml --mock=rr --script=jquery --orm datamapper
   
@@ -610,17 +612,27 @@ The available components and their default options are listed below:
 * mock:     <tt>mocha</tt>  (default), <tt>rr</tt>
 * script:   <tt>jquery</tt> (default), <tt>prototype</tt>, <tt>rightjs</tt>
 * orm:      <tt>datamapper</tt> (default), <tt>mongomapper</tt>, <tt>activerecord</tt>, <tt>sequel</tt>
+
+The generator uses the <tt>bundler</tt> gem to resolve any application dependencies when the application is newly created.
+The necessary bundler command can be executed automatically through the generator with
+
+  $ sinatra_gen demo_app . --run_bundler # alias -b
+
+or this can be done manually through executing command <tt>gem bundle</tt> in the terminal at the root of the generated application.
+If not executed manually, the bundling will be performed automatically the first time the application attempts to boot.
+Note that this command only has to be performed when the application is first generated or when the Gemfile is modified.
  
-The generator framework within sinatra_more is highly extensible and additional components and tools can easily be added. 
+The generator framework within sinatra_more is extensible and additional components and tools can be added easily.
 This would be achieved through forking our project and reading through the code in <tt>/generators/sinatra_generator.rb</tt> and
 the setup instructions inside the relevant files within <tt>/generators/components/</tt>. We are happy to accept pull requests
 for additional component types not originally included (although helping us maintain them would also be appreciated).
 
-We are planning to add additional generator actions such as:
+We are also planning to add generator actions such as:
 
-* Model generator (working for any of the available orms listed)
-* Routes generator 
-* Migrations generator
+* Model generation (working for any of the available orms listed)
+* Routes generation
+* Mailer generation
+* Migrations generation
 
 See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/generator>
   
@@ -630,7 +642,8 @@ See the wiki article for additional information: <http://wiki.github.com/nesquen
 * Thanks to sbfaulkner for the <tt>sinatra-helpers</tt> code that I browsed through many times while starting this library.
 * Thanks to vestel for the excellent modified <tt>pony</tt> fork which in part powers the mailer_plugin (http://github.com/vestel/pony)
 * Thanks to focat and sinatra-content-for library (http://github.com/focat/sinatra-content-for) for a good content_for starting point
-* Thanks to wycats and all for the awesome Thor gem which made creating the sinatra generator relatively painless
+* Thanks to wycats and others for the awesome Thor gem which made creating the sinatra generator relatively painless
+* Thanks to wycats and others for the bundler gem which made bundling the required gems for an application easy
 
 == Contributors
 
