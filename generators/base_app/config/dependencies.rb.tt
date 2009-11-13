@@ -28,6 +28,7 @@ class <%= @class_name %> < Sinatra::Application
   register SinatraMore::RenderPlugin
   register SinatraMore::MailerPlugin
   register SinatraMore::WardenPlugin
+  register SinatraMore::RoutingPlugin
     
   # Required helpers
   helpers ViewHelpers

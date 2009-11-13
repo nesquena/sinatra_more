@@ -49,6 +49,7 @@ Here is a small list of what sinatra_more contains:
 * Generic view and tag helpers (<tt>tag</tt>, <tt>content_tag</tt>, <tt>input_tag</tt>, ...)
 * Asset tag helpers (<tt>link_to</tt>, <tt>image_tag</tt>, <tt>javascript_include_tag</tt>, ...)
 * Full form helpers and builders support (<tt>form_tag</tt>, <tt>form_for</tt>, <tt>field_set_tag</tt>, <tt>text_field</tt>, ...)
+* Full url named route support to avoid hardcoding url paths in sinatra (<tt>map</tt>, <tt>url_for</tt>)
 * Generally useful formatting extensions (<tt>relative_time_ago</tt>, <tt>js_escape_html</tt>, <tt>sanitize_html</tt>)
 * Simple 'mailer' support for sinatra (akin to <tt>ActionMailer</tt> but simpler and powered by <tt>pony</tt>)
 * Plug and play setup for the excellent Warden authentication system
@@ -81,6 +82,7 @@ different components based on which pieces are useful for your particular applic
     register SinatraMore::RenderPlugin
     register SinatraMore::WardenPlugin
     register SinatraMore::MailerPlugin
+    register SinatraMore::RoutingPlugin
   end
 
 This will then allow you to use the components that have been registered. A breakdown of components is below:
@@ -577,6 +579,62 @@ or perhaps we want to have a short body without the need for a template file:
   end
 
 See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/mailerplugin>
+
+== RoutingPlugin
+
+This component provides Sinatra with an enhanced url routing system which enables named routes to be defined
+and used throughout your application. The benefits of this are that instead of having to hard-code route urls
+into every link and definition, now we can define the urls in a single spot and then attach an alias
+which can be used to refer to the url in the rest of the application. 
+
+Let's take a look at how to define named route mappings:
+
+  # /app/routes/example.rb
+  require 'sinatra_more'
+  
+  class RoutingDemo < Sinatra::Application
+    register SinatraMore::RoutingPlugin  
+    
+    # Define the named route mappings
+    map(:account).to("/the/accounts/:name/and/:id")
+    map(:accounts).to("/the/accounts/index")
+    
+    # Configure the routes using the named alias
+    get(:account)  { "name: params[:name] - id: params[:id]" }    
+    get(:accounts) { "I am the body for the url /the/accounts/index" }
+  end
+
+Notice we simply create a route alias using the <tt>map</tt> function and then pass in the corresponding url into the <tt>to</tt> method.
+You can then define the routes using the named symbol representing the url. The route aliases can be accessed using <tt>url_for</tt>
+
+  url_for(:accounts)
+  url_for(:account, :id => 1, :name => 'first')
+
+You can also refer to the url in views using <tt>url_for</tt>
+
+  # /app/views/index.erb
+  <p>Go to the <%= link_to 'accounts dashboard', url_for(:accounts) %> to view your accounts</p>
+  <p>Go to account for <%= link_to 'first account', url_for(:account, :id => 1, :name => 'first') %>
+
+Simply invoking <tt>url_for(name, *parameters)</tt> will return the full mapped url for use in links or anywhere else
+that the url might be required.
+
+The routing system also supports url route namespaces:
+
+  # /app/routes/example.rb
+  map(:admin, :show).to("/admin/:id/show")
+  
+  namespace :admin do
+    get :show do
+      "admin show for #{params[:id]}"
+    end
+  end
+
+You can then reference the url using the same <tt>url_for</tt> method:
+
+  <%= link_to 'admin page', url_for(:admin, :show, :id => 25) %>
+  
+You can freely use both named routes and traditional Sinatra routes in the same application without any conflicts.
   
 == Sinatra Generators
 
@@ -642,6 +700,7 @@ See the wiki article for additional information: <http://wiki.github.com/nesquen
 * Thanks to sbfaulkner for the <tt>sinatra-helpers</tt> code that I browsed through many times while starting this library.
 * Thanks to vestel for the excellent modified <tt>pony</tt> fork which in part powers the mailer_plugin (http://github.com/vestel/pony)
 * Thanks to focat and sinatra-content-for library (http://github.com/focat/sinatra-content-for) for a good content_for starting point
+* Thanks to bcarlso for the snap sinatra library (http://github.com/bcarlso/snap) which was a starting point for named routes
 * Thanks to wycats and others for the awesome Thor gem which made creating the sinatra generator relatively painless
 * Thanks to wycats and others for the bundler gem which made bundling the required gems for an application easy
 

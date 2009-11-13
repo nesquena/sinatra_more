@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/support_lite'
-Dir[File.dirname(__FILE__) + '/mapper_plugin/**/*.rb'].each {|file| load file }
+Dir[File.dirname(__FILE__) + '/routing_plugin/**/*.rb'].each {|file| load file }
 
 module SinatraMore
-  class MappedRoute
+  class NamedRoute
     def initialize(app, *names)
       @app = app
       @names = names
@@ -13,7 +13,7 @@ module SinatraMore
     end
   end
 
-  module MapperHelpers
+  module RoutingHelpers
     def url_for(*names)
       values = names.extract_options!
       mapped_url = self.class.named_paths[names]
@@ -26,13 +26,13 @@ module SinatraMore
     end
   end
 
-  module MapperPlugin
+  module RoutingPlugin
     def self.registered(app)
       app.set :named_paths, {}
-      app.helpers SinatraMore::MapperHelpers
+      app.helpers SinatraMore::RoutingHelpers
 
       def map(*args)
-        MappedRoute.new(self, *args)
+        NamedRoute.new(self, *args)
       end
 
       def namespace(name, &block)

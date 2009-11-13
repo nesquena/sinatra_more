@@ -2,13 +2,8 @@ require 'sinatra/base'
 require 'sinatra_more'
 require 'haml'
 
-class MapperUser
-  attr_accessor :name
-  def initialize(name); @name = name; end
-end
-
-class MapperDemo < Sinatra::Base
-  register SinatraMore::MapperPlugin
+class RoutingDemo < Sinatra::Base
+  register SinatraMore::RoutingPlugin
   
   configure do
     set :root, File.dirname(__FILE__)
