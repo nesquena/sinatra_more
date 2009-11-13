@@ -580,7 +580,7 @@ or perhaps we want to have a short body without the need for a template file:
 
 See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/mailerplugin>
 
-== RoutingPlugin
+=== RoutingPlugin
 
 This component provides Sinatra with an enhanced url routing system which enables named route aliases to be defined
 and used throughout your application to refer to urls. The benefits of this is that instead of having to hard-code route urls
