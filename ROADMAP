@@ -20,6 +20,13 @@ Framework structure:
  * sinatra-routing (sinatra route mapping system)            <= from RoutingPlugin
  * sinatra-cache   (page and fragment caching support)       
  * sinatra-admin   (admin management dashboard for content)  <= from Lipsiadmin (ported)
+ 
+Additional wish-list features (integrate existing plugin) (?)
+
+ * Internationalization  - http://r18n.rubyforge.org/#sinatra
+ * Asynchronous Commands - http://github.com/deadprogrammer/spork
+ * Capistrano Deployment - http://github.com/nakajima/capinatra (?)
+ * Job Queue             - http://github.com/adamcooke/resque (or http://github.com/bmizerany/sinatra-dj)
 
 'sinatra-cache' Caching concept:
 
