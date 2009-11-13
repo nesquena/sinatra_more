@@ -5,7 +5,7 @@ module SinatraMore
     # require_dependencies 'mocha', 'bacon', :env => :testing
     def require_dependencies(*gem_names)
       options = gem_names.extract_options!
-      gem_names.each { |lib| insert_into_gemfile(lib, options) }
+      gem_names.reverse.each { |lib| insert_into_gemfile(lib, options) }
     end
 
     # Inserts a required gem into the Gemfile to add the bundler dependency
