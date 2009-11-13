@@ -1,4 +1,6 @@
 # This file is merely for beginning the boot process, check dependencies.rb for more information
+require 'rubygems'
+require 'sinatra/base'
 
 RACK_ENV = ENV["RACK_ENV"] ||= "development" unless defined? RACK_ENV
 ROOT_DIR = File.dirname(__FILE__) + '/../' unless defined? ROOT_DIR
