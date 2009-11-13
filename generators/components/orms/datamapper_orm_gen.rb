@@ -44,7 +44,7 @@ User.auto_upgrade!
 USER
     
     def setup_orm
-      require_dependencies 'dm-core'
+      require_dependencies 'dm-core', 'dm-validations'
       create_file("config/initializers/data_mapper.rb", DM)
       create_file("app/models/user.rb", USER)
     end
