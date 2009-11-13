@@ -6,6 +6,12 @@ class <%= @class_name %> < Sinatra::Application
   # Required middleware
   use Rack::Session::Cookie
   use Rack::Flash
+  
+  # Includes all necessary sinatra_more helpers
+  register SinatraMore::MarkupPlugin
+  register SinatraMore::RenderPlugin
+  register SinatraMore::MailerPlugin
+  register SinatraMore::RoutingPlugin
 
   # Requires the initializer modules which configure specific components
   Dir[File.dirname(__FILE__) + '/initializers/*.rb'].each do |file|
@@ -23,12 +29,8 @@ class <%= @class_name %> < Sinatra::Application
   # Require all the folders and files necessary to run the application
   file_loading_paths.each { |load_path| Dir[root_path(load_path)].each { |file| require file } }
   
-  # Includes all necessary sinatra_more helpers
-  register SinatraMore::MarkupPlugin
-  register SinatraMore::RenderPlugin
-  register SinatraMore::MailerPlugin
+  # Require Warden plugin below to allow User to be loaded
   register SinatraMore::WardenPlugin
-  register SinatraMore::RoutingPlugin
     
   # Required helpers
   helpers ViewHelpers

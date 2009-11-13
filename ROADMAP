@@ -18,34 +18,9 @@ Framework structure:
  * sinatra-mailer  (mail handling for sinatra applications)  <= from MailerPlugin
  * sinatra-gen     (easy generation of and for sinatra apps) <= from Generator
  * sinatra-admin   (admin management dashboard for content)  <= from Lipsiadmin (ported)
+ * sinatra-routing (sinatra route mapping system)            <= from RoutingPlugin
  * sinatra-cache   (page and fragment caching support)       
- * sinatra-routing (sinatra route mapping system)
 
-'sinatra-routing' Routing Concept:
-
-    namespace :admin do
-      get :show do
-        ...
-      end
-    end
- 
-    get :accounts do
-     ...
-    end
- 
-    map(:admin, :show).to("/my-admin/:id/show")
-    map(:accounts).to("/show-me-my/accounts")
- 
-    # or
- 
-    map :admin do |namespace|
-     namespace.map(:show).to("/my-admin/:id/show")
-    end
- 
-    # and to use
-    link_to "Show Admin", url_for(:admin, :show, :id => 5)
-    link_to "Accounts",   url_for(:accounts)
-  
 'sinatra-cache' Caching concept:
 
     # in models
@@ -73,3 +48,28 @@ Framework structure:
     get '/example', :cache => true do
       haml_template 'accounts/index'
     end
+
+'sinatra-routing' Routing Concept:
+
+    namespace :admin do
+      get :show do
+        ...
+      end
+    end
+ 
+    get :accounts do
+     ...
+    end
+ 
+    map(:admin, :show).to("/my-admin/:id/show")
+    map(:accounts).to("/show-me-my/accounts")
+ 
+    # or
+ 
+    map :admin do |namespace|
+     namespace.map(:show).to("/my-admin/:id/show")
+    end
+ 
+    # and to use
+    link_to "Show Admin", url_for(:admin, :show, :id => 5)
+    link_to "Accounts",   url_for(:accounts)
