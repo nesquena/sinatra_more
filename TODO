@@ -25,6 +25,10 @@
   * Become total warden solution (basically just require warden gem installed, do everything) (?)
   * Look into removing overlapping methods and simply leveraging sinatra_warden
   * Take advantage of shared strategies: http://github.com/hassox/warden_strategies/tree/master/lib/
+  
+== RoutingPlugin
+
+  * Add support for multiple applications being mounted
 
 = COMPLETED
 
