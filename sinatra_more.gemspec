@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra_more}
-  s.version = "0.3.13"
+  s.version = "0.3.14"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Esquenazi"]
-  s.date = %q{2009-11-12}
+  s.date = %q{2009-11-13}
   s.default_executable = %q{sinatra_gen}
   s.description = %q{Expands sinatra with standard helpers and tools to allow for complex applications}
   s.email = %q{nesquena@gmail.com}
@@ -84,6 +84,9 @@ Gem::Specification.new do |s|
      "lib/sinatra_more/markup_plugin/tag_helpers.rb",
      "lib/sinatra_more/render_plugin.rb",
      "lib/sinatra_more/render_plugin/render_helpers.rb",
+     "lib/sinatra_more/routing_plugin.rb",
+     "lib/sinatra_more/routing_plugin/named_route.rb",
+     "lib/sinatra_more/routing_plugin/routing_helpers.rb",
      "lib/sinatra_more/support_lite.rb",
      "lib/sinatra_more/warden_plugin.rb",
      "lib/sinatra_more/warden_plugin/warden_helpers.rb",
@@ -116,6 +119,8 @@ Gem::Specification.new do |s|
      "test/fixtures/render_app/views/template/_user.haml",
      "test/fixtures/render_app/views/template/haml_template.haml",
      "test/fixtures/render_app/views/template/some_template.haml",
+     "test/fixtures/routing_app/app.rb",
+     "test/fixtures/routing_app/views/index.haml",
      "test/fixtures/warden_app/app.rb",
      "test/fixtures/warden_app/views/dashboard.haml",
      "test/generators/test_skeleton_generator.rb",
@@ -130,6 +135,7 @@ Gem::Specification.new do |s|
      "test/markup_plugin/test_tag_helpers.rb",
      "test/test_mailer_plugin.rb",
      "test/test_render_plugin.rb",
+     "test/test_routing_plugin.rb",
      "test/test_warden_plugin.rb",
      "vendor/pony/lib/pony.rb",
      "vendor/pony/spec/base.rb",
@@ -145,6 +151,7 @@ Gem::Specification.new do |s|
      "test/fixtures/mailer_app/app.rb",
      "test/fixtures/markup_app/app.rb",
      "test/fixtures/render_app/app.rb",
+     "test/fixtures/routing_app/app.rb",
      "test/fixtures/warden_app/app.rb",
      "test/generators/test_skeleton_generator.rb",
      "test/helper.rb",
@@ -158,6 +165,7 @@ Gem::Specification.new do |s|
      "test/markup_plugin/test_tag_helpers.rb",
      "test/test_mailer_plugin.rb",
      "test/test_render_plugin.rb",
+     "test/test_routing_plugin.rb",
      "test/test_warden_plugin.rb"
   ]
 
