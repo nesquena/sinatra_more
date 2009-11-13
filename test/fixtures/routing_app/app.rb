@@ -10,15 +10,26 @@ class RoutingDemo < Sinatra::Base
   end
   
   map(:admin, :show).to("/admin/:id/show")
+  map :admin do |namespace|
+    namespace.map(:update).to("/admin/:id/update/:name")
+    namespace.map(:destroy).to("/admin/:id/destroy")
+  end
   map(:account).to("/the/accounts/:name/path/:id/end")
   map(:accounts).to("/the/accounts/index/?")
   
   namespace :admin do
     get :show do
-      "admin show for #{params[:id]}"
+      "<p>admin show for id #{params[:id]}</p>"
+    end
+    
+    get :update do
+      "<p>updated admin with id #{params[:id]} and name #{params[:name]}</p>"
+    end
+    
+    get :destroy do
+      "<p>destroy admin with id #{params[:id]}</p>"
     end
   end
-  
   get :account do
     "<h1>the account url for #{params[:name]} and id #{params[:id]}</h1>"
   end

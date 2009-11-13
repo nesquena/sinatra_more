@@ -2,52 +2,38 @@ require File.dirname(__FILE__) + '/support_lite'
 Dir[File.dirname(__FILE__) + '/routing_plugin/**/*.rb'].each {|file| load file }
 
 module SinatraMore
-  class NamedRoute
-    def initialize(app, *names)
-      @app = app
-      @names = names
-    end
-
-    def to(path)
-      @app.named_paths[@names] = path
-    end
-  end
-
-  module RoutingHelpers
-    def url_for(*names)
-      values = names.extract_options!
-      mapped_url = self.class.named_paths[names]
-      result_url = String.new(mapped_url)
-      result_url.scan(%r{/?(:\S+?)(?:/|$)}).each do |placeholder|
-        value_key = placeholder[0][1..-1].to_sym
-        result_url.gsub!(Regexp.new(placeholder[0]), values[value_key].to_s)
-      end
-      result_url
-    end
-  end
-
   module RoutingPlugin
     def self.registered(app)
+      # Named paths stores the named route aliases mapping to the url
+      # i.e { [:account] => '/account/path', [:admin, :show] => '/admin/show/:id' }
       app.set :named_paths, {}
       app.helpers SinatraMore::RoutingHelpers
 
-      def map(*args)
-        NamedRoute.new(self, *args)
+      # map constructs a mapping between a named route and a specified alias
+      # the mapping url can contain url query parameters
+      # map(:accounts).to('/accounts/url')
+      # map(:admin, :show).to('/admin/show/:id')
+      # map(:admin) { |namespace| namespace.map(:show).to('/admin/show/:id') }
+      def map(*args, &block)
+        named_router = SinatraMore::NamedRoute.new(self, *args)
+        block_given? ? block.call(named_router) : named_router
       end
 
+      # Used to define namespaced route configurations in order to group similar routes
+      # Class evals the routes but with the namespace assigned which will append to each route
+      # namespace(:admin) { get(:show) { "..." } }
       def namespace(name, &block)
         original, @_namespace = @_namespace, name
         self.class_eval(&block)
         @_namespace = original
       end
 
+      # Hijacking route method in sinatra to replace a route alias (i.e :account) with the full url string mapping
+      # Supports namespaces by accessing the instance variable and appending this to the route alias name
+      # If the path is not a symbol, nothing is changed and the original route method is invoked
       def route(verb, path, options={}, &block)
-        # raise "namespace: #{@_namespace}, path: #{path}, and named: #{named_paths.inspect}"
-        if path.kind_of? Symbol
-          route_name = [@_namespace, path].flatten.compact
-          path = named_paths[route_name]
-        end
-        # raise path.inspect
+        route_name = [@_namespace, path].flatten.compact
+        path = named_paths[route_name] if path.kind_of? Symbol
         super verb, path, options, &block
       end
     end

@@ -635,6 +635,8 @@ You can then reference the url using the same <tt>url_for</tt> method:
   <%= link_to 'admin page', url_for(:admin, :show, :id => 25) %>
   
 You can freely use both named routes and traditional Sinatra routes in the same application without any conflicts.
+
+See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/routingplugin>
   
 == Sinatra Generators
 

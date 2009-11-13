@@ -19,9 +19,9 @@ Framework structure:
  * sinatra-gen     (easy generation of and for sinatra apps) <= from Generator
  * sinatra-admin   (admin management dashboard for content)  <= from Lipsiadmin (ported)
  * sinatra-cache   (page and fragment caching support)       
- * sinatra-mapping (sinatra route mapping system)
+ * sinatra-routing (sinatra route mapping system)
 
-'sinatra-mapping' Routing Concept:
+'sinatra-routing' Routing Concept:
 
     namespace :admin do
       get :show do
@@ -43,11 +43,8 @@ Framework structure:
     end
  
     # and to use
-    link_to "Show Admin", admin_show_path(:id => 5)
-    link_to "Accounts", accounts_path
-    # or maybe
     link_to "Show Admin", url_for(:admin, :show, :id => 5)
-    link_to "Accounts", url_for(:accounts)
+    link_to "Accounts",   url_for(:accounts)
   
 'sinatra-cache' Caching concept:
 
