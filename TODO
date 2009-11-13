@@ -17,7 +17,6 @@
 == Generator
 
   * Add support for model, routes, migration generator types based on components
-  * Add support for bundler (http://github.com/wycats/bundler) to make setting up a generated app easy
 
 == MarkupPlugin
 
@@ -32,6 +31,7 @@
 
 = COMPLETED
 
+* Add support for bundler (http://github.com/wycats/bundler) to make setting up a generated app easy
 * Add support for button tag method, mail_to helper
 * Add support for simple fields_for tag helper
 * Add content_for / yield tags similar to rails
