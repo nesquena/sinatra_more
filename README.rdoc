@@ -52,6 +52,7 @@ Here is a small list of what sinatra_more contains:
 * Full url named route support to avoid hardcoding url paths in sinatra (<tt>map</tt>, <tt>url_for</tt>)
 * Generally useful formatting extensions (<tt>relative_time_ago</tt>, <tt>js_escape_html</tt>, <tt>sanitize_html</tt>)
 * Simple 'mailer' support for sinatra (akin to <tt>ActionMailer</tt> but simpler and powered by <tt>pony</tt>)
+* Page, fragment and model caching akin to the caching support in rails (with a Sinatra twist)
 * Plug and play setup for the excellent Warden authentication system
 
 Keep in mind, the user will be able to pull in these components seperately and leave out those that are not required.
@@ -657,6 +658,12 @@ You can then reference the urls using the same <tt>url_for</tt> method:
 You can freely use both named route aliases and traditional Sinatra routes in the same application without conflict.
 
 See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/routingplugin>
+
+=== CachingPlugin
+
+...DOCUMENTATION...
+
+See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/cachingplugin>
   
 == Sinatra Generators
 
