@@ -91,7 +91,7 @@ end
 AUTH
 
     def setup_orm
-      insert_require 'mongo_mapper', :path => "config/dependencies.rb", :indent => 2
+      require_dependencies 'mongo_mapper'
       create_file("config/initializers/mongo_db.rb", MONGO)
       create_file("lib/ext/mongo_mapper.rb", CONCERNED)
       create_file("app/models/user.rb", USER)

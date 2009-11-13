@@ -11,7 +11,7 @@ end
 TEST
 
     def setup_test
-      insert_require 'bacon', :path => "test/test_config.rb"
+      require_dependencies 'bacon', :env => :testing
       insert_test_suite_setup BACON_SETUP
     end
     

@@ -42,20 +42,27 @@ class TestSkeletonGenerator < Test::Unit::TestCase
       assert_match /Applying.*?prototype.*?script/, buffer
       assert_match /Applying.*?erb.*?renderer/, buffer
     end
+    should "output gem files for base app" do
+      silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--script=none']) }
+      assert_match_in_file(/gem 'sinatra'/, '/tmp/sample_app/Gemfile')
+      assert_match_in_file(/gem 'sinatra_more'/, '/tmp/sample_app/Gemfile')
+      assert_match_in_file(/gem 'rack-flash'/, '/tmp/sample_app/Gemfile')
+      assert_match_in_file(/gem 'rack-test'/, '/tmp/sample_app/Gemfile')
+    end
   end
 
-  context "the generator for mock component" do
+  context "a generator for mock component" do
     should "properly generate for rr" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--mock=rr', '--script=none']) }
       assert_match /Applying.*?rr.*?mock/, buffer
-      assert_match_in_file(/require 'rr'/, '/tmp/sample_app/test/test_config.rb')
+      assert_match_in_file(/gem 'rr'/, '/tmp/sample_app/Gemfile')
       assert_match_in_file(/class.*?include RR::Adapters::RRMethods/m, '/tmp/sample_app/test/test_config.rb')
     end
 
     should "properly generate default for mocha" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--mock=mocha', '--script=none']) }
       assert_match /Applying.*?mocha.*?mock/, buffer
-      assert_match_in_file(/require 'mocha'/, '/tmp/sample_app/test/test_config.rb')
+      assert_match_in_file(/gem 'mocha'/, '/tmp/sample_app/Gemfile')
       assert_match_in_file(/class.*?include Mocha::API/m, '/tmp/sample_app/test/test_config.rb')
     end
   end
@@ -66,7 +73,7 @@ class TestSkeletonGenerator < Test::Unit::TestCase
       SinatraMore::SkeletonGenerator.instance_eval("undef setup_orm if respond_to?('setup_orm')")
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--orm=sequel', '--script=none']) }
       assert_match /Applying.*?sequel.*?orm/, buffer
-      assert_match_in_file(/require 'sequel'/, '/tmp/sample_app/config/dependencies.rb')
+      assert_match_in_file(/gem 'sequel'/, '/tmp/sample_app/Gemfile')
       assert_match_in_file(/SequelInitializer/, '/tmp/sample_app/config/initializers/sequel.rb')
       assert_match_in_file(/class User < Sequel::Model/, '/tmp/sample_app/app/models/user.rb')
     end
@@ -74,7 +81,7 @@ class TestSkeletonGenerator < Test::Unit::TestCase
     should "properly generate for activerecord" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--orm=activerecord', '--script=none']) }
       assert_match /Applying.*?activerecord.*?orm/, buffer
-      assert_match_in_file(/require 'active_record'/, '/tmp/sample_app/config/dependencies.rb')
+      assert_match_in_file(/gem 'activerecord'/, '/tmp/sample_app/Gemfile')
       assert_match_in_file(/ActiveRecordInitializer/, '/tmp/sample_app/config/initializers/active_record.rb')
       assert_match_in_file(/Migrate the database/, '/tmp/sample_app/Rakefile')
       assert_match_in_file(/CreateUsers < ActiveRecord::Migration/, '/tmp/sample_app/db/migrate/001_create_users.rb')
@@ -84,7 +91,7 @@ class TestSkeletonGenerator < Test::Unit::TestCase
     should "properly generate default for datamapper" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--orm=datamapper', '--script=none']) }
       assert_match /Applying.*?datamapper.*?orm/, buffer
-      assert_match_in_file(/require 'dm-core'/, '/tmp/sample_app/config/dependencies.rb')
+      assert_match_in_file(/gem 'dm-core'/, '/tmp/sample_app/Gemfile')
       assert_match_in_file(/DataMapperInitializer/, '/tmp/sample_app/config/initializers/data_mapper.rb')
       assert_match_in_file(/class User.*?include DataMapper::Resource/m, '/tmp/sample_app/app/models/user.rb')
     end
@@ -92,7 +99,7 @@ class TestSkeletonGenerator < Test::Unit::TestCase
     should "properly generate for mongomapper" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--orm=mongomapper', '--script=none']) }
       assert_match /Applying.*?mongomapper.*?orm/, buffer
-      assert_match_in_file(/require 'mongo_mapper'/, '/tmp/sample_app/config/dependencies.rb')
+      assert_match_in_file(/gem 'mongo_mapper'/, '/tmp/sample_app/Gemfile')
       assert_match_in_file(/MongoDbInitializer/, '/tmp/sample_app/config/initializers/mongo_db.rb')
       assert_match_in_file(/class User.*?include MongoMapper::Document/m, '/tmp/sample_app/app/models/user.rb')
     end
@@ -102,13 +109,14 @@ class TestSkeletonGenerator < Test::Unit::TestCase
     should "properly generate default for erb" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--renderer=erb', '--script=none']) }
       assert_match /Applying.*?erb.*?renderer/, buffer
-      assert_match_in_file(/require 'erb'/, '/tmp/sample_app/config/dependencies.rb')
+      assert_match_in_file(/gem 'erubis'/, '/tmp/sample_app/Gemfile')
     end
 
     should "properly generate for haml" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--renderer=haml','--script=none']) }
       assert_match /Applying.*?haml.*?renderer/, buffer
-      assert_match_in_file(/haml.*sass.*hassle.*require/, '/tmp/sample_app/config/dependencies.rb')
+      assert_match_in_file(/gem 'haml'/, '/tmp/sample_app/Gemfile')
+      assert_match_in_file(/gem 'hassle'/, '/tmp/sample_app/Gemfile')
       assert_match_in_file(/HassleInitializer/, '/tmp/sample_app/config/initializers/hassle.rb')
     end
   end
@@ -138,35 +146,35 @@ class TestSkeletonGenerator < Test::Unit::TestCase
     should "properly default generate for bacon" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--test=bacon', '--script=none']) }
       assert_match /Applying.*?bacon.*?test/, buffer
-      assert_match_in_file(/require 'bacon'/, '/tmp/sample_app/test/test_config.rb')
+      assert_match_in_file(/gem 'bacon'/, '/tmp/sample_app/Gemfile')
       assert_match_in_file(/Bacon::Context/, '/tmp/sample_app/test/test_config.rb')
     end
 
     should "properly generate for riot" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--test=riot', '--script=none']) }
       assert_match /Applying.*?riot.*?test/, buffer
-      assert_match_in_file(/require 'riot'/, '/tmp/sample_app/test/test_config.rb')
+      assert_match_in_file(/gem 'riot'/, '/tmp/sample_app/Gemfile')
       assert_match_in_file(/Riot::Situation/, '/tmp/sample_app/test/test_config.rb')
     end
 
     should "properly generate for rspec" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--test=rspec', '--script=none']) }
       assert_match /Applying.*?rspec.*?test/, buffer
-      assert_match_in_file(/require 'spec'/, '/tmp/sample_app/test/test_config.rb')
+      assert_match_in_file(/gem 'spec'/, '/tmp/sample_app/Gemfile')
       assert_match_in_file(/Spec::Runner/, '/tmp/sample_app/test/test_config.rb')
     end
 
     should "properly generate for shoulda" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--test=shoulda', '--script=none']) }
       assert_match /Applying.*?shoulda.*?test/, buffer
-      assert_match_in_file(/test\/unit.*shoulda.*require/, '/tmp/sample_app/test/test_config.rb')
+      assert_match_in_file(/gem 'shoulda'/, '/tmp/sample_app/Gemfile')
       assert_match_in_file(/Test::Unit::TestCase/, '/tmp/sample_app/test/test_config.rb')
     end
 
     should "properly generate for testspec" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--test=testspec', '--script=none']) }
       assert_match /Applying.*?testspec.*?test/, buffer
-      assert_match_in_file(/require 'test\/spec'/, '/tmp/sample_app/test/test_config.rb')
+      assert_match_in_file(/gem 'test\/spec'/, '/tmp/sample_app/Gemfile')
       assert_match_in_file(/Test::Unit::TestCase/, '/tmp/sample_app/test/test_config.rb')
     end
   end

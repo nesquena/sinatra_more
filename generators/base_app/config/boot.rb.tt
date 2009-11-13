@@ -1,13 +1,12 @@
 # This file is merely for beginning the boot process, check dependencies.rb for more information
+require 'rubygems'
+require 'sinatra/base'
 
 RACK_ENV = ENV["RACK_ENV"] ||= "development" unless defined? RACK_ENV
 ROOT_DIR = File.dirname(__FILE__) + '/../' unless defined? ROOT_DIR
 
 # Helper method for file references.
-#
-# @param args [Array] Path components relative to ROOT_DIR.
-# @example Referencing a file in config called settings.yml:
-#   root_path("config", "settings.yml")
+# root_path("config", "settings.yml")
 def root_path(*args)
   File.join(ROOT_DIR, *args)
 end
@@ -25,6 +24,18 @@ class <%= @class_name %> < Sinatra::Application
   set :images_path, public_path("images")
   set :default_builder, 'StandardFormBuilder'
   set :environment, RACK_ENV if defined?(RACK_ENV)
+
+  # Attempts to require all dependencies with bundler, if this fails, bundle and then try again
+  def self.bundler_require_dependencies(environment=nil)
+    require 'bundler'
+    require File.expand_path(File.join(File.dirname(__FILE__), '/../vendor', 'gems', 'environment'))
+    Bundler.require_env(environment)
+  rescue LoadError => e
+    puts "Bundler must be run to resolve dependencies!"
+    system('gem bundle')
+    puts "Retrying with dependencies resolved..."
+    retry
+  end
 
   # Dependencies contains all required gems and core configuration
   require File.dirname(__FILE__) + '/dependencies.rb'

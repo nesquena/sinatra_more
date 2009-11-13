@@ -44,7 +44,7 @@ User.auto_upgrade!
 USER
     
     def setup_orm
-      insert_require 'dm-core', :path => "config/dependencies.rb", :indent => 2
+      require_dependencies 'dm-core'
       create_file("config/initializers/data_mapper.rb", DM)
       create_file("app/models/user.rb", USER)
     end

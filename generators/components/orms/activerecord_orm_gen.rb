@@ -29,8 +29,8 @@ end
 AR
 
 RAKE = <<-RAKE
-require 'active_record'
 require 'sinatra/base'
+require 'active_record'
 
 namespace :db do
   desc "Migrate the database"
@@ -89,7 +89,7 @@ end
 USER
     
     def setup_orm
-      insert_require 'active_record', :path => "config/dependencies.rb", :indent => 2
+      require_dependencies 'activerecord'
       create_file("config/initializers/active_record.rb", AR)
       create_file("Rakefile", RAKE)
       create_file("db/migrate/001_create_users.rb", MIGRATION)

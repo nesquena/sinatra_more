@@ -12,11 +12,12 @@ module SinatraMore
     include Thor::Actions
     include SinatraMore::GeneratorActions
     include SinatraMore::ComponentActions
-    
+
     desc "Description:\n\n\tsinatra_gen is the sinatra_more generators which generate or build on Sinatra applications."
 
     argument :name, :desc => "The name of your sinatra app"
     argument :path, :desc => "The path to create your app"
+    class_option :run_bundler, :aliases => '-b', :default => false, :type => :boolean
 
     # Definitions for the available customizable components
     component_option :orm,      "database engine",    :aliases => '-d', :choices => [:datamapper, :mongomapper, :activerecord, :sequel]
@@ -38,6 +39,14 @@ module SinatraMore
       self.class.component_types.each do |comp|
         choice = resolve_valid_choice(comp)
         execute_component_setup(comp, choice)
+      end
+    end
+
+    # Bundle all required components using bundler and Gemfile
+    def bundle_dependencies
+      if options[:run_bundle]
+        say "Bundling application dependencies using bundler..."
+        in_root { run 'gem bundle' }
       end
     end
   end
