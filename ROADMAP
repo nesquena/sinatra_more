@@ -14,12 +14,12 @@ Use Bundler for managing dependencies:
 Framework structure:
 
  * sinatra-core    (the existing sinatra framework)          <= from Sinatra
+ * sinatra-gen     (easy generation of and for sinatra apps) <= from Generator
  * sinatra-helpers (adds the markup and renderer helpers)    <= from MarkupPlugin, RenderPlugin
  * sinatra-mailer  (mail handling for sinatra applications)  <= from MailerPlugin
- * sinatra-gen     (easy generation of and for sinatra apps) <= from Generator
- * sinatra-admin   (admin management dashboard for content)  <= from Lipsiadmin (ported)
  * sinatra-routing (sinatra route mapping system)            <= from RoutingPlugin
  * sinatra-cache   (page and fragment caching support)       
+ * sinatra-admin   (admin management dashboard for content)  <= from Lipsiadmin (ported)
 
 'sinatra-cache' Caching concept:
 
