@@ -1,10 +1,7 @@
 = RESOURCES
 
 - Check out the following sinatra extensions:
-  * http://github.com/emk/sinatra-url-for/
   * http://github.com/wbzyl/sinatra-static-assets
-  * http://github.com/hallison/sinatra-mapping/
-  * http://github.com/bcarlso/snap/
   * http://github.com/giraffesoft/classy_resources
   * http://github.com/nakajima/capinatra
   * http://github.com/deadprogrammer/spork
@@ -31,6 +28,7 @@
 
 = COMPLETED
 
+* Add support for RoutingPlugin for easy to use named alias routes for urls
 * Add support for bundler (http://github.com/wycats/bundler) to make setting up a generated app easy
 * Add support for button tag method, mail_to helper
 * Add support for simple fields_for tag helper
