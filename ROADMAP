@@ -50,6 +50,10 @@ Additional wish-list features (integrate existing plugin) (?)
     # /views/test.haml
     - cache 'test', :expiry => 10 do
       = partial 'item', :collection => @items
+    - cache @post do
+      = partial 'item', :collection => @items
+    - cache [@post, :cache_for_blog] do
+      = partial 'item', :collection => @items
 
     # page
     get '/example', :cache => true do
