@@ -2,11 +2,14 @@ require File.dirname(__FILE__) + '/support_lite'
 Dir[File.dirname(__FILE__) + '/routing_plugin/**/*.rb'].each {|file| load file }
 
 module SinatraMore
+  class RouteNotFound < RuntimeError; end
+
   module RoutingPlugin
     def self.registered(app)
       # Named paths stores the named route aliases mapping to the url
       # i.e { [:account] => '/account/path', [:admin, :show] => '/admin/show/:id' }
       app.set :named_paths, {}
+      app.set :app_name, app.name.underscore.to_sym
       app.helpers SinatraMore::RoutingHelpers
 
       # map constructs a mapping between a named route and a specified alias
@@ -32,7 +35,7 @@ module SinatraMore
       # Supports namespaces by accessing the instance variable and appending this to the route alias name
       # If the path is not a symbol, nothing is changed and the original route method is invoked
       def route(verb, path, options={}, &block)
-        route_name = [@_namespace, path].flatten.compact
+        route_name = [self.app_name, @_namespace, path].flatten.compact
         path = named_paths[route_name] if path.kind_of? Symbol
         super verb, path, options, &block
       end
