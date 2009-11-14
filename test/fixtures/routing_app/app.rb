@@ -4,11 +4,11 @@ require 'haml'
 
 class RoutingDemo < Sinatra::Base
   register SinatraMore::RoutingPlugin
-  
+
   configure do
     set :root, File.dirname(__FILE__)
   end
-  
+
   map(:admin, :show).to("/admin/:id/show")
   map :admin do |namespace|
     namespace.map(:update).to("/admin/:id/update/:name")
