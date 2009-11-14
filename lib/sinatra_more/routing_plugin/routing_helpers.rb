@@ -9,7 +9,7 @@ module SinatraMore
       values = route_name.extract_options!
       mapped_url = self.class.named_paths[route_name] || self.class.named_paths[route_name.dup.unshift(self.class.app_name)]
       raise SinatraMore::RouteNotFound.new("Route alias #{route_name.inspect} is not mapped to a url") unless mapped_url
-      result_url = String.new(mapped_url)
+      result_url = String.new(File.join(self.class.uri_root, mapped_url))
       result_url.scan(%r{/?(:\S+?)(?:/|$)}).each do |placeholder|
         value_key = placeholder[0][1..-1].to_sym
         result_url.gsub!(Regexp.new(placeholder[0]), values[value_key].to_s)

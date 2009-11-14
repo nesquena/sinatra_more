@@ -28,12 +28,14 @@ class TestRoutingPlugin < Test::Unit::TestCase
       demo = app.new
       demo.class.stubs(:uri_root).returns("/")
       demo.class.map(:demo).to('/demo')
+      assert_equal "/demo", demo.class.named_paths[[:routing_demo, :demo]]
       assert_equal "/demo", demo.url_for(:demo)
     end
     should "support changing uri root with mount" do
       demo = app.new
       demo.class.stubs(:uri_root).returns("/blog")
       demo.class.map(:demo).to('/demo')
+      assert_equal "/demo", demo.class.named_paths[[:routing_demo, :demo]]
       assert_equal "/blog/demo", demo.url_for(:demo)
     end
   end
