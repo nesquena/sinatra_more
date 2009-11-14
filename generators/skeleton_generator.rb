@@ -20,7 +20,7 @@ module SinatraMore
     class_option :run_bundler, :aliases => '-b', :default => false, :type => :boolean
 
     # Definitions for the available customizable components
-    component_option :orm,      "database engine",    :aliases => '-d', :choices => [:datamapper, :mongomapper, :activerecord, :sequel]
+    component_option :orm,      "database engine",    :aliases => '-d', :choices => [:datamapper, :mongomapper, :activerecord, :sequel, :couchrest]
     component_option :test,     "testing framework",  :aliases => '-t', :choices => [:bacon, :shoulda, :rspec, :testspec, :riot]
     component_option :mock,     "mocking library",    :aliases => '-m', :choices => [:mocha, :rr]
     component_option :script,   "javascript library", :aliases => '-s', :choices => [:jquery, :prototype, :rightjs]
