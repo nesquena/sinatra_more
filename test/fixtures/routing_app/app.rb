@@ -41,4 +41,8 @@ class RoutingDemo < Sinatra::Base
   get '/links' do
     haml :index
   end
+  
+  get '/failed_route' do
+    url_for(:some, :not_real, :id => 5)
+  end
 end

@@ -17,6 +17,21 @@ class TestRoutingPlugin < Test::Unit::TestCase
       assert_have_selector :p, :class => 'admin_url2', :content => '/admin/10/update/test'
       assert_have_selector :p, :class => 'admin_url3', :content => '/admin/12/destroy'
     end
+    should "support app namespaces" do
+      assert_have_selector :p, :class => 'app_accounts_index', :content => '/the/accounts/index'
+      assert_have_selector :p, :class => 'app_admin_url', :content => '/admin/25/show'
+    end
+  end
+  
+  context 'for failed or missing routes' do
+    should "properly not raise when found" do
+      assert_nothing_raised { app.new.url_for(:accounts) } 
+      assert_nothing_raised { app.new.url_for(:routing_demo, :admin, :show, :id => 5) } 
+    end
+    should "properly raise not found exception" do
+      assert_raises(SinatraMore::RouteNotFound) { visit '/failed_route' } 
+      assert_raises(SinatraMore::RouteNotFound) { app.new.url_for(:admin, :fake) } 
+    end
   end
 
   context 'for no namespaced account route' do
