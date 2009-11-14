@@ -9,7 +9,8 @@ module SinatraMore
       # Named paths stores the named route aliases mapping to the url
       # i.e { [:account] => '/account/path', [:admin, :show] => '/admin/show/:id' }
       app.set :named_paths, {}
-      app.set :app_name, app.name.underscore.to_sym
+      app.set :app_name, app.name.underscore.to_sym unless app.respond_to?(:app_name)
+      app.set :uri_root, '/' unless app.respond_to?(:uri_root)
       app.helpers SinatraMore::RoutingHelpers
 
       # map constructs a mapping between a named route and a specified alias

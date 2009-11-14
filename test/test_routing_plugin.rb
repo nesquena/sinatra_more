@@ -3,7 +3,7 @@ require 'fixtures/routing_app/app'
 
 class TestRoutingPlugin < Test::Unit::TestCase
   def app
-    RoutingDemo.tap { |app| app.set :environment, :test }
+    RoutingDemo.tap { |app| app.set :environment, :test }.tap { |app| app.set :uri_root, '/blog' }
   end
 
   context 'for links list displaying routes' do
@@ -22,15 +22,30 @@ class TestRoutingPlugin < Test::Unit::TestCase
       assert_have_selector :p, :class => 'app_admin_url', :content => '/admin/25/show'
     end
   end
-  
+
+  context 'for mounted application' do
+    should "support changing uri root no mount" do
+      demo = app.new
+      demo.class.stubs(:uri_root).returns("/")
+      demo.class.map(:demo).to('/demo')
+      assert_equal "/demo", demo.url_for(:demo)
+    end
+    should "support changing uri root with mount" do
+      demo = app.new
+      demo.class.stubs(:uri_root).returns("/blog")
+      demo.class.map(:demo).to('/demo')
+      assert_equal "/blog/demo", demo.url_for(:demo)
+    end
+  end
+
   context 'for failed or missing routes' do
     should "properly not raise when found" do
-      assert_nothing_raised { app.new.url_for(:accounts) } 
-      assert_nothing_raised { app.new.url_for(:routing_demo, :admin, :show, :id => 5) } 
+      assert_nothing_raised { app.new.url_for(:accounts) }
+      assert_nothing_raised { app.new.url_for(:routing_demo, :admin, :show, :id => 5) }
     end
     should "properly raise not found exception" do
-      assert_raises(SinatraMore::RouteNotFound) { visit '/failed_route' } 
-      assert_raises(SinatraMore::RouteNotFound) { app.new.url_for(:admin, :fake) } 
+      assert_raises(SinatraMore::RouteNotFound) { visit '/failed_route' }
+      assert_raises(SinatraMore::RouteNotFound) { app.new.url_for(:admin, :fake) }
     end
     should "properly raise about an invalid alias for route definition" do
       assert_raises(SinatraMore::RouteNotFound) { app.get(:fake) }
@@ -60,14 +75,14 @@ class TestRoutingPlugin < Test::Unit::TestCase
       assert_have_selector :p, :content => "admin show for id 50"
     end
   end
-  
+
   context 'for admin update url' do
     setup { visit '/admin/15/update/demo' }
     should "return proper update text" do
       assert_have_selector :p, :content => "updated admin with id 15 and name demo"
     end
   end
-  
+
   context 'for admin destroy url' do
     setup { visit '/admin/60/destroy' }
     should "return proper destroy text" do
