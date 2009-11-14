@@ -28,6 +28,7 @@
 
 = COMPLETED
 
+* Add support for multiple applications being mounted into routing system
 * Add support for RoutingPlugin for easy to use named alias routes for urls
 * Add support for bundler (http://github.com/wycats/bundler) to make setting up a generated app easy
 * Add support for button tag method, mail_to helper
