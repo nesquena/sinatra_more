@@ -32,6 +32,12 @@ class TestRoutingPlugin < Test::Unit::TestCase
       assert_raises(SinatraMore::RouteNotFound) { visit '/failed_route' } 
       assert_raises(SinatraMore::RouteNotFound) { app.new.url_for(:admin, :fake) } 
     end
+    should "properly raise about an invalid alias for route definition" do
+      assert_raises(SinatraMore::RouteNotFound) { app.get(:fake) }
+    end
+    should "properly work when alias is used in proper route definition" do
+      assert_nothing_raised { app.get(:accounts) do; end }
+    end
   end
 
   context 'for no namespaced account route' do

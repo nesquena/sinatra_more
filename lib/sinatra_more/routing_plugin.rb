@@ -35,8 +35,11 @@ module SinatraMore
       # Supports namespaces by accessing the instance variable and appending this to the route alias name
       # If the path is not a symbol, nothing is changed and the original route method is invoked
       def route(verb, path, options={}, &block)
-        route_name = [self.app_name, @_namespace, path].flatten.compact
-        path = named_paths[route_name] if path.kind_of? Symbol
+        if path.kind_of? Symbol
+          route_name = [self.app_name, @_namespace, path].flatten.compact
+          path = named_paths[route_name]
+          raise RouteNotFound.new("Route alias #{route_name.inspect} is not mapped to a url") unless path
+        end
         super verb, path, options, &block
       end
     end
