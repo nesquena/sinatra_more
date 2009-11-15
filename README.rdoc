@@ -691,7 +691,7 @@ The available components and their default options are listed below:
 * renderer: <tt>erb</tt>    (default), <tt>haml</tt>
 * mock:     <tt>mocha</tt>  (default), <tt>rr</tt>
 * script:   <tt>jquery</tt> (default), <tt>prototype</tt>, <tt>rightjs</tt>
-* orm:      <tt>datamapper</tt> (default), <tt>mongomapper</tt>, <tt>activerecord</tt>, <tt>sequel</tt>
+* orm:      <tt>datamapper</tt> (default), <tt>mongomapper</tt>, <tt>activerecord</tt>, <tt>sequel</tt>, <tt>couchrest</tt>
 
 The generator uses the <tt>bundler</tt> gem to resolve any application dependencies when the application is newly created.
 The necessary bundler command can be executed automatically through the generator with
@@ -730,6 +730,7 @@ See the wiki article for additional information: <http://wiki.github.com/nesquen
 
 * Nathan Esquenazi - Project creator and code maintainer
 * Arthur Chiu      - Forming the idea and various code contributions
+* Rob Holland      - Added couchrest ORM component to generator
 
 == Known Issues
 
