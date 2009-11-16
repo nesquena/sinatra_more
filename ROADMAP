@@ -23,6 +23,7 @@ Framework structure:
  
 Additional wish-list features (integrate existing plugin) (?)
 
+ * Reloading Support     - http://github.com/alexch/rerun
  * Internationalization  - http://r18n.rubyforge.org/#sinatra
  * Asynchronous Commands - http://github.com/deadprogrammer/spork
  * Capistrano Deployment - http://github.com/nakajima/capinatra (?)

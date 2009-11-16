@@ -8,6 +8,8 @@
   * http://github.com/gioext/sinatra-memcache
   * http://github.com/kematzy/sinatra-cache
   * http://r18n.rubyforge.org/#sinatra
+  * http://github.com/alexch/rerun (reloading)
+  * http://github.com/monkrb/glue/blob/master/lib/monk/glue/reloader.rb
 
 = UNFINISHED
 
