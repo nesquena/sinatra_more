@@ -55,6 +55,7 @@ Gem::Specification.new do |s|
      "generators/components/mocks/mocha_mock_gen.rb",
      "generators/components/mocks/rr_mock_gen.rb",
      "generators/components/orms/activerecord_orm_gen.rb",
+     "generators/components/orms/couchrest_orm_gen.rb",
      "generators/components/orms/datamapper_orm_gen.rb",
      "generators/components/orms/mongomapper_orm_gen.rb",
      "generators/components/orms/sequel_orm_gen.rb",

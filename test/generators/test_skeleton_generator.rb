@@ -103,6 +103,14 @@ class TestSkeletonGenerator < Test::Unit::TestCase
       assert_match_in_file(/MongoDbInitializer/, '/tmp/sample_app/config/initializers/mongo_db.rb')
       assert_match_in_file(/class User.*?include MongoMapper::Document/m, '/tmp/sample_app/app/models/user.rb')
     end
+
+    should "properly generate for couchrest" do
+      buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--orm=couchrest', '--script=none']) }
+      assert_match /Applying.*?couchrest.*?orm/, buffer
+      assert_match_in_file(/gem 'couchrest'/, '/tmp/sample_app/Gemfile')
+      assert_match_in_file(/CouchRestInitializer/, '/tmp/sample_app/config/initializers/couch_rest.rb')
+      assert_match_in_file(/class User < CouchRest::ExtendedDocument/m, '/tmp/sample_app/app/models/user.rb')      
+    end
   end
 
   context "the generator for renderer component" do

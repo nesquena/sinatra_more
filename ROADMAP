@@ -27,7 +27,7 @@ Additional wish-list features (integrate existing plugin) (?)
  * Internationalization  - http://r18n.rubyforge.org/#sinatra
  * Asynchronous Commands - http://github.com/deadprogrammer/spork
  * Capistrano Deployment - http://github.com/nakajima/capinatra (?)
- * Job Queue             - http://github.com/adamcooke/resque (or http://github.com/bmizerany/sinatra-dj)
+ * Job Queue             - http://github.com/adamcooke/resque (or http://github.com/bmizerany/sinatra-dj)       
 
 'sinatra-cache' Caching concept:
 
@@ -81,3 +81,8 @@ Additional wish-list features (integrate existing plugin) (?)
     # and to use
     link_to "Show Admin", url_for(:admin, :show, :id => 5)
     link_to "Accounts",   url_for(:accounts)
+
+'commands' Concept: (console (?) http://github.com/sickill/racksh)
+
+    $ sinatra_more console # loads console for sinatra
+    $ sinatra_more test    # runs all test using specified testing framework

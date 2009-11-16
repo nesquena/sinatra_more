@@ -1,5 +1,9 @@
 # Dependencies contains all required gems, helpers and core configuration
 
+def app(&block)
+  <%= @class_name %>.class_eval(&block)
+end
+
 class <%= @class_name %> < Sinatra::Application
   bundler_require_dependencies
   
