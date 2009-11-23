@@ -168,7 +168,7 @@ class TestSkeletonGenerator < Test::Unit::TestCase
     should "properly generate for rspec" do
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--test=rspec', '--script=none']) }
       assert_match /Applying.*?rspec.*?test/, buffer
-      assert_match_in_file(/gem 'rspec'/, '/tmp/sample_app/Gemfile')
+      assert_match_in_file(/gem 'rspec', :require_as => "spec"/, '/tmp/sample_app/Gemfile')
       assert_match_in_file(/Spec::Runner/, '/tmp/sample_app/test/test_config.rb')
     end
 

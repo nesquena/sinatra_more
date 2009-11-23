@@ -11,7 +11,7 @@ end
 TEST
 
     def setup_test
-      require_dependencies 'rspec', :env => :testing
+      insert_into_gemfile 'rspec', :require_as => 'spec', :env => :testing
       insert_test_suite_setup RSPEC_SETUP
     end
     

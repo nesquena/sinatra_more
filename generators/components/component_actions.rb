@@ -9,12 +9,15 @@ module SinatraMore
     end
 
     # Inserts a required gem into the Gemfile to add the bundler dependency
-    # insert_dependency_to_gemfile(name)
-    # insert_dependency_to_gemfile(name, :env => :testing)
+    # insert_into_gemfile(name)
+    # insert_into_gemfile(name, :env => :testing)
     def insert_into_gemfile(name, options={})
       after_pattern = "# Component requirements\n"
       after_pattern = "# #{options[:env].to_s.capitalize} requirements\n" if environment = options[:env]
-      include_text = "gem '#{name}'" << (environment ? ", :only => #{environment.inspect}" : "") << "\n"
+      include_text = "gem '#{name}'" 
+      include_text << ", :require_as => #{options[:require_as].inspect}" if options[:require_as]
+      include_text << ", :only => #{environment.inspect}" if environment
+      include_text << "\n"
       options.merge!(:content => include_text, :after => after_pattern)
       inject_into_file('Gemfile', options[:content], :after => options[:after])
     end
