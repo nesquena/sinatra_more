@@ -124,8 +124,8 @@ class TestSkeletonGenerator < Test::Unit::TestCase
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--renderer=haml','--script=none']) }
       assert_match /Applying.*?haml.*?renderer/, buffer
       assert_match_in_file(/gem 'haml'/, '/tmp/sample_app/Gemfile')
-      assert_match_in_file(/gem 'hassle'/, '/tmp/sample_app/Gemfile')
-      assert_match_in_file(/HassleInitializer/, '/tmp/sample_app/config/initializers/hassle.rb')
+      assert_match_in_file(/SassInitializer/, '/tmp/sample_app/config/initializers/sass.rb')
+      assert_match_in_file(/app.use Sass::Plugin::Rack/, '/tmp/sample_app/config/initializers/sass.rb')
     end
   end
 
