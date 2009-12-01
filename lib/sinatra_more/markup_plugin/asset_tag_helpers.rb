@@ -80,14 +80,16 @@ module SinatraMore
 
     def javascript_path(source)
       return source if source =~ /^http/
-      result_path = "/javascripts/#{source.gsub(/.js$/, '')}.js"
+      result_path = "/javascripts/#{source.gsub(/.js$/, '')}"
+      result_path << ".js" unless source =~ /\.js\w{2,4}$/
       stamp = File.exist?(result_path) ? File.mtime(result_path) : Time.now.to_i
       "#{result_path}?#{stamp}"
     end
 
     def stylesheet_path(source)
       return source if source =~ /^http/
-      result_path = "/stylesheets/#{source.gsub(/.css$/, '')}.css"
+      result_path = "/stylesheets/#{source.gsub(/.css$/, '')}"
+      result_path << ".css" unless source =~ /\.css\w{2,4}$/
       stamp = File.exist?(result_path) ? File.mtime(result_path) : Time.now.to_i
       "#{result_path}?#{stamp}"
     end

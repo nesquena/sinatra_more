@@ -121,6 +121,16 @@ class TestAssetTagHelpers < Test::Unit::TestCase
       actual_html = javascript_include_tag('application')
       assert_has_tag('script', :src => "/javascripts/application.js?#{time.to_i}", :type => "text/javascript") { actual_html }
     end
+    should "display javascript item for path containing js" do
+      time = stop_time_for_test
+      actual_html = javascript_include_tag 'test/jquery.json'
+      assert_has_tag('script', :src => "/javascripts/test/jquery.json?#{time.to_i}", :type => "text/javascript") { actual_html }
+    end
+    should "display javascript item for path containing period" do
+      time = stop_time_for_test
+      actual_html = javascript_include_tag 'test/jquery.min'
+      assert_has_tag('script', :src => "/javascripts/test/jquery.min.js?#{time.to_i}", :type => "text/javascript") { actual_html }
+    end
     should "display javascript item for long relative path" do
       time = stop_time_for_test
       actual_html = javascript_include_tag('example/demo/application')
