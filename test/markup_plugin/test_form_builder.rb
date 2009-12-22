@@ -149,21 +149,21 @@ class TestFormBuilder < Test::Unit::TestCase
   context 'for #label method' do
     should "display correct label html" do
       actual_html = standard_builder.label(:first_name, :class => 'large', :caption => "F. Name")
-      assert_has_tag('label', :class => 'large', :for => 'user_first_name', :content => "F. Name: ") { actual_html }
+      assert_has_tag('label', :class => 'large', :for => 'user_first_name', :content => "F. Name") { actual_html }
     end
 
     should "display correct label in haml" do
       visit '/haml/form_for'
-      assert_have_selector '#demo label', :content => "Login: ", :class => 'user-label'
-      assert_have_selector '#demo label', :content => "About Me: "
-      assert_have_selector '#demo2 label', :content => "Nickname: ", :class => 'label'
+      assert_have_selector '#demo label', :content => "Login", :class => 'user-label'
+      assert_have_selector '#demo label', :content => "About Me"
+      assert_have_selector '#demo2 label', :content => "Nickname", :class => 'label'
     end
 
     should "display correct label in erb" do
       visit '/erb/form_for'
-      assert_have_selector '#demo label', :content => "Login: ", :class => 'user-label'
-      assert_have_selector '#demo label', :content => "About Me: "
-      assert_have_selector '#demo2 label', :content => "Nickname: ", :class => 'label'
+      assert_have_selector '#demo label', :content => "Login", :class => 'user-label'
+      assert_have_selector '#demo label', :content => "About Me"
+      assert_have_selector '#demo2 label', :content => "Nickname", :class => 'label'
     end
   end
 
@@ -454,19 +454,19 @@ class TestFormBuilder < Test::Unit::TestCase
   context 'for #text_field_block method' do
     should "display correct text field block html" do
       actual_html = standard_builder.text_field_block(:first_name, :class => 'large', :caption => "FName")
-      assert_has_tag('p label', :for => 'user_first_name', :content => "FName: ") { actual_html }
+      assert_has_tag('p label', :for => 'user_first_name', :content => "FName") { actual_html }
       assert_has_tag('p input.large[type=text]', :value => "Joe", :id => 'user_first_name', :name => 'user[first_name]') { actual_html }
     end
 
     should "display correct text field block in haml" do
       visit '/haml/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_username', :content => "Nickname: ", :class => 'label'
+      assert_have_selector '#demo2 p label', :for => 'markup_user_username', :content => "Nickname", :class => 'label'
       assert_have_selector '#demo2 p input', :type => 'text', :name => 'markup_user[username]', :id => 'markup_user_username'
     end
 
     should "display correct text field block in erb" do
       visit '/erb/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_username', :content => "Nickname: ", :class => 'label'
+      assert_have_selector '#demo2 p label', :for => 'markup_user_username', :content => "Nickname", :class => 'label'
       assert_have_selector '#demo2 p input', :type => 'text', :name => 'markup_user[username]', :id => 'markup_user_username'
     end
   end
@@ -474,19 +474,19 @@ class TestFormBuilder < Test::Unit::TestCase
   context 'for #text_area_block method' do
     should "display correct text area block html" do
       actual_html = standard_builder.text_area_block(:about, :class => 'large', :caption => "About Me")
-      assert_has_tag('p label', :for => 'user_about', :content => "About Me: ") { actual_html }
+      assert_has_tag('p label', :for => 'user_about', :content => "About Me") { actual_html }
       assert_has_tag('p textarea', :id => 'user_about', :name => 'user[about]') { actual_html }
     end
 
     should "display correct text area block in haml" do
       visit '/haml/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_about', :content => "About: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_about', :content => "About"
       assert_have_selector '#demo2 p textarea', :name => 'markup_user[about]', :id => 'markup_user_about'
     end
 
     should "display correct text area block in erb" do
       visit '/erb/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_about', :content => "About: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_about', :content => "About"
       assert_have_selector '#demo2 p textarea', :name => 'markup_user[about]', :id => 'markup_user_about'
     end
   end
@@ -494,19 +494,19 @@ class TestFormBuilder < Test::Unit::TestCase
   context 'for #password_field_block method' do
     should "display correct password field block html" do
       actual_html = standard_builder.password_field_block(:keycode, :class => 'large', :caption => "Code")
-      assert_has_tag('p label', :for => 'user_keycode', :content => "Code: ") { actual_html }
+      assert_has_tag('p label', :for => 'user_keycode', :content => "Code") { actual_html }
       assert_has_tag('p input.large[type=password]', :id => 'user_keycode', :name => 'user[keycode]') { actual_html }
     end
 
     should "display correct password field block in haml" do
       visit '/haml/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_code', :content => "Code: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_code', :content => "Code"
       assert_have_selector '#demo2 p input', :type => 'password', :name => 'markup_user[code]', :id => 'markup_user_code'
     end
 
     should "display correct password field block in erb" do
       visit '/erb/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_code', :content => "Code: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_code', :content => "Code"
       assert_have_selector '#demo2 p input', :type => 'password', :name => 'markup_user[code]', :id => 'markup_user_code'
     end
   end
@@ -514,19 +514,19 @@ class TestFormBuilder < Test::Unit::TestCase
   context 'for #file_field_block method' do
     should "display correct file field block html" do
       actual_html = standard_builder.file_field_block(:photo, :class => 'large', :caption => "Photo")
-      assert_has_tag('p label', :for => 'user_photo', :content => "Photo: ") { actual_html }
+      assert_has_tag('p label', :for => 'user_photo', :content => "Photo") { actual_html }
       assert_has_tag('p input.large[type=file]', :id => 'user_photo', :name => 'user[photo]') { actual_html }
     end
 
     should "display correct file field block in haml" do
       visit '/haml/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_photo', :content => "Photo: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_photo', :content => "Photo"
       assert_have_selector '#demo2 p input.upload', :type => 'file', :name => 'markup_user[photo]', :id => 'markup_user_photo'
     end
 
     should "display correct file field block in erb" do
       visit '/erb/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_photo', :content => "Photo: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_photo', :content => "Photo"
       assert_have_selector '#demo2 p input.upload', :type => 'file', :name => 'markup_user[photo]', :id => 'markup_user_photo'
     end
   end
@@ -534,19 +534,19 @@ class TestFormBuilder < Test::Unit::TestCase
   context 'for #check_box_block method' do
     should "display correct check box block html" do
       actual_html = standard_builder.check_box_block(:remember_me, :class => 'large', :caption => "Remember session")
-      assert_has_tag('p label', :for => 'user_remember_me', :content => "Remember session: ") { actual_html }
+      assert_has_tag('p label', :for => 'user_remember_me', :content => "Remember session") { actual_html }
       assert_has_tag('p input.large[type=checkbox]', :id => 'user_remember_me', :name => 'user[remember_me]') { actual_html }
     end
 
     should "display correct check box block in haml" do
       visit '/haml/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_remember_me', :content => "Remember Me: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_remember_me', :content => "Remember Me"
       assert_have_selector '#demo2 p input.checker', :type => 'checkbox', :name => 'markup_user[remember_me]'
     end
 
     should "display correct check box block in erb" do
       visit '/erb/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_remember_me', :content => "Remember Me: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_remember_me', :content => "Remember Me"
       assert_have_selector '#demo2 p input.checker', :type => 'checkbox', :name => 'markup_user[remember_me]'
     end
   end
@@ -554,7 +554,7 @@ class TestFormBuilder < Test::Unit::TestCase
   context 'for #select_block method' do
     should "display correct select_block block html" do
       actual_html = standard_builder.select_block(:country, :options => ['USA', 'Canada'], :class => 'large', :caption => "Your country")
-      assert_has_tag('p label', :for => 'user_country', :content => "Your country: ") { actual_html }
+      assert_has_tag('p label', :for => 'user_country', :content => "Your country") { actual_html }
       assert_has_tag('p select', :id => 'user_country', :name => 'user[country]') { actual_html }
       assert_has_tag('p select option', :content => 'USA')   { actual_html }
       assert_has_tag('p select option', :content => 'Canada') { actual_html }
@@ -562,7 +562,7 @@ class TestFormBuilder < Test::Unit::TestCase
 
     should "display correct select_block block in haml" do
       visit '/haml/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_state', :content => "State: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_state', :content => "State"
       assert_have_selector '#demo2 p select', :name => 'markup_user[state]', :id => 'markup_user_state'
       assert_have_selector '#demo2 p select option',  :content => 'California'
       assert_have_selector '#demo2 p select option',  :content => 'Texas'
@@ -570,7 +570,7 @@ class TestFormBuilder < Test::Unit::TestCase
 
     should "display correct select_block block in erb" do
       visit '/erb/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_state', :content => "State: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_state', :content => "State"
       assert_have_selector '#demo2 p select', :name => 'markup_user[state]', :id => 'markup_user_state'
     end
   end
