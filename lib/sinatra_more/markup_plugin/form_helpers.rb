@@ -83,7 +83,8 @@ module SinatraMore
     # text_area_tag :username, :class => 'long'
     def text_area_tag(name, options={})
       options.reverse_merge!(:name => name)
-      content_tag(:textarea, '', options)
+      text_area_value = options[:value].blank? ? '' : options.delete(:value)
+      content_tag(:textarea, text_area_value, options)
     end
 
     # Constructs a password field input from the given options
