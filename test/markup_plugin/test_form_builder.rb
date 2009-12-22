@@ -148,8 +148,8 @@ class TestFormBuilder < Test::Unit::TestCase
 
   context 'for #label method' do
     should "display correct label html" do
-      actual_html = standard_builder.label(:first_name, :class => 'large', :caption => "F. Name")
-      assert_has_tag('label', :class => 'large', :for => 'user_first_name', :content => "F. Name") { actual_html }
+      actual_html = standard_builder.label(:first_name, :class => 'large', :caption => "F. Name: ")
+      assert_has_tag('label', :class => 'large', :for => 'user_first_name', :content => "F. Name: ") { actual_html }
     end
 
     should "display correct label in haml" do
@@ -299,6 +299,11 @@ class TestFormBuilder < Test::Unit::TestCase
     should "display correct text_area html" do
       actual_html = standard_builder.text_area(:about, :class => 'large')
       assert_has_tag('textarea.large', :id => 'user_about', :name => 'user[about]') { actual_html }
+    end
+    
+    should "display correct text_area html and content" do
+      actual_html = standard_builder.text_area(:about, :value => "Demo")
+      assert_has_tag('textarea', :id => 'user_about', :content => 'Demo') { actual_html }
     end
 
     should "display correct text_area in haml" do
@@ -493,8 +498,13 @@ class TestFormBuilder < Test::Unit::TestCase
 
   context 'for #password_field_block method' do
     should "display correct password field block html" do
+<<<<<<< HEAD
       actual_html = standard_builder.password_field_block(:keycode, :class => 'large', :caption => "Code")
       assert_has_tag('p label', :for => 'user_keycode', :content => "Code") { actual_html }
+=======
+      actual_html = standard_builder.password_field_block(:keycode, :class => 'large', :caption => "Code: ")
+      assert_has_tag('p label', :for => 'user_keycode', :content => "Code: ") { actual_html }
+>>>>>>> 46615661f2c4793cd0beac705823985ab978bb64
       assert_has_tag('p input.large[type=password]', :id => 'user_keycode', :name => 'user[keycode]') { actual_html }
     end
 
@@ -513,8 +523,13 @@ class TestFormBuilder < Test::Unit::TestCase
 
   context 'for #file_field_block method' do
     should "display correct file field block html" do
+<<<<<<< HEAD
       actual_html = standard_builder.file_field_block(:photo, :class => 'large', :caption => "Photo")
       assert_has_tag('p label', :for => 'user_photo', :content => "Photo") { actual_html }
+=======
+      actual_html = standard_builder.file_field_block(:photo, :class => 'large', :caption => "Photo: ")
+      assert_has_tag('p label', :for => 'user_photo', :content => "Photo: ") { actual_html }
+>>>>>>> 46615661f2c4793cd0beac705823985ab978bb64
       assert_has_tag('p input.large[type=file]', :id => 'user_photo', :name => 'user[photo]') { actual_html }
     end
 
@@ -533,8 +548,8 @@ class TestFormBuilder < Test::Unit::TestCase
 
   context 'for #check_box_block method' do
     should "display correct check box block html" do
-      actual_html = standard_builder.check_box_block(:remember_me, :class => 'large', :caption => "Remember session")
-      assert_has_tag('p label', :for => 'user_remember_me', :content => "Remember session") { actual_html }
+      actual_html = standard_builder.check_box_block(:remember_me, :class => 'large', :caption => "Remember session?")
+      assert_has_tag('p label', :for => 'user_remember_me', :content => "Remember session?") { actual_html }
       assert_has_tag('p input.large[type=checkbox]', :id => 'user_remember_me', :name => 'user[remember_me]') { actual_html }
     end
 

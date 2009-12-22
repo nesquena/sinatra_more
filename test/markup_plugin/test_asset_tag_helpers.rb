@@ -145,7 +145,7 @@ class TestAssetTagHelpers < Test::Unit::TestCase
       assert_has_tag('script', :src => "http://google.com/lib.js") { actual_html }
     end
   end
-  
+
   context 'for #meta_tag method' do
     should "display meta tag with given content and name" do
       actual_html = meta_tag("weblog,news", :name => "keywords")
@@ -165,7 +165,7 @@ class TestAssetTagHelpers < Test::Unit::TestCase
       assert_have_selector 'meta', "content" => "weblog,news", :name => "keywords"
       assert_have_selector 'meta', "content" => "text/html; charset=UTF-8", :"http-equiv" => "Content-Type"
     end
-    
+
   end
-  
+
 end
