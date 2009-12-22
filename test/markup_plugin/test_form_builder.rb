@@ -300,6 +300,11 @@ class TestFormBuilder < Test::Unit::TestCase
       actual_html = standard_builder.text_area(:about, :class => 'large')
       assert_has_tag('textarea.large', :id => 'user_about', :name => 'user[about]') { actual_html }
     end
+    
+    should "display correct text_area html and content" do
+      actual_html = standard_builder.text_area(:about, :value => "Demo")
+      assert_has_tag('textarea', :id => 'user_about', :content => 'Demo') { actual_html }
+    end
 
     should "display correct text_area in haml" do
       visit '/haml/form_for'
