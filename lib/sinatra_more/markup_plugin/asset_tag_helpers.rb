@@ -45,7 +45,7 @@ module SinatraMore
       options.reverse_merge!("content" => content)
       content_tag(:meta, '', options)
     end
-    
+
     # Creates an image element with given url and options
     # image_tag('icons/avatar.png')
     def image_tag(url, options={})
