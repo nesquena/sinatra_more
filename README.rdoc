@@ -731,6 +731,7 @@ See the wiki article for additional information: <http://wiki.github.com/nesquen
 * Nathan Esquenazi - Project creator and code maintainer
 * Arthur Chiu      - Forming the idea and various code contributions
 * Rob Holland      - Added couchrest ORM component to generator
+* Bill Turner      - Added several form builder and helper fixes
 
 == Known Issues
 
