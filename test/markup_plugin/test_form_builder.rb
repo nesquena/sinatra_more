@@ -307,9 +307,14 @@ class TestFormBuilder < Test::Unit::TestCase
       assert_has_tag('textarea.large', :id => 'user_about', :name => 'user[about]') { actual_html }
     end
     
-    should "display correct text_area html and content" do
+    should "display correct text_area html and custom content" do
       actual_html = standard_builder.text_area(:about, :value => "Demo")
       assert_has_tag('textarea', :id => 'user_about', :content => 'Demo') { actual_html }
+    end
+    
+    should "display correct text_area html and default content" do
+      actual_html = standard_builder(MarkupUser.new).text_area(:about)
+      assert_has_tag('textarea', :id => 'markup_user_about', :content => '') { actual_html }
     end
 
     should "display correct text_area in haml" do
