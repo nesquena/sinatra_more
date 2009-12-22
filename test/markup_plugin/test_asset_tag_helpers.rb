@@ -11,7 +11,7 @@ class TestAssetTagHelpers < Test::Unit::TestCase
   def flash
     { :notice => "Demo notice" }
   end
-
+  
   context 'for #flash_tag method' do
     should "display flash with no given attributes" do
       assert_has_tag('div.flash', :content => "Demo notice") { flash_tag(:notice) }
@@ -145,4 +145,27 @@ class TestAssetTagHelpers < Test::Unit::TestCase
       assert_has_tag('script', :src => "http://google.com/lib.js") { actual_html }
     end
   end
+  
+  context 'for #meta_tag method' do
+    should "display meta tag with given content and name" do
+      actual_html = meta_tag("weblog,news", :name => "keywords")
+      assert_has_tag("meta", :name => "keywords", "content" => "weblog,news") { actual_html }
+    end
+    should "display meta tag with given content and http-equiv" do
+      actual_html = meta_tag("text/html; charset=UTF-8", :"http-equiv" => "Content-Type")
+      assert_has_tag("meta", :"http-equiv" => "Content-Type", "content" => "text/html; charset=UTF-8") { actual_html }
+    end
+    should "display meta tag element in haml" do
+      visit '/haml/meta_tag'
+      assert_have_selector 'meta', "content" => "weblog,news", :name => "keywords"
+      assert_have_selector 'meta', "content" => "text/html; charset=UTF-8", :"http-equiv" => "Content-Type"
+    end
+    should "display meta tag element in erb" do
+      visit '/erb/meta_tag'
+      assert_have_selector 'meta', "content" => "weblog,news", :name => "keywords"
+      assert_have_selector 'meta', "content" => "text/html; charset=UTF-8", :"http-equiv" => "Content-Type"
+    end
+    
+  end
+  
 end
