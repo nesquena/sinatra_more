@@ -509,13 +509,8 @@ class TestFormBuilder < Test::Unit::TestCase
 
   context 'for #password_field_block method' do
     should "display correct password field block html" do
-<<<<<<< HEAD
-      actual_html = standard_builder.password_field_block(:keycode, :class => 'large', :caption => "Code")
-      assert_has_tag('p label', :for => 'user_keycode', :content => "Code") { actual_html }
-=======
       actual_html = standard_builder.password_field_block(:keycode, :class => 'large', :caption => "Code: ")
       assert_has_tag('p label', :for => 'user_keycode', :content => "Code: ") { actual_html }
->>>>>>> 46615661f2c4793cd0beac705823985ab978bb64
       assert_has_tag('p input.large[type=password]', :id => 'user_keycode', :name => 'user[keycode]') { actual_html }
     end
 
@@ -534,13 +529,8 @@ class TestFormBuilder < Test::Unit::TestCase
 
   context 'for #file_field_block method' do
     should "display correct file field block html" do
-<<<<<<< HEAD
-      actual_html = standard_builder.file_field_block(:photo, :class => 'large', :caption => "Photo")
-      assert_has_tag('p label', :for => 'user_photo', :content => "Photo") { actual_html }
-=======
       actual_html = standard_builder.file_field_block(:photo, :class => 'large', :caption => "Photo: ")
       assert_has_tag('p label', :for => 'user_photo', :content => "Photo: ") { actual_html }
->>>>>>> 46615661f2c4793cd0beac705823985ab978bb64
       assert_has_tag('p input.large[type=file]', :id => 'user_photo', :name => 'user[photo]') { actual_html }
     end
 
