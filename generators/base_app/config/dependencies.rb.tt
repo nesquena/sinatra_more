@@ -21,7 +21,7 @@ class <%= @class_name %> < Sinatra::Application
   Dir[File.dirname(__FILE__) + '/initializers/*.rb'].each do |file|
     # Each initializer file contains a module called 'XxxxInitializer' (i.e HassleInitializer)
     require file
-    file_class = File.basename(file, '.rb').classify
+    file_class = File.basename(file, '.rb').camelize
     register "#{file_class}Initializer".constantize
   end
   
