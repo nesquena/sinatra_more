@@ -8,7 +8,11 @@ require 'base64'
 begin
 	require 'tmail'
 rescue LoadError
-	require 'actionmailer'
+  begin
+	  require 'actionmailer'
+  rescue LoadError
+    require 'action_mailer'
+  end
 end
 
 module Pony
