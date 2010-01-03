@@ -9,9 +9,9 @@ begin
 	require 'tmail'
 rescue LoadError
   begin
-	  require 'actionmailer'
-  rescue LoadError
     require 'action_mailer'
+  rescue LoadError
+    require 'actionmailer'
   end
 end
 
