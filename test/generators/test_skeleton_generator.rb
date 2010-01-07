@@ -147,6 +147,7 @@ class TestSkeletonGenerator < Test::Unit::TestCase
       buffer = silence_logger { SinatraMore::SkeletonGenerator.start(['sample_app', '/tmp', '--script=rightjs']) }
       assert_match /Applying.*?rightjs.*?script/, buffer
       assert File.exist?('/tmp/sample_app/public/javascripts/right-min.js')
+      assert File.exist?('/tmp/sample_app/public/javascripts/right-olds-min.js')
     end
   end
 
