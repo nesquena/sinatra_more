@@ -11,7 +11,7 @@ end
 TEST
 
     def setup_test
-      require_dependencies 'riot', :env => :testing
+      require_dependencies 'riot', :group => :testing
       insert_test_suite_setup RIOT_SETUP
     end
     

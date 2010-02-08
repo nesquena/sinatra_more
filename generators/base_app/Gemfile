@@ -5,9 +5,9 @@ gem 'sinatra'
 gem 'sinatra_more'
 gem 'rack-flash'
 gem 'warden'
-gem 'bcrypt-ruby', :require_as => 'bcrypt'
+gem 'bcrypt-ruby', :require => 'bcrypt'
 
 # Component requirements
 
 # Testing requirements
-gem 'rack-test', :require_as => 'rack/test', :only => :testing
+gem 'rack-test', :require => 'rack/test', :group => :testing
