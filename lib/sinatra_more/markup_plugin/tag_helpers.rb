@@ -26,7 +26,7 @@ module SinatraMore
       content = options.delete(:content)
       identity_tag_attributes.each { |attr| options[attr] = attr.to_s if options[attr]  }
       html_attrs = options.collect { |a, v| v.blank? ? nil : "#{a}=\"#{v}\"" }.compact.join(" ")
-      base_tag = (html_attrs.present? ? "<#{name} #{html_attrs}" : "<#{name}")
+      base_tag = (!html_attrs.blank? ? "<#{name} #{html_attrs}" : "<#{name}")
       base_tag << (content ? ">#{content}</#{name}>" : " />")
     end
 
