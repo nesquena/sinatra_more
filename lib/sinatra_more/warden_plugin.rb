@@ -32,12 +32,9 @@ module SinatraMore
       raise "WardenPlugin::Error - Install warden with 'sudo gem install warden' to use plugin!" unless Warden && Warden::Manager
       app.use Warden::Manager do |manager|
         manager.default_strategies :password
-        manager.default_serializers :session, :cookie
         manager.failure_app = app
-        manager.serializers.update(:session) do
-          def serialize(user); user.nil? ? nil : user.id; end
-          def deserialize(id); id.nil? ? nil : PasswordStrategy.user_class.find(id); end
-        end
+        manager.serialize_into_session { |user| user.nil? ? nil : user.id }
+        manager.serialize_from_session { |id| id.nil? ? nil : PasswordStrategy.user_class.find(id) }
       end
       app.helpers SinatraMore::OutputHelpers
       app.helpers SinatraMore::WardenHelpers
