@@ -32,7 +32,7 @@ class <%= @class_name %> < Sinatra::Application
     Bundler.require_env(environment)
   rescue LoadError => e
     puts "Bundler must be run to resolve dependencies!"
-    system("cd #{ROOT_DIR}; gem bundle")
+    system("cd #{ROOT_DIR}; bundle install")
     puts "Retrying with dependencies resolved..."
     retry
   end

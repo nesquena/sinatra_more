@@ -46,7 +46,7 @@ module SinatraMore
     def bundle_dependencies
       if options[:run_bundle]
         say "Bundling application dependencies using bundler..."
-        in_root { run 'gem bundle' }
+        in_root { run 'bundle install' }
       end
     end
   end

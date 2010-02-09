@@ -160,16 +160,16 @@ class TestFormBuilder < Test::Unit::TestCase
 
     should "display correct label in haml" do
       visit '/haml/form_for'
-      assert_have_selector '#demo label', :content => "Login: ", :class => 'user-label'
-      assert_have_selector '#demo label', :content => "About Me: "
-      assert_have_selector '#demo2 label', :content => "Nickname: ", :class => 'label'
+      assert_have_selector '#demo label', :content => "Login", :class => 'user-label'
+      assert_have_selector '#demo label', :content => "About Me"
+      assert_have_selector '#demo2 label', :content => "Nickname", :class => 'label'
     end
 
     should "display correct label in erb" do
       visit '/erb/form_for'
-      assert_have_selector '#demo label', :content => "Login: ", :class => 'user-label'
-      assert_have_selector '#demo label', :content => "About Me: "
-      assert_have_selector '#demo2 label', :content => "Nickname: ", :class => 'label'
+      assert_have_selector '#demo label', :content => "Login", :class => 'user-label'
+      assert_have_selector '#demo label', :content => "About Me"
+      assert_have_selector '#demo2 label', :content => "Nickname", :class => 'label'
     end
   end
 
@@ -496,13 +496,13 @@ class TestFormBuilder < Test::Unit::TestCase
 
     should "display correct text area block in haml" do
       visit '/haml/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_about', :content => "About: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_about', :content => "About"
       assert_have_selector '#demo2 p textarea', :name => 'markup_user[about]', :id => 'markup_user_about'
     end
 
     should "display correct text area block in erb" do
       visit '/erb/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_about', :content => "About: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_about', :content => "About"
       assert_have_selector '#demo2 p textarea', :name => 'markup_user[about]', :id => 'markup_user_about'
     end
   end
@@ -516,13 +516,13 @@ class TestFormBuilder < Test::Unit::TestCase
 
     should "display correct password field block in haml" do
       visit '/haml/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_code', :content => "Code: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_code', :content => "Code"
       assert_have_selector '#demo2 p input', :type => 'password', :name => 'markup_user[code]', :id => 'markup_user_code'
     end
 
     should "display correct password field block in erb" do
       visit '/erb/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_code', :content => "Code: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_code', :content => "Code"
       assert_have_selector '#demo2 p input', :type => 'password', :name => 'markup_user[code]', :id => 'markup_user_code'
     end
   end
@@ -536,13 +536,13 @@ class TestFormBuilder < Test::Unit::TestCase
 
     should "display correct file field block in haml" do
       visit '/haml/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_photo', :content => "Photo: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_photo', :content => "Photo"
       assert_have_selector '#demo2 p input.upload', :type => 'file', :name => 'markup_user[photo]', :id => 'markup_user_photo'
     end
 
     should "display correct file field block in erb" do
       visit '/erb/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_photo', :content => "Photo: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_photo', :content => "Photo"
       assert_have_selector '#demo2 p input.upload', :type => 'file', :name => 'markup_user[photo]', :id => 'markup_user_photo'
     end
   end
@@ -556,13 +556,13 @@ class TestFormBuilder < Test::Unit::TestCase
 
     should "display correct check box block in haml" do
       visit '/haml/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_remember_me', :content => "Remember Me: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_remember_me', :content => "Remember Me"
       assert_have_selector '#demo2 p input.checker', :type => 'checkbox', :name => 'markup_user[remember_me]'
     end
 
     should "display correct check box block in erb" do
       visit '/erb/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_remember_me', :content => "Remember Me: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_remember_me', :content => "Remember Me"
       assert_have_selector '#demo2 p input.checker', :type => 'checkbox', :name => 'markup_user[remember_me]'
     end
   end
@@ -578,7 +578,7 @@ class TestFormBuilder < Test::Unit::TestCase
 
     should "display correct select_block block in haml" do
       visit '/haml/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_state', :content => "State: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_state', :content => "State"
       assert_have_selector '#demo2 p select', :name => 'markup_user[state]', :id => 'markup_user_state'
       assert_have_selector '#demo2 p select option',  :content => 'California'
       assert_have_selector '#demo2 p select option',  :content => 'Texas'
@@ -586,7 +586,7 @@ class TestFormBuilder < Test::Unit::TestCase
 
     should "display correct select_block block in erb" do
       visit '/erb/form_for'
-      assert_have_selector '#demo2 p label', :for => 'markup_user_state', :content => "State: "
+      assert_have_selector '#demo2 p label', :for => 'markup_user_state', :content => "State"
       assert_have_selector '#demo2 p select', :name => 'markup_user[state]', :id => 'markup_user_state'
     end
   end

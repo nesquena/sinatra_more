@@ -11,7 +11,7 @@ end
 TEST
 
     def setup_test
-      require_dependencies 'test/unit', 'shoulda', :env => :testing
+      require_dependencies 'test/unit', 'shoulda', :group => :testing
       insert_test_suite_setup SHOULDA_SETUP
     end
     
