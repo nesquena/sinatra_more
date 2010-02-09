@@ -13,7 +13,7 @@ module SinatraMore
     # insert_into_gemfile(name, :group => :testing)
     def insert_into_gemfile(name, options={})
       after_pattern = "# Component requirements\n"
-      after_pattern = "# #{options[:env].to_s.capitalize} requirements\n" if environment = options[:group]
+      after_pattern = "# #{options[:group].to_s.capitalize} requirements\n" if environment = options[:group]
       include_text = "gem '#{name}'" 
       include_text << ", :require => #{options[:require].inspect}" if options[:require]
       include_text << ", :group => #{environment.inspect}" if environment
