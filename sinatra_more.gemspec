@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra_more}
-  s.version = "0.3.33"
+  s.version = "0.3.34"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Esquenazi"]
-  s.date = %q{2010-01-07}
+  s.date = %q{2010-02-09}
   s.default_executable = %q{sinatra_gen}
   s.description = %q{Expands sinatra with standard helpers and tools to allow for complex applications}
   s.email = %q{nesquena@gmail.com}
@@ -54,6 +54,11 @@ Gem::Specification.new do |s|
      "generators/base_app/tmp/.empty_directory",
      "generators/base_app/vendor/gems/.empty_directory",
      "generators/components/component_actions.rb",
+     "generators/components/files/jquery-1.3.2.min.js",
+     "generators/components/files/lowpro.js",
+     "generators/components/files/prototype.js",
+     "generators/components/files/right-min.js",
+     "generators/components/files/right-olds-min.js",
      "generators/components/mocks/mocha_mock_gen.rb",
      "generators/components/mocks/rr_mock_gen.rb",
      "generators/components/orms/activerecord_orm_gen.rb",
