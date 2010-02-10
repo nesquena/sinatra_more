@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra_more}
-  s.version = "0.3.34"
+  s.version = "0.3.35"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Esquenazi"]
@@ -38,6 +38,7 @@ Gem::Specification.new do |s|
      "generators/base_app/app/mailers/.empty_directory",
      "generators/base_app/app/models/.empty_directory",
      "generators/base_app/app/routes/.empty_directory",
+     "generators/base_app/app/routes/main.rb.tt",
      "generators/base_app/app/views/.empty_directory",
      "generators/base_app/config.ru.tt",
      "generators/base_app/config/boot.rb.tt",
