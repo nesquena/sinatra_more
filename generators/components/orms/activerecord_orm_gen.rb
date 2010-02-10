@@ -7,21 +7,21 @@ module ActiveRecordInitializer
     app.configure :development do
       ActiveRecord::Base.establish_connection(
         :adapter => 'sqlite3',
-        :database => 'your_dev_db_here'
+        :database => ":memory:"
       )
     end
 
     app.configure :production do
       ActiveRecord::Base.establish_connection(
         :adapter => 'sqlite3',
-        :database => 'your_production_db_here'
+        :database => ":memory:"
       )
     end
 
     app.configure :test do
       ActiveRecord::Base.establish_connection(
         :adapter => 'sqlite3',
-        :database => 'your_test_db_here'
+        :database => ":memory:"
       )
     end
   end

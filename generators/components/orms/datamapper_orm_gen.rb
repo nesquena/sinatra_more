@@ -4,9 +4,9 @@ module SinatraMore
     DM = <<-DM
 module DataMapperInitializer
   def self.registered(app)
-    app.configure(:development) { DataMapper.setup(:default, 'your_dev_db_here') }
-    app.configure(:production)  { DataMapper.setup(:default, 'your_production_db_here') }
-    app.configure(:test)        { DataMapper.setup(:default, 'your_test_db_here') }
+    app.configure(:development) { DataMapper.setup(:default, 'sqlite3::memory:') }
+    app.configure(:production)  { DataMapper.setup(:default, 'sqlite3::memory:') }
+    app.configure(:test)        { DataMapper.setup(:default, 'sqlite3::memory:') }
   end
 end
 DM
@@ -44,7 +44,7 @@ User.auto_upgrade!
 USER
     
     def setup_orm
-      require_dependencies 'dm-core', 'dm-validations'
+      require_dependencies 'data_objects', 'do_sqlite3', 'dm-core', 'dm-validations'
       create_file("config/initializers/data_mapper.rb", DM)
       create_file("app/models/user.rb", USER)
     end
