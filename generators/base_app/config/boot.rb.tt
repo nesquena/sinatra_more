@@ -26,10 +26,10 @@ class <%= @class_name %> < Sinatra::Application
   set :environment, RACK_ENV.to_sym if defined?(RACK_ENV)
 
   # Attempts to require all dependencies with bundler, if this fails, bundle and then try again
-  def self.bundler_require_dependencies(environment=nil)
+  def self.bundler_require_dependencies(environment='default')
     require 'bundler'
-    require File.expand_path(File.join(File.dirname(__FILE__), '/../vendor', 'gems', 'environment'))
-    Bundler.require_env(environment)
+    Bundler.setup(environment.to_sym)
+    Bundler.require(environment.to_sym)
   rescue LoadError => e
     puts "Bundler must be run to resolve dependencies!"
     system("cd #{ROOT_DIR}; bundle install")
