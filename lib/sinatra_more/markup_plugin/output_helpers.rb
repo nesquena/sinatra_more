@@ -46,7 +46,9 @@ module SinatraMore
     # yield_content :include
     # yield_content :head, "param1", "param2"
     def yield_content(key, *args)
-      content_blocks[key.to_sym].map { |content|
+      blocks = content_blocks[key.to_sym]
+      return nil if blocks.empty?
+      blocks.map { |content|
         capture_html(*args, &content)
       }.join
     end
