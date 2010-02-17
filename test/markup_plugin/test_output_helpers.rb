@@ -19,6 +19,18 @@ class TestOutputHelpers < Test::Unit::TestCase
       assert_have_selector '.demo2 h1', :content => "This is content yielded with name Johnny Smith"
     end
   end
+  
+  context 'for #yield_content method' do
+    should 'work for erb templates' do
+      visit '/erb/yield_content'
+      assert_have_selector '.demo', :content => "nil"
+    end
+
+    should "work for haml templates" do
+      visit '/haml/yield_content'
+      assert_have_selector '.demo', :content => "nil"
+    end
+  end
 
   context 'for #capture_html method' do
     should "work for erb templates" do
