@@ -4,7 +4,7 @@
 
 Worth noting here that sinatra_more is still undergoing bug fixes and occasional development. 
 However, I want to point out that this project is essentially made obsolete by another project that
-I am working on (with Lipsiasoft and others) called the {Padrino Framework}[http://github.com/padrino/padrino-framework]. 
+I am working on (with DAddYE and others) called the {Padrino Framework}[http://github.com/padrino/padrino-framework]. 
 
 {Padrino}[http://wiki.github.com/padrino/padrino-framework/] is definately the place to look in the future 
 for a modular extension to Sinatra. Note that {Padrino}[http://github.com/padrino/padrino-framework] contains
