@@ -11,8 +11,8 @@ for a modular extension to Sinatra. Note that {Padrino}[http://github.com/padrin
 everything from sinatra_more but is far more powerful and larger in scope. 
 
 Padrino is still early in development but is worth taking a look at. The idea for Padrino is to start with Sinatra
-and follow that philosophy but to super-charge the baked in functionality including support for
-automatic code reloading, far more advanced route definitions, baked-in orm support, baked-in code generators, et al.
+and follow that philosophy but to super-charge the functionality adding support for
+development code reloading, advanced route definitions, I18n localization support, baked-in orm support, baked-in code generators, multi-app support, admin dashboard, authentication logic, view helpers, and more.
 
 Feel free to use sinatra_more for now but if you enjoy this and get curious, please contribute to Padrino or at least
 let us know what you think!
@@ -81,7 +81,7 @@ If you want to use the WardenPlugin component, then the 'warden' gem would need 
 
 To install sinatra_more, simply grab the latest version from gemcutter:
 
-  $ sudo gem install sinatra_more --source http://gemcutter.org
+  $ sudo gem install sinatra_more
   
 Now you are ready to use this gem in your sinatra project.
 
