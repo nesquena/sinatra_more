@@ -2,7 +2,7 @@
 
 == Notice
 
-Worth noting here is that sinatra_more is still undergoing minor bug fixes and I will manage pull requests but *development has stopped*. The reason for this is that this project has been superseded by another project called the {Padrino Framework}[http://www.padrinorb.com]. 
+Worth noting here is that sinatra_more is still undergoing minor bug fixes and I will manage pull requests but _development has stopped_. The reason for this is that this project has been superseded by another project called the {Padrino Framework}[http://www.padrinorb.com]. 
 
 {Padrino}[http://www.padrinorb.com] is definately the place to look in the future 
 for a modular extension to Sinatra. Note that {Padrino}[http://github.com/padrino/padrino-framework] contains
@@ -10,7 +10,7 @@ everything from sinatra_more but is far more ambitious and larger in scope.
 
 Padrino development is already well underway towards a 1.0 release, has a larger number of core developers, and a number of production applications have already been deployed. The idea for Padrino is to start with Sinatra and follow that philosophy but to super-charge the functionality adding support for development code reloading, advanced route definitions, I18n localization support, baked-in orm support, baked-in code generators, multi-app support, admin dashboard, authentication logic, view helpers, and more.
 
-Feel free to watch or play with sinatra_more but I would recommend switching your eyes to Padrino if you want a more robust extension solution for Sinatra. Be sure to join us on the #padrino irc channel on freenode, and check out the (Padrino Guides){http://www.padrinorb.com/guides} for more information.
+Feel free to watch or play with sinatra_more but I would recommend switching your eyes to Padrino if you want a more robust extension solution for Sinatra. Be sure to join us on the #padrino irc channel on freenode, and check out the {Padrino Guides}[http://www.padrinorb.com/guides] for more information.
 
 == Preface
 
