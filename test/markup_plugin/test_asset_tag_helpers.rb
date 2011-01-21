@@ -11,7 +11,7 @@ class TestAssetTagHelpers < Test::Unit::TestCase
   def flash
     { :notice => "Demo notice" }
   end
-  
+
   context 'for #flash_tag method' do
     should "display flash with no given attributes" do
       assert_has_tag('div.flash', :content => "Demo notice") { flash_tag(:notice) }
@@ -53,13 +53,13 @@ class TestAssetTagHelpers < Test::Unit::TestCase
     end
 
     should "display link element for mail to with caption" do
-      actual_html = mail_to('test@demo.com', "My Email", :class => 'demo')
-      assert_has_tag(:a, :href => "mailto:test@demo.com", :content => 'My Email', :class => 'demo') { actual_html }
+      actual_html = mail_to('test@demo.com', "My Email")
+      assert_has_tag(:a, :href => "mailto:test@demo.com", :content => 'My Email') { actual_html }
     end
 
     should "display link element for mail to with caption and mail options" do
-      actual_html = mail_to('test@demo.com', "My Email", :subject => 'demo test', :class => 'demo', :cc => 'foo@test.com')
-      assert_has_tag(:a, :class => 'demo') { actual_html }
+      actual_html = mail_to('test@demo.com', "My Email", :subject => 'demo test', :cc => 'foo@test.com')
+      assert_has_tag(:a) { actual_html }
       assert_match /mailto\:test\@demo.com\?/, actual_html
       assert_match /cc=foo\@test\.com/, actual_html
       assert_match /subject\=demo\%20test/, actual_html
