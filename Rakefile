@@ -15,7 +15,7 @@ begin
     gem.add_runtime_dependency     "sinatra",       ">= 0.9.2"
     gem.add_runtime_dependency     "tilt",          ">= 0.2"
     gem.add_runtime_dependency     "thor",          ">= 0.11.8"
-    gem.add_runtime_dependency     "activesupport", ">= 2.2.2"
+    gem.add_runtime_dependency     "activesupport", "< 3.0.0"
     gem.add_runtime_dependency     "bundler",       ">= 0.9.2"
     gem.add_development_dependency "haml",          ">= 2.2.14"
     gem.add_development_dependency "shoulda",       ">= 2.10.2"
@@ -47,8 +47,6 @@ rescue LoadError
     abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
   end
 end
-
-task :test => :check_dependencies
 
 task :default => :test
 
