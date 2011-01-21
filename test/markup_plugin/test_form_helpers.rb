@@ -189,12 +189,12 @@ class TestFormHelpers < Test::Unit::TestCase
       actual_html = text_area_tag(:about, :class => 'long')
       assert_has_tag(:textarea, :class => "long", :content => '', :name => 'about') { actual_html }
     end
-    
+
     should "display text area in ruby with specified content" do
       actual_html = text_area_tag(:about, :value => "a test")
       assert_has_tag(:textarea, :content => "a test", :name => 'about') { actual_html }
     end
-    
+
     should "display text area in ruby with no content with closing tag" do
       actual_html = text_area_tag(:about)
       assert_has_tag(:textarea, :content => "", :name => 'about') { actual_html }
