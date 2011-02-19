@@ -21,3 +21,4 @@ pkg
 ## PROJECT::SPECIFIC
 webrat.log
 tmp/**/*
+.rvmrc
