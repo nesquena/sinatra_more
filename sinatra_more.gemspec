@@ -4,7 +4,7 @@ require "sinatra_more/version"
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra_more}
-  s.version = "0.3.41"
+  s.version = SinatraMore::VERSION
   s.platform    = Gem::Platform::RUBY
 
   s.authors = ["Nathan Esquenazi"]
