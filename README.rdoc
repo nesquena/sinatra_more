@@ -2,11 +2,11 @@
 
 == Notice
 
-Worth noting here is that sinatra_more is still undergoing minor bug fixes and I will manage pull requests but _development has stopped_. The reason for this is that this project has been superseded by another project called the {Padrino Framework}[http://www.padrinorb.com]. 
+Worth noting here is that sinatra_more is still undergoing minor bug fixes and I will manage pull requests but _development has stopped_. The reason for this is that this project has been superseded by another project called the {Padrino Framework}[http://www.padrinorb.com].
 
-{Padrino}[http://www.padrinorb.com] is definately the place to look in the future 
+{Padrino}[http://www.padrinorb.com] is definately the place to look in the future
 for a modular extension to Sinatra. Note that {Padrino}[http://github.com/padrino/padrino-framework] contains
-everything from sinatra_more but is far more ambitious and larger in scope. 
+everything from sinatra_more but is far more ambitious and larger in scope.
 
 Padrino development is already well underway towards a 1.0 release, has a larger number of core developers, and a number of production applications have already been deployed. The idea for Padrino is to start with Sinatra and follow that philosophy but to super-charge the functionality adding support for development code reloading, advanced route definitions, I18n localization support, baked-in orm support, baked-in code generators, multi-app support, admin dashboard, authentication logic, view helpers, and more.
 
@@ -24,11 +24,11 @@ The canonical example of how to create an entire simple web application with Sin
   get '/' do
     'Hello world!'
   end
-  
+
 and then to run the application:
 
   $ ruby myapp.rb
-  
+
 The extreme simplicity of the framework is quite refreshing. I have been using Sinatra a great deal
 for recent projects. First for small and simple json and xml web services and then even
 for more complex full-featured applications. This gem represents my attempt to make it as fun and easy
@@ -36,12 +36,12 @@ as possible to code increasingly advanced view-heavy web applications in Sinatra
 
 == Introduction
 
-Note: This library is still experimental and may not be ready for production just yet. 
+Note: This library is still experimental and may not be ready for production just yet.
 That being said the gem is being actively used on a number of sinatra projects.
 In addition, the gem has fairly solid test coverage ensuring that everything works as expected.
 
-This will be a plugin which expands sinatra's capabilities in a variety of ways. 
-Note that all extensions have been created to work with haml, erb, and erubis. 
+This will be a plugin which expands sinatra's capabilities in a variety of ways.
+Note that all extensions have been created to work with haml, erb, and erubis.
 This gem is intended to be template-agnostic in providing helpers wherever possible.
 
 Let me expand briefly on what I want to accomplish with this gem. I love sinatra but if I want to use it
@@ -49,8 +49,8 @@ for any non-trivial application I very quickly miss a lot of the extra tools pro
 
 Now the obvious question is "Why not just use rails then?" Well, in many cases that might be the right decision.
 Still, at least until version 3 comes along, Rails is quite a large framework with a 'take it or leave it' attitude.
-Personally, I have come to love the spirit of sinatra which acts as a thin wrapper on top of rack 
-often allowing middleware to do most of the work and pulling in additional complexity only as required. 
+Personally, I have come to love the spirit of sinatra which acts as a thin wrapper on top of rack
+often allowing middleware to do most of the work and pulling in additional complexity only as required.
 
 My goal with this extension is to match the spirit of Sinatra and at the same time create a standard library
 of tools, helpers and components that will make Sinatra suitable for more complex applications.
@@ -71,13 +71,13 @@ Keep in mind, the user will be able to pull in these components seperately and l
 Please help me brainstorm and fork the project if you have any ideas to contribute.
 
 == Installation
- 
+
 If you want to use the WardenPlugin component, then the 'warden' gem would need to be installed.
 
 To install sinatra_more, simply grab the latest version from gemcutter:
 
   $ sudo gem install sinatra_more
-  
+
 Now you are ready to use this gem in your sinatra project.
 
 == Usage
@@ -85,7 +85,7 @@ Now you are ready to use this gem in your sinatra project.
 This extension can be easily registered into any existing sinatra application. You can require
 different components based on which pieces are useful for your particular application.
 
-  # app.rb 
+  # app.rb
   require 'sinatra/base'
   require 'sinatra_more' # or require 'sinatra_more/markup_plugin' for precise inclusion
 
@@ -161,7 +161,7 @@ methods should be very familiar to anyone who has used rails view helpers.
 * <tt>javascript_include_tag(*sources)</tt>
   * Returns an html script tag for each of the sources provided.
   * <tt>javascript_include_tag 'application', 'special'</tt>
-  
+
 ==== Form Helpers
 
 * <tt>form_tag(url, options={}, &block)</tt>
@@ -233,7 +233,7 @@ A form_tag might look like:
         = check_box_tag :confirm_delete
     - field_set_tag(:class => 'buttons') do
       = submit_tag "Remove"
-    
+
 ==== FormBuilders
 
 * <tt>form_for(object, url, settings={}, &block)</tt>
@@ -278,7 +278,7 @@ The following are fields provided by AbstractFormBuilder that can be used within
   * <tt>f.submit "Update", :class => 'long'</tt>
 * <tt>image_submit(source, options={})</tt>
   * <tt>f.image_submit "submit.png", :class => 'long'</tt>
-  
+
 A form_for using these basic fields might look like:
 
   - form_for @user, '/register', :id => 'register' do |f|
@@ -304,7 +304,7 @@ A form_for using these basic fields might look like:
         = location.text_field :city
     %p
       = f.submit "Create", :class => 'button'
-  
+
 There is also a StandardFormBuilder which builds on the abstract fields that can be used within a form_for:
 
 * <tt>text_field_block(field, options={}, label_options={})</tt>
@@ -323,7 +323,7 @@ There is also a StandardFormBuilder which builds on the abstract fields that can
   * <tt>submit_block(:username, :class => 'big')</tt>
 * <tt>image_submit_block(source, options={})</tt>
   * <tt>image_submit_block('submit.png', :class => 'big')</tt>
-  
+
 A form_for using these standard fields might look like:
 
   - form_for @user, '/register', :id => 'register' do |f|
@@ -366,7 +366,7 @@ The form builder can even be made into the default builder when form_for is invo
   # anywhere in the sinatra application
   set :default_builder, 'MyCustomFormBuilder'
 
-And there you have it, a fairly complete form builder solution for sinatra. 
+And there you have it, a fairly complete form builder solution for sinatra.
 I hope to create or merge in an even better 'default' form_builder in the near future.
 
 ==== Format Helpers
@@ -413,31 +413,31 @@ such as partials (with support for :collection) into the templating system.
 Using render plugin helpers is extremely simple. If you want to render an erb template in your view path:
 
   erb_template 'path/to/my/template'
-  
+
 or using haml templates works just as well:
 
   haml_template 'path/to/haml/template'
-  
+
 There is also a method which renders the first view matching the path and removes the need to define an engine:
 
   render_template 'path/to/any/template'
-  
+
 It is worth noting these are mostly for convenience. When I had more complex view files in sinatra, I got tired of writing:
 
   haml :"the/path/to/file"
   erb "/path/to/file".to_sym
-  
+
 Finally, we have the all-important partials support for rendering mini-templates onto a page:
 
   partial 'photo/_item', :object => @photo, :locals => { :foo => 'bar' }
   partial 'photo/_item', :collection => @photos
-  
+
 This works as you would expect and also supports the collection counter inside the partial <tt>item_counter</tt>
 
   # /views/photo/_item.haml
   # Access to collection counter with <partial_name>_counter i.e item_counter
   # Access the object with the partial_name i.e item
-  
+
 And that concludes the render plugin for now but I am open to adding more methods as time progresses.
 
 See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/renderplugin>
@@ -463,7 +463,7 @@ provided to make interacting with warden dead simple.
   * Forces a user to return to a fail path unless they are authorized
   * Used to require a user be authenticated before routing to an action
   * <tt>must_be_authorized!('/login')</tt>
-  
+
 There are a few configuration options and details you need to be aware of. By default, the WardenPlugin
 assumes you have a User class which represents the authenticating class type. If your user class has a different
 name then you need to specify that as follows:
@@ -492,7 +492,7 @@ Using this plugin you also do need to define your own routes for managing warden
     authenticate_user!
     redirect "/dashboard"
   end
-  
+
   post '/unauthenticated/?' do
     flash[:notice] = "That username and password are not correct!"
     status 401
@@ -506,9 +506,9 @@ Using this plugin you also do need to define your own routes for managing warden
 
 I was made aware of other sinatra/warden plugins which work very similarly to the system I outline for this plugin.
 Most notably is the sinatra_warden plugin by Justin Smestad (http://github.com/jsmestad/sinatra_warden)
-Eventually I plan to vendor that gem or just remove support for this piece of my plugin completely. 
+Eventually I plan to vendor that gem or just remove support for this piece of my plugin completely.
 
-If anybody has any thoughts on this or the warden integration in general, please let me know. 
+If anybody has any thoughts on this or the warden integration in general, please let me know.
 Nonetheless, there is a certain convenience for me having access to a plug-and-play warden solution directly from this gem.
 
 See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/wardenplugin>
@@ -597,22 +597,22 @@ See the wiki article for additional information: <http://wiki.github.com/nesquen
 This component provides Sinatra with an enhanced url routing system which enables named route aliases to be defined
 and used throughout your application to refer to urls. The benefits of this is that instead of having to hard-code route urls
 into every area of your application, now we can just define the urls in a single spot and then attach an alias
-which can be used to refer to the url throughout the rest. 
+which can be used to refer to the url throughout the rest.
 
 Let's take a look at how to define named route mappings:
 
   # /app/routes/example.rb
   require 'sinatra_more'
-  
+
   class RoutingDemo < Sinatra::Application
-    register SinatraMore::RoutingPlugin  
-    
+    register SinatraMore::RoutingPlugin
+
     # Define the named route mappings
     map(:account).to("/the/accounts/:name/and/:id")
     map(:accounts).to("/the/accounts/index")
-    
+
     # Configure the routes using the named alias
-    get(:account)  { "name: params[:name] - id: params[:id]" }    
+    get(:account)  { "name: params[:name] - id: params[:id]" }
     get(:accounts) { "I am the body for the url /the/accounts/index" }
   end
 
@@ -635,13 +635,13 @@ The routing system also supports url route configuration namespaces:
 
   # /app/routes/example.rb
   map(:admin, :show).to("/admin/:id/show")
-  
+
   namespace :admin do
     get :show do
       "admin show for #{params[:id]}"
     end
   end
-  
+
 You could also define the route aliases themselves using a namespace for convenience:
 
   # /app/routes/example.rb
@@ -649,12 +649,12 @@ You could also define the route aliases themselves using a namespace for conveni
     namespace.map(:show).to("/admin/:id/show")
     namespace.map(:destroy).to("/admin/:id/destroy")
   end
-  
+
   namespace :admin do
     get :show do
       "admin show for #{params[:id]}"
     end
-    
+
     get :destroy do
       "admin destroy for #{params[:id]}"
     end
@@ -665,17 +665,17 @@ You can then reference the urls using the same <tt>url_for</tt> method:
   <%= link_to 'admin page', url_for(:admin, :show, :id => 25) %>
   <%= link_to 'admin page', url_for(:admin, :update, :id => 25) %>
   <%= link_to 'admin page', url_for(:admin, :show, :id => 25) %>
-  
+
 You can freely use both named route aliases and traditional Sinatra routes in the same application without conflict.
 
 See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/routingplugin>
-  
+
 == Sinatra Generators
 
 In addition to the support provided above, sinatra_more also comes preloaded with flexible code generators for Sinatra
 powered in part by the excellent Thor gem (incidentally also used in the Rails 3 generators). These generators are intended
 to allow for easy code generation both in creating new applications and building on existing ones. The generators have been
-built to be as library-agnostic as possible, supporting a myriad of test frameworks, js libraries, mocking libraries, etc. 
+built to be as library-agnostic as possible, supporting a myriad of test frameworks, js libraries, mocking libraries, etc.
 
 The usage for the generator is quite simple:
 
@@ -684,19 +684,19 @@ The usage for the generator is quite simple:
 The simplest possible command to generate a base application would be:
 
   $ sinatra_gen demo_app .
-  
-This would construct a Sinatra application DemoApp (which extends from Sinatra::Application) 
-inside the folder 'demo_app' at our current path. Inside the application there would be configuration and 
+
+This would construct a Sinatra application DemoApp (which extends from Sinatra::Application)
+inside the folder 'demo_app' at our current path. Inside the application there would be configuration and
 setup performed for the default components.
 
 You can also define specific components to be used:
 
   $ sinatra_gen demo_app . --test=rspec --renderer=haml --mock=rr --script=jquery --orm datamapper
-  
+
 There is also support for aliases for each component within the command:
 
   $ sinatra_gen demo_app . -t=rspec -r=haml -m=rr -s=jquery -d=datamapper
-  
+
 The available components and their default options are listed below:
 
 * test:     <tt>bacon</tt>  (default), <tt>shoulda</tt>, <tt>rspec</tt>, <tt>testspec</tt>, <tt>riot</tt>
@@ -713,7 +713,7 @@ The necessary bundler command can be executed automatically through the generato
 or this can be done manually through executing command <tt>gem bundle</tt> in the terminal at the root of the generated application.
 If not executed manually, the bundling will be performed automatically the first time the application attempts to boot.
 Note that this command only has to be performed when the application is first generated or when the Gemfile is modified.
- 
+
 The generator framework within sinatra_more is extensible and additional components and tools can be added easily.
 This would be achieved through forking our project and reading through the code in <tt>/generators/sinatra_generator.rb</tt> and
 the setup instructions inside the relevant files within <tt>/generators/components/</tt>. We are happy to accept pull requests
@@ -727,7 +727,7 @@ We are also planning to add generator actions such as:
 * Migrations generation
 
 See the wiki article for additional information: <http://wiki.github.com/nesquena/sinatra_more/generator>
-  
+
 == Acknowledgements
 
 * Thanks to kelredd (http://github.com/kelredd) for the <tt>sinatra_helpers</tt> code that helped me to create erb capture and concat methods.
@@ -745,6 +745,7 @@ See the wiki article for additional information: <http://wiki.github.com/nesquen
 * Rob Holland      - Added couchrest ORM component to generator
 * Bill Turner      - Added several form builder and helper fixes
 * Adrian (orangea) - Fixes to content_for and tests
+* Indrek Juhkam (indrekj) - Support for AS3 and fixes to select_tag
 
 == Known Issues
 
@@ -756,7 +757,7 @@ See the wiki article for additional information: <http://wiki.github.com/nesquen
 * Ruby5     - <http://ruby5.envylabs.com/episodes/24-episode-23-october-30-2009/stories/183-sinatra-more>
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
