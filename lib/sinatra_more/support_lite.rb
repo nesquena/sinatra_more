@@ -1,5 +1,7 @@
 # This is for adding specific methods that are required by sinatra_more if activesupport isn't required
 
+require 'yaml' unless defined?(YAML)
+
 unless String.method_defined?(:titleize) && Hash.method_defined?(:slice)
   require 'active_support/core_ext/kernel'
   require 'active_support/core_ext/array'
@@ -11,7 +13,7 @@ unless String.method_defined?(:titleize) && Hash.method_defined?(:slice)
 end
 
 unless String.method_defined?(:blank?)
-  begin 
+  begin
     require 'active_support/core_ext/object/blank'
   rescue LoadError
     require 'active_support/core_ext/blank'

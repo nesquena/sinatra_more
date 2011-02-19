@@ -1,4 +1,5 @@
 require 'thor/group'
+require File.dirname(__FILE__) + "/../lib/sinatra_more/support_lite"
 require File.dirname(__FILE__) + '/generator_actions'
 require File.dirname(__FILE__) + '/components/component_actions'
 Dir[File.dirname(__FILE__) + "/{base_app,components}/**/*.rb"].each { |lib| require lib }
