@@ -1,8 +1,8 @@
 = sinatra_more
 
-== *Notice*
+== Notice
 
-Worth noting here is that sinatra_more is still undergoing minor bug fixes and I will manage pull requests but *development has stopped*. The reason for this is that this project has been superseded by another project called the {Padrino Framework}[http://www.padrinorb.com].
+Worth noting here is that sinatra_more is still undergoing minor bug fixes and I will manage pull requests but <b>development has stopped</b>. The reason for this is that this project has been superseded by another project called the {Padrino Framework}[http://www.padrinorb.com].
 
 {Padrino}[http://www.padrinorb.com] is definately the place to look in the future
 for modular extensions to Sinatra. Note that {Padrino}[http://github.com/padrino/padrino-framework] contains
