@@ -160,11 +160,13 @@ module SinatraMore
     end
 
     # Returns the options tags for a select based on the given option items
-    def options_for_select(option_items, selected_value=nil)
+    def options_for_select(option_items, selected_values=[])
       return '' if option_items.blank?
+      selected_values = [selected_values].compact unless selected_values.is_a?(Array)
       option_items.collect { |caption, value|
         value ||= caption
-        content_tag(:option, caption, :value => value, :selected => selected_value.to_s =~ /#{value}|#{caption}/)
+        selected = selected_values.find {|v| v.to_s =~ /^(#{value}|#{caption})$/}
+        content_tag(:option, caption, :value => value, :selected => !!selected)
       }.join("\n")
     end
 

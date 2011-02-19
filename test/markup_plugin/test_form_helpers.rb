@@ -331,6 +331,16 @@ class TestFormHelpers < Test::Unit::TestCase
       assert_has_tag('select option', :content => 'Black', :value => 'black1') { actual_html }
     end
 
+    should "should mark correct options as selected" do
+      options = [['Fun', 'f1'], ['Funny', 'f2'], ['Funniest', 'f3']]
+      actual_html = select_tag(:fun_level, :options => options, :selected => ['Fun', 'Funny'], :multiple => true)
+      assert_has_tag(:select, :name => 'fun_level[]') { actual_html }
+      assert_has_tag('select option', :selected => 'selected', :count => 2) { actual_html}
+      assert_has_tag('select option', :content => 'Fun', :value => 'f1', :selected => 'selected') { actual_html }
+      assert_has_tag('select option', :content => 'Funny', :value => 'f2', :selected => 'selected') { actual_html }
+      assert_has_tag('select option', :content => 'Funniest', :value => 'f3') { actual_html }
+    end
+
     should "display select tag in erb" do
       visit '/erb/form_tag'
       assert_have_selector 'form.simple-form select', :count => 1, :name => 'color'
