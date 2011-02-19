@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.add_dependency     "sinatra",       ">= 0.9.2"
   s.add_dependency     "tilt",          ">= 0.2"
   s.add_dependency     "thor",          ">= 0.11.8"
-  s.add_dependency     "activesupport", "< 2.3.8"
+  s.add_dependency     "activesupport"
   s.add_dependency     "bundler",       ">= 0.9.2"
   s.add_development_dependency "haml",      ">= 2.2.14"
   s.add_development_dependency "shoulda",   ">= 2.10.2"
