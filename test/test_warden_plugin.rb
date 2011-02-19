@@ -5,7 +5,7 @@ class TestWardenPlugin < Test::Unit::TestCase
   def app
     WardenDemo.tap { |app| app.set :environment, :test }
   end
-  
+
   context 'for authenticate_user! helper' do
     setup do
       visit '/login', :post, :username => 'john21', :password => 'secret'
@@ -15,7 +15,7 @@ class TestWardenPlugin < Test::Unit::TestCase
       assert_have_selector :h1, :content => "John"
     end
   end
-  
+
   context 'for logout_user! helper' do
     setup do
       visit '/login', :post, :username => 'john21', :password => 'secret'
@@ -26,7 +26,7 @@ class TestWardenPlugin < Test::Unit::TestCase
       assert_have_selector :h2, :content => "Not logged in"
     end
   end
-  
+
   context 'for logged_in? helper when logged in' do
     setup do
       visit '/login', :post, :username => 'john21', :password => 'secret'
@@ -36,7 +36,7 @@ class TestWardenPlugin < Test::Unit::TestCase
       assert_have_selector :h1, :content => 'logged_in? true'
     end
   end
-  
+
   context 'for logged_in? helper when logged out' do
     setup do
       visit '/logged_in'
@@ -45,7 +45,7 @@ class TestWardenPlugin < Test::Unit::TestCase
       assert_have_selector :h1, :content => 'logged_in? false'
     end
   end
-  
+
   context 'for authenticated? helper when logged in' do
     setup do
       visit '/login', :post, :username => 'john21', :password => 'secret'
@@ -55,7 +55,7 @@ class TestWardenPlugin < Test::Unit::TestCase
       assert_have_selector :p, :content => "Dashboard, You are logged in!"
     end
   end
-  
+
   context 'for authenticated? helper when logged out' do
     setup do
       visit '/authenticated'
@@ -64,7 +64,7 @@ class TestWardenPlugin < Test::Unit::TestCase
       assert_have_no_selector :p, :content => "Dashboard, You are logged in!"
     end
   end
-  
+
   context 'for unregistered? helper when logged in' do
     setup do
       visit '/login', :post, :username => 'john21', :password => 'secret'
@@ -74,7 +74,7 @@ class TestWardenPlugin < Test::Unit::TestCase
       assert_have_no_selector :p, :content => "Dashboard, You are unregistered!"
     end
   end
-  
+
   context 'for unregistered? helper when logged out' do
     setup do
       visit '/unregistered'
@@ -83,7 +83,7 @@ class TestWardenPlugin < Test::Unit::TestCase
       assert_have_selector :p, :content => "Dashboard, You are unregistered!"
     end
   end
-  
+
   context 'for must_be_authorized! helper with valid login' do
     setup do
       visit '/login', :post, :username => 'john21', :password => 'secret'
@@ -93,12 +93,12 @@ class TestWardenPlugin < Test::Unit::TestCase
       assert_have_selector :h1, :content => "Valid Authorized Page"
     end
   end
-  
+
   context 'for must_be_authorized! helper when not logged in' do
     setup do
       visit '/must_be_authorized'
     end
-    should "be forced to login" do
+    should_eventually "be forced to login" do
       assert_have_selector :h1, :content => "Please login!"
     end
   end

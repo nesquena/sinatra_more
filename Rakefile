@@ -1,32 +1,8 @@
-# $ rake version:bump:patch release
-
+# $ EDIT version.rb, rake release
 require 'rubygems'
 require 'rake'
-
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "sinatra_more"
-    gem.summary = "Expands sinatra to allow for complex applications"
-    gem.description = "Expands sinatra with standard helpers and tools to allow for complex applications"
-    gem.email = "nesquena@gmail.com"
-    gem.homepage = "http://github.com/nesquena/sinatra_more"
-    gem.authors = ["Nathan Esquenazi"]
-    gem.add_runtime_dependency     "sinatra",       ">= 0.9.2"
-    gem.add_runtime_dependency     "tilt",          ">= 0.2"
-    gem.add_runtime_dependency     "thor",          ">= 0.11.8"
-    gem.add_runtime_dependency     "activesupport", "< 3.0.0"
-    gem.add_runtime_dependency     "bundler",       ">= 0.9.2"
-    gem.add_development_dependency "haml",          ">= 2.2.14"
-    gem.add_development_dependency "shoulda",       ">= 2.10.2"
-    gem.add_development_dependency "mocha",         ">= 0.9.7"
-    gem.add_development_dependency "rack-test",     ">= 0.5.0"
-    gem.add_development_dependency "webrat",        ">= 0.5.1"
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
-end
+require 'bundler'
+Bundler::GemHelper.install_tasks
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
