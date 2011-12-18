@@ -45,7 +45,7 @@ module SinatraMore
         when 2..44 then "#{distance_in_minutes} minutes"
         when 45..89 then 'about 1 hour'
         when 90..1439 then "about #{(distance_in_minutes.to_f / 60.0).round} hours"
-        when 1440..2339 then '1 day'
+        when 1440..2439 then '1 day'
         when 2440..2879 then 'about 2 days'
         when 2880..43199 then "#{(distance_in_minutes / 1440).round} days"
         when 43200..86399 then 'about 1 month'
